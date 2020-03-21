@@ -1,15 +1,18 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System;
 using Contracts.DAL.Base;
 
 namespace DAL.Base
 {
-    public abstract class DomainEntity : IDomainEntity<string>
+    public class DomainEntity : DomainEntity<Guid>
     {
-        public virtual string Id { get; set; } = Guid.NewGuid().ToString();
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime DeletedAt { get; set; } = DateTime.MaxValue;
-        [MaxLength(255)]
-        public string? Comment { get; set; }
+    }
+    
+    public class DomainEntity<TKey> : IDomainEntity<TKey> 
+        where TKey : struct, IComparable
+    {
+        public virtual TKey Id { get; set; }
+        public virtual DateTime CreatedAt { get; set; }
+        public virtual DateTime DeletedAt { get; set; }
+        public virtual string? Comment { get; set; }
     }
 }
