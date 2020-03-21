@@ -7,7 +7,6 @@ namespace Domain
 {
     public class UnitsType : DomainEntity
     {
-        public int UnitsTypeId { get; set; }
         [MaxLength(255)]
         public string Name { get; set; } = default!;
         [MaxLength(255)]

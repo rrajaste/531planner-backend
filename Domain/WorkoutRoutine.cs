@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Contracts.DAL.Base;
+﻿using System.ComponentModel.DataAnnotations;
 using DAL.Base;
+using Domain.Identity;
 
 namespace Domain
 {

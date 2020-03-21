@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography;
-using DAL.Base;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace Domain
+namespace Domain.Identity
 {
     public class AppUser : IdentityUser
     {
