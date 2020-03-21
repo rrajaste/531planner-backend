@@ -1,12 +1,16 @@
-﻿using System;
+
+using System;
 
 namespace Contracts.DAL.Base
 {
-    public interface IDomainEntity<TKey> where TKey : IComparable
+    public interface IDomainEntity : IDomainEntity<Guid>
     {
-        TKey Id { get; set; }
-        DateTime CreatedAt { get; set; }
-        DateTime DeletedAt { get; set; }
-        string? Comment { get; set; }
+        
+    }
+
+    public interface IDomainEntity<TKey> : IDomainBaseEntity<TKey>, IDomainEntityMetadata
+        where TKey : struct, IComparable
+    {
+         
     }
 }
