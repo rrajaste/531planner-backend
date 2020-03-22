@@ -6,6 +6,8 @@ using DAL.App.EF.Repositories;
 using Domain;
 using Extensions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -13,10 +15,12 @@ namespace WebApplication.Controllers
     public class BodyMeasurementsController : Controller
     {
         private readonly BodyMeasurementsRepository _bodyMeasurementsRepository;
+        private readonly UnitsTypeRepository _unitsTypeRepository;
 
         public BodyMeasurementsController(AppDbContext context)
         {
             _bodyMeasurementsRepository = new BodyMeasurementsRepository(context);
+            _unitsTypeRepository = new UnitsTypeRepository(context);
         }
 
         // GET: BodyMeasurements
@@ -46,7 +50,10 @@ namespace WebApplication.Controllers
         // GET: BodyMeasurements/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new BodyMeasurementCreateEditViewModel();
+            var unitTypes = _unitsTypeRepository.All();
+            viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name));
+            return View(viewModel);
         }
 
         // POST: BodyMeasurements/Create
@@ -54,15 +61,18 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Weight,Height,Chest,Waist,Hip,Arm,BodyFatPercentage,UnitsTypeId")] BodyMeasurements bodyMeasurements)
-        {
+        public async Task<IActionResult> Create(BodyMeasurementCreateEditViewModel viewModel)
+        { 
             if (ModelState.IsValid)
             {
-                _bodyMeasurementsRepository.Add(bodyMeasurements);
+                _bodyMeasurementsRepository.Add(viewModel.BodyMeasurements);
                 await _bodyMeasurementsRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(bodyMeasurements);
+            var unitTypes = _unitsTypeRepository.All();
+            viewModel.UnitTypeSelectList = new SelectList(
+                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurements.UnitsTypeId);
+            return View(viewModel);
         }
 
         // GET: BodyMeasurements/Edit/5
