@@ -8,8 +8,8 @@ namespace Domain
     public class TrainingDay : DomainEntity
     {
         public DateTime Date { get; set; }
-        public string TrainingWeekId { get; set; }
-        public string TrainingDayTypeId { get; set; }
+        public Guid TrainingWeekId { get; set; } = default!;
+        public Guid TrainingDayTypeId { get; set; } = default!;
         public TrainingWeek? TrainingWeek { get; set; }
         public TrainingDayType? TrainingDayType { get; set; }
     }

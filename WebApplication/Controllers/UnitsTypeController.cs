@@ -6,35 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
+using DAL.App.EF.Repositories;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class UnitsTypeController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly UnitsTypeRepository _unitsTypeRepository;
 
         public UnitsTypeController(AppDbContext context)
         {
-            _context = context;
+            _unitsTypeRepository = new UnitsTypeRepository(context);
         }
 
         // GET: UnitsType
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UnitsTypes.ToListAsync());
+            return View(await _unitsTypeRepository.AllAsync());
         }
 
         // GET: UnitsType/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var unitsType = await _context.UnitsTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var unitsType = await _unitsTypeRepository.FindAsync(id);
             if (unitsType == null)
             {
                 return NotFound();
@@ -54,26 +56,26 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UnitsTypeId,Name,Description,Id,CreatedAt,DeletedAt,Comment")] UnitsType unitsType)
+        public async Task<IActionResult> Create([Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] UnitsType unitsType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(unitsType);
-                await _context.SaveChangesAsync();
+                _unitsTypeRepository.Add(unitsType);
+                await _unitsTypeRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(unitsType);
         }
 
         // GET: UnitsType/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var unitsType = await _context.UnitsTypes.FindAsync(id);
+            var unitsType = await _unitsTypeRepository.FindAsync(id);
             if (unitsType == null)
             {
                 return NotFound();
@@ -86,7 +88,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("UnitsTypeId,Name,Description,Id,CreatedAt,DeletedAt,Comment")] UnitsType unitsType)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] UnitsType unitsType)
         {
             if (id != unitsType.Id)
             {
@@ -95,37 +97,22 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(unitsType);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UnitsTypeExists(unitsType.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _unitsTypeRepository.Update(unitsType);
+                await _unitsTypeRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(unitsType);
         }
 
         // GET: UnitsType/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var unitsType = await _context.UnitsTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var unitsType = await _unitsTypeRepository.FindAsync(id);
             if (unitsType == null)
             {
                 return NotFound();
@@ -137,17 +124,12 @@ namespace WebApplication.Controllers
         // POST: UnitsType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var unitsType = await _context.UnitsTypes.FindAsync(id);
-            _context.UnitsTypes.Remove(unitsType);
-            await _context.SaveChangesAsync();
+            var unitsType = await _unitsTypeRepository.FindAsync(id);
+            _unitsTypeRepository.Remove(unitsType);
+            await _unitsTypeRepository.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool UnitsTypeExists(string id)
-        {
-            return _context.UnitsTypes.Any(e => e.Id == id);
         }
     }
 }

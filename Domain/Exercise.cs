@@ -12,7 +12,7 @@ namespace Domain
         [MaxLength(255)] 
         public string Description { get; set; } = default!;
         
-        public string ExerciseTypeId { get; set; }
+        public Guid ExerciseTypeId { get; set; }
         public ExerciseType? ExerciseType { get; set; }
         public ICollection<TargetMuscleGroup>? TargetMuscleGroups { get; set; }
         public ICollection<PerformedExercise>? PerformedExercises { get; set; }

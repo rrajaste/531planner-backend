@@ -2836,6 +2836,20 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Contracts.DAL.App/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Contracts.DAL.Base": "1.0.0",
+          "Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Contracts.DAL.App.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Contracts.DAL.App.dll": {}
+        }
+      },
       "Contracts.DAL.Base/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
@@ -2853,8 +2867,11 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
+          "Contracts.DAL.App": "1.0.0",
+          "DAL.Base.EF": "1.0.0",
           "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "3.1.2",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.1",
           "Pomelo.EntityFrameworkCore.MySql": "3.1.1"
         },
@@ -2876,6 +2893,20 @@
         },
         "runtime": {
           "bin/placeholder/DAL.Base.dll": {}
+        }
+      },
+      "DAL.Base.EF/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Contracts.DAL.Base": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "3.1.2"
+        },
+        "compile": {
+          "bin/placeholder/DAL.Base.EF.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DAL.Base.EF.dll": {}
         }
       },
       "Domain/1.0.0": {
@@ -9057,6 +9088,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "Contracts.DAL.App/1.0.0": {
+      "type": "project",
+      "path": "../Contracts.DAL.App/Contracts.DAL.App.csproj",
+      "msbuildProject": "../Contracts.DAL.App/Contracts.DAL.App.csproj"
+    },
     "Contracts.DAL.Base/1.0.0": {
       "type": "project",
       "path": "../Contracts.DAL.Base/Contracts.DAL.Base.csproj",
@@ -9071,6 +9107,11 @@
       "type": "project",
       "path": "../DAL.Base/DAL.Base.csproj",
       "msbuildProject": "../DAL.Base/DAL.Base.csproj"
+    },
+    "DAL.Base.EF/1.0.0": {
+      "type": "project",
+      "path": "../DAL.Base.EF/DAL.Base.EF.csproj",
+      "msbuildProject": "../DAL.Base.EF/DAL.Base.EF.csproj"
     },
     "Domain/1.0.0": {
       "type": "project",
@@ -9103,14 +9144,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/WebApplication/WebApplication.csproj",
+      "projectUniqueName": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/WebApplication/WebApplication.csproj",
       "projectName": "WebApplication",
-      "projectPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/WebApplication/WebApplication.csproj",
+      "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/WebApplication/WebApplication.csproj",
       "packagesPath": "/home/ranno/.nuget/packages/",
-      "outputPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/WebApplication/obj/",
+      "outputPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/WebApplication/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/ranno/.config/NuGet/NuGet.Config"
+        "/home/ranno/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -9121,11 +9162,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/DAL.App.EF/DAL.App.EF.csproj": {
-              "projectPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/DAL.App.EF/DAL.App.EF.csproj"
+            "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.EF/DAL.App.EF.csproj": {
+              "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.EF/DAL.App.EF.csproj"
             },
-            "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/Extensions/Extensions.csproj": {
-              "projectPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/Extensions/Extensions.csproj"
+            "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Extensions/Extensions.csproj": {
+              "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Extensions/Extensions.csproj"
             }
           }
         }

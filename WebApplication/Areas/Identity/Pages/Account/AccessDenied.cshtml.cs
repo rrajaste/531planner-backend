@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApplication.Areas.Identity.Pages.Account
+namespace WebApp.Areas.Identity.Pages.Account
 {
     public class AccessDeniedModel : PageModel
     {

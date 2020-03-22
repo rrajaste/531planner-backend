@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DAL.App.EF;
 using Domain;
+using Domain.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -29,8 +30,8 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseMySql(
-                    Configuration.GetConnectionString("MySqlConnection")));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("MsSqlConnection")));
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
             services.AddControllersWithViews();
@@ -65,6 +66,9 @@ namespace WebApplication
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "area",
+                    pattern: "{area:exists}/{ controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
@@ -79,7 +83,7 @@ namespace WebApplication
                 .CreateScope();
             
             using var ctx = serviceScope.ServiceProvider.GetService<AppDbContext>();
-            // ctx.Database.EnsureDeleted();
+            //ctx.Database.EnsureDeleted();
             ctx.Database.Migrate();
         }
     }

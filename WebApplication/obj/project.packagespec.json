@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/WebApplication/WebApplication.csproj",
+    "projectUniqueName": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/WebApplication/WebApplication.csproj",
     "projectName": "WebApplication",
-    "projectPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/WebApplication/WebApplication.csproj",
-    "outputPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/WebApplication/obj/",
+    "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/WebApplication/WebApplication.csproj",
+    "outputPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/WebApplication/obj/",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netcoreapp3.1"
@@ -15,11 +15,11 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
-          "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/DAL.App.EF/DAL.App.EF.csproj": {
-            "projectPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/DAL.App.EF/DAL.App.EF.csproj"
+          "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.EF/DAL.App.EF.csproj": {
+            "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.EF/DAL.App.EF.csproj"
           },
-          "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/Extensions/Extensions.csproj": {
-            "projectPath": "/home/ranno/Documents/distsys/icd0009-2019s/WebApplication/Extensions/Extensions.csproj"
+          "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Extensions/Extensions.csproj": {
+            "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Extensions/Extensions.csproj"
           }
         }
       }

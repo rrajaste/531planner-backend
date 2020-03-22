@@ -1,4 +1,5 @@
-﻿using DAL.Base;
+﻿using System;
+using DAL.Base;
 using Domain.Identity;
 
 namespace Domain
@@ -11,11 +12,11 @@ namespace Domain
         public int Distance { get; set; }   
         public int Duration { get; set; }
 
-        public string AppUserId { get; set; }
-        public string ExerciseId { get; set; }
-        public string UnitsTypeId { get; set; }
-        public string TrainingDayId { get; set; }
-        public string WorkoutRoutineId { get; set; }
+        public Guid AppUserId { get; set; }
+        public Guid ExerciseId { get; set; }
+        public Guid UnitsTypeId { get; set; }
+        public Guid TrainingDayId { get; set; }
+        public Guid WorkoutRoutineId { get; set; }
         public AppUser? User { get; set; }
         public Exercise? Exercise { get; set; }
         public UnitsType? UnitsType{ get; set; }

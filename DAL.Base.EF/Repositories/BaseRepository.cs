@@ -23,6 +23,7 @@ namespace DAL.Base.EF.Repositories
 
         protected DbContext RepoDbContext;
         protected DbSet<TEntity> RepoDbSet;
+        
         public BaseRepository(DbContext repoDbContext)
         {
             RepoDbContext = repoDbContext;

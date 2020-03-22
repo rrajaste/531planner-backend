@@ -1,46 +1,40 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
+using DAL.App.EF.Repositories;
 using Domain;
 using Extensions;
 using Microsoft.AspNetCore.Authorization;
-
 
 namespace WebApplication.Controllers
 {
     [Authorize]
     public class BodyMeasurementsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly BodyMeasurementsRepository _bodyMeasurementsRepository;
 
         public BodyMeasurementsController(AppDbContext context)
         {
-            _context = context;
+            _bodyMeasurementsRepository = new BodyMeasurementsRepository(context);
         }
 
         // GET: BodyMeasurements
         public async Task<IActionResult> Index()
         {
             var userId = User.UserId();
-            return View(await _context.BodyMeasurements.Where(b => b.AppUserId == userId).ToListAsync());
+            return View(await _bodyMeasurementsRepository.AllWithAppUserIdAsync(userId));
         }
 
         // GET: BodyMeasurements/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var bodyMeasurements = await _context.BodyMeasurements
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var bodyMeasurements = await _bodyMeasurementsRepository.FindAsync(id);
             if (bodyMeasurements == null)
             {
                 return NotFound();
@@ -60,26 +54,25 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Weight,Height,Chest,Waist,Hip,Arm,BodyFatPercentage,AppUserId,UnitsTypeId,Id")] BodyMeasurements bodyMeasurements)
+        public async Task<IActionResult> Create([Bind("Weight,Height,Chest,Waist,Hip,Arm,BodyFatPercentage,UnitsTypeId")] BodyMeasurements bodyMeasurements)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bodyMeasurements);
-                await _context.SaveChangesAsync();
+                _bodyMeasurementsRepository.Add(bodyMeasurements);
+                await _bodyMeasurementsRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(bodyMeasurements);
         }
 
         // GET: BodyMeasurements/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var bodyMeasurements = await _context.BodyMeasurements.FindAsync(id);
+            var bodyMeasurements = await _bodyMeasurementsRepository.FindAsync(id);
             if (bodyMeasurements == null)
             {
                 return NotFound();
@@ -92,7 +85,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Weight,Height,Chest,Waist,Hip,Arm,BodyFatPercentage,AppUserId,UnitsTypeId,Id,CreatedAt,DeletedAt,Comment")] BodyMeasurements bodyMeasurements)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Weight,Height,Chest,Waist,Hip,Arm,BodyFatPercentage")] BodyMeasurements bodyMeasurements)
         {
             if (id != bodyMeasurements.Id)
             {
@@ -101,37 +94,24 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(bodyMeasurements);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BodyMeasurementsExists(bodyMeasurements.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                
+                _bodyMeasurementsRepository.Update(bodyMeasurements);
+                await _bodyMeasurementsRepository.SaveChangesAsync();
+               
                 return RedirectToAction(nameof(Index));
             }
             return View(bodyMeasurements);
         }
 
         // GET: BodyMeasurements/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var bodyMeasurements = await _context.BodyMeasurements
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var bodyMeasurements = await _bodyMeasurementsRepository.FindAsync(id);
             if (bodyMeasurements == null)
             {
                 return NotFound();
@@ -143,17 +123,12 @@ namespace WebApplication.Controllers
         // POST: BodyMeasurements/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var bodyMeasurements = await _context.BodyMeasurements.FindAsync(id);
-            _context.BodyMeasurements.Remove(bodyMeasurements);
-            await _context.SaveChangesAsync();
+            var bodyMeasurements = await _bodyMeasurementsRepository.FindAsync(id);
+            _bodyMeasurementsRepository.Remove(bodyMeasurements);
+            await _bodyMeasurementsRepository.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool BodyMeasurementsExists(string id)
-        {
-            return _context.BodyMeasurements.Any(e => e.Id == id);
         }
     }
 }

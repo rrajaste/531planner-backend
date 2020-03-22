@@ -11,8 +11,8 @@ namespace Domain
         public string Name { get; set; } = default!;
         [MaxLength(255)]
         public string Description { get; set; } = default!;
-        public string MuscleGroupId { get; set; }
-        public string ExerciseId { get; set; }
+        public Guid MuscleGroupId { get; set; }
+        public Guid ExerciseId { get; set; }
         public MuscleGroup? MuscleGroup { get; set; }
         public Exercise? Exercise { get; set; }
     }

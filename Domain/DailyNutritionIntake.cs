@@ -13,8 +13,8 @@ namespace Domain
         public int? Protein { get; set; }
         public int? Fats { get; set; }
         public int? Carbohydrates { get; set; }
-        public string AppUserId { get; set; }
-        public string UnitsTypeId { get; set; }
+        public Guid AppUserId { get; set; }
+        public Guid UnitsTypeId { get; set; }
         public AppUser? User { get; set; }
         public UnitsType? UnitsType { get; set; }
     }

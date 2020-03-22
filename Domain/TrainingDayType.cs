@@ -9,7 +9,6 @@ namespace Domain
 {
     public class TrainingDayType : DomainEntity
     {
-        public int TrainingDayTypeId { get; set; }
         [MaxLength(255)]
         public string Name { get; set; } = default!;
         [MaxLength(255)]

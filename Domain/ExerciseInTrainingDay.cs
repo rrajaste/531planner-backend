@@ -7,8 +7,8 @@ namespace Domain
 {
     public class ExerciseInTrainingDay : DomainEntity
     {
-        public string TrainingDayId { get; set; }
-        public string ExerciseId { get; set; }
+        public Guid TrainingDayId { get; set; }
+        public Guid ExerciseId { get; set; }
         public TrainingDay? TrainingDay { get; set; }
         public Exercise? Exercise { get; set; }
     }
