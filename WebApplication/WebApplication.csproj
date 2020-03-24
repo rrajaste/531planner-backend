@@ -210,4 +210,11 @@
       <UpToDateCheckInput Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Controllers\MuscleGroupsController.cs" />
+      <Compile Remove="Controllers\RoutineTypesController.cs" />
+      <Compile Remove="Controllers\TrainingDayTypesController.cs" />
+      <Compile Remove="Controllers\UnitsTypeController.cs" />
+    </ItemGroup>
+
 </Project>

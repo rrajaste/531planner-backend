@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
-    [Authorize]
+    [Au thorize]
     public class MuscleGroupsController : Controller
     {
         private readonly MuscleGroupRepository _muscleGroupRepository;

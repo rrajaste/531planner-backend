@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using DAL.App.EF;
+using DAL.App.EF.Repositories;
 using Domain;
 using Domain.Identity;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +34,10 @@ namespace WebApplication
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("MsSqlConnection")));
+            
+            services.AddScoped<IBodyMeasurementsRepository, BodyMeasurementsRepository>();
+            services.AddScoped<IUnitsTypeRepository, UnitsTypeRepository>();
+            services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
             services.AddControllersWithViews();
