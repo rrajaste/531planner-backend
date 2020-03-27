@@ -6,7 +6,7 @@ using Domain.Identity;
 
 namespace Domain
 {
-    public class BodyMeasurements : DomainEntity
+    public class BodyMeasurement : DomainEntity
     {
         [Range(1, int.MaxValue)]
         public int Weight { get; set; }

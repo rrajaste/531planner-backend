@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Identity
 {
-    public class AppUserRole : IdentityRole
+    public class AppUserRole : AppUser<Guid>
     {
-        public override string Id { get; set; } = default!;
     }
+
+    public class AppUserRole<TKey> : IdentityRole<TKey> where TKey : IEquatable<TKey>
+    {
+    }
+
 }
