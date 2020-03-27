@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class BodyMeasurementsRepository : BaseRepository<BodyMeasurements>, IBodyMeasurementsRepository
+    public class BodyMeasurementRepository : EFBaseRepository<BodyMeasurement, AppDbContext>, IBodyMeasurementRepository
     {
-        public BodyMeasurementsRepository(DbContext repoDbContext) : base(repoDbContext)
+        public BodyMeasurementRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {
         }
-
-        public async Task<IEnumerable<BodyMeasurements>> AllWithAppUserIdAsync(object id)
+        public async Task<IEnumerable<BodyMeasurement>> AllWithAppUserIdAsync(object id)
         {
             return await RepoDbSet.Where(b => b.AppUserId.Equals(id)).ToListAsync();
         }

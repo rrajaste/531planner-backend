@@ -6,9 +6,9 @@ namespace DAL.App.EF
 {
     public class AppUnitOfWork : EFBaseUnitOfWork<AppDbContext>, IAppUnitOfWork
     {
-        public IBodyMeasurementsRepository BodyMeasurements => 
-            GetRepository<IBodyMeasurementsRepository>(()=> new BodyMeasurementsRepository(UnitOfWorkDbContext));
-        public IUnitsTypeRepository UnitsTypes => 
+        public IBodyMeasurementRepository BodyMeasurements => 
+            GetRepository<IBodyMeasurementRepository>(()=> new BodyMeasurementRepository(UnitOfWorkDbContext));
+        public IUnitsTypeRepository UnitTypes => 
             GetRepository<IUnitsTypeRepository>(()=> new UnitsTypeRepository(UnitOfWorkDbContext));
 
         public AppUnitOfWork(AppDbContext unitOfWorkDbContext) : base(unitOfWorkDbContext)

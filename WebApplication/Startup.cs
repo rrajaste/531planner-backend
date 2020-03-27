@@ -35,7 +35,7 @@ namespace WebApplication
                 options.UseSqlServer(
                     Configuration.GetConnectionString("MsSqlConnection")));
             
-            services.AddScoped<IBodyMeasurementsRepository, BodyMeasurementsRepository>();
+            services.AddScoped<IBodyMeasurementRepository, BodyMeasurementRepository>();
             services.AddScoped<IUnitsTypeRepository, UnitsTypeRepository>();
             services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)

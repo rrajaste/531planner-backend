@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
@@ -8,79 +9,82 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Base.EF.Repositories
 {
-    public abstract class BaseRepository<TEntity, TDbContext> : BaseRepository<TEntity, Guid, TDbContext> 
+    public class EFBaseRepository<TEntity, TDbContext> : EFBaseRepository<TEntity, Guid, TDbContext>, IBaseRepository<TEntity>
         where TEntity : class, IDomainEntity<Guid>, new()
-        where TDbContext : DbContext
+        where TDbContext: DbContext
     {
-        public BaseRepository(TDbContext repoDbContext) : base(repoDbContext)
+        public EFBaseRepository(TDbContext dbContext) : base(dbContext)
         {
         }
     }
 
-    public abstract class BaseRepository<TEntity, TKey, TDbContext> : IBaseRepository<TEntity, TKey>
+    public class EFBaseRepository<TEntity, TKey, TDbContext> : IBaseRepository<TEntity, TKey>
         where TEntity : class, IDomainEntity<TKey>, new()
-        where TKey : struct, IComparable
-        where TDbContext : DbContext
-
+        where TKey : struct, IEquatable<TKey>
+        where TDbContext: DbContext
     {
-
-    protected TDbContext RepoDbContext;
-    protected DbSet<TEntity> RepoDbSet;
-
-    public BaseRepository(TDbContext repoDbContext)
-    {
-        RepoDbContext = repoDbContext;
-        RepoDbSet = RepoDbContext.Set<TEntity>();
-        if (RepoDbSet == null)
+        protected TDbContext RepoDbContext;
+        protected DbSet<TEntity> RepoDbSet;
+        public EFBaseRepository(TDbContext dbContext)
         {
-            throw new ArgumentNullException(typeof(TEntity).Name + " was not found as DbSet!");
+            RepoDbContext = dbContext;
+            RepoDbSet = RepoDbContext.Set<TEntity>();
+            if (RepoDbSet == null)
+            {
+               throw new ArgumentNullException(typeof(TEntity).Name + " was not found as DBSet!");
+            }
         }
-    }
+        
+        public virtual IEnumerable<TEntity> All()
+        {
+            return RepoDbSet.ToList();
+        }
 
-    public virtual IEnumerable<TEntity> All()
-    {
-        return RepoDbSet.ToList();
-    }
+        public virtual async Task<IEnumerable<TEntity>> AllAsync()
+        {
+            return await RepoDbSet.ToListAsync();
+        }
 
-    public virtual async Task<IEnumerable<TEntity>> AllAsync()
-    {
-        return await RepoDbSet.ToListAsync();
-    }
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>>? filter = null)
+        {
+            throw new NotImplementedException();
+        }
 
-    public virtual TEntity Find(params object[] id)
-    {
-        return RepoDbSet.Find(id);
-    }
+        public Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null)
+        {
+            throw new NotImplementedException();
+        }
 
-    public virtual async Task<TEntity> FindAsync(params object[] id)
-    {
-        return await RepoDbSet.FindAsync(id);
-    }
+        public virtual TEntity Find(params object[] id)
+        {
+            return RepoDbSet.Find(id);
+        }
 
-    public virtual TEntity Add(TEntity entity)
-    {
-        return RepoDbSet.Add(entity).Entity;
-    }
+        public virtual async Task<TEntity> FindAsync(params object[] id)
+        {
+            return await RepoDbSet.FindAsync(id);
+        }
 
-    public virtual TEntity Update(TEntity entity)
-    {
-        return RepoDbSet.Update(entity).Entity;
-    }
+        public virtual TEntity Add(TEntity entity)
+        {
+            return RepoDbSet.Add(entity).Entity;
+        }
 
-    public virtual TEntity Remove(TEntity entity)
-    {
-        return RepoDbSet.Remove(entity).Entity;
+        public virtual TEntity Update(TEntity entity)
+        {
+            return RepoDbSet.Update(entity).Entity;
+        }
+
+        public virtual TEntity Remove(TEntity entity)
+        {
+            return RepoDbSet.Remove(entity).Entity;
+        }
+
+        public virtual TEntity Remove(params object[] id)
+        {
+            return Remove(Find(id));
+        }
 
     }
-
-    public virtual TEntity Remove(params object[] id)
-    {
-        return Remove(Find(id));
-    }
-
-    public virtual int SaveChanges()
-    {
-        return RepoDbContext.SaveChanges();
-    }
-    }
+    
 }

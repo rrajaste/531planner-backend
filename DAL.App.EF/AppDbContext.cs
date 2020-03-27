@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF
 {
-    public class AppDbContext : IdentityDbContext<AppUser, AppUserRole, string>
+    public class AppDbContext : IdentityDbContext<AppUser, AppUserRole, Guid>
     {
-        public DbSet<BodyMeasurements> BodyMeasurements { get; set; } = default!;
+        public DbSet<BodyMeasurement> BodyMeasurements { get; set; } = default!;
         public DbSet<DailyNutritionIntake> DailyNutritionIntakes { get; set; } = default!;
         public DbSet<Exercise> Exercises { get; set; } = default!;
         public DbSet<ExerciseInTrainingDay> ExercisesInTrainingDays { get; set; } = default!;

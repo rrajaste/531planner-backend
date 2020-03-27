@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class TrainingCycleRepository : BaseRepository<TrainingCycle>, ITrainingCycleRepository
+    public class TrainingCycleRepository : EFBaseRepository<TrainingCycle, AppDbContext>, ITrainingCycleRepository
     {
-        public TrainingCycleRepository(DbContext repoDbContext) : base(repoDbContext)
+        public TrainingCycleRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {
         }
     }

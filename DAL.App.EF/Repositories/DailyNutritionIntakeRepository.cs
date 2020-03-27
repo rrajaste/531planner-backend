@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class DailyNutritionIntakeRepository : BaseRepository<DailyNutritionIntake>, IDailyNutritionIntakeRepository
+    public class DailyNutritionIntakeRepository : EFBaseRepository<DailyNutritionIntake,AppDbContext>, IDailyNutritionIntakeRepository
     {
-        public DailyNutritionIntakeRepository(DbContext repoDbContext) : base(repoDbContext)
+        public DailyNutritionIntakeRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {
         }
     }

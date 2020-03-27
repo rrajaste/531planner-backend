@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class RoutineTypeRepository : BaseRepository<RoutineType>, IRoutineTypeRepository
+    public class RoutineTypeRepository : EFBaseRepository<RoutineType, AppDbContext>, IRoutineTypeRepository
     {
-        public RoutineTypeRepository(DbContext repoDbContext) : base(repoDbContext)
+        public RoutineTypeRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {
         }
     }

@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class UnitsTypeRepository : BaseRepository<UnitsType>, IUnitsTypeRepository
+    public class UnitsTypeRepository : EFBaseRepository<UnitsType, AppDbContext>, IUnitsTypeRepository
     {
-        public UnitsTypeRepository(DbContext repoDbContext) : base(repoDbContext)
+        public UnitsTypeRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {
         }
     }

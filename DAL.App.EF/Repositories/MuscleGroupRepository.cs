@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class MuscleGroupRepository : BaseRepository<MuscleGroup>, IMuscleGroupRepository
+    public class MuscleGroupRepository : EFBaseRepository<MuscleGroup, AppDbContext>, IMuscleGroupRepository
     {
-        public MuscleGroupRepository(DbContext repoDbContext) : base(repoDbContext)
+        public MuscleGroupRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {
         }
     }
