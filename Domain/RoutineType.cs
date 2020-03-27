@@ -10,6 +10,5 @@ namespace Domain
         public string Name { get; set; } = default!;
         [MaxLength(255)]
         public string Description { get; set; } = default!;
-        public DateTime ClosedAt { get; set; }
     }
 }
