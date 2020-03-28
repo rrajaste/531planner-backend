@@ -34,6 +34,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
+
             var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindAsync(id);
             if (bodyMeasurements == null)
             {
@@ -66,7 +67,7 @@ namespace WebApplication.Controllers
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var unitTypes = _unitOfWork.BodyMeasurements.All();
+            var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
                 unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
             return View(viewModel);
@@ -79,8 +80,11 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
-            var viewModel = new BodyMeasurementCreateEditViewModel();
-            viewModel.BodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id);
+
+            var viewModel = new BodyMeasurementCreateEditViewModel
+            {
+                BodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id)
+            };
             var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
                 unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
@@ -105,6 +109,7 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
+                viewModel.BodyMeasurement.AppUserId = User.UserId();   
                 _unitOfWork.BodyMeasurements.Update(viewModel.BodyMeasurement);
                 await _unitOfWork.SaveChangesAsync();
                

@@ -1,0 +1,13 @@
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/bin/Debug/netstandard2.1/DAL.Base.EF.deps.json
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/bin/Debug/netstandard2.1/DAL.Base.EF.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/bin/Debug/netstandard2.1/DAL.Base.EF.pdb
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/bin/Debug/netstandard2.1/Contracts.DAL.Base.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/bin/Debug/netstandard2.1/DAL.Base.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/bin/Debug/netstandard2.1/Contracts.DAL.Base.pdb
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/bin/Debug/netstandard2.1/DAL.Base.pdb
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/obj/Debug/netstandard2.1/DAL.Base.EF.csprojAssemblyReference.cache
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/obj/Debug/netstandard2.1/DAL.Base.EF.AssemblyInfoInputs.cache
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/obj/Debug/netstandard2.1/DAL.Base.EF.AssemblyInfo.cs
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/obj/Debug/netstandard2.1/DAL.Base.EF.csproj.CopyComplete
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/obj/Debug/netstandard2.1/DAL.Base.EF.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/obj/Debug/netstandard2.1/DAL.Base.EF.pdb

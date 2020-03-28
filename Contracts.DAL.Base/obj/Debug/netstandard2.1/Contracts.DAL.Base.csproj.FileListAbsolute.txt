@@ -1,0 +1,8 @@
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/bin/Debug/netstandard2.1/Contracts.DAL.Base.deps.json
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/bin/Debug/netstandard2.1/Contracts.DAL.Base.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/bin/Debug/netstandard2.1/Contracts.DAL.Base.pdb
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/obj/Debug/netstandard2.1/Contracts.DAL.Base.csprojAssemblyReference.cache
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/obj/Debug/netstandard2.1/Contracts.DAL.Base.AssemblyInfoInputs.cache
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/obj/Debug/netstandard2.1/Contracts.DAL.Base.AssemblyInfo.cs
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/obj/Debug/netstandard2.1/Contracts.DAL.Base.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/obj/Debug/netstandard2.1/Contracts.DAL.Base.pdb

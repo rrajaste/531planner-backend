@@ -1,0 +1,13 @@
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/bin/Debug/netstandard2.1/Domain.deps.json
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/bin/Debug/netstandard2.1/Domain.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/bin/Debug/netstandard2.1/Domain.pdb
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/bin/Debug/netstandard2.1/Contracts.DAL.Base.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/bin/Debug/netstandard2.1/DAL.Base.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/bin/Debug/netstandard2.1/Contracts.DAL.Base.pdb
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/bin/Debug/netstandard2.1/DAL.Base.pdb
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/obj/Debug/netstandard2.1/Domain.csprojAssemblyReference.cache
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/obj/Debug/netstandard2.1/Domain.AssemblyInfoInputs.cache
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/obj/Debug/netstandard2.1/Domain.AssemblyInfo.cs
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/obj/Debug/netstandard2.1/Domain.csproj.CopyComplete
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/obj/Debug/netstandard2.1/Domain.dll
+/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/obj/Debug/netstandard2.1/Domain.pdb
