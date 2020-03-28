@@ -1,4 +1,5 @@
 using Contracts.DAL.App;
+using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
 using Domain;
 
