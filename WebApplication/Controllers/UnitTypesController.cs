@@ -1,31 +1,27 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using DAL.App.EF;
-using DAL.App.EF.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
     [Authorize]
-    public class UnitsTypeController : Controller
-    {
-        private readonly UnitsTypeRepository _unitsTypeRepository;
 
-        public UnitsTypeController(AppDbContext context)
+    public class UnitTypesController : Controller
+    {
+        private readonly IAppUnitOfWork _unitOfWork;
+
+        public UnitTypesController(IAppUnitOfWork unitOfWork)
         {
-            _unitsTypeRepository = new UnitsTypeRepository(context);
+            _unitOfWork = unitOfWork;
         }
 
         // GET: UnitsType
         public async Task<IActionResult> Index()
         {
-            return View(await _unitsTypeRepository.AllAsync());
+            return View(await _unitOfWork.UnitTypes.AllAsync());
         }
 
         // GET: UnitsType/Details/5
@@ -36,7 +32,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var unitsType = await _unitsTypeRepository.FindAsync(id);
+            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
             if (unitsType == null)
             {
                 return NotFound();
@@ -60,8 +56,8 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitsTypeRepository.Add(unitsType);
-                await _unitsTypeRepository.SaveChangesAsync();
+                _unitOfWork.UnitTypes.Add(unitsType);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(unitsType);
@@ -75,7 +71,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var unitsType = await _unitsTypeRepository.FindAsync(id);
+            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
             if (unitsType == null)
             {
                 return NotFound();
@@ -97,8 +93,8 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitsTypeRepository.Update(unitsType);
-                await _unitsTypeRepository.SaveChangesAsync();
+                _unitOfWork.UnitTypes.Update(unitsType);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(unitsType);
@@ -112,7 +108,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var unitsType = await _unitsTypeRepository.FindAsync(id);
+            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
             if (unitsType == null)
             {
                 return NotFound();
@@ -126,9 +122,9 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var unitsType = await _unitsTypeRepository.FindAsync(id);
-            _unitsTypeRepository.Remove(unitsType);
-            await _unitsTypeRepository.SaveChangesAsync();
+            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
+            _unitOfWork.UnitTypes.Remove(unitsType);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

@@ -1,10 +1,7 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
-using DAL.App.EF;
-using DAL.App.EF.Repositories;
 using Domain;
 using Extensions;
 using Microsoft.AspNetCore.Authorization;
@@ -26,7 +23,6 @@ namespace WebApplication.Controllers
         // GET: BodyMeasurements
         public async Task<IActionResult> Index()
         {
-            var userId = User.UserId();
             return View(await _unitOfWork.BodyMeasurements.AllAsync());
         }
 
@@ -51,7 +47,7 @@ namespace WebApplication.Controllers
         public IActionResult Create()
         {
             var viewModel = new BodyMeasurementCreateEditViewModel();
-            var unitTypes = _unitOfWork.UnitsTypes.All();
+            var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name));
             return View(viewModel);
         }
@@ -65,14 +61,14 @@ namespace WebApplication.Controllers
         { 
             if (ModelState.IsValid)
             {
-                viewModel.BodyMeasurements.AppUserId = User.UserId();
-                _unitOfWork.BodyMeasurements.Add(viewModel.BodyMeasurements);
+                viewModel.BodyMeasurement.AppUserId = User.UserId();
+                _unitOfWork.BodyMeasurements.Add(viewModel.BodyMeasurement);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             var unitTypes = _unitOfWork.BodyMeasurements.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurements.UnitsTypeId);
+                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
             return View(viewModel);
         }
 
@@ -84,11 +80,11 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
             var viewModel = new BodyMeasurementCreateEditViewModel();
-            viewModel.BodyMeasurements = await _unitOfWork.BodyMeasurements.FindAsync(id);
-            var unitTypes = _unitOfWork.UnitsTypes.All();
+            viewModel.BodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id);
+            var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurements.UnitsTypeId);
-            if (viewModel.BodyMeasurements == null)
+                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
+            if (viewModel.BodyMeasurement == null)
             {
                 return NotFound();
             }
@@ -102,21 +98,21 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, BodyMeasurementCreateEditViewModel viewModel)
         {
-            if (id != viewModel.BodyMeasurements.Id)
+            if (id != viewModel.BodyMeasurement.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.BodyMeasurements.Update(viewModel.BodyMeasurements);
+                _unitOfWork.BodyMeasurements.Update(viewModel.BodyMeasurement);
                 await _unitOfWork.SaveChangesAsync();
                
                 return RedirectToAction(nameof(Index));
             }
             var unitTypes = _unitOfWork.BodyMeasurements.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurements.UnitsTypeId);
+                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
             return View(viewModel);
         }
 

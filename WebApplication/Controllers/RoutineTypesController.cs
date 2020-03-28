@@ -1,12 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using DAL.App.EF;
-using DAL.App.EF.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 
@@ -15,17 +10,17 @@ namespace WebApplication.Controllers
     [Authorize]
     public class RoutineTypesController : Controller
     {
-        private readonly RoutineTypeRepository _routineTypeRepository;
+        private readonly IAppUnitOfWork _unitOfWork;
 
-        public RoutineTypesController(AppDbContext context)
+        public RoutineTypesController(IAppUnitOfWork unitOfWork)
         {
-            _routineTypeRepository = new RoutineTypeRepository(context);
+            _unitOfWork = unitOfWork;
         }
 
         // GET: RoutineTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _routineTypeRepository.AllAsync());
+            return View(await _unitOfWork.RoutineTypes.AllAsync());
         }
 
         // GET: RoutineTypes/Details/5
@@ -36,7 +31,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var routineType = await _routineTypeRepository.FindAsync(id);
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
             if (routineType == null)
             {
                 return NotFound();
@@ -60,8 +55,8 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                _routineTypeRepository.Add(routineType);
-                await _routineTypeRepository.SaveChangesAsync();
+                _unitOfWork.RoutineTypes.Add(routineType);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(routineType);
@@ -75,7 +70,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var routineType = await _routineTypeRepository.FindAsync(id);
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
             if (routineType == null)
             {
                 return NotFound();
@@ -98,8 +93,8 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 
-                _routineTypeRepository.Update(routineType);
-                await _routineTypeRepository.SaveChangesAsync();
+                _unitOfWork.RoutineTypes.Update(routineType);
+                await _unitOfWork.SaveChangesAsync();
                 
                 return RedirectToAction(nameof(Index));
             }
@@ -114,7 +109,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var routineType = await _routineTypeRepository.FindAsync(id); 
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id); 
             if (routineType == null)
             {
                 return NotFound();
@@ -128,9 +123,9 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var routineType = await _routineTypeRepository.FindAsync(id);
-            _routineTypeRepository.Remove(routineType);
-            await _routineTypeRepository.SaveChangesAsync();
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
+            _unitOfWork.RoutineTypes.Remove(routineType);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

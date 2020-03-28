@@ -1,31 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using DAL.App.EF;
-using DAL.App.EF.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
-    [Au thorize]
+    [Authorize]
     public class MuscleGroupsController : Controller
     {
-        private readonly MuscleGroupRepository _muscleGroupRepository;
+        private readonly IAppUnitOfWork _unitOfWork;
 
-        public MuscleGroupsController(AppDbContext context)
+        public MuscleGroupsController(IAppUnitOfWork unitOfWork)
         {
-            _muscleGroupRepository = new MuscleGroupRepository(context);
+            _unitOfWork = unitOfWork;
         }
 
         // GET: MuscleGroups
         public async Task<IActionResult> Index()
         {
-            return View(await _muscleGroupRepository.AllAsync());
+            return View(await _unitOfWork.MuscleGroups.AllAsync());
         }
 
         // GET: MuscleGroups/Details/5
@@ -36,7 +31,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _muscleGroupRepository.FindAsync(id);
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
             if (muscleGroup == null)
             {
                 return NotFound();
@@ -50,7 +45,6 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-
         // POST: MuscleGroups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -60,8 +54,8 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                _muscleGroupRepository.Add(muscleGroup);
-                await _muscleGroupRepository.SaveChangesAsync();
+                _unitOfWork.MuscleGroups.Add(muscleGroup);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(muscleGroup);
@@ -75,7 +69,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _muscleGroupRepository.FindAsync(id);
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
             if (muscleGroup == null)
             {
                 return NotFound();
@@ -97,8 +91,8 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                _muscleGroupRepository.Update(muscleGroup);
-                await _muscleGroupRepository.SaveChangesAsync();
+                _unitOfWork.MuscleGroups.Update(muscleGroup);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(muscleGroup);
@@ -112,7 +106,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _muscleGroupRepository.FindAsync(id);
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
             if (muscleGroup == null)
             {
                 return NotFound();
@@ -126,9 +120,9 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var muscleGroup = await _muscleGroupRepository.FindAsync(id);
-            _muscleGroupRepository.Remove(muscleGroup);
-            await _muscleGroupRepository.SaveChangesAsync();
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            _unitOfWork.MuscleGroups.Remove(muscleGroup);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

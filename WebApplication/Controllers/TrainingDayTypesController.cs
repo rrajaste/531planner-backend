@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,17 +16,17 @@ namespace WebApplication.Controllers
     [Authorize]
     public class TrainingDayTypesController : Controller
     {
-        private readonly TrainingDayTypeRepository _trainingDayTypeRepository;
+        private readonly IAppUnitOfWork _unitOfWork;
 
-        public TrainingDayTypesController(AppDbContext context)
+        public TrainingDayTypesController(IAppUnitOfWork unitOfWork)
         {
-            _trainingDayTypeRepository = new TrainingDayTypeRepository(context);
+            _unitOfWork = unitOfWork;
         }
 
         // GET: TrainingDayTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _trainingDayTypeRepository.AllAsync());
+            return View(await _unitOfWork.TrainingDayTypes.AllAsync());
         }
 
         // GET: TrainingDayTypes/Details/5
@@ -36,7 +37,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingDayType = await _trainingDayTypeRepository.FindAsync(id);
+            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
             if (trainingDayType == null)
             {
                 return NotFound();
@@ -60,8 +61,8 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                _trainingDayTypeRepository.Add(trainingDayType);
-                await _trainingDayTypeRepository.SaveChangesAsync();
+                _unitOfWork.TrainingDayTypes.Add(trainingDayType);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingDayType);
@@ -75,7 +76,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingDayType = await _trainingDayTypeRepository.FindAsync(id);
+            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
             if (trainingDayType == null)
             {
                 return NotFound();
@@ -97,8 +98,8 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                _trainingDayTypeRepository.Update(trainingDayType);
-                await _trainingDayTypeRepository.SaveChangesAsync();
+                _unitOfWork.TrainingDayTypes.Update(trainingDayType);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingDayType);
@@ -112,7 +113,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingDayType = await _trainingDayTypeRepository.FindAsync(id);
+            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
             if (trainingDayType == null)
             {
                 return NotFound();
@@ -126,9 +127,9 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var trainingDayType = await _trainingDayTypeRepository.FindAsync(id);
-            _trainingDayTypeRepository.Remove(trainingDayType);
-            await _trainingDayTypeRepository.SaveChangesAsync();
+            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
+            _unitOfWork.TrainingDayTypes.Remove(trainingDayType);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }
