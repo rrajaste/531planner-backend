@@ -1,4 +1,4 @@
-namespace Contracts.DAL.App
+namespace Contracts.DAL.App.Repositories
 {
     public interface IWorkoutRoutineRepository
     {

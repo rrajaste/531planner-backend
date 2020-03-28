@@ -1,7 +1,7 @@
 using Contracts.DAL.Base.Repositories;
 using Domain;
 
-namespace Contracts.DAL.App
+namespace Contracts.DAL.App.Repositories
 {
     public interface ITrainingCycleRepository : IBaseRepository<TrainingCycle>
     {

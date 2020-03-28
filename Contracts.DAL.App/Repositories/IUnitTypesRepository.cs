@@ -3,7 +3,7 @@ using Domain;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface ITrainingWeekRepository : IBaseRepository<TrainingWeek>
+    public interface IUnitTypesRepository : IBaseRepository<UnitsType>
     {
         
     }
