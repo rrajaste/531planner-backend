@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "/home/ranno/.dotnet/store/|arch|/|tfm|",
-      "/home/ranno/.nuget/packages"
-    ]
-  }
-}

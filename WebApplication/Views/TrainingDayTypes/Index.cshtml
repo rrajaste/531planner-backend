@@ -1,10 +1,10 @@
 @model IEnumerable<Domain.TrainingDayType>
 
 @{
-    ViewData["Title"] = "Training day types";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Training day types</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -18,12 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                            @Html.DisplayNameFor(model => model.Comment)
-                        </th>
+           
             <th></th>
         </tr>
     </thead>
@@ -37,12 +32,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
+           
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

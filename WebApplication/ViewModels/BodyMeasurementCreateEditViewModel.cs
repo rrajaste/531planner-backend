@@ -5,7 +5,7 @@ namespace WebApplication.ViewModels
 {
     public class BodyMeasurementCreateEditViewModel
     {
-        public BodyMeasurement BodyMeasurement { get; set; }
+        public BodyMeasurements BodyMeasurements { get; set; }
         public SelectList? UnitTypeSelectList { get; set; }
     }
 }
