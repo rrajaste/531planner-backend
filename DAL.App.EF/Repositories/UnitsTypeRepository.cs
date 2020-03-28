@@ -1,14 +1,12 @@
-using Contracts.DAL.App;
-using Contracts.DAL.Base.Repositories;
+using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
 using Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class UnitsTypeRepository : EFBaseRepository<UnitsType, AppDbContext>, IUnitsTypeRepository
+    public class UnitTypesRepository : EFBaseRepository<UnitsType, AppDbContext>, IUnitTypesRepository
     {
-        public UnitsTypeRepository(AppDbContext repoDbContext) : base(repoDbContext)
+        public UnitTypesRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {
         }
     }
