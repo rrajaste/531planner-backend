@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_WebApplication.1789077397.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
@@ -20,8 +21,9 @@
       <e p="BuildFiles" t="Include" />
       <e p="Contracts.DAL.App" t="IncludeRecursive">
         <e p="Contracts.DAL.App.csproj" t="IncludeRecursive" />
+        <e p="IAppUnitOfWork.cs" t="Include" />
         <e p="Repositories" t="Include">
-          <e p="IBodyMeasurementsRepository.cs" t="Include" />
+          <e p="IBodyMeasurementRepository.cs" t="Include" />
           <e p="IDailyNutritionIntakeRepository.cs" t="Include" />
           <e p="IExerciseInTrainingDayRepository.cs" t="Include" />
           <e p="IExerciseRepository.cs" t="Include" />
@@ -35,7 +37,7 @@
           <e p="ITrainingDayRepository.cs" t="Include" />
           <e p="ITrainingDayTypeRepository.cs" t="Include" />
           <e p="ITrainingWeekRepository.cs" t="Include" />
-          <e p="IUnitsTypeInterface.cs" t="Include" />
+          <e p="IUnitTypesRepository.cs" t="Include" />
           <e p="IWorkoutRoutineRepository.cs" t="Include" />
           <e p="Identity" t="Include" />
         </e>
@@ -50,6 +52,7 @@
       </e>
       <e p="Contracts.DAL.Base" t="IncludeRecursive">
         <e p="Contracts.DAL.Base.csproj" t="IncludeRecursive" />
+        <e p="IBaseUnitOfWork.cs" t="Include" />
         <e p="IDomainBaseEntity.cs" t="Include" />
         <e p="IDomainEntity.cs" t="Include" />
         <e p="IDomainEntityMetadata.cs" t="Include" />
@@ -67,14 +70,13 @@
       </e>
       <e p="DAL.App.EF" t="IncludeRecursive">
         <e p="AppDbContext.cs" t="Include" />
+        <e p="AppUnitOfWork.cs" t="Include" />
         <e p="DAL.App.EF.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20200322195501_InitialDbCreation.Designer.cs" t="Include" />
-          <e p="20200322195501_InitialDbCreation.cs" t="Include" />
           <e p="AppDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Repositories" t="Include">
-          <e p="BodyMeasurementsRepository.cs" t="Include" />
+          <e p="BodyMeasurementRepository.cs" t="Include" />
           <e p="DailyNutritionIntakeRepository.cs" t="Include" />
           <e p="ExerciseInTrainingDayRepository.cs" t="Include" />
           <e p="ExerciseRepository.cs" t="Include" />
@@ -101,6 +103,7 @@
         </e>
       </e>
       <e p="DAL.Base" t="IncludeRecursive">
+        <e p="BaseUnitOfWork.cs" t="Include" />
         <e p="DAL.Base.csproj" t="IncludeRecursive" />
         <e p="DomainBaseEntity.cs" t="Include" />
         <e p="DomainEntity.cs" t="Include" />
@@ -116,8 +119,9 @@
       </e>
       <e p="DAL.Base.EF" t="IncludeRecursive">
         <e p="DAL.Base.EF.csproj" t="IncludeRecursive" />
+        <e p="EFBaseUnitOfWork.cs" t="Include" />
         <e p="Repositories" t="Include">
-          <e p="BaseRepository.cs" t="Include" />
+          <e p="EFBaseRepository.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -130,7 +134,7 @@
       </e>
       <e p="Directory.Build.props" t="Include" />
       <e p="Domain" t="IncludeRecursive">
-        <e p="BodyMeasurements.cs" t="Include" />
+        <e p="BodyMeasurement.cs" t="Include" />
         <e p="DailyNutritionIntake.cs" t="Include" />
         <e p="Domain.csproj" t="IncludeRecursive" />
         <e p="Exercise.cs" t="Include" />
@@ -257,11 +261,12 @@
         </e>
         <e p="Controllers" t="Include">
           <e p="BodyMeasurementsController.cs" t="Include" />
+          <e p="DailyNutritionIntakesController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
           <e p="MuscleGroupsController.cs" t="Include" />
           <e p="RoutineTypesController.cs" t="Include" />
           <e p="TrainingDayTypesController.cs" t="Include" />
-          <e p="UnitsTypeController.cs" t="Include" />
+          <e p="UnitTypesController.cs" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -270,10 +275,21 @@
         <e p="ScaffoldingReadMe.txt" t="Include" />
         <e p="Startup.cs" t="Include" />
         <e p="ViewModels" t="Include">
+          <e p="BodyMeasurementCreateEditViewModel.cs" t="Include" />
+          <e p="DailyNutritionIntakeCreateEditViewModel.cs" t="Include" />
           <e p="ErrorViewModel.cs" t="Include" />
         </e>
         <e p="Views" t="Include">
           <e p="BodyMeasurements" t="Include">
+            <e p="Create.cshtml" t="Include" />
+            <e p="Delete.cshtml" t="Include" />
+            <e p="Details.cshtml" t="Include" />
+            <e p="Edit.cshtml" t="Include" />
+            <e p="Index.cshtml" t="Include" />
+            <e p="_CreateEditPartial.cshtml" t="Include" />
+            <e p="_DetailsDeletePartial.cshtml" t="Include" />
+          </e>
+          <e p="DailyNutritionIntakes" t="Include">
             <e p="Create.cshtml" t="Include" />
             <e p="Delete.cshtml" t="Include" />
             <e p="Details.cshtml" t="Include" />
@@ -309,6 +325,7 @@
             <e p="_Layout.cshtml" t="Include" />
             <e p="_LoginPartial.cshtml" t="Include" />
             <e p="_ValidationScriptsPartial.cshtml" t="Include" />
+            <e p="_controllerSelectionPartial.cshtml" t="Include" />
           </e>
           <e p="TrainingDayTypes" t="Include">
             <e p="Create.cshtml" t="Include" />
@@ -319,7 +336,7 @@
             <e p="_CreateEditPartial.cshtml" t="Include" />
             <e p="_DetailsDeletePartial.cshtml" t="Include" />
           </e>
-          <e p="UnitsType" t="Include">
+          <e p="UnitTypes" t="Include">
             <e p="Create.cshtml" t="Include" />
             <e p="Delete.cshtml" t="Include" />
             <e p="Details.cshtml" t="Include" />
