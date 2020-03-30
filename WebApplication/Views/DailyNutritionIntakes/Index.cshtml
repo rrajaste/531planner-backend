@@ -1,10 +1,10 @@
-@model IEnumerable<Domain.RoutineType>
+@model IEnumerable<Domain.DailyNutritionIntake>
 
 @{
-    ViewData["Title"] = "Routine types";
+    ViewData["Title"] = "Daily nutrition intake";
 }
 
-<h1>Routine types</h1>
+<h1>Daily nutrition intake</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,14 +13,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Calories)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Protein)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Carbohydrates)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.UnitsType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Comment)
             </th>
@@ -31,10 +42,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Calories)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Protein)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Carbohydrates)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsType.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)

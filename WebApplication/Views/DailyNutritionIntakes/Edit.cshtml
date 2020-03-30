@@ -1,4 +1,4 @@
-@model BodyMeasurementCreateEditViewModel
+@model DailyNutritionIntakeCreateEditViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,12 +6,12 @@
 
 <h1>Edit</h1>
 
-<h4>BodyMeasurements</h4>
+<h4>DailyNutritionIntake</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <input type="hidden" asp-for="BodyMeasurement.Id"/>
+            <input type="hidden" asp-for="DailyNutritionIntake.Id" />
             <partial name="_CreateEditPartial"/>
         </form>
     </div>

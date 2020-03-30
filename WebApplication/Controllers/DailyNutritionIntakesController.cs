@@ -1,32 +1,36 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using DAL.App.EF;
 using Domain;
 using Extensions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
     [Authorize]
-    public class BodyMeasurementsController : Controller
+    public class DailyNutritionIntakesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;
 
-        public BodyMeasurementsController(IAppUnitOfWork unitOfWork)
+        public DailyNutritionIntakesController(IAppUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: BodyMeasurements
+        // GET: DailyNutritionIntakes
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.BodyMeasurements.AllAsync());
+            return View(await _unitOfWork.DailyNutritionIntakes.AllAsync());
         }
 
-        // GET: BodyMeasurements/Details/5
+        // GET: DailyNutritionIntakes/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -34,94 +38,90 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-
-            var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindAsync(id);
-            if (bodyMeasurements == null)
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            if (dailyNutritionIntake == null)
             {
                 return NotFound();
             }
 
-            return View(bodyMeasurements);
+            return View(dailyNutritionIntake);
         }
 
-        // GET: BodyMeasurements/Create
+        // GET: DailyNutritionIntakes/Create
         public IActionResult Create()
         {
-            var viewModel = new BodyMeasurementCreateEditViewModel();
+            var viewModel = new DailyNutritionIntakeCreateEditViewModel();
             var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name));
             return View(viewModel);
         }
 
-        // POST: BodyMeasurements/Create
+        // POST: DailyNutritionIntakes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BodyMeasurementCreateEditViewModel viewModel)
-        { 
+        public async Task<IActionResult> Create(DailyNutritionIntakeCreateEditViewModel viewModel)
+        {
             if (ModelState.IsValid)
             {
-                viewModel.BodyMeasurement.AppUserId = User.UserId();
-                _unitOfWork.BodyMeasurements.Add(viewModel.BodyMeasurement);
+                viewModel.DailyNutritionIntake.AppUserId = User.UserId();
+                _unitOfWork.DailyNutritionIntakes.Add(viewModel.DailyNutritionIntake);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
+                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.DailyNutritionIntake.UnitsTypeId);
             return View(viewModel);
         }
 
-        // GET: BodyMeasurements/Edit/5
+        // GET: DailyNutritionIntakes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var viewModel = new BodyMeasurementCreateEditViewModel
-            {
-                BodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id)
-            };
-            var unitTypes = _unitOfWork.UnitTypes.All();
-            viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
-            if (viewModel.BodyMeasurement == null)
+            var viewModel = new DailyNutritionIntakeCreateEditViewModel();
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            viewModel.DailyNutritionIntake = dailyNutritionIntake;
+            if (dailyNutritionIntake == null)
             {
                 return NotFound();
             }
+            var unitTypes = _unitOfWork.UnitTypes.All();
+            viewModel.UnitTypeSelectList = new SelectList(
+                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.DailyNutritionIntake.UnitsTypeId);
             return View(viewModel);
         }
 
-        // POST: BodyMeasurements/Edit/5
+        // POST: DailyNutritionIntakes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, BodyMeasurementCreateEditViewModel viewModel)
+        public async Task<IActionResult> Edit(Guid id, DailyNutritionIntakeCreateEditViewModel viewModel)
         {
-            if (id != viewModel.BodyMeasurement.Id)
+            if (id != viewModel.DailyNutritionIntake.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                viewModel.BodyMeasurement.AppUserId = User.UserId();   
-                _unitOfWork.BodyMeasurements.Update(viewModel.BodyMeasurement);
+                viewModel.DailyNutritionIntake.AppUserId = User.UserId();
+                _unitOfWork.DailyNutritionIntakes.Update(viewModel.DailyNutritionIntake); 
                 await _unitOfWork.SaveChangesAsync();
-               
                 return RedirectToAction(nameof(Index));
             }
             var unitTypes = _unitOfWork.BodyMeasurements.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
+                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.DailyNutritionIntake.UnitsTypeId);
             return View(viewModel);
         }
 
-        // GET: BodyMeasurements/Delete/5
+        // GET: DailyNutritionIntakes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -129,22 +129,21 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindAsync(id);
-            if (bodyMeasurements == null)
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            if (dailyNutritionIntake == null)
             {
                 return NotFound();
             }
-
-            return View(bodyMeasurements);
+            return View(dailyNutritionIntake);
         }
 
-        // POST: BodyMeasurements/Delete/5
+        // POST: DailyNutritionIntakes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindAsync(id);
-            _unitOfWork.BodyMeasurements.Remove(bodyMeasurements);
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            _unitOfWork.DailyNutritionIntakes.Remove(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

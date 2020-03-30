@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApplication.ViewModels
 {
-    public class BodyMeasurementCreateEditViewModel
+    public class DailyNutritionIntakeCreateEditViewModel
     {
-        public BodyMeasurement BodyMeasurement { get; set; }
+        public DailyNutritionIntake DailyNutritionIntake { get; set; }
         public SelectList? UnitTypeSelectList { get; set; }
     }
 }

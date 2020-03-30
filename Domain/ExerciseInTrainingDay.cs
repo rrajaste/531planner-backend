@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Contracts.DAL.Base;
 using DAL.Base;
 
 namespace Domain

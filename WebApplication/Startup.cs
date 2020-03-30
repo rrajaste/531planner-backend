@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
+using Contracts.DAL.App.Repositories;
 using DAL.App.EF;
 using DAL.App.EF.Repositories;
 using Domain;
@@ -36,7 +37,7 @@ namespace WebApplication
                     Configuration.GetConnectionString("MsSqlConnection")));
             
             services.AddScoped<IBodyMeasurementRepository, BodyMeasurementRepository>();
-            services.AddScoped<IUnitsTypeRepository, UnitsTypeRepository>();
+            services.AddScoped<IUnitTypesRepository, UnitTypesRepository>();
             services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
