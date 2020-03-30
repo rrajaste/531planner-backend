@@ -1,18 +1,16 @@
-@model Domain.MuscleGroup
+@model Domain.ExerciseType
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>MuscleGroup</h4>
+<h4>ExerciseType</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            
-            <input type="hidden" asp-for="Id" />
+        <form asp-action="Create">
             <partial name="_CreateEditPartial"/>
         </form>
     </div>
