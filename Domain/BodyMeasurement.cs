@@ -24,9 +24,9 @@ namespace Domain
         public int? BodyFatPercentage { get; set; }
 
         public Guid AppUserId { get; set; } = default!;
-        public Guid UnitsTypeId { get; set; } = default!;
+        public Guid UnitTypeId { get; set; } = default!;
         
-        public UnitsType? UnitsType { get; set; }
+        public UnitType? UnitType { get; set; }
         public AppUser? User { get; set; }
     }
 }

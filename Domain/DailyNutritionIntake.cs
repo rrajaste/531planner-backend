@@ -14,8 +14,8 @@ namespace Domain
         public int? Fats { get; set; }
         public int? Carbohydrates { get; set; }
         public Guid AppUserId { get; set; }
-        public Guid UnitsTypeId { get; set; }
+        public Guid UnitTypeId { get; set; }
         public AppUser? User { get; set; }
-        public UnitsType? UnitsType { get; set; }
+        public UnitType? UnitType { get; set; }
     }
 }

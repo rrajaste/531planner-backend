@@ -5,7 +5,7 @@ using DAL.Base;
 
 namespace Domain
 {
-    public class UnitsType : DomainEntity
+    public class UnitType : DomainEntity
     {
         [MaxLength(255)]
         public string Name { get; set; } = default!;

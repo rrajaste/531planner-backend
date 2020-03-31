@@ -4,7 +4,7 @@ using Domain;
 
 namespace DAL.App.EF.Repositories
 {
-    public class UnitTypesRepository : EFBaseRepository<UnitsType, AppDbContext>, IUnitTypesRepository
+    public class UnitTypesRepository : EFBaseRepository<UnitType, AppDbContext>, IUnitTypesRepository
     {
         public UnitTypesRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {

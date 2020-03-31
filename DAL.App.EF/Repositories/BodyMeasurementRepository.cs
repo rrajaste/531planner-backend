@@ -23,14 +23,14 @@ namespace DAL.App.EF.Repositories
         public override IEnumerable<BodyMeasurement> All()
         {
             return RepoDbContext.BodyMeasurements
-                .Include(b => b.UnitsType)
+                .Include(b => b.UnitType)
                 .ToList();
         }
 
         public override async Task<IEnumerable<BodyMeasurement>> AllAsync()
         {
             return await RepoDbSet
-                .Include(b => b.UnitsType)
+                .Include(b => b.UnitType)
                 .ToListAsync();
         }
 

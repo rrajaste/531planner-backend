@@ -14,11 +14,16 @@ namespace DAL.App.EF
         public IDailyNutritionIntakeRepository DailyNutritionIntakes => 
             GetRepository<IDailyNutritionIntakeRepository>(
                 ()=> new DailyNutritionIntakeRepository(UnitOfWorkDbContext));
+
+        public IPersonalRecordRepository PersonalRecords => 
+            GetRepository<IPersonalRecordRepository>(
+                ()=> new PersonalRecordRepository(UnitOfWorkDbContext));
         
-        public IExerciseInTrainingDayRepository ExercisesInTrainingDays => 
-            GetRepository<IExerciseInTrainingDayRepository>(
-                ()=> new ExerciseInTrainingDayRepository(UnitOfWorkDbContext));
-        
+        public IExerciseSetRepository ExerciseSetRepository => 
+            GetRepository<IExerciseSetRepository>(
+                ()=> new ExerciseSetRepository(UnitOfWorkDbContext));
+
+
         public IExerciseRepository Exercises => 
             GetRepository<IExerciseRepository>(
                 ()=> new ExerciseRepository(UnitOfWorkDbContext));
@@ -35,9 +40,7 @@ namespace DAL.App.EF
             GetRepository<IMuscleRepository>(
                 ()=> new MuscleRepository(UnitOfWorkDbContext));
         
-        public IPerformedExerciseRepository PerformedExercises => 
-            GetRepository<IPerformedExerciseRepository>(
-                ()=> new PerformedExerciseRepository(UnitOfWorkDbContext));
+        
         
         public IRoutineTypeRepository RoutineTypes => 
             GetRepository<IRoutineTypeRepository>(
