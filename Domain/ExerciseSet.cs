@@ -8,8 +8,8 @@ namespace Domain
         public int SetNumber { get; set; } = default!;
         public bool Completed { get; set; } = default!;
         public int? NrOfReps { get; set; }
-        public decimal? Weight { get; set; }
-        public decimal? Duration { get; set; }
+        public float? Weight { get; set; }
+        public float? Duration { get; set; }
         public int? Distance { get; set; }
         public Guid UnitTypeId { get; set; }
         public Guid TrainingDayId { get; set; }
