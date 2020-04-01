@@ -3,7 +3,7 @@ using Domain;
 
 namespace App.DTO
 {
-    public class NewRoutineDTO
+    public class BaseNewRoutineDto
     {
         public WorkoutRoutine BaseRoutine { get; set; }
         public string? RoutineName { get; set; }
