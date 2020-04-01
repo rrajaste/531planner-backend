@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using App.DTO;
+using Contracts.BLL.App;
 using Domain;
 using Extensions;
 
 namespace BLL
 {
-    public class NewRoutineGenerator
+    public class BaseRoutineGenerator<TNewRoutineDto>  : IBaseRoutineGenerator
+    where TNewRoutineDto : BaseNewRoutineDto
     {
 
-        private readonly NewRoutineDTO _newRoutineDto;
+        protected readonly TNewRoutineDto _newRoutineDto;
         
-        public NewRoutineGenerator(NewRoutineDTO newRoutineDto)
+        protected BaseRoutineGenerator(TNewRoutineDto newRoutineDto)
         {
             _newRoutineDto = newRoutineDto;
         }
@@ -27,7 +29,7 @@ namespace BLL
             };
         }
 
-        private TrainingCycle GenerateNewTrainingCycle()
+        protected virtual TrainingCycle GenerateNewTrainingCycle()
         {
             return new TrainingCycle()
             {
@@ -39,7 +41,7 @@ namespace BLL
             };
         }
 
-        private DateTime GetTrainingCycleEndDate()
+        protected virtual DateTime GetTrainingCycleEndDate()
         {
             var nrOfWeeksInBaseRoutineCycle =
                 GetFirstTrainingCycleFromBaseRoutine(_newRoutineDto.BaseRoutine).TrainingWeeks.Count;
@@ -48,7 +50,7 @@ namespace BLL
                 .AddDays(7 * nrOfWeeksInBaseRoutineCycle).Date;
         }
 
-        private ICollection<TrainingWeek> GenerateTrainingWeeks()
+        protected virtual ICollection<TrainingWeek> GenerateTrainingWeeks()
         {
             var baseTrainingWeeks =
                 GetFirstTrainingCycleFromBaseRoutine(_newRoutineDto.BaseRoutine).TrainingWeeks.ToList();
@@ -69,12 +71,12 @@ namespace BLL
             return newTrainingWeeks;
         }
 
-        private TrainingCycle GetFirstTrainingCycleFromBaseRoutine(WorkoutRoutine baseRoutine)
+        protected virtual TrainingCycle GetFirstTrainingCycleFromBaseRoutine(WorkoutRoutine baseRoutine)
         {
             return baseRoutine.TrainingCycles?.First();
         }
 
-        private TrainingWeek GenerateTrainingWeek(TrainingWeek baseTrainingWeek, DateTime startingDate)
+        protected virtual TrainingWeek GenerateTrainingWeek(TrainingWeek baseTrainingWeek, DateTime startingDate)
         {
             var baseDates = baseTrainingWeek.TrainingDays.Select(d => d.Date).ToArray();
             var newDates = startingDate.StartingFromGetDatesWithSameDayOfWeek(baseDates);
@@ -88,31 +90,32 @@ namespace BLL
             };
         }
 
-        private ICollection<TrainingDay> GenerateTrainingDays(TrainingWeek baseTrainingWeek, IReadOnlyList<DateTime> dates)
+        protected virtual ICollection<TrainingDay> GenerateTrainingDays(TrainingWeek baseTrainingWeek, IReadOnlyList<DateTime> dates)
         {
             var generatedTrainingDays = new Collection<TrainingDay>();
             var baseTrainingDays = baseTrainingWeek.TrainingDays.ToList();
             for(var i = 0; i < baseTrainingWeek.TrainingDays.Count; i++)
             {
-                generatedTrainingDays.Add(GenerateTrainingDay(baseTrainingDays[i], dates[i]));
+                generatedTrainingDays.Add(GenerateTrainingDay(baseTrainingDays[i], dates[i], baseTrainingWeek.WeekNumber));
             }
             return generatedTrainingDays;
         }
 
-        private TrainingDay GenerateTrainingDay(TrainingDay baseTrainingDay, DateTime date)
+        protected virtual TrainingDay GenerateTrainingDay(TrainingDay baseTrainingDay, DateTime date, int trainingWeekNumber)
         {
             return new TrainingDay()
             {
                 Date = date,
-                ExerciseSets = GenerateBaseExerciseSets(baseTrainingDay)
+                ExerciseSets = GenerateBaseExerciseSets(baseTrainingDay, trainingWeekNumber)
             };
         }
-        private ICollection<ExerciseSet> GenerateBaseExerciseSets(TrainingDay baseTrainingDay)
+        
+        protected virtual ICollection<ExerciseSet> GenerateBaseExerciseSets(TrainingDay baseTrainingDay, int trainingWeekNumber)
         {
             return baseTrainingDay.ExerciseSets.Select(GenerateBaseExerciseSet).ToList();
         }
 
-        private ExerciseSet GenerateBaseExerciseSet(ExerciseSet exerciseSet)
+        protected virtual ExerciseSet GenerateBaseExerciseSet(ExerciseSet exerciseSet, int trainingWeekNumber)
         {
             return new ExerciseSet()
             {
