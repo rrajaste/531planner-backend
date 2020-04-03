@@ -1,29 +1,27 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using DAL.App.EF;
+
 using Domain;
+using Extensions;
 
 namespace WebApplication.Controllers
 {
     public class TrainingDaysController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAppUnitOfWork _unitOfWork;
 
-        public TrainingDaysController(AppDbContext context)
+        public TrainingDaysController(IAppUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: TrainingDays
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid id)
         {
-            var appDbContext = _context.TrainingDays.Include(t => t.TrainingDayType).Include(t => t.TrainingWeek);
-            return View(await appDbContext.ToListAsync());
+            return View(await _unitOfWork.TrainingDays.AllWithTrainingWeekIdAsyncAuthorize(id, User.UserId()));
         }
 
         // GET: TrainingDays/Details/5
@@ -34,10 +32,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingDay = await _context.TrainingDays
-                .Include(t => t.TrainingDayType)
-                .Include(t => t.TrainingWeek)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var trainingDay = await _unitOfWork.TrainingDays.FindAsyncAuthorize(id, User.UserId());
             if (trainingDay == null)
             {
                 return NotFound();
@@ -49,8 +44,6 @@ namespace WebApplication.Controllers
         // GET: TrainingDays/Create
         public IActionResult Create()
         {
-            ViewData["TrainingDayTypeId"] = new SelectList(_context.TrainingDaysTypes, "Id", "Description");
-            ViewData["TrainingWeekId"] = new SelectList(_context.TrainingWeeks, "Id", "Id");
             return View();
         }
 
@@ -64,12 +57,10 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 trainingDay.Id = Guid.NewGuid();
-                _context.Add(trainingDay);
-                await _context.SaveChangesAsync();
+                _unitOfWork.TrainingDays.Add(trainingDay);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TrainingDayTypeId"] = new SelectList(_context.TrainingDaysTypes, "Id", "Description", trainingDay.TrainingDayTypeId);
-            ViewData["TrainingWeekId"] = new SelectList(_context.TrainingWeeks, "Id", "Id", trainingDay.TrainingWeekId);
             return View(trainingDay);
         }
 
@@ -81,13 +72,11 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingDay = await _context.TrainingDays.FindAsync(id);
+            var trainingDay = await _unitOfWork.TrainingDays.FindAsync(id);
             if (trainingDay == null)
             {
                 return NotFound();
             }
-            ViewData["TrainingDayTypeId"] = new SelectList(_context.TrainingDaysTypes, "Id", "Description", trainingDay.TrainingDayTypeId);
-            ViewData["TrainingWeekId"] = new SelectList(_context.TrainingWeeks, "Id", "Id", trainingDay.TrainingWeekId);
             return View(trainingDay);
         }
 
@@ -105,26 +94,12 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(trainingDay);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TrainingDayExists(trainingDay.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                
+                _unitOfWork.TrainingDays.Update(trainingDay);
+                await _unitOfWork.SaveChangesAsync();
+           
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TrainingDayTypeId"] = new SelectList(_context.TrainingDaysTypes, "Id", "Description", trainingDay.TrainingDayTypeId);
-            ViewData["TrainingWeekId"] = new SelectList(_context.TrainingWeeks, "Id", "Id", trainingDay.TrainingWeekId);
             return View(trainingDay);
         }
 
@@ -136,10 +111,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingDay = await _context.TrainingDays
-                .Include(t => t.TrainingDayType)
-                .Include(t => t.TrainingWeek)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var trainingDay = await _unitOfWork.TrainingDays.FindAsyncAuthorize(id, User.UserId());
             if (trainingDay == null)
             {
                 return NotFound();
@@ -153,15 +125,10 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var trainingDay = await _context.TrainingDays.FindAsync(id);
-            _context.TrainingDays.Remove(trainingDay);
-            await _context.SaveChangesAsync();
+            var trainingDay = await _unitOfWork.TrainingDays.FindAsync(id);
+            _unitOfWork.TrainingDays.Remove(trainingDay);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TrainingDayExists(Guid id)
-        {
-            return _context.TrainingDays.Any(e => e.Id == id);
         }
     }
 }

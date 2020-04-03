@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,17 +13,17 @@ namespace WebApplication.Controllers
 {
     public class TrainingWeeksController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAppUnitOfWork _unitOfWork;
 
-        public TrainingWeeksController(AppDbContext context)
+        public TrainingWeeksController(IAppUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: TrainingWeeks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TrainingWeeks.ToListAsync());
+            return View(await _unitOfWork.TrainingWeeks.AllAsync());
         }
 
         // GET: TrainingWeeks/Details/5
@@ -33,8 +34,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingWeek = await _context.TrainingWeeks
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var trainingWeek = await _unitOfWork.TrainingWeeks.FindAsync(id);
             if (trainingWeek == null)
             {
                 return NotFound();
@@ -58,9 +58,8 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                trainingWeek.Id = Guid.NewGuid();
-                _context.Add(trainingWeek);
-                await _context.SaveChangesAsync();
+                _unitOfWork.TrainingWeeks.Add(trainingWeek);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingWeek);
@@ -74,7 +73,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingWeek = await _context.TrainingWeeks.FindAsync(id);
+            var trainingWeek = await _unitOfWork.TrainingWeeks.FindAsync(id);
             if (trainingWeek == null)
             {
                 return NotFound();
@@ -96,22 +95,8 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(trainingWeek);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TrainingWeekExists(trainingWeek.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _unitOfWork.TrainingWeeks.Update(trainingWeek);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingWeek);
@@ -125,8 +110,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingWeek = await _context.TrainingWeeks
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var trainingWeek = await _unitOfWork.TrainingWeeks.FindAsync(id);
             if (trainingWeek == null)
             {
                 return NotFound();
@@ -140,15 +124,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var trainingWeek = await _context.TrainingWeeks.FindAsync(id);
-            _context.TrainingWeeks.Remove(trainingWeek);
-            await _context.SaveChangesAsync();
+            var trainingWeek = await _unitOfWork.TrainingWeeks.FindAsync(id);
+            _unitOfWork.TrainingWeeks.Remove(trainingWeek);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TrainingWeekExists(Guid id)
-        {
-            return _context.TrainingWeeks.Any(e => e.Id == id);
-        }
     }
 }

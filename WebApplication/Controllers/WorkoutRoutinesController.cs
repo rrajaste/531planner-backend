@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 using Domain;
+using Extensions;
 using Microsoft.AspNetCore.Authorization;
 using WebApplication.ViewModels;
 
@@ -24,7 +25,12 @@ namespace WebApplication.Controllers
         // GET: WorkoutRoutines
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.WorkoutRoutines.AllAsync());
+            var viewModel = new WorkoutRoutineIndexViewModel()
+            {
+                ActiveRoutine = await _unitOfWork.WorkoutRoutines.ActiveRoutineForUserIdAsync(User.UserId()),
+                PreviousRoutines = await _unitOfWork.WorkoutRoutines.AllNonActiveRoutinesForUserIdAsync(User.UserId())
+            };
+            return View(viewModel);
         }
 
         // GET: WorkoutRoutines/Details/5
@@ -71,7 +77,6 @@ namespace WebApplication.Controllers
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
             return View(viewModel);
         }
 

@@ -2,27 +2,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
+using Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class TrainingCyclesController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAppUnitOfWork _unitOfWork;
 
-        public TrainingCyclesController(AppDbContext context)
+        public TrainingCyclesController(IAppUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: TrainingCycles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Guid id)
         {
-            return View(await _context.TrainingCycles.ToListAsync());
+            return View(await _unitOfWork.TrainingCycles.AllWithRoutineIdAuthorizeAsync(id, User.UserId()));
         }
 
         // GET: TrainingCycles/Details/5
@@ -33,8 +37,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingCycle = await _context.TrainingCycles
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var trainingCycle = await _unitOfWork.TrainingCycles.FindAuthorizeAsync(id, User.UserId());
             if (trainingCycle == null)
             {
                 return NotFound();
@@ -54,13 +57,12 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("WorkoutRoutineId,CycleNumber,StartingDate,EndingDate,Id,CreatedAt,ClosedAt,Comment")] TrainingCycle trainingCycle)
+        public async Task<IActionResult> Create(TrainingCycle trainingCycle)
         {
             if (ModelState.IsValid)
             {
-                trainingCycle.Id = Guid.NewGuid();
-                _context.Add(trainingCycle);
-                await _context.SaveChangesAsync();
+                _unitOfWork.TrainingCycles.Add(trainingCycle);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingCycle);
@@ -74,7 +76,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingCycle = await _context.TrainingCycles.FindAsync(id);
+            var trainingCycle = await _unitOfWork.TrainingCycles.FindAsync(id);
             if (trainingCycle == null)
             {
                 return NotFound();
@@ -96,22 +98,11 @@ namespace WebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(trainingCycle);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TrainingCycleExists(trainingCycle.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+               
+                _unitOfWork.TrainingCycles.Update(trainingCycle);
+                await _unitOfWork.SaveChangesAsync();
+           
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingCycle);
@@ -125,8 +116,8 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var trainingCycle = await _context.TrainingCycles
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var trainingCycle = await _unitOfWork.TrainingCycles
+                .FindAsync(id);
             if (trainingCycle == null)
             {
                 return NotFound();
@@ -140,15 +131,10 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var trainingCycle = await _context.TrainingCycles.FindAsync(id);
-            _context.TrainingCycles.Remove(trainingCycle);
-            await _context.SaveChangesAsync();
+            var trainingCycle = await _unitOfWork.TrainingCycles.FindAsync(id);
+            _unitOfWork.TrainingCycles.Remove(trainingCycle);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool TrainingCycleExists(Guid id)
-        {
-            return _context.TrainingCycles.Any(e => e.Id == id);
         }
     }
 }

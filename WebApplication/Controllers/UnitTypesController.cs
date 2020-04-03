@@ -18,13 +18,13 @@ namespace WebApplication.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: UnitsType
+        // GET: UnitType
         public async Task<IActionResult> Index()
         {
             return View(await _unitOfWork.UnitTypes.AllAsync());
         }
 
-        // GET: UnitsType/Details/5
+        // GET: UnitType/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -32,38 +32,38 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
-            if (unitsType == null)
+            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            if (UnitType == null)
             {
                 return NotFound();
             }
 
-            return View(unitsType);
+            return View(UnitType);
         }
 
-        // GET: UnitsType/Create
+        // GET: UnitType/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: UnitsType/Create
+        // POST: UnitType/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] UnitsType unitsType)
+        public async Task<IActionResult> Create(UnitType unitType)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.UnitTypes.Add(unitsType);
+                _unitOfWork.UnitTypes.Add(unitType);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(unitsType);
+            return View(unitType);
         }
 
-        // GET: UnitsType/Edit/5
+        // GET: UnitType/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -71,36 +71,36 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
-            if (unitsType == null)
+            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            if (UnitType == null)
             {
                 return NotFound();
             }
-            return View(unitsType);
+            return View(UnitType);
         }
 
-        // POST: UnitsType/Edit/5
+        // POST: UnitType/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] UnitsType unitsType)
+        public async Task<IActionResult> Edit(Guid id, UnitType UnitType)
         {
-            if (id != unitsType.Id)
+            if (id != UnitType.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.UnitTypes.Update(unitsType);
+                _unitOfWork.UnitTypes.Update(UnitType);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(unitsType);
+            return View(UnitType);
         }
 
-        // GET: UnitsType/Delete/5
+        // GET: UnitType/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -108,22 +108,22 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
-            if (unitsType == null)
+            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            if (UnitType == null)
             {
                 return NotFound();
             }
 
-            return View(unitsType);
+            return View(UnitType);
         }
 
-        // POST: UnitsType/Delete/5
+        // POST: UnitType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var unitsType = await _unitOfWork.UnitTypes.FindAsync(id);
-            _unitOfWork.UnitTypes.Remove(unitsType);
+            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            _unitOfWork.UnitTypes.Remove(UnitType);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -52,7 +52,7 @@ namespace WebApplication.Controllers
         {
             var viewModel = new DailyNutritionIntakeCreateEditViewModel();
             var unitTypes = _unitOfWork.UnitTypes.All();
-            viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name));
+            viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitType.Id), nameof(UnitType.Name));
             return View(viewModel);
         }
 
@@ -72,7 +72,7 @@ namespace WebApplication.Controllers
             }
             var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.DailyNutritionIntake.UnitsTypeId);
+                unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.DailyNutritionIntake.UnitTypeId);
             return View(viewModel);
         }
 
@@ -92,7 +92,7 @@ namespace WebApplication.Controllers
             }
             var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.DailyNutritionIntake.UnitsTypeId);
+                unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.DailyNutritionIntake.UnitTypeId);
             return View(viewModel);
         }
 
@@ -117,7 +117,7 @@ namespace WebApplication.Controllers
             }
             var unitTypes = _unitOfWork.BodyMeasurements.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.DailyNutritionIntake.UnitsTypeId);
+                unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.DailyNutritionIntake.UnitTypeId);
             return View(viewModel);
         }
 

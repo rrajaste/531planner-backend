@@ -49,7 +49,7 @@ namespace WebApplication.Controllers
         {
             var viewModel = new BodyMeasurementCreateEditViewModel();
             var unitTypes = _unitOfWork.UnitTypes.All();
-            viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name));
+            viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitType.Id), nameof(UnitType.Name));
             return View(viewModel);
         }
 
@@ -69,7 +69,7 @@ namespace WebApplication.Controllers
             }
             var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
+                unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.BodyMeasurement.UnitTypeId);
             return View(viewModel);
         }
 
@@ -87,7 +87,7 @@ namespace WebApplication.Controllers
             };
             var unitTypes = _unitOfWork.UnitTypes.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
+                unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.BodyMeasurement.UnitTypeId);
             if (viewModel.BodyMeasurement == null)
             {
                 return NotFound();
@@ -117,7 +117,7 @@ namespace WebApplication.Controllers
             }
             var unitTypes = _unitOfWork.BodyMeasurements.All();
             viewModel.UnitTypeSelectList = new SelectList(
-                unitTypes, nameof(UnitsType.Id), nameof(UnitsType.Name), viewModel.BodyMeasurement.UnitsTypeId);
+                unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.BodyMeasurement.UnitTypeId);
             return View(viewModel);
         }
 
