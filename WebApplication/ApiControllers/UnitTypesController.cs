@@ -51,13 +51,13 @@ namespace WebApplication.ApiControllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUnitType(Guid id, UnitTypeDto unitTypeDto)
         {
-            if (id != unitTypeDto.Id)
+            if (id != Guid.Parse(unitTypeDto.Id))
             {
                 return BadRequest();
             }
 
             var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            MapDtoFieldsToDomainEntityFields(unitTypeDto, unitType);
+            MapDtoToDomainEntity(unitTypeDto, unitType);
             await _unitOfWork.SaveChangesAsync();
             return NoContent();
         }
@@ -69,7 +69,7 @@ namespace WebApplication.ApiControllers
         public async Task<ActionResult<UnitType>> PostUnitType(UnitTypeDto unitTypeDto)
         {
             var unitType = new UnitType();
-            MapDtoFieldsToDomainEntityFields(unitTypeDto, unitType);
+            MapDtoToDomainEntity(unitTypeDto, unitType);
             _unitOfWork.UnitTypes.Add(unitType);
             await _unitOfWork.SaveChangesAsync();
             return CreatedAtAction("GetUnitType", new {id = unitType.Id}, unitTypeDto);
@@ -94,13 +94,13 @@ namespace WebApplication.ApiControllers
         {
             return new UnitTypeDto()
             {
-                Id = unitType.Id,
+                Id = unitType.Id.ToString(),
                 Name = unitType.Name,
                 Description = unitType.Description
             };
         }
 
-        private static void MapDtoFieldsToDomainEntityFields(UnitTypeDto dto, UnitType domainEntity)
+        private static void MapDtoToDomainEntity(UnitTypeDto dto, UnitType domainEntity)
         {
             domainEntity.Description = dto.Description;
             domainEntity.Name = dto.Name;

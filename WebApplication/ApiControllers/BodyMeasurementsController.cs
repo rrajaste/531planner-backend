@@ -51,7 +51,7 @@ namespace WebApplication.ApiControllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBodyMeasurement(Guid id, BodyMeasurementDto bodyMeasurementDto)
         {
-            if (id != bodyMeasurementDto.Id)
+            if (id != Guid.Parse(bodyMeasurementDto.Id))
             {
                 return BadRequest();
             }
@@ -97,8 +97,13 @@ namespace WebApplication.ApiControllers
         {
             return new BodyMeasurementDto()
             {
-                Id = bodyMeasurement.Id,
-                UnitType = bodyMeasurement.UnitType,
+                Id = bodyMeasurement.Id.ToString(),
+                UnitType = new UnitTypeDto()
+                {
+                    Description = bodyMeasurement.UnitType.Description,
+                    Name = bodyMeasurement.UnitType.Name,
+                    Id = bodyMeasurement.UnitType.Id.ToString()
+                },
                 Arm = bodyMeasurement.Arm,
                 BodyFatPercentage = bodyMeasurement.BodyFatPercentage,
                 Chest = bodyMeasurement.Chest,
@@ -111,16 +116,14 @@ namespace WebApplication.ApiControllers
 
         private static void MapDtoToDomainEntity(BodyMeasurementDto dto, BodyMeasurement domainEntity)
         {
-            domainEntity.Id = dto.Id;
             domainEntity.Arm = dto.Arm;
             domainEntity.Chest = dto.Chest;
             domainEntity.Height = dto.Height;
             domainEntity.Hip = dto.Hip;
             domainEntity.Waist = dto.Waist;
             domainEntity.Weight = dto.Weight;
-            domainEntity.UnitType = dto.UnitType;
             domainEntity.BodyFatPercentage = dto.BodyFatPercentage;
+            domainEntity.UnitTypeId = Guid.Parse(dto.UnitType.Id);
         }
-        
     }
 }

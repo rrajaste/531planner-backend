@@ -103,7 +103,12 @@ namespace WebApplication.ApiControllers
                 Carbohydrates =  dailyNutritionIntake.Carbohydrates,
                 Fats = dailyNutritionIntake.Fats,
                 Protein = dailyNutritionIntake.Protein,
-                UnitType = dailyNutritionIntake.UnitType
+                UnitType = new UnitTypeDto()
+                {
+                    Description = dailyNutritionIntake.UnitType.Description,
+                    Name = dailyNutritionIntake.UnitType.Name,
+                    Id = dailyNutritionIntake.UnitType.Id.ToString()
+                }
             };
         }
 
@@ -113,7 +118,7 @@ namespace WebApplication.ApiControllers
             domainEntity.Carbohydrates = dto.Carbohydrates;
             domainEntity.Fats = dto.Fats;
             domainEntity.Protein = dto.Protein;
-            domainEntity.UnitType = dto.UnitType;
+            domainEntity.UnitTypeId = Guid.Parse(dto.UnitType.Id);
         }
     }
 }
