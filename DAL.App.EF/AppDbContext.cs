@@ -23,7 +23,7 @@ namespace DAL.App.EF
         public DbSet<TrainingDay> TrainingDays { get; set; } = default!;
         public DbSet<TrainingDayType> TrainingDaysTypes { get; set; } = default!;
         public DbSet<TrainingWeek> TrainingWeeks { get; set; } = default!;
-        public DbSet<UnitType> UnitsTypes { get; set; } = default!;
+        public DbSet<UnitType> UnitTypes { get; set; } = default!;
         public DbSet<AppUser> AppUsers { get; set; } = default!;
         public DbSet<WorkoutRoutine> WorkoutRoutines { get; set; } = default!;
         

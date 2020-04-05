@@ -23,7 +23,6 @@ namespace DAL.App.EF
             GetRepository<IExerciseSetRepository>(
                 ()=> new ExerciseSetRepository(UnitOfWorkDbContext));
 
-
         public IExerciseRepository Exercises => 
             GetRepository<IExerciseRepository>(
                 ()=> new ExerciseRepository(UnitOfWorkDbContext));
@@ -39,9 +38,7 @@ namespace DAL.App.EF
         public IMuscleRepository Muscles => 
             GetRepository<IMuscleRepository>(
                 ()=> new MuscleRepository(UnitOfWorkDbContext));
-        
-        
-        
+
         public IRoutineTypeRepository RoutineTypes => 
             GetRepository<IRoutineTypeRepository>(
                 ()=> new RoutineTypeRepository(UnitOfWorkDbContext));
