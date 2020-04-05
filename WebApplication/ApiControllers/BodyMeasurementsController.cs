@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
@@ -110,7 +111,8 @@ namespace WebApplication.ApiControllers
                 Height = bodyMeasurement.Height,
                 Hip = bodyMeasurement.Hip,
                 Waist = bodyMeasurement.Waist,
-                Weight = bodyMeasurement.Weight
+                Weight = bodyMeasurement.Weight,
+                CreatedAt = bodyMeasurement.CreatedAt.ToString()
             };
         }
 

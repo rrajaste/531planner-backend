@@ -53,7 +53,7 @@ namespace WebApplication.ApiControllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDailyNutritionIntake(Guid id, DailyNutritionIntakeDto dailyNutritionIntakeDto)
         {
-            if (id != dailyNutritionIntakeDto.Id)
+            if (id != new Guid(dailyNutritionIntakeDto.Id))
             {
                 return BadRequest();
             }
@@ -98,11 +98,13 @@ namespace WebApplication.ApiControllers
         {
             return new DailyNutritionIntakeDto()
             {
-                Id = dailyNutritionIntake.Id,
+                Id = dailyNutritionIntake.Id.ToString(),
                 Calories = dailyNutritionIntake.Calories,
                 Carbohydrates =  dailyNutritionIntake.Carbohydrates,
                 Fats = dailyNutritionIntake.Fats,
                 Protein = dailyNutritionIntake.Protein,
+                CreatedAt = dailyNutritionIntake.CreatedAt,
+                UnitTypeId = dailyNutritionIntake.UnitTypeId.ToString(),
                 UnitType = new UnitTypeDto()
                 {
                     Description = dailyNutritionIntake.UnitType.Description,
@@ -118,7 +120,7 @@ namespace WebApplication.ApiControllers
             domainEntity.Carbohydrates = dto.Carbohydrates;
             domainEntity.Fats = dto.Fats;
             domainEntity.Protein = dto.Protein;
-            domainEntity.UnitTypeId = Guid.Parse(dto.UnitType.Id);
+            domainEntity.UnitTypeId = Guid.Parse(dto.UnitTypeId);
         }
     }
 }

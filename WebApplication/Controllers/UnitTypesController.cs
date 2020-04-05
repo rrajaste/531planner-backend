@@ -71,12 +71,12 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            if (UnitType == null)
+            var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            if (unitType == null)
             {
                 return NotFound();
             }
-            return View(UnitType);
+            return View(unitType);
         }
 
         // POST: UnitType/Edit/5

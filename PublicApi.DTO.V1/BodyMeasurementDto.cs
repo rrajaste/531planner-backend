@@ -7,6 +7,7 @@ namespace PublicApi.DTO.V1
 {
     public class BodyMeasurementDto
     {
+        public string CreatedAt { get; set; }
         public string Id { get; set; }
         [Range(1, int.MaxValue)]
         public int Weight { get; set; }
