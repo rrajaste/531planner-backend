@@ -1,10 +1,10 @@
-@model IEnumerable<Domain.DailyNutritionIntake>
+@model IEnumerable<Domain.TrainingCycle>
 
 @{
-    ViewData["Title"] = "Daily nutrition intake";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Daily nutrition intake</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,25 +13,23 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Calories)
+                @Html.DisplayNameFor(model => model.WorkoutRoutineId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Protein)
+                @Html.DisplayNameFor(model => model.CycleNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fats)
+                @Html.DisplayNameFor(model => model.StartingDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Carbohydrates)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.UnitType)
+                @Html.DisplayNameFor(model => model.EndingDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.ClosedAt)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Comment)
             </th>
@@ -42,22 +40,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Calories)
+                @Html.DisplayFor(modelItem => item.WorkoutRoutineId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Protein)
+                @Html.DisplayFor(modelItem => item.CycleNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fats)
+                @Html.DisplayFor(modelItem => item.StartingDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Carbohydrates)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitType.Name)
+                @Html.DisplayFor(modelItem => item.EndingDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosedAt)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comment)

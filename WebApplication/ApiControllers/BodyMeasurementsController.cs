@@ -51,7 +51,6 @@ namespace WebApplication.ApiControllers
             }
             var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id);
             MapDtoToDomainEntity(dto, bodyMeasurement);
-            _unitOfWork.BodyMeasurements.Add(bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
 
             return NoContent();
@@ -118,6 +117,7 @@ namespace WebApplication.ApiControllers
             bodyMeasurement.Arm = dto.Arm;
             bodyMeasurement.Hip = dto.Hip;
             bodyMeasurement.BodyFatPercentage = dto.BodyFatPercentage;
+            bodyMeasurement.UnitTypeId = Guid.Parse(dto.UnitTypeId);
         }
     }
 }

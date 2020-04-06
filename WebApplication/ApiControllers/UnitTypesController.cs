@@ -93,8 +93,8 @@ namespace WebApplication.ApiControllers
         private static void MapDtoToDomainEntity<TDto>(TDto dto, UnitType unitType) 
             where TDto : UnitTypeCreateDto
         {
-            unitType.Name = unitType.Name;
-            unitType.Description = unitType.Description;
+            unitType.Name = dto.Name;
+            unitType.Description = dto.Description;
         }
     }
 }

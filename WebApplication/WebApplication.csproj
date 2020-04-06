@@ -19,6 +19,7 @@
     <ItemGroup>
       <ProjectReference Include="..\DAL.App.EF\DAL.App.EF.csproj" />
       <ProjectReference Include="..\Extensions\Extensions.csproj" />
+      <ProjectReference Include="..\PublicApi.DTO.V1\PublicApi.DTO.V1.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -93,11 +94,11 @@
       <_ContentIncludedByDefault Remove="Views\TrainingDayType\Details.cshtml" />
       <_ContentIncludedByDefault Remove="Views\TrainingDayType\Edit.cshtml" />
       <_ContentIncludedByDefault Remove="Views\TrainingDayType\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\UnitsType\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\UnitsType\Delete.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\UnitsType\Details.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\UnitsType\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Views\UnitsType\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitType\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitType\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitType\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitType\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitType\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\WorkoutRoutine\Create.cshtml" />
       <_ContentIncludedByDefault Remove="Views\WorkoutRoutine\Delete.cshtml" />
       <_ContentIncludedByDefault Remove="Views\WorkoutRoutine\Details.cshtml" />
@@ -171,11 +172,11 @@
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\TrainingDayType\Details.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\TrainingDayType\Edit.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\TrainingDayType\Index.cshtml" />
-      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitsType\Create.cshtml" />
-      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitsType\Delete.cshtml" />
-      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitsType\Details.cshtml" />
-      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitsType\Edit.cshtml" />
-      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitsType\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitType\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitType\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitType\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitType\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Areas\Admin\Views\UnitType\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\WorkoutRoutine\Create.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\WorkoutRoutine\Delete.cshtml" />
       <_ContentIncludedByDefault Remove="Areas\Admin\Views\WorkoutRoutine\Details.cshtml" />
@@ -204,6 +205,13 @@
       <_ContentIncludedByDefault Remove="Shared\_ValidationScriptsPartial.cshtml" />
       <_ContentIncludedByDefault Remove="Home\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Home\Privacy.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\PerformedExercises\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\PerformedExercises\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\PerformedExercises\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\PerformedExercises\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\PerformedExercises\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\PerformedExercises\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\PerformedExercises\_DetailsDeletePartial.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -211,7 +219,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="Controllers\UnitsTypeController.cs" />
+      <Compile Remove="Controllers\UnitTypeController.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Areas\Admin\Controllers" />
+      <Folder Include="Areas\Admin\ViewModels" />
+      <Folder Include="Areas\Admin\Views" />
+      <Folder Include="Areas\User" />
     </ItemGroup>
 
 </Project>

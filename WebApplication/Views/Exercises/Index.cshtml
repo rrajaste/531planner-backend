@@ -1,10 +1,10 @@
 @model IEnumerable<Domain.Exercise>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Exercises";
 }
 
-<h1>Index</h1>
+<h1>Exercises</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -20,9 +20,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ExerciseType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
             </th>
             
             <th></th>
@@ -40,10 +37,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ExerciseType.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            
+          
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
