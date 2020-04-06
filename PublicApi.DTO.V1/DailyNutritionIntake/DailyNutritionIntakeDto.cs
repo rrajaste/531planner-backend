@@ -1,8 +1,6 @@
-using System;
-using Domain;
-using Domain.Identity;
+using PublicApi.DTO.V1.UnitType;
 
-namespace PublicApi.DTO.V1
+namespace PublicApi.DTO.V1.DailyNutritionIntake
 {
     public class DailyNutritionIntakeDto
     {
@@ -11,9 +9,7 @@ namespace PublicApi.DTO.V1
         public int? Protein { get; set; }
         public int? Fats { get; set; }
         public int? Carbohydrates { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        
-        public string UnitTypeId { get; set; }
-        public UnitTypeDto? UnitType { get; set; }
+        public string CreatedAt { get; set; } 
+        public UnitTypeDto UnitType { get; set; }
     }
 }

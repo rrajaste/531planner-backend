@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
 using PublicApi.DTO.V1;
+using PublicApi.DTO.V1.UnitType;
 
 namespace WebApplication.ApiControllers
 {
@@ -22,60 +24,48 @@ namespace WebApplication.ApiControllers
         {
             _unitOfWork = unitOfWork;
         }
-
-        // GET: api/UnitTypes
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UnitTypeDto>>> GetUnitTypes()
         {
             var unitTypes = await _unitOfWork.UnitTypes.AllAsync();
-            return new ActionResult<IEnumerable<UnitTypeDto>>(unitTypes.Select(CreateNewDtoFromDomainEntity));
+            return Ok(unitTypes.Select(CreateNewDtoFromDomainEntity));
         }
-
-        // GET: api/UnitTypes/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<UnitTypeDto>> GetUnitType(Guid id)
         {
             var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
-
             if (unitType == null)
             {
                 return NotFound();
             }
-
-            return CreateNewDtoFromDomainEntity(unitType);
+            return Ok(CreateNewDtoFromDomainEntity(unitType));
         }
-
-        // PUT: api/UnitTypes/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUnitType(Guid id, UnitTypeDto unitTypeDto)
+        public async Task<IActionResult> PutUnitType(Guid id, UnitTypeEditDto dto)
         {
-            if (id != Guid.Parse(unitTypeDto.Id))
+            if (id != Guid.Parse(dto.Id))
             {
                 return BadRequest();
             }
-
             var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            MapDtoToDomainEntity(unitTypeDto, unitType);
+            MapDtoToDomainEntity(dto, unitType);
             await _unitOfWork.SaveChangesAsync();
             return NoContent();
         }
-
-        // POST: api/UnitTypes
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        
         [HttpPost]
-        public async Task<ActionResult<UnitType>> PostUnitType(UnitTypeDto unitTypeDto)
+        public async Task<ActionResult<UnitType>> PostUnitType(UnitTypeCreateDto dto)
         {
             var unitType = new UnitType();
-            MapDtoToDomainEntity(unitTypeDto, unitType);
+            MapDtoToDomainEntity(dto, unitType);
             _unitOfWork.UnitTypes.Add(unitType);
             await _unitOfWork.SaveChangesAsync();
-            return CreatedAtAction("GetUnitType", new {id = unitType.Id}, unitTypeDto);
+            return CreatedAtAction("GetUnitType", new {id = unitType.Id}, unitType);
         }
-
-        // DELETE: api/UnitTypes/5
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult<UnitType>> DeleteUnitType(Guid id)
         {
@@ -86,8 +76,7 @@ namespace WebApplication.ApiControllers
             }
             _unitOfWork.UnitTypes.Remove(unitType);
             await _unitOfWork.SaveChangesAsync();
-
-            return unitType;
+            return Ok(unitType);
         }
 
         private static UnitTypeDto CreateNewDtoFromDomainEntity(UnitType unitType)
@@ -96,14 +85,16 @@ namespace WebApplication.ApiControllers
             {
                 Id = unitType.Id.ToString(),
                 Name = unitType.Name,
-                Description = unitType.Description
+                Description = unitType.Description,
+                CreatedAt = unitType.CreatedAt.ToString(CultureInfo.InvariantCulture)
             };
         }
-
-        private static void MapDtoToDomainEntity(UnitTypeDto dto, UnitType domainEntity)
+        
+        private static void MapDtoToDomainEntity<TDto>(TDto dto, UnitType unitType) 
+            where TDto : UnitTypeCreateDto
         {
-            domainEntity.Description = dto.Description;
-            domainEntity.Name = dto.Name;
+            unitType.Name = unitType.Name;
+            unitType.Description = unitType.Description;
         }
     }
 }

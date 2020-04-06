@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
@@ -9,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
 using PublicApi.DTO.V1;
+using PublicApi.DTO.V1.DailyNutritionIntake;
+using PublicApi.DTO.V1.UnitType;
 
 namespace WebApplication.ApiControllers
 {
@@ -28,9 +31,7 @@ namespace WebApplication.ApiControllers
         public async Task<ActionResult<IEnumerable<DailyNutritionIntakeDto>>> GetDailyNutritionIntakes()
         {
             var dailyNutritionIntakes = await _unitOfWork.DailyNutritionIntakes.AllAsync();
-            return new ActionResult<IEnumerable<DailyNutritionIntakeDto>>(
-                dailyNutritionIntakes.Select(CreateNewDtoFromDomainEntity)
-            );
+            return Ok(dailyNutritionIntakes.Select(CreateNewDtoFromDomainEntity));
         }
 
         // GET: api/DailyNutritionIntake/5
@@ -43,7 +44,7 @@ namespace WebApplication.ApiControllers
             {
                 return NotFound();
             }
-            return CreateNewDtoFromDomainEntity(dailyNutritionIntake);
+            return Ok(CreateNewDtoFromDomainEntity(dailyNutritionIntake));
         }
 
         // PUT: api/DailyNutritionIntake/5
@@ -51,15 +52,14 @@ namespace WebApplication.ApiControllers
         // more details see https://aka.ms/RazorPagesCRUD.
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDailyNutritionIntake(Guid id, DailyNutritionIntakeDto dailyNutritionIntakeDto)
+        public async Task<IActionResult> PutDailyNutritionIntake(Guid id, DailyNutritionIntakeEditDto dto)
         {
-            if (id != new Guid(dailyNutritionIntakeDto.Id))
+            if (id != new Guid(dto.Id))
             {
                 return BadRequest();
             }
-
             var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
-            MapDtoToDomainEntity(dailyNutritionIntakeDto, dailyNutritionIntake);
+            MapDtoToDomainEntity(dto, dailyNutritionIntake);
             _unitOfWork.DailyNutritionIntakes.Update(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
             return NoContent();
@@ -69,11 +69,10 @@ namespace WebApplication.ApiControllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<DailyNutritionIntake>> PostDailyNutritionIntake(DailyNutritionIntakeDto dailyNutritionIntakeDto)
+        public async Task<ActionResult<DailyNutritionIntake>> PostDailyNutritionIntake(DailyNutritionIntakeCreateDto dto)
         {
-            
             var dailyNutritionIntake = new DailyNutritionIntake();
-            MapDtoToDomainEntity(dailyNutritionIntakeDto, dailyNutritionIntake);
+            MapDtoToDomainEntity(dto, dailyNutritionIntake);
             _unitOfWork.DailyNutritionIntakes.Add(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
             return CreatedAtAction("GetDailyNutritionIntake", new { id = dailyNutritionIntake.Id }, dailyNutritionIntake);
@@ -103,8 +102,7 @@ namespace WebApplication.ApiControllers
                 Carbohydrates =  dailyNutritionIntake.Carbohydrates,
                 Fats = dailyNutritionIntake.Fats,
                 Protein = dailyNutritionIntake.Protein,
-                CreatedAt = dailyNutritionIntake.CreatedAt,
-                UnitTypeId = dailyNutritionIntake.UnitTypeId.ToString(),
+                CreatedAt = dailyNutritionIntake.CreatedAt.ToString(CultureInfo.InvariantCulture),
                 UnitType = new UnitTypeDto()
                 {
                     Description = dailyNutritionIntake.UnitType.Description,
@@ -114,7 +112,8 @@ namespace WebApplication.ApiControllers
             };
         }
 
-        private static void MapDtoToDomainEntity(DailyNutritionIntakeDto dto, DailyNutritionIntake domainEntity)
+        private static void MapDtoToDomainEntity<TDto>(TDto dto, DailyNutritionIntake domainEntity)
+            where TDto : DailyNutritionIntakeCreateDto 
         {
             domainEntity.Calories = dto.Calories;
             domainEntity.Carbohydrates = dto.Carbohydrates;
