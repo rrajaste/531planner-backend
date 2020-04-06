@@ -9,7 +9,5 @@ namespace PublicApi.DTO.V1.UnitType
         public string Name { get; set; }
         [MaxLength(255)]
         public string Description { get; set; }
-
-        public string CreatedAt { get; set; }
     }
 }

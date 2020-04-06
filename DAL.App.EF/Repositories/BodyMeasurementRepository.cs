@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
 using Domain;
@@ -35,14 +34,14 @@ namespace DAL.App.EF.Repositories
                 .ToListAsync();
         }
 
-        public override BodyMeasurement Find(Guid id)
+        public override BodyMeasurement Find(Guid? id)
         {
             return RepoDbSet
                 .Include(b => b.UnitType)
                 .FirstOrDefault(d => d.Id == id);
         }
 
-        public override async Task<BodyMeasurement> FindAsync(Guid id)
+        public override async Task<BodyMeasurement> FindAsync(Guid? id)
         {
             return await RepoDbSet
                 .Include(b => b.UnitType)

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Domain;
 using PublicApi.DTO.V1;
 using PublicApi.DTO.V1.BodyMeasurement;
+using PublicApi.DTO.V1.UnitType;
 
 namespace WebApplication.ApiControllers
 {
@@ -97,9 +98,16 @@ namespace WebApplication.ApiControllers
                 Arm = bodyMeasurement.Arm,
                 Hip = bodyMeasurement.Hip,
                 BodyFatPercentage = bodyMeasurement.BodyFatPercentage,
-                CreatedAt = bodyMeasurement.CreatedAt.ToString(CultureInfo.InvariantCulture)
+                CreatedAt = bodyMeasurement.CreatedAt.ToString(CultureInfo.InvariantCulture),
+                UnitType = new UnitTypeDto()
+                {
+                    Description = bodyMeasurement.UnitType.Description,
+                    Name = bodyMeasurement.UnitType.Name,
+                    Id = bodyMeasurement.UnitType.Id.ToString()
+                }
             };
         }
+        
         private static void MapDtoToDomainEntity<TDto>(TDto dto, BodyMeasurement bodyMeasurement) 
             where TDto : BodyMeasurementCreateDto
         {

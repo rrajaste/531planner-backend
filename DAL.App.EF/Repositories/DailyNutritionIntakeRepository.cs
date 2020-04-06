@@ -26,14 +26,14 @@ namespace DAL.App.EF.Repositories
             return await RepoDbSet.Include(d => d.UnitType).ToListAsync();
         }
 
-        public override DailyNutritionIntake Find(Guid id)
+        public override DailyNutritionIntake Find(Guid? id)
         {
             return RepoDbSet
                 .Include(d => d.UnitType)
                 .SingleOrDefault(d => d.Id == id);
         }
 
-        public override async Task<DailyNutritionIntake> FindAsync(Guid id)
+        public override async Task<DailyNutritionIntake> FindAsync(Guid? id)
         {
             return await RepoDbSet
                 .Include(d => d.UnitType)

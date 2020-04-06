@@ -79,9 +79,9 @@ namespace WebApplication.ApiControllers
             return Ok(unitType);
         }
 
-        private static UnitTypeDto CreateNewDtoFromDomainEntity(UnitType unitType)
+        private static UnitTypeDetailsDto CreateNewDtoFromDomainEntity(UnitType unitType)
         {
-            return new UnitTypeDto()
+            return new UnitTypeDetailsDto()
             {
                 Id = unitType.Id.ToString(),
                 Name = unitType.Name,
