@@ -15,6 +15,7 @@ using PublicApi.DTO.V1.UnitType;
 namespace WebApplication.ApiControllers.User
 {
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user")]
     [ApiController]
     public class BodyMeasurementsController : ControllerBase
     {
@@ -28,14 +29,14 @@ namespace WebApplication.ApiControllers.User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BodyMeasurementDto>>> GetBodyMeasurements()
         {
-            var bodyMeasurements = await _unitOfWork.BodyMeasurements.AllAsync();
+            var bodyMeasurements = await _unitOfWork.BodyMeasurements.AllWithAppUserIdAsync(User.UserId());
             return Ok(bodyMeasurements.Select(CreateNewDtoFromDomainEntity));
         }
         
         [HttpGet("{id}")]
         public async Task<ActionResult<BodyMeasurementDto>> GetBodyMeasurement(Guid id)
         {
-            var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id);
+            var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, User.UserId());
             
             if (bodyMeasurement == null)
             {
@@ -51,11 +52,12 @@ namespace WebApplication.ApiControllers.User
             {
                 return BadRequest();
             }
-            var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id);
+            var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, User.UserId());
             if (bodyMeasurement == null)
             {
                 return NotFound();
             }
+            
             MapDtoToDomainEntity(dto, bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
             
@@ -67,6 +69,7 @@ namespace WebApplication.ApiControllers.User
         {
             var bodyMeasurement = new BodyMeasurement();
             MapDtoToDomainEntity(dto, bodyMeasurement);
+            bodyMeasurement.AppUserId = User.UserId();
             _unitOfWork.BodyMeasurements.Add(bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
             return CreatedAtAction("GetBodyMeasurement", new { id = bodyMeasurement.Id }, CreateNewDtoFromDomainEntity(bodyMeasurement));
@@ -76,11 +79,12 @@ namespace WebApplication.ApiControllers.User
         [HttpDelete("{id}")]
         public async Task<ActionResult<BodyMeasurement>> DeleteBodyMeasurement(Guid id)
         {
-            var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id);
+            var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, User.UserId());
             if (bodyMeasurement == null)
             {
                 return NotFound();
             }
+            
             _unitOfWork.BodyMeasurements.Remove(bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
 

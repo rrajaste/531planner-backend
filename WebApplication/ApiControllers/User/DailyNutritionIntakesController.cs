@@ -15,6 +15,7 @@ using PublicApi.DTO.V1.UnitType;
 namespace WebApplication.ApiControllers.User
 {
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user")]
     [ApiController]
     public class DailyNutritionIntakesController : ControllerBase
     {
@@ -24,20 +25,19 @@ namespace WebApplication.ApiControllers.User
         {
             _unitOfWork = unitOfWork;
         }
-
-        // GET: api/DailyNutritionIntake
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DailyNutritionIntakeDto>>> GetDailyNutritionIntakes()
         {
-            var dailyNutritionIntakes = await _unitOfWork.DailyNutritionIntakes.AllAsync();
+            var dailyNutritionIntakes = 
+                await _unitOfWork.DailyNutritionIntakes.AllWithAppUserIdAsync(User.UserId());
             return Ok(dailyNutritionIntakes.Select(CreateNewDtoFromDomainEntity));
         }
-
-        // GET: api/DailyNutritionIntake/5
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<DailyNutritionIntakeDto>> GetDailyNutritionIntake(Guid id)
         {
-            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(id, User.UserId());
 
             if (dailyNutritionIntake == null)
             {
@@ -46,10 +46,6 @@ namespace WebApplication.ApiControllers.User
             return Ok(CreateNewDtoFromDomainEntity(dailyNutritionIntake));
         }
 
-        // PUT: api/DailyNutritionIntake/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDailyNutritionIntake(Guid id, DailyNutritionIntakeEditDto dto)
         {
@@ -57,28 +53,29 @@ namespace WebApplication.ApiControllers.User
             {
                 return BadRequest();
             }
-            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(id, User.UserId());
+            if (dailyNutritionIntake == null)
+            {
+                return NotFound();
+            }
             MapDtoToDomainEntity(dto, dailyNutritionIntake);
             _unitOfWork.DailyNutritionIntakes.Update(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
             return NoContent();
         }
-
-        // POST: api/DailyNutritionIntake
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        
         [HttpPost]
         public async Task<ActionResult<DailyNutritionIntake>> PostDailyNutritionIntake(DailyNutritionIntakeCreateDto dto)
         {
             var dailyNutritionIntake = new DailyNutritionIntake();
             MapDtoToDomainEntity(dto, dailyNutritionIntake);
+            dailyNutritionIntake.AppUserId = User.UserId();
             _unitOfWork.DailyNutritionIntakes.Add(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
             return CreatedAtAction(
                 "GetDailyNutritionIntake", new { id = dailyNutritionIntake.Id },CreateNewDtoFromDomainEntity(dailyNutritionIntake));
         }
-
-        // DELETE: api/DailyNutritionIntake/5
+        
         [HttpDelete("{id}")]
         public async Task<ActionResult<DailyNutritionIntake>> DeleteDailyNutritionIntake(Guid id)
         {
