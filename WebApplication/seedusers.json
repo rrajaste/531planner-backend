@@ -1,0 +1,16 @@
+[
+  {
+    "name": "admin",
+    "email": "ranno@rajaste.ee",
+    "password": "12345678",
+    "role": "admin",
+    "isEmailConfirmed": "true"
+  },
+  {
+    "name": "user",
+    "email": "ranno2@rajaste.ee",
+    "password": "12345678",
+    "role": "user",
+    "isEmailConfirmed": "true"
+  }
+]

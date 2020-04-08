@@ -50,15 +50,16 @@ namespace WebApplication.ApiControllers
                 return BadRequest();
             }
             var bodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id);
+            if (bodyMeasurement == null)
+            {
+                return NotFound();
+            }
             MapDtoToDomainEntity(dto, bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
 
             return NoContent();
         }
-
-        // POST: api/BodyMeasurements
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
+        
         [HttpPost]
         public async Task<ActionResult<BodyMeasurement>> PostBodyMeasurement(BodyMeasurementCreateDto dto)
         {
