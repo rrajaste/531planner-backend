@@ -23,7 +23,7 @@ namespace Domain
         [DisplayName("Body fat %")][Range(1, 99, ErrorMessage = "Body fat percentage must be between 1-99%")]
         public int? BodyFatPercentage { get; set; }
 
-        public Guid? AppUserId { get; set; } = default!;
+        public Guid AppUserId { get; set; } = default!;
         public Guid UnitTypeId { get; set; } = default!;
         
         public UnitType? UnitType { get; set; }

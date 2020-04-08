@@ -20,6 +20,13 @@ namespace DAL.App.EF.Repositories
             return await RepoDbSet.Where(b => b.AppUserId.Equals(id)).ToListAsync();
         }
 
+        public async Task<BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId)
+        {
+            return await RepoDbSet
+                .Include(b => b.UnitType)
+                .FirstOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId);
+        }
+
         public override IEnumerable<BodyMeasurement> All()
         {
             return RepoDbContext.BodyMeasurements

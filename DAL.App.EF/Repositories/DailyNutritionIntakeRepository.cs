@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
@@ -39,6 +40,19 @@ namespace DAL.App.EF.Repositories
             return await RepoDbSet
                 .Include(d => d.UnitType)
                 .SingleOrDefaultAsync(d => d.Id == id);
+        }
+        
+        public async Task<DailyNutritionIntake> FindWithAppUserIdAsync(Guid id, Guid appUserId)
+        {
+            return RepoDbSet
+                .Include(d => d.UnitType)
+                .SingleOrDefault(d => d.Id == id && d.AppUserId == appUserId);
+        }
+
+        public async Task<IEnumerable<DailyNutritionIntake>> AllWithAppUserIdAsync(Guid id)
+        {
+            return await RepoDbSet.Include(d => d.UnitType)
+                .Where(b => b.AppUserId == id).ToListAsync();
         }
     }
 }

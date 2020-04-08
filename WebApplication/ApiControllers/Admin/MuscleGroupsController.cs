@@ -4,13 +4,16 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Mvc;
 using Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PublicApi.DTO.V1.MuscleGroups;
 
-namespace WebApplication.ApiControllers
+namespace WebApplication.ApiControllers.Admin
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
     [ApiController]
     public class MuscleGroupsController : ControllerBase
     {
