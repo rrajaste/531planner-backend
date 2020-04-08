@@ -14,8 +14,7 @@ namespace Contracts.DAL.App.Repositories
     public interface IProtectedInformationRepository<TEntity, TKey>
         where TEntity : class, IDomainEntity<TKey>, new()
         where TKey : struct, IEquatable<TKey>
-    {
-        IEnumerable<TEntity> AllAuthorize(TKey userId);
+    { 
         Task<IEnumerable<TEntity>> AllAsyncAuthorize(TKey userId);
         TEntity FindAuthorize(object id, TKey userId);
         Task<TEntity> FindAsyncAuthorize(object id);

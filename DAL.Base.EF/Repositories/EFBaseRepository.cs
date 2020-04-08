@@ -55,12 +55,12 @@ namespace DAL.Base.EF.Repositories
             throw new NotImplementedException();
         }
 
-        public virtual TEntity Find(TKey id)
+        public virtual TEntity Find(TKey? id)
         {
             return RepoDbSet.Find(id);
         }
 
-        public virtual async Task<TEntity> FindAsync(TKey id)
+        public virtual async Task<TEntity> FindAsync(TKey? id)
         {
             return await RepoDbSet.FindAsync(id);
         }
@@ -80,7 +80,7 @@ namespace DAL.Base.EF.Repositories
             return RepoDbSet.Remove(entity).Entity;
         }
 
-        public virtual TEntity Remove(TKey id)
+        public virtual TEntity Remove(TKey? id)
         {
             return Remove(Find(id));
         }

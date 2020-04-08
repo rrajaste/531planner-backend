@@ -18,11 +18,11 @@ namespace Contracts.DAL.Base.Repositories
         Task<IEnumerable<TEntity>> AllAsync();
         IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>>? filter = null);
         Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null);
-        TEntity Find(TKey id);
-        Task<TEntity> FindAsync(TKey id);
+        TEntity Find(TKey? id);
+        Task<TEntity> FindAsync(TKey? id);
         TEntity Add(TEntity entity);
         TEntity Update(TEntity entity);
         TEntity Remove(TEntity entity);
-        TEntity Remove(TKey id);
+        TEntity Remove(TKey? id);
     }
 }
