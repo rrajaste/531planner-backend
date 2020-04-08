@@ -87,20 +87,21 @@ namespace WebApplication.ApiControllers
             return Ok();
         }
         private static MuscleDetailsDto CreateNewDtoFromDomainEntity(Muscle muscle)
+        {
+            return new MuscleDetailsDto()
             {
-                return new MuscleDetailsDto()
+                Id = muscle.Id.ToString(),
+                Name = muscle.Name,
+                Description = muscle.Description,
+                CreatedAt = muscle.CreatedAt.ToString(CultureInfo.InvariantCulture),
+                MuscleGroup = new MuscleGroupDto()
                 {
-                    Id = muscle.Id.ToString(),
-                    Name = muscle.Name,
-                    Description = muscle.Description,
-                    CreatedAt = muscle.CreatedAt.ToString(CultureInfo.InvariantCulture),
-                    MuscleGroup = new MuscleGroupDto()
-                    {
-                        Name = muscle.MuscleGroup.Name,
-                        Description = muscle.MuscleGroup.Description
-                    }
-                };
-            }
+                    Id = muscle.MuscleGroup.Id.ToString(),
+                    Name = muscle.MuscleGroup.Name,
+                    Description = muscle.MuscleGroup.Description
+                }
+            };
+        }
             
         private static void MapDtoToDomainEntity<TDto>(TDto dto, Muscle muscle) 
                 where TDto : MuscleCreateDto

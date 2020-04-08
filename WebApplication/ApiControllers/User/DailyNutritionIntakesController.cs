@@ -4,24 +4,23 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using DAL.App.EF;
 using Domain;
-using PublicApi.DTO.V1;
+using Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PublicApi.DTO.V1.DailyNutritionIntake;
 using PublicApi.DTO.V1.UnitType;
 
-namespace WebApplication.ApiControllers
+namespace WebApplication.ApiControllers.User
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DailyNutritionIntakeController : ControllerBase
+    public class DailyNutritionIntakesController : ControllerBase
     {
         private readonly IAppUnitOfWork _unitOfWork;
 
-        public DailyNutritionIntakeController(IAppUnitOfWork unitOfWork)
+        public DailyNutritionIntakesController(IAppUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -75,7 +74,8 @@ namespace WebApplication.ApiControllers
             MapDtoToDomainEntity(dto, dailyNutritionIntake);
             _unitOfWork.DailyNutritionIntakes.Add(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
-            return CreatedAtAction("GetDailyNutritionIntake", new { id = dailyNutritionIntake.Id }, dailyNutritionIntake);
+            return CreatedAtAction(
+                "GetDailyNutritionIntake", new { id = dailyNutritionIntake.Id },CreateNewDtoFromDomainEntity(dailyNutritionIntake));
         }
 
         // DELETE: api/DailyNutritionIntake/5

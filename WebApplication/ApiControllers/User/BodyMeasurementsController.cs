@@ -4,13 +4,15 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Mvc;
 using Domain;
-using PublicApi.DTO.V1;
+using Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PublicApi.DTO.V1.BodyMeasurement;
 using PublicApi.DTO.V1.UnitType;
 
-namespace WebApplication.ApiControllers
+namespace WebApplication.ApiControllers.User
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -56,7 +58,7 @@ namespace WebApplication.ApiControllers
             }
             MapDtoToDomainEntity(dto, bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
-
+            
             return NoContent();
         }
         
@@ -67,8 +69,7 @@ namespace WebApplication.ApiControllers
             MapDtoToDomainEntity(dto, bodyMeasurement);
             _unitOfWork.BodyMeasurements.Add(bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
-
-            return CreatedAtAction("GetBodyMeasurement", new { id = bodyMeasurement.Id }, bodyMeasurement);
+            return CreatedAtAction("GetBodyMeasurement", new { id = bodyMeasurement.Id }, CreateNewDtoFromDomainEntity(bodyMeasurement));
         }
 
         // DELETE: api/BodyMeasurements/5
