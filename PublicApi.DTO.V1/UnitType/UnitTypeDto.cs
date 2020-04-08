@@ -1,13 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using PublicApi.DTO.V1.BaseDTOs.BaseDictionaryTypeDto;
 
 namespace PublicApi.DTO.V1.UnitType
 {
-    public class UnitTypeDto
+    public class UnitTypeDto : BaseDto
     {
-        public string Id { get; set; }
-        [MaxLength(255)]
-        public string Name { get; set; }
-        [MaxLength(255)]
-        public string Description { get; set; }
     }
 }
