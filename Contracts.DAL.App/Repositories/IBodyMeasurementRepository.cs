@@ -9,7 +9,7 @@ namespace Contracts.DAL.App.Repositories
 {
     public interface IBodyMeasurementRepository : IBaseRepository<BodyMeasurement>
     {
-        Task<IEnumerable<BodyMeasurement>> AllWithAppUserIdAsync (object id);
+        Task<IEnumerable<BodyMeasurement>> AllWithAppUserIdAsync (Guid id);
         Task<BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId);
     }
 }
