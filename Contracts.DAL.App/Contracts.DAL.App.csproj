@@ -10,8 +10,4 @@
       <ProjectReference Include="..\PublicApi.DTO.V1\PublicApi.DTO.V1.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Repositories\Identity" />
-    </ItemGroup>
-
 </Project>

@@ -17,7 +17,9 @@ namespace DAL.App.EF.Repositories
 
         public async Task<IEnumerable<BodyMeasurement>> AllWithAppUserIdAsync(Guid id)
         {
-            return await RepoDbSet.Where(b => b.AppUserId.Equals(id)).ToListAsync();
+            return await RepoDbSet
+                .Include(b => b.UnitType)
+                .Where(b => b.AppUserId.Equals(id)).ToListAsync();
         }
 
         public async Task<BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId)

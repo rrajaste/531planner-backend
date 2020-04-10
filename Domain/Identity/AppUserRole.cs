@@ -1,4 +1,5 @@
 ﻿using System;
+using Contracts.DAL.Base;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Identity
@@ -7,8 +8,12 @@ namespace Domain.Identity
     {
     }
 
-    public class AppUserRole<TKey> : IdentityRole<TKey> where TKey : IEquatable<TKey>
+    public class AppUserRole<TKey> : IdentityRole<TKey>, IDomainEntity<TKey>
+        where TKey : struct, IEquatable<TKey>
     {
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime ClosedAt { get; set; } = DateTime.MaxValue;
+        public string? Comment { get; set; }
     }
 
 }
