@@ -61,7 +61,7 @@ namespace WebApplication.ApiControllers.User
             MapDtoToDomainEntity(dto, dailyNutritionIntake);
             _unitOfWork.DailyNutritionIntakes.Update(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
-            return NoContent();
+            return Ok(CreateNewDtoFromDomainEntity(dailyNutritionIntake));
         }
         
         [HttpPost]
@@ -72,8 +72,9 @@ namespace WebApplication.ApiControllers.User
             dailyNutritionIntake.AppUserId = User.UserId();
             _unitOfWork.DailyNutritionIntakes.Add(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
-            return CreatedAtAction(
-                "GetDailyNutritionIntake", new { id = dailyNutritionIntake.Id },CreateNewDtoFromDomainEntity(dailyNutritionIntake));
+            dailyNutritionIntake =
+                await _unitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(dailyNutritionIntake.Id, User.UserId());
+            return Ok(CreateNewDtoFromDomainEntity(dailyNutritionIntake));
         }
         
         [HttpDelete("{id}")]
@@ -87,7 +88,7 @@ namespace WebApplication.ApiControllers.User
 
             _unitOfWork.DailyNutritionIntakes.Remove(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
-            return dailyNutritionIntake;
+            return Ok(CreateNewDtoFromDomainEntity(dailyNutritionIntake));
         }
 
         private static DailyNutritionIntakeDto CreateNewDtoFromDomainEntity(DailyNutritionIntake dailyNutritionIntake)

@@ -60,8 +60,7 @@ namespace WebApplication.ApiControllers.User
             
             MapDtoToDomainEntity(dto, bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
-            
-            return NoContent();
+            return Ok(CreateNewDtoFromDomainEntity(bodyMeasurement));
         }
         
         [HttpPost]
@@ -72,7 +71,8 @@ namespace WebApplication.ApiControllers.User
             bodyMeasurement.AppUserId = User.UserId();
             _unitOfWork.BodyMeasurements.Add(bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
-            return CreatedAtAction("GetBodyMeasurement", new { id = bodyMeasurement.Id }, CreateNewDtoFromDomainEntity(bodyMeasurement));
+            bodyMeasurement = await _unitOfWork.BodyMeasurements.FindWithAppUserIdAsync(bodyMeasurement.Id, User.UserId());
+            return Ok(CreateNewDtoFromDomainEntity(bodyMeasurement));
         }
 
         // DELETE: api/BodyMeasurements/5
@@ -88,7 +88,7 @@ namespace WebApplication.ApiControllers.User
             _unitOfWork.BodyMeasurements.Remove(bodyMeasurement);
             await _unitOfWork.SaveChangesAsync();
 
-            return Ok(bodyMeasurement);
+            return Ok(CreateNewDtoFromDomainEntity(bodyMeasurement));
         }
 
         private static BodyMeasurementDto CreateNewDtoFromDomainEntity(BodyMeasurement bodyMeasurement)

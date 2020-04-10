@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
+using Contracts.DAL.App;
 using Domain.Identity;
 using Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using PublicApi.DTO.V1.Account;
 
 namespace WebApplication.ApiControllers.Identity
 {
@@ -18,18 +20,26 @@ namespace WebApplication.ApiControllers.Identity
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
+        private readonly IAppUnitOfWork _unitOfWork;
         
-        public AccountController(IConfiguration configuration, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILogger<AccountController> logger)
+        public AccountController(
+            IConfiguration configuration,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            ILogger<AccountController> logger,
+            IAppUnitOfWork unitOfWork
+            )
         {
             _configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<string>> Login([FromBody] LoginDTO dto)
+        public async Task<ActionResult<string>> Login([FromBody] LoginDto dto)
         {
             var appUser = await _userManager.FindByNameAsync(dto.UserName);
             if (appUser == null)
@@ -56,23 +66,24 @@ namespace WebApplication.ApiControllers.Identity
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> Register([FromBody] RegisterDTO dto)
+        public async Task<ActionResult<string>> Register([FromBody] RegisterDto dto)
         {
-            return "{}";
-        }
+            if (await _unitOfWork.AppUsers.UserWithEmailExists(dto.Email))
+            {
+                return BadRequest(new {message = $"User with email {dto.Email} already exists"});
+            }
 
-        public class LoginDTO
-        {
-            public string UserName { get; set; }
-            public string Password { get; set; }
-        }
-        
-        
-        public class RegisterDTO
-        {
-            public string Email { get; set; }           
-            public string UserName { get; set; }           
-            public string Password { get; set; }           
+            var newUser = new AppUser()
+            {
+                UserName = dto.UserName,
+                Email = dto.Email,
+            };
+            var result = await _userManager.CreateAsync(newUser, dto.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest();
+            }
+            return NoContent();
         }
     }
 }
