@@ -3,14 +3,21 @@
     "name": "admin",
     "email": "ranno@rajaste.ee",
     "password": "12345678",
-    "role": "admin",
+    "appRole": "admin",
     "isEmailConfirmed": "true"
   },
   {
     "name": "user",
     "email": "ranno2@rajaste.ee",
     "password": "12345678",
-    "role": "user",
+    "appRole": "user",
+    "isEmailConfirmed": "true"
+  },
+  {
+    "name": "user2",
+    "email": "ranno3@rajaste.ee",
+    "password": "123456123456",
+    "appRole": "user",
     "isEmailConfirmed": "true"
   }
 ]

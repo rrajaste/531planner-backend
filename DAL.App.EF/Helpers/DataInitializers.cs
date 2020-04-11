@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using DAL.Base;
+using Domain;
 using Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,12 +31,18 @@ namespace DAL.App.EF.Helpers
 
         public static void SeedData(AppDbContext context)
         {
-            
+            var path = SeedDataFilePaths.BasePath;
+            SeedDomainEntity(context.UnitTypes, path + SeedDataFilePaths.UnitTypes);
+            SeedDomainEntity(context.RoutineTypes, path + SeedDataFilePaths.RoutineTypes);
+            SeedDomainEntity(context.ExerciseTypes, path + SeedDataFilePaths.ExerciseTypes);
+            SeedDomainEntity(context.MuscleGroups, path + SeedDataFilePaths.MuscleGroups);
+            SeedDomainEntity(context.TrainingDaysTypes, path + SeedDataFilePaths.TrainingDayTypes);
+            context.SaveChanges();
         }
 
         private static void SeedUsers(UserManager<AppUser> userManager)
         {
-            var filePath = "../WebApplication/seedusers.json";
+            var filePath = SeedDataFilePaths.BasePath + SeedDataFilePaths.AppUsers;
             var usersToSeed = GetSeedObjectsList<User>(filePath);
             foreach (var userToSeed in usersToSeed)
             {
@@ -53,13 +61,13 @@ namespace DAL.App.EF.Helpers
                         throw new ApplicationException("Failed to create seeded user");
                     }
                 }
-                var roleAddResult = userManager.AddToRoleAsync(userInUserManager, userToSeed.Role).Result;
+                var roleAddResult = userManager.AddToRoleAsync(userInUserManager, userToSeed.AppRole).Result;
             }
         }
 
         private static void SeedRoles(RoleManager<AppUserRole> roleManager)
         {
-            var filePath = "../WebApplication/seedroles.json";
+            var filePath = SeedDataFilePaths.BasePath + SeedDataFilePaths.AppRoles;
             var rolesToSeed = GetSeedObjectsList<Role>(filePath);
             foreach (var roleToSeed in rolesToSeed)
             {
@@ -76,6 +84,12 @@ namespace DAL.App.EF.Helpers
             }
         }
 
+        private static void SeedDomainEntity<TEntity>(DbSet<TEntity> dbSet, string filePath)
+            where TEntity : DomainEntity
+        {
+            dbSet.AddRange(GetSeedObjectsList<TEntity>(filePath));
+        }
+
         private static List<TObject> GetSeedObjectsList<TObject>(string filePath)
         {
             using var reader = new StreamReader(filePath);
@@ -88,15 +102,15 @@ namespace DAL.App.EF.Helpers
             public string Name { get; set; }
             public string Email { get; set; }
             public string Password { get; set; }
-            public string Role { get; set; }
+            public string AppRole { get; set; }
             public bool IsEmailConfirmed { get; set; }
             
-            public User(string name, string email, string password, string role, bool isEmailConfirmed)
+            public User(string name, string email, string password, string appRole, bool isEmailConfirmed)
             {
                 Name = name;
                 Email = email;
                 Password = password;
-                Role = role;
+                AppRole = appRole;
                 IsEmailConfirmed = isEmailConfirmed;
             }
         }

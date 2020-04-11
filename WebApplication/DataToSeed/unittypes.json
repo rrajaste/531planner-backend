@@ -1,0 +1,10 @@
+[ 
+  {
+    "name": "Metric",
+    "description": "Weight: KG, height: cm, distance: m"
+  },
+  {
+    "name": "Imperial",
+    "description": "Weight: Lbs, height: inches, distance: yards"
+  }
+]

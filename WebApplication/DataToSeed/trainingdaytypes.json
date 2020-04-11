@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Pull day",
+    "description": "Pull days are training days where training focus is on pulling exercises, such as rows and lat pull-downs."
+  },
+  {
+    "name": "Push day",
+    "description": "Push days are training days where training focus is on pushing exercises, such as bench press and overhead press."
+  },
+  {
+  "name": "Leg day",
+  "description": "Leg days are training days where training focus is on leg exercises, such as squats and lunges."
+}
+]
