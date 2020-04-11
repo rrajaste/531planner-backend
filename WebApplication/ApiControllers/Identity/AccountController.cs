@@ -20,21 +20,18 @@ namespace WebApplication.ApiControllers.Identity
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
-        private readonly IAppUnitOfWork _unitOfWork;
-        
+
         public AccountController(
             IConfiguration configuration,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            ILogger<AccountController> logger,
-            IAppUnitOfWork unitOfWork
-            )
+            ILogger<AccountController> logger)
+        
         {
             _configuration = configuration;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _unitOfWork = unitOfWork;
         }
 
 
@@ -68,7 +65,7 @@ namespace WebApplication.ApiControllers.Identity
         [HttpPost]
         public async Task<ActionResult<string>> Register([FromBody] RegisterDto dto)
         {
-            if (await _unitOfWork.AppUsers.UserWithEmailExists(dto.Email))
+            if (await _userManager.FindByEmailAsync(dto.Email) != null)
             {
                 return BadRequest(new {message = $"User with email {dto.Email} already exists"});
             }
@@ -83,7 +80,8 @@ namespace WebApplication.ApiControllers.Identity
             {
                 return BadRequest();
             }
-            return NoContent();
+            await _userManager.AddToRoleAsync(newUser, "user");
+            return Ok(new {username = dto.UserName, email = dto.Email});
         }
     }
 }
