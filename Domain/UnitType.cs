@@ -8,8 +8,12 @@ namespace Domain
     public class UnitType : DomainEntity
     {
         [MaxLength(255)]
+        [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.UnitType))]
         public string Name { get; set; } = default!;
+        
+        
         [MaxLength(255)]
+        [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.UnitType))]
         public string Description { get; set; } = default!;
     }
 }
