@@ -10,10 +10,20 @@ namespace Domain
     public class TrainingWeek : DomainEntity
     {
         public int TrainingWeekId { get; set; }
+        
+        [Display(Name = nameof(WeekNumber), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public int WeekNumber { get; set; }
+        
+        [Display(Name = nameof(IsDeload), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public bool IsDeload { get; set; }
+        
+        [Display(Name = nameof(StartingDate), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public DateTime StartingDate { get; set; }
+        
+        [Display(Name = nameof(EndingDate), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public DateTime? EndingDate { get; set; }
+        
+        [Display(Name = nameof(TrainingCycle), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public TrainingCycle? TrainingCycle { get; set; }
         public ICollection<TrainingDay>? TrainingDays { get; set; }
     }

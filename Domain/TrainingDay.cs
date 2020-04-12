@@ -9,6 +9,7 @@ namespace Domain
 {
     public class TrainingDay : DomainEntity
     {
+        [Display(Name = nameof(Date), ResourceType = typeof(Resources.Domain.TrainingDay))]
         public DateTime Date { get; set; }
         public Guid TrainingWeekId { get; set; } = default!;
         public Guid TrainingDayTypeId { get; set; } = default!;

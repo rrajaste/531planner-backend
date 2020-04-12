@@ -10,8 +10,11 @@ namespace Domain
     public class TrainingDayType : DomainEntity
     {
         [MaxLength(255)]
+        [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.TrainingDayType))]
         public string Name { get; set; } = default!;
+        
         [MaxLength(255)]
+        [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.TrainingDayType))]
         public string Description { get; set; } = default!;
         public ICollection<TrainingDay>? TrainingDays { get; set; }
     }
