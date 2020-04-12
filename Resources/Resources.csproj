@@ -1,0 +1,100 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\BodyMeasurements\BodyMeasurement.en-GB.resx" />
+    <EmbeddedResource Remove="Views\BodyMeasurements\BodyMeasurement.et-EE.resx" />
+    <EmbeddedResource Remove="Views\DailyNutritionIntakes\DailyNutritionIntake.en-GB.resx" />
+    <EmbeddedResource Remove="Views\DailyNutritionIntakes\DailyNutritionIntake.et-EE.resx" />
+    <EmbeddedResource Remove="Views\UnitTypes\UnitType.en-GB.resx" />
+    <EmbeddedResource Remove="Views\UnitTypes\UnitType.et-EE.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\BodyMeasurements\" />
+    <Folder Include="Views\DailyNutritionIntakes\" />
+    <Folder Include="Views\UnitTypes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Domain\BodyMeasurement.en-GB.resx" />
+    <None Include="Domain\BodyMeasurement.et-EE.resx" />
+    <None Include="Domain\DailyNutritionIntake.en-GB.resx" />
+    <None Include="Domain\DailyNutritionIntake.et-EE.resx" />
+    <None Include="Domain\UnitType.en-GB.resx" />
+    <None Include="Domain\UnitType.et-EE.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Domain\BodyMeasurement.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BodyMeasurement.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\DailyNutritionIntake.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DailyNutritionIntake.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\UnitType.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UnitType.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Shared\_Layout.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_Layout.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Domain\BodyMeasurement.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BodyMeasurement.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\BodyMeasurement.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\BodyMeasurement.et-EE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\DailyNutritionIntake.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DailyNutritionIntake.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\DailyNutritionIntake.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\DailyNutritionIntake.et-EE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\UnitType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnitType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\UnitType.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\UnitType.et-EE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Shared\_Layout.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_Layout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Shared\_Layout.en-GB.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Shared\_Layout.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
