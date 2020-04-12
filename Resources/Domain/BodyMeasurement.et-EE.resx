@@ -120,6 +120,9 @@
   <data name="Arm" xml:space="preserve">
     <value>Käsivars</value>
   </data>
+  <data name="BodyFatPercentage" xml:space="preserve">
+    <value>BodyFatPercentage</value>
+  </data>
   <data name="Chest" xml:space="preserve">
     <value>Rinnaümbermõõt</value>
   </data>
