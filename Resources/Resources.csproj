@@ -39,10 +39,55 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DailyNutritionIntake.resx</DependentUpon>
     </Compile>
-    <Compile Update="Domain\UnitType.Designer.cs">
+    <Compile Update="Domain\ExerciseSet.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>ExerciseSet.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\ExerciseType.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExerciseType.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\Muscle.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Muscle.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\MuscleGroup.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MuscleGroup.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\RoutineType.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RoutineType.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\TrainingCycle.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TrainingCycle.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\TrainingDay.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TrainingDay.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\TrainingDayType.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TrainingDayType.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\TrainingWeek.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TrainingWeek.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Domain\UnitType - Copy.Designer.cs">
       <DependentUpon>UnitType.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Views\Shared\_Layout.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -62,6 +107,16 @@
     <EmbeddedResource Update="Domain\BodyMeasurement.et-EE.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ExerciseSet.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExerciseSet.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ExerciseSet.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ExerciseSet.et-EE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Domain\DailyNutritionIntake.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DailyNutritionIntake.Designer.cs</LastGenOutput>
@@ -70,6 +125,102 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Domain\DailyNutritionIntake.et-EE.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ExerciseType.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExerciseType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ExerciseType.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\ExerciseType.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Muscle.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Muscle.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Muscle.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\Muscle.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\MuscleGroup.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MuscleGroup.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\MuscleGroup.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\MuscleGroup.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\WorkoutRoutine.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\WorkoutRoutine.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\RoutineType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RoutineType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingCycle.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingCycle.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingDay.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingDay.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingCycle.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingCycle.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingWeek.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingWeek.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingWeek.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingWeek.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingDayType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingDayType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingDayType.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingDayType.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingDay.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\TrainingDay.et-EE.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\RoutineType.en-GB.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Domain\RoutineType.et-EE.resx">
+      <SubType>Designer</SubType>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Domain\UnitType.resx">
