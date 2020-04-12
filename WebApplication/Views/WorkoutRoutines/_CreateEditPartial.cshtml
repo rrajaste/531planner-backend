@@ -1,11 +1,7 @@
 @model WorkoutRoutineCreateEditViewModel
 
 <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="WorkoutRoutine.WorkoutRoutineId" class="control-label"></label>
-        <input asp-for="WorkoutRoutine.WorkoutRoutineId" class="form-control" />
-        <span asp-validation-for="WorkoutRoutine.WorkoutRoutineId" class="text-danger"></span>
-    </div>
+
     <div class="form-group">
         <label asp-for="WorkoutRoutine.Name" class="control-label"></label>
         <input asp-for="WorkoutRoutine.Name" class="form-control" />
