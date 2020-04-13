@@ -1,29 +1,30 @@
 using System;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Mvc;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Areas.Admin.Controllers
 {
+    [Area("admin")]
     [Authorize(Roles = "admin")]
-    public class RoutineTypesController : Controller
+    public class UnitTypesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;
 
-        public RoutineTypesController(IAppUnitOfWork unitOfWork)
+        public UnitTypesController(IAppUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: RoutineTypes
+        // GET: UnitType
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.RoutineTypes.AllAsync());
+            return View(await _unitOfWork.UnitTypes.AllAsync());
         }
 
-        // GET: RoutineTypes/Details/5
+        // GET: UnitType/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -31,38 +32,38 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
-            if (routineType == null)
+            var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            if (unitType == null)
             {
                 return NotFound();
             }
 
-            return View(routineType);
+            return View(unitType);
         }
 
-        // GET: RoutineTypes/Create
+        // GET: UnitType/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: RoutineTypes/Create
+        // POST: UnitType/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,ClosedAt,Id,CreatedAt,DeletedAt,Comment")] RoutineType routineType)
+        public async Task<IActionResult> Create(UnitType unitType)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.RoutineTypes.Add(routineType);
+                _unitOfWork.UnitTypes.Add(unitType);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(routineType);
+            return View(unitType);
         }
 
-        // GET: RoutineTypes/Edit/5
+        // GET: UnitType/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -70,38 +71,36 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
-            if (routineType == null)
+            var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            if (unitType == null)
             {
                 return NotFound();
             }
-            return View(routineType);
+            return View(unitType);
         }
 
-        // POST: RoutineTypes/Edit/5
+        // POST: UnitType/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,ClosedAt,Id,CreatedAt,DeletedAt,Comment")] RoutineType routineType)
+        public async Task<IActionResult> Edit(Guid id, UnitType UnitType)
         {
-            if (id != routineType.Id)
+            if (id != UnitType.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                
-                _unitOfWork.RoutineTypes.Update(routineType);
+                _unitOfWork.UnitTypes.Update(UnitType);
                 await _unitOfWork.SaveChangesAsync();
-                
                 return RedirectToAction(nameof(Index));
             }
-            return View(routineType);
+            return View(UnitType);
         }
 
-        // GET: RoutineTypes/Delete/5
+        // GET: UnitType/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -109,22 +108,22 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id); 
-            if (routineType == null)
+            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            if (UnitType == null)
             {
                 return NotFound();
             }
 
-            return View(routineType);
+            return View(UnitType);
         }
 
-        // POST: RoutineTypes/Delete/5
+        // POST: UnitType/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
-            _unitOfWork.RoutineTypes.Remove(routineType);
+            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            _unitOfWork.UnitTypes.Remove(UnitType);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

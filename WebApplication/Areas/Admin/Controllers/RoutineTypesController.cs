@@ -1,29 +1,30 @@
 using System;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Mvc;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Areas.Admin.Controllers
 {
     [Authorize(Roles = "admin")]
-    public class MuscleGroupsController : Controller
+    [Area("admin")]
+    public class RoutineTypesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;
 
-        public MuscleGroupsController(IAppUnitOfWork unitOfWork)
+        public RoutineTypesController(IAppUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: MuscleGroups
+        // GET: RoutineTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.MuscleGroups.AllAsync());
+            return View(await _unitOfWork.RoutineTypes.AllAsync());
         }
 
-        // GET: MuscleGroups/Details/5
+        // GET: RoutineTypes/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -31,37 +32,38 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
-            if (muscleGroup == null)
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
+            if (routineType == null)
             {
                 return NotFound();
             }
 
-            return View(muscleGroup);
+            return View(routineType);
         }
 
-        // GET: MuscleGroups/Create
+        // GET: RoutineTypes/Create
         public IActionResult Create()
         {
             return View();
         }
-        // POST: MuscleGroups/Create
+
+        // POST: RoutineTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] MuscleGroup muscleGroup)
+        public async Task<IActionResult> Create([Bind("Name,Description,ClosedAt,Id,CreatedAt,DeletedAt,Comment")] RoutineType routineType)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.MuscleGroups.Add(muscleGroup);
+                _unitOfWork.RoutineTypes.Add(routineType);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(muscleGroup);
+            return View(routineType);
         }
 
-        // GET: MuscleGroups/Edit/5
+        // GET: RoutineTypes/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -69,36 +71,38 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
-            if (muscleGroup == null)
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
+            if (routineType == null)
             {
                 return NotFound();
             }
-            return View(muscleGroup);
+            return View(routineType);
         }
 
-        // POST: MuscleGroups/Edit/5
+        // POST: RoutineTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] MuscleGroup muscleGroup)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,ClosedAt,Id,CreatedAt,DeletedAt,Comment")] RoutineType routineType)
         {
-            if (id != muscleGroup.Id)
+            if (id != routineType.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.MuscleGroups.Update(muscleGroup);
+                
+                _unitOfWork.RoutineTypes.Update(routineType);
                 await _unitOfWork.SaveChangesAsync();
+                
                 return RedirectToAction(nameof(Index));
             }
-            return View(muscleGroup);
+            return View(routineType);
         }
 
-        // GET: MuscleGroups/Delete/5
+        // GET: RoutineTypes/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -106,22 +110,22 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
-            if (muscleGroup == null)
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id); 
+            if (routineType == null)
             {
                 return NotFound();
             }
 
-            return View(muscleGroup);
+            return View(routineType);
         }
 
-        // POST: MuscleGroups/Delete/5
+        // POST: RoutineTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
-            _unitOfWork.MuscleGroups.Remove(muscleGroup);
+            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
+            _unitOfWork.RoutineTypes.Remove(routineType);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -1,19 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using DAL.App.EF;
-using DAL.App.EF.Repositories;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Areas.Admin.Controllers
 {
     [Authorize(Roles = "admin")]
+    [Area("admin")]
     public class TrainingDayTypesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

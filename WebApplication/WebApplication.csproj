@@ -215,6 +215,55 @@
       <_ContentIncludedByDefault Remove="Views\PerformedExercises\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Views\PerformedExercises\_CreateEditPartial.cshtml" />
       <_ContentIncludedByDefault Remove="Views\PerformedExercises\_DetailsDeletePartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ExerciseTypes\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ExerciseTypes\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ExerciseTypes\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ExerciseTypes\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ExerciseTypes\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ExerciseTypes\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ExerciseTypes\_DetailsDeletePartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\RoutineTypes\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\RoutineTypes\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\RoutineTypes\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\RoutineTypes\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\RoutineTypes\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\RoutineTypes\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\RoutineTypes\_DetailsDeletePartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitTypes\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitTypes\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitTypes\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitTypes\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitTypes\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitTypes\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\UnitTypes\_DetailsDeletePartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TrainingDayTypes\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TrainingDayTypes\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TrainingDayTypes\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TrainingDayTypes\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TrainingDayTypes\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TrainingDayTypes\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\TrainingDayTypes\_DetailsDeletePartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\MuscleGroups\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\MuscleGroups\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\MuscleGroups\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\MuscleGroups\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\MuscleGroups\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\MuscleGroups\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\MuscleGroups\_DetailsDeletePartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Muscles\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Muscles\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Muscles\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Muscles\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Muscles\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Muscles\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Muscles\_DetailsDeletePartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Exercises\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Exercises\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Exercises\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Exercises\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Exercises\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Exercises\_CreateEditPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Exercises\_DetailsDeletePartial.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
@@ -226,10 +275,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\Admin\Controllers" />
       <Folder Include="Areas\Admin\ViewModels" />
-      <Folder Include="Areas\Admin\Views" />
-      <Folder Include="Areas\User" />
+      <Folder Include="Areas\User\Controllers" />
+      <Folder Include="Areas\User\ViewModels" />
+      <Folder Include="Areas\User\Views" />
     </ItemGroup>
 
 </Project>

@@ -1,29 +1,30 @@
 using System;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Mvc;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
-namespace WebApplication.Controllers
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApplication.Areas.Admin.Controllers
 {
-    
     [Authorize(Roles = "admin")]
-    public class UnitTypesController : Controller
+    [Area("admin")]
+    public class MuscleGroupsController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;
 
-        public UnitTypesController(IAppUnitOfWork unitOfWork)
+        public MuscleGroupsController(IAppUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        // GET: UnitType
+        // GET: MuscleGroups
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.UnitTypes.AllAsync());
+            return View(await _unitOfWork.MuscleGroups.AllAsync());
         }
 
-        // GET: UnitType/Details/5
+        // GET: MuscleGroups/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -31,38 +32,37 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            if (UnitType == null)
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            if (muscleGroup == null)
             {
                 return NotFound();
             }
 
-            return View(UnitType);
+            return View(muscleGroup);
         }
 
-        // GET: UnitType/Create
+        // GET: MuscleGroups/Create
         public IActionResult Create()
         {
             return View();
         }
-
-        // POST: UnitType/Create
+        // POST: MuscleGroups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UnitType unitType)
+        public async Task<IActionResult> Create([Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] MuscleGroup muscleGroup)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.UnitTypes.Add(unitType);
+                _unitOfWork.MuscleGroups.Add(muscleGroup);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(unitType);
+            return View(muscleGroup);
         }
 
-        // GET: UnitType/Edit/5
+        // GET: MuscleGroups/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -70,36 +70,36 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            if (unitType == null)
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            if (muscleGroup == null)
             {
                 return NotFound();
             }
-            return View(unitType);
+            return View(muscleGroup);
         }
 
-        // POST: UnitType/Edit/5
+        // POST: MuscleGroups/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, UnitType UnitType)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] MuscleGroup muscleGroup)
         {
-            if (id != UnitType.Id)
+            if (id != muscleGroup.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.UnitTypes.Update(UnitType);
+                _unitOfWork.MuscleGroups.Update(muscleGroup);
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(UnitType);
+            return View(muscleGroup);
         }
 
-        // GET: UnitType/Delete/5
+        // GET: MuscleGroups/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -107,22 +107,22 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            if (UnitType == null)
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            if (muscleGroup == null)
             {
                 return NotFound();
             }
 
-            return View(UnitType);
+            return View(muscleGroup);
         }
 
-        // POST: UnitType/Delete/5
+        // POST: MuscleGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            _unitOfWork.UnitTypes.Remove(UnitType);
+            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            _unitOfWork.MuscleGroups.Remove(muscleGroup);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

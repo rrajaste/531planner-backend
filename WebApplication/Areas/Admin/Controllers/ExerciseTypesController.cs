@@ -1,14 +1,14 @@
 using System;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Microsoft.AspNetCore.Mvc;
-
 using Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication.Controllers
+namespace WebApplication.Areas.Admin.Controllers
 {
     [Authorize(Roles = "admin")]
+    [Area("admin")]
     public class ExerciseTypesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;
