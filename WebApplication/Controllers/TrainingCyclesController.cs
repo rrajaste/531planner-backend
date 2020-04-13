@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin, user")]
     public class TrainingCyclesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

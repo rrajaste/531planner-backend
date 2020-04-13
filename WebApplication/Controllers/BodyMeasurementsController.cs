@@ -23,7 +23,7 @@ namespace WebApplication.Controllers
         // GET: BodyMeasurements
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.BodyMeasurements.AllAsync());
+            return View(await _unitOfWork.BodyMeasurements.AllWithAppUserIdAsync(User.UserId()));
         }
 
         // GET: BodyMeasurements/Details/5
@@ -33,9 +33,7 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
-
-
-            var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindAsync(id);
+            var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, User.UserId());
             if (bodyMeasurements == null)
             {
                 return NotFound();
@@ -45,10 +43,10 @@ namespace WebApplication.Controllers
         }
 
         // GET: BodyMeasurements/Create
-        public IActionResult Create()
+        public async Task<ViewResult> Create()
         {
             var viewModel = new BodyMeasurementCreateEditViewModel();
-            var unitTypes = _unitOfWork.UnitTypes.All();
+            var unitTypes = await _unitOfWork.UnitTypes.AllAsync();
             viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitType.Id), nameof(UnitType.Name));
             return View(viewModel);
         }
@@ -67,7 +65,7 @@ namespace WebApplication.Controllers
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var unitTypes = _unitOfWork.UnitTypes.All();
+            var unitTypes = await _unitOfWork.UnitTypes.AllAsync();
             viewModel.UnitTypeSelectList = new SelectList(
                 unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.BodyMeasurement.UnitTypeId);
             return View(viewModel);
@@ -83,9 +81,9 @@ namespace WebApplication.Controllers
 
             var viewModel = new BodyMeasurementCreateEditViewModel
             {
-                BodyMeasurement = await _unitOfWork.BodyMeasurements.FindAsync(id)
+                BodyMeasurement = await _unitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, User.UserId())
             };
-            var unitTypes = _unitOfWork.UnitTypes.All();
+            var unitTypes = await _unitOfWork.UnitTypes.AllAsync();
             viewModel.UnitTypeSelectList = new SelectList(
                 unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.BodyMeasurement.UnitTypeId);
             if (viewModel.BodyMeasurement == null)
@@ -143,7 +141,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindAsync(id);
+            var bodyMeasurements = await _unitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, User.UserId());
+            if (bodyMeasurements == null)
+            {
+                return NotFound();
+            }
             _unitOfWork.BodyMeasurements.Remove(bodyMeasurements);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

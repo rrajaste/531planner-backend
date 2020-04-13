@@ -22,7 +22,7 @@ namespace DAL.App.EF.Repositories
                 .Where(b => b.AppUserId.Equals(id)).ToListAsync();
         }
 
-        public async Task<BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId)
+        public async Task<BodyMeasurement> FindWithAppUserIdAsync(Guid? id, Guid appUserId)
         {
             return await RepoDbSet
                 .Include(b => b.UnitType)

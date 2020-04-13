@@ -11,7 +11,6 @@ namespace DAL.App.EF
         public DbSet<BodyMeasurement> BodyMeasurements { get; set; } = default!;
         public DbSet<DailyNutritionIntake> DailyNutritionIntakes { get; set; } = default!;
         public DbSet<Exercise> Exercises { get; set; } = default!;
-        public DbSet<ExerciseInTrainingDay> ExercisesInTrainingDays { get; set; } = default!;
         public DbSet<ExerciseType> ExerciseTypes { get; set; } = default!;
         public DbSet<Muscle> Muscles { get; set; } = default!;
         public DbSet<MuscleGroup> MuscleGroups { get; set; } = default!;

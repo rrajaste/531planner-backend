@@ -1,10 +1,8 @@
 using System;
-
 using System.Threading.Tasks;
 using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
 using Domain;
 using Extensions;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +10,8 @@ using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
-    [Authorize]
+    
+    [Authorize(Roles = "user")]
     public class WorkoutRoutinesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

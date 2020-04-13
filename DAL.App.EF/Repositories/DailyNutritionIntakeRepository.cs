@@ -42,7 +42,7 @@ namespace DAL.App.EF.Repositories
                 .SingleOrDefaultAsync(d => d.Id == id);
         }
         
-        public async Task<DailyNutritionIntake> FindWithAppUserIdAsync(Guid id, Guid appUserId)
+        public async Task<DailyNutritionIntake> FindWithAppUserIdAsync(Guid? id, Guid appUserId)
         {
             return RepoDbSet
                 .Include(d => d.UnitType)

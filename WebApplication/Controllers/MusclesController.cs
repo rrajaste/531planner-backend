@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAL.App.EF;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class MusclesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

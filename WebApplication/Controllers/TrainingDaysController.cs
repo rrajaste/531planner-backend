@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 using Domain;
 using Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "admin, user")]
     public class TrainingDaysController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

@@ -4,11 +4,10 @@ using Contracts.DAL.App;
 using Microsoft.AspNetCore.Mvc;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
-
 namespace WebApplication.Controllers
 {
-    [Authorize]
-
+    
+    [Authorize(Roles = "admin")]
     public class UnitTypesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

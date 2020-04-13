@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class RoutineTypesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

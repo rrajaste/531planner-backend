@@ -2,12 +2,14 @@ using System;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication.ViewModels;
 
-namespace WebApplication.Areas.Admin.Controllers
+namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ExercisesController : Controller
     {
         private readonly IAppUnitOfWork _unitOfWork;

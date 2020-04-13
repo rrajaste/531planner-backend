@@ -27,7 +27,7 @@ namespace WebApplication.Controllers
         // GET: DailyNutritionIntakes
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.DailyNutritionIntakes.AllAsync());
+            return View(await _unitOfWork.DailyNutritionIntakes.AllWithAppUserIdAsync(User.UserId()));
         }
 
         // GET: DailyNutritionIntakes/Details/5
@@ -38,7 +38,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(id, User.UserId());
             if (dailyNutritionIntake == null)
             {
                 return NotFound();
@@ -48,10 +48,10 @@ namespace WebApplication.Controllers
         }
 
         // GET: DailyNutritionIntakes/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var viewModel = new DailyNutritionIntakeCreateEditViewModel();
-            var unitTypes = _unitOfWork.UnitTypes.All();
+            var unitTypes = await _unitOfWork.UnitTypes.AllAsync();
             viewModel.UnitTypeSelectList = new SelectList(unitTypes, nameof(UnitType.Id), nameof(UnitType.Name));
             return View(viewModel);
         }
@@ -70,7 +70,7 @@ namespace WebApplication.Controllers
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var unitTypes = _unitOfWork.UnitTypes.All();
+            var unitTypes = await _unitOfWork.UnitTypes.AllAsync();
             viewModel.UnitTypeSelectList = new SelectList(
                 unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.DailyNutritionIntake.UnitTypeId);
             return View(viewModel);
@@ -84,13 +84,13 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
             var viewModel = new DailyNutritionIntakeCreateEditViewModel();
-            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(id, User.UserId());
             viewModel.DailyNutritionIntake = dailyNutritionIntake;
             if (dailyNutritionIntake == null)
             {
                 return NotFound();
             }
-            var unitTypes = _unitOfWork.UnitTypes.All();
+            var unitTypes = await _unitOfWork.UnitTypes.AllAsync();
             viewModel.UnitTypeSelectList = new SelectList(
                 unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.DailyNutritionIntake.UnitTypeId);
             return View(viewModel);
@@ -115,7 +115,7 @@ namespace WebApplication.Controllers
                 await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var unitTypes = _unitOfWork.BodyMeasurements.All();
+            var unitTypes = await _unitOfWork.BodyMeasurements.AllAsync();
             viewModel.UnitTypeSelectList = new SelectList(
                 unitTypes, nameof(UnitType.Id), nameof(UnitType.Name), viewModel.DailyNutritionIntake.UnitTypeId);
             return View(viewModel);
@@ -129,7 +129,7 @@ namespace WebApplication.Controllers
                 return NotFound();
             }
 
-            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(id, User.UserId());
             if (dailyNutritionIntake == null)
             {
                 return NotFound();
@@ -142,7 +142,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindAsync(id);
+            var dailyNutritionIntake = await _unitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(id, User.UserId());
+            if (dailyNutritionIntake == null)
+            {
+                return NotFound();
+            }
             _unitOfWork.DailyNutritionIntakes.Remove(dailyNutritionIntake);
             await _unitOfWork.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
