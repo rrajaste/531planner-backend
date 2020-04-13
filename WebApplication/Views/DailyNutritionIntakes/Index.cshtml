@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.LoggedAt)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Calories)
             </th>
             <th>
@@ -28,46 +31,38 @@
             <th>
                 @Html.DisplayNameFor(model => model.UnitType)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
             
-            <th>
-                @Html.DisplayNameFor(model => model.Comment)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calories)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Protein)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Carbohydrates)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">@Resources.Views.DailyNutritionIntakes.Index.Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">@Resources.Views.DailyNutritionIntakes.Index.Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">@Resources.Views.DailyNutritionIntakes.Index.Remove</a>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoggedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Calories)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Protein)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fats)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Carbohydrates)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitType.Name)
+        </td>
+
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">@Resources.Views.DailyNutritionIntakes.Index.Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Id">@Resources.Views.DailyNutritionIntakes.Index.Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Id">@Resources.Views.DailyNutritionIntakes.Index.Remove</a>
+        </td>
+    </tr>
 }
     </tbody>
 </table>

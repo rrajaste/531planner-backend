@@ -4,7 +4,7 @@
     ViewData["Title"] = @Resources.Views.BodyMeasurements.Index.Title;
 }
 
-<h1>@Resources.Views.BodyMeasurements.Index.BodyMeasurement;</h1>
+<h1>@Resources.Views.BodyMeasurements.Index.BodyMeasurements</h1>
 
 <p>
     <a asp-action="Create">@Resources.Views.BodyMeasurements.Index.CreateNew</a>
@@ -13,7 +13,7 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
+            @Html.DisplayNameFor(model => model.LoggedAt)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Weight)
@@ -47,7 +47,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
+            @Html.DisplayFor(modelItem => item.LoggedAt)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Weight)
