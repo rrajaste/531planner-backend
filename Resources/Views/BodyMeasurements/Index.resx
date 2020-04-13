@@ -123,6 +123,9 @@
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="BodyMeasurements" xml:space="preserve">
+    <value>Body measurements</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>

@@ -126,4 +126,7 @@
   <data name="RoutineType" xml:space="preserve">
     <value>Routine type</value>
   </data>
+  <data name="TrainingCycles" xml:space="preserve">
+    <value>Training cycles</value>
+  </data>
 </root>

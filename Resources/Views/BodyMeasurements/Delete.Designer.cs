@@ -8,28 +8,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Domain {
+namespace Resources.Views.BodyMeasurements {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class BodyMeasurement {
+    public class Delete {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal BodyMeasurement() {
+        internal Delete() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Domain.BodyMeasurement", typeof(BodyMeasurement).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.BodyMeasurements.Delete", typeof(Delete).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -46,57 +46,21 @@ namespace Resources.Domain {
             }
         }
         
-        public static string Arm {
+        public static string BackToList {
             get {
-                return ResourceManager.GetString("Arm", resourceCulture);
+                return ResourceManager.GetString("BackToList", resourceCulture);
             }
         }
         
-        public static string BodyFatPercentage {
+        public static string ConfirmationText {
             get {
-                return ResourceManager.GetString("BodyFatPercentage", resourceCulture);
+                return ResourceManager.GetString("ConfirmationText", resourceCulture);
             }
         }
         
-        public static string Chest {
+        public static string Title {
             get {
-                return ResourceManager.GetString("Chest", resourceCulture);
-            }
-        }
-        
-        public static string Height {
-            get {
-                return ResourceManager.GetString("Height", resourceCulture);
-            }
-        }
-        
-        public static string Hip {
-            get {
-                return ResourceManager.GetString("Hip", resourceCulture);
-            }
-        }
-        
-        public static string UnitType {
-            get {
-                return ResourceManager.GetString("UnitType", resourceCulture);
-            }
-        }
-        
-        public static string Waist {
-            get {
-                return ResourceManager.GetString("Waist", resourceCulture);
-            }
-        }
-        
-        public static string Weight {
-            get {
-                return ResourceManager.GetString("Weight", resourceCulture);
-            }
-        }
-        
-        public static string LoggedAt {
-            get {
-                return ResourceManager.GetString("LoggedAt", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

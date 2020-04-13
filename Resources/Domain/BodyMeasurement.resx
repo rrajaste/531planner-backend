@@ -121,7 +121,7 @@
     <value>Arm</value>
   </data>
   <data name="BodyFatPercentage" xml:space="preserve">
-    <value>BodyFatPercentage</value>
+    <value>Body fat percentage</value>
   </data>
   <data name="Chest" xml:space="preserve">
     <value>Chest</value>
@@ -140,5 +140,8 @@
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
+  </data>
+  <data name="LoggedAt" xml:space="preserve">
+    <value>Logged at</value>
   </data>
 </root>

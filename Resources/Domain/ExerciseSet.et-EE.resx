@@ -144,4 +144,7 @@
   <data name="WorkoutRoutine" xml:space="preserve">
     <value>Treeningkava</value>
   </data>
+  <data name="SetNumber" xml:space="preserve">
+    <value>Seeria number</value>
+  </data>
 </root>

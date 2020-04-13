@@ -144,4 +144,7 @@
   <data name="WorkoutRoutine" xml:space="preserve">
     <value>WorkoutRoutine</value>
   </data>
+  <data name="SetNumber" xml:space="preserve">
+    <value>Set number</value>
+  </data>
 </root>

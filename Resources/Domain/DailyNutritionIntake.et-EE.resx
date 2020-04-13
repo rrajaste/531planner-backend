@@ -132,4 +132,7 @@
   <data name="UnitType" xml:space="preserve">
     <value>Mõõtühikud</value>
   </data>
+  <data name="LoggedAt" xml:space="preserve">
+    <value>Sissekande kuupäev</value>
+  </data>
 </root>

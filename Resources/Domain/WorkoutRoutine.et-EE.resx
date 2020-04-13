@@ -126,4 +126,7 @@
   <data name="RoutineType" xml:space="preserve">
     <value>Kava tüüp</value>
   </data>
+  <data name="TrainingCycles" xml:space="preserve">
+    <value>Treeningtsüklid</value>
+  </data>
 </root>

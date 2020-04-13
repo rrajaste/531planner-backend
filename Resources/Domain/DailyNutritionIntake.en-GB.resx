@@ -132,4 +132,7 @@
   <data name="UnitType" xml:space="preserve">
     <value>Unit type</value>
   </data>
+  <data name="LoggedAt" xml:space="preserve">
+    <value>Logged at</value>
+  </data>
 </root>

@@ -117,31 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Arm" xml:space="preserve">
-    <value>Arm</value>
+  <data name="BackToList" xml:space="preserve">
+    <value>Tagasi nimekirja</value>
   </data>
-  <data name="BodyFatPercentage" xml:space="preserve">
-    <value>Body fat percentage</value>
+  <data name="ConfirmationText" xml:space="preserve">
+    <value>Olete kindel, et soovite selle eemaldada?</value>
   </data>
-  <data name="Chest" xml:space="preserve">
-    <value>Chest</value>
-  </data>
-  <data name="Height" xml:space="preserve">
-    <value>Height</value>
-  </data>
-  <data name="Hip" xml:space="preserve">
-    <value>Hip</value>
-  </data>
-  <data name="UnitType" xml:space="preserve">
-    <value>Unit type</value>
-  </data>
-  <data name="Waist" xml:space="preserve">
-    <value>Waist</value>
-  </data>
-  <data name="Weight" xml:space="preserve">
-    <value>Weight</value>
-  </data>
-  <data name="LoggedAt" xml:space="preserve">
-    <value>Sissekande kuupäev</value>
+  <data name="Title" xml:space="preserve">
+    <value>Eemalda</value>
   </data>
 </root>

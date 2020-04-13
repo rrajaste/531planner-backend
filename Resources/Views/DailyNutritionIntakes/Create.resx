@@ -120,10 +120,11 @@
   <data name="BackToList" xml:space="preserve">
     <value>Back to list</value>
   </data>
-  <data name="BodyMeasurement" xml:space="preserve">
-    <value>Body measurement</value>
-  </data>
   <data name="Title" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="DailyNutritionIntakes" xml:space="preserve">
+    <value>Daily nutrition intake</value>
+  </data>
+  
 </root>
