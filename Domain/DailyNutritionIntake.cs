@@ -23,7 +23,9 @@ namespace Domain
 
         [Display(Name = nameof(Carbohydrates), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
         public int? Carbohydrates { get; set; }
-        
+
+        [Display(Name = nameof(LoggedAt), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
+        public DateTime LoggedAt => CreatedAt.Date;
         
         public Guid? AppUserId { get; set; }
 
