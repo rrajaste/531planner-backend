@@ -29,7 +29,9 @@ namespace WebApplication.Areas.Admin.Controllers
             var viewModels = users.Select(u => new AppUserIndexViewModel()
             {
                 UserName = u.UserName,
-                Email = u.Email
+                Email = u.Email,
+                Roles = string.Join(", ", _userManager.GetRolesAsync(u).Result),
+                IsLocked = u.LockoutEnd
             });
             return View(viewModels);
         }
@@ -47,7 +49,17 @@ namespace WebApplication.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(appUser);
+            var viewModel = new AppUserDetailsViewModel()
+            {
+                CreatedAt = appUser.CreatedAt,
+                Email = appUser.Email,
+                EmailConfirmed = appUser.EmailConfirmed,
+                LockoutEnabled = appUser.LockoutEnabled,
+                PhoneNumber = appUser.PhoneNumber ?? "Unknown",
+                PhoneNumberConfirmed = appUser.PhoneNumberConfirmed,
+                UserName = appUser.UserName
+            };
+            return View(viewModel);
         }
 
         // GET: Admin/Users/Create

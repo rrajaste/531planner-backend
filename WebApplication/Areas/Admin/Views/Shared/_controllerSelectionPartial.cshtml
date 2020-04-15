@@ -1,8 +1,28 @@
 <ul class="navbar-nav">
-    <li>
-        <a class="nav-link text-dark" asp-area="Admin" asp-route="/" title="Manage">Accounts<span class="caret"></span></a>
+    <li class="nav-item dropdown">
+        <a class="nav-link" aria-haspopup="true" aria-expanded="false">Routines</a>
     </li>
-    <li>
-        <a class="nav-link text-dark" asp-area="Admin" asp-route="/" title="Manage">Content</a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuAccounts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Accounts
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" asp-area="admin" asp-controller="AppUsers">Users</a>
+            <a class="dropdown-item">Roles</a>
+        </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Data
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" asp-area="admin" asp-controller="Muscles">Muscles</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="MuscleGroups">Muscle groups</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="Exercises">Exercises</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="ExerciseTypes">Exercise types</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="RoutineTypes">Routine types</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="TrainingDayTypes">Trainig day types</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="UnitTypes">Unit types</a>
+        </div>
     </li>
 </ul>

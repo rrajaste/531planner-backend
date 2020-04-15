@@ -1,10 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL;
+using Contracts.BLL.App;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
 using DAL.App.EF;
@@ -43,6 +44,7 @@ namespace WebApplication
                     Configuration.GetConnectionString("MsSqlConnection")));
             
             services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
+            services.AddScoped<IAppBLL, AppBLL>();
 
 
             services.AddIdentity<AppUser, AppUserRole>()

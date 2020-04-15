@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using App.DTO;
 using Contracts.BLL.App;
+using Contracts.BLL.App.Services;
 using Domain;
 
 namespace BLL

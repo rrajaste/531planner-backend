@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Contracts.DAL.Base;
+using Contracts.DAL.Base.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Base.EF
 {
-    public class EFBaseUnitOfWork<TDbContext> : BaseUnitOfWork, IBaseUnitOfWork
+    public class EFBaseUnitOfWork<TDbContext> : BaseUnitOfWork
         where TDbContext : DbContext
     {
         protected TDbContext UnitOfWorkDbContext;
@@ -16,12 +16,12 @@ namespace DAL.Base.EF
             UnitOfWorkDbContext = unitOfWorkDbContext;
         }
 
-        public int SaveChanges()
+        public override int SaveChanges()
         {
             return UnitOfWorkDbContext.SaveChanges();
         }
 
-        public Task<int> SaveChangesAsync()
+        public override Task<int> SaveChangesAsync()
         {
             return UnitOfWorkDbContext.SaveChangesAsync();
         }

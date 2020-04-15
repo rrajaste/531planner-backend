@@ -5,9 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\App.DTO\App.DTO.csproj" />
       <ProjectReference Include="..\Contracts.BLL.Base\Contracts.BLL.Base.csproj" />
-      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="9.0.0" />
     </ItemGroup>
 
 </Project>

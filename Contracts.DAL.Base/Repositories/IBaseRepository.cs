@@ -16,8 +16,6 @@ namespace Contracts.DAL.Base.Repositories
     {
         IEnumerable<TEntity> All();
         Task<IEnumerable<TEntity>> AllAsync();
-        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>>? filter = null);
-        Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null);
         TEntity Find(TKey? id);
         Task<TEntity> FindAsync(TKey? id);
         TEntity Add(TEntity entity);
