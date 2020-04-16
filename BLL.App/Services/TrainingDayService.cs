@@ -11,7 +11,7 @@ namespace BLL.Services
 {
     public class TrainingDayService : BaseEntityService<ITrainingDayRepository, IAppUnitOfWork, TrainingDay, TrainingDay>, ITrainingDayService 
     {
-        public TrainingDayService(AppUnitOfWork unitOfWork) 
+        public TrainingDayService(IAppUnitOfWork unitOfWork) 
             : base(unitOfWork, new BaseBLLMapper<TrainingDay, TrainingDay>(), unitOfWork.TrainingDays)
         {
         }

@@ -2,13 +2,14 @@ using BLL.Base;
 using BLL.Services;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Services;
+using Contracts.DAL.App;
 using DAL.App.EF;
 
 namespace BLL
 {
-    public class AppBLL : BaseBLL<AppUnitOfWork>, IAppBLL
+    public class AppBLL : BaseBLL<IAppUnitOfWork>, IAppBLL
     {
-        public AppBLL(AppUnitOfWork unitOfWork) : base(unitOfWork)
+        public AppBLL(IAppUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
 

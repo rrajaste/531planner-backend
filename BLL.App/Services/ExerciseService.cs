@@ -10,7 +10,7 @@ namespace BLL.Services
 {
     public class ExerciseService : BaseEntityService<IExerciseRepository, IAppUnitOfWork, Exercise, Exercise>, IExerciseService 
     {
-        public ExerciseService(AppUnitOfWork unitOfWork) 
+        public ExerciseService(IAppUnitOfWork unitOfWork) 
             : base(unitOfWork, new BaseBLLMapper<Exercise, Exercise>(), unitOfWork.Exercises)
         {
         }

@@ -11,7 +11,7 @@ namespace BLL.Services
 {
     public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork, WorkoutRoutine, WorkoutRoutine>, IWorkoutRoutineService 
     {
-        public WorkoutRoutineService(AppUnitOfWork unitOfWork) 
+        public WorkoutRoutineService(IAppUnitOfWork unitOfWork) 
             : base(unitOfWork, new BaseBLLMapper<WorkoutRoutine, WorkoutRoutine>(), unitOfWork.WorkoutRoutines)
         {
         }

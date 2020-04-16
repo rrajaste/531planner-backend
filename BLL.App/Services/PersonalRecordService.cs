@@ -11,7 +11,7 @@ namespace BLL.Services
 {
     public class PersonalRecordService : BaseEntityService<IPersonalRecordRepository, IAppUnitOfWork, PersonalRecord, PersonalRecord>, IPersonalRecordService 
     {
-        public PersonalRecordService(AppUnitOfWork unitOfWork) 
+        public PersonalRecordService(IAppUnitOfWork unitOfWork) 
             : base(unitOfWork, new BaseBLLMapper<PersonalRecord, PersonalRecord>(), unitOfWork.PersonalRecords)
         {
         }
