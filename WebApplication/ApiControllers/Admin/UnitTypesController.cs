@@ -13,7 +13,9 @@ using PublicApi.DTO.V1.UnitType;
 
 namespace WebApplication.ApiControllers.Admin
 {
-    [Route("api/admin/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/admin/[controller]")]
+
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
     [ApiController]
     public class UnitTypesController : ControllerBase

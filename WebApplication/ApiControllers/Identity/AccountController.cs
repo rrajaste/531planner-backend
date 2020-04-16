@@ -11,7 +11,8 @@ using PublicApi.DTO.V1.Account;
 namespace WebApplication.ApiControllers.Identity
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
 
     public class AccountController : ControllerBase
     {

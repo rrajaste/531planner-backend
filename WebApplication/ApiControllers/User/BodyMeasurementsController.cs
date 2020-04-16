@@ -14,7 +14,9 @@ using PublicApi.DTO.V1.UnitType;
 
 namespace WebApplication.ApiControllers.User
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user")]
     [ApiController]
     public class BodyMeasurementsController : ControllerBase
