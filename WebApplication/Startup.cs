@@ -19,12 +19,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using WebApplication.Helpers;
 
 namespace WebApplication
 {
@@ -108,10 +111,15 @@ namespace WebApplication
             {
                 options.ReportApiVersions = true;
             });
+            
+            services.AddVersionedApiExplorer( options => options.GroupNameFormat = "'v'VVV" );
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
 
             UpdateDatabase(app, env, Configuration);
@@ -138,6 +146,19 @@ namespace WebApplication
 
             app.UseRouting();
             app.UseCors("CorsAllowAll"); 
+            
+            app.UseSwagger();
+                        app.UseSwaggerUI(
+                            options =>
+                            {
+                                foreach ( var description in provider.ApiVersionDescriptions )
+                                {
+                                    options.SwaggerEndpoint(
+                                        $"/swagger/{description.GroupName}/swagger.json",
+                                        description.GroupName.ToUpperInvariant() );
+                                }
+                            } );
+
 
             app.UseAuthentication();
             app.UseAuthorization();
