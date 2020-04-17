@@ -8,7 +8,7 @@ namespace DAL.App.DTO.Identity
     }
     
     public class AppUser<TKey> : IDomainBaseEntity<TKey> 
-        where TKey : struct, IEquatable<TKey>
+        where TKey : IEquatable<TKey>
     {
         public TKey Id { get; set; }
         public string UserName { get; set; } = default!;

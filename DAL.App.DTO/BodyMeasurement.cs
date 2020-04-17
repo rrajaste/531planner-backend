@@ -1,5 +1,4 @@
 ﻿using System;
-using Contracts.DAL.App;
 using Contracts.DAL.Base;
 
 namespace DAL.App.DTO
@@ -9,9 +8,9 @@ namespace DAL.App.DTO
     }
     
     public class BodyMeasurement<TKey> : IDALBaseDTO<TKey>
-        where TKey : struct, IEquatable<TKey>
+        where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; }
+        public TKey Id { get; set; } = default!;
         public int Weight { get; set; }
         public int Height { get; set; }
         public int? Chest { get; set; }

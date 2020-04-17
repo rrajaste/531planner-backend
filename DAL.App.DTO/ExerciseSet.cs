@@ -1,5 +1,6 @@
 using System;
 using Contracts.DAL.App;
+using Contracts.DAL.Base;
 
 namespace DAL.App.DTO
 {
@@ -9,9 +10,9 @@ namespace DAL.App.DTO
     }
 
     public class ExerciseSet<TKey> : IDALBaseDTO<TKey> 
-        where TKey : struct, IEquatable<TKey>
+        where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; }
+        public TKey Id { get; set; } = default!;
         public int SetNumber { get; set; } = default!;
         public bool Completed { get; set; } = default!;
         public int? NrOfReps { get; set; }

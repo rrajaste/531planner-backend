@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Contracts.DAL.App;
+using Contracts.DAL.Base;
 
 namespace DAL.App.DTO
 {
@@ -9,10 +10,10 @@ namespace DAL.App.DTO
     }
 
     public class TrainingCycle<TKey> : IDALBaseDTO<TKey> 
-        where TKey : struct, IEquatable<TKey>
+        where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; }
-        public TKey WorkoutRoutineId { get; set; }
+        public TKey Id { get; set; } = default!;
+        public TKey WorkoutRoutineId { get; set; } = default!;
         public int CycleNumber { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime? EndingDate { get; set; }
