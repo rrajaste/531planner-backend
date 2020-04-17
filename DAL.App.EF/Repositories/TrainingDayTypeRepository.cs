@@ -4,7 +4,8 @@ using Domain;
 
 namespace DAL.App.EF.Repositories
 {
-    public class TrainingDayTypeRepository : EFBaseRepository<TrainingDayType, AppDbContext>, ITrainingDayTypeRepository
+    public class TrainingDayTypeRepository : EFBaseRepository<AppDbContext, Domain.TrainingDayType, DAL.App.DTO.TrainingDayType>
+        , ITrainingDayTypeRepository
     {
         public TrainingDayTypeRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {

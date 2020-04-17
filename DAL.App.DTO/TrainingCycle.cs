@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Contracts.DAL.App;
 using Contracts.DAL.Base;
 
 namespace DAL.App.DTO

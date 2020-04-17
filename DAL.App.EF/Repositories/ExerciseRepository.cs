@@ -4,7 +4,7 @@ using Domain;
 
 namespace DAL.App.EF.Repositories
 {
-    public class ExerciseRepository : EFBaseRepository<Exercise, AppDbContext>, IExerciseRepository
+    public class ExerciseRepository : EFBaseRepository<AppDbContext, Domain.Exercise, DAL.App.DTO.Exercise>, IExerciseRepository
     {
         public ExerciseRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {

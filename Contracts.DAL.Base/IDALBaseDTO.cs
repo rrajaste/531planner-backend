@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 
 namespace Contracts.DAL.Base
 {
-    public interface IDomainBaseEntity : IDomainBaseEntity<Guid>
+    
+    public interface IDALBaseDTO : IDALBaseDTO<Guid>
     {
     }
-
-    public interface IDomainBaseEntity<TKey> 
+    
+    public interface IDALBaseDTO<TKey> 
         where TKey : IEquatable<TKey>
     {
         public TKey Id { get; set; }

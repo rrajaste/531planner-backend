@@ -28,6 +28,9 @@
               "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
                 "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj"
               },
+              "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj": {
+                "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj"
+              },
               "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/Domain.csproj": {
                 "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/Domain.csproj"
               },
@@ -96,11 +99,69 @@
       "frameworks": {
         "netstandard2.1": {
           "dependencies": {
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[3.1.2, )"
+            },
             "System.ComponentModel.Annotations": {
               "target": "Package",
               "version": "[4.7.0, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj",
+        "projectName": "DAL.App.DTO",
+        "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj",
+        "packagesPath": "/home/ranno/.nuget/packages/",
+        "outputPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ranno/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
+                "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
           "imports": [
             "net461",
             "net462",
@@ -143,6 +204,9 @@
             "projectReferences": {
               "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.App/Contracts.DAL.App.csproj": {
                 "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.App/Contracts.DAL.App.csproj"
+              },
+              "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj": {
+                "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj"
               },
               "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/DAL.Base.EF.csproj": {
                 "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base.EF/DAL.Base.EF.csproj"
@@ -223,6 +287,9 @@
         "frameworks": {
           "netstandard2.1": {
             "projectReferences": {
+              "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.App/Contracts.DAL.App.csproj": {
+                "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.App/Contracts.DAL.App.csproj"
+              },
               "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
                 "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj"
               },
@@ -241,6 +308,10 @@
       "frameworks": {
         "netstandard2.1": {
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.2, )"
@@ -345,6 +416,9 @@
               },
               "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base/DAL.Base.csproj": {
                 "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base/DAL.Base.csproj"
+              },
+              "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/Resources.csproj": {
+                "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/Resources.csproj"
               }
             }
           }
@@ -427,6 +501,56 @@
               "version": "[4.7.0, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/Resources.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/Resources.csproj",
+        "projectName": "Resources",
+        "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/Resources.csproj",
+        "packagesPath": "/home/ranno/.nuget/packages/",
+        "outputPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/ranno/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
           "imports": [
             "net461",
             "net462",

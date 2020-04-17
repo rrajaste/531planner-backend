@@ -361,6 +361,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
+          "Microsoft.Extensions.Identity.Stores": "3.1.2",
           "System.ComponentModel.Annotations": "4.7.0"
         },
         "compile": {
@@ -368,6 +369,19 @@
         },
         "runtime": {
           "bin/placeholder/Contracts.DAL.Base.dll": {}
+        }
+      },
+      "DAL.App.DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Contracts.DAL.Base": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DAL.App.DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DAL.App.DTO.dll": {}
         }
       },
       "DAL.Base/1.0.0": {
@@ -390,6 +404,7 @@
           "Contracts.DAL.Base": "1.0.0",
           "DAL.Base": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.2",
+          "Resources": "1.0.0",
           "System.ComponentModel.Annotations": "4.7.0"
         },
         "compile": {
@@ -411,6 +426,16 @@
         },
         "runtime": {
           "bin/placeholder/PublicApi.DTO.V1.dll": {}
+        }
+      },
+      "Resources/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Resources.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Resources.dll": {}
         }
       }
     }
@@ -1072,6 +1097,11 @@
       "path": "../Contracts.DAL.Base/Contracts.DAL.Base.csproj",
       "msbuildProject": "../Contracts.DAL.Base/Contracts.DAL.Base.csproj"
     },
+    "DAL.App.DTO/1.0.0": {
+      "type": "project",
+      "path": "../DAL.App.DTO/DAL.App.DTO.csproj",
+      "msbuildProject": "../DAL.App.DTO/DAL.App.DTO.csproj"
+    },
     "DAL.Base/1.0.0": {
       "type": "project",
       "path": "../DAL.Base/DAL.Base.csproj",
@@ -1086,11 +1116,17 @@
       "type": "project",
       "path": "../PublicApi.DTO.V1/PublicApi.DTO.V1.csproj",
       "msbuildProject": "../PublicApi.DTO.V1/PublicApi.DTO.V1.csproj"
+    },
+    "Resources/1.0.0": {
+      "type": "project",
+      "path": "../Resources/Resources.csproj",
+      "msbuildProject": "../Resources/Resources.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
       "Contracts.DAL.Base >= 1.0.0",
+      "DAL.App.DTO >= 1.0.0",
       "Domain >= 1.0.0",
       "PublicApi.DTO.V1 >= 1.0.0"
     ]
@@ -1121,6 +1157,9 @@
           "projectReferences": {
             "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
               "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj"
+            },
+            "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj": {
+              "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj"
             },
             "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/Domain.csproj": {
               "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/Domain.csproj"

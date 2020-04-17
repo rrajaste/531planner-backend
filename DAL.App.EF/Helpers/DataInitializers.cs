@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Contracts.DAL.Base;
 using DAL.Base;
 using Domain;
 using Domain.Identity;
@@ -85,7 +86,7 @@ namespace DAL.App.EF.Helpers
         }
 
         private static void SeedDomainEntity<TEntity>(DbSet<TEntity> dbSet, string filePath)
-            where TEntity : DomainEntity
+            where TEntity : class, IDomainEntityBaseMetadata
         {
             dbSet.AddRange(GetSeedObjectsList<TEntity>(filePath));
         }

@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
-using Domain;
-using PublicApi.DTO.V1;
+using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IBodyMeasurementRepository : IBaseRepository<BodyMeasurement>
+    public interface IBodyMeasurementRepository : IBodyMeasurementRepository<Guid, BodyMeasurement>
     {
-        Task<IEnumerable<BodyMeasurement>> AllWithAppUserIdAsync (Guid id);
-        Task<BodyMeasurement> FindWithAppUserIdAsync(Guid? id, Guid appUserId);
+    }
+    
+    public interface IBodyMeasurementRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
+        where TEntity : class, IDALBaseDTO<TKey>, new() 
+        where TKey : IEquatable<TKey>
+    {
+        Task<IEnumerable<TEntity>> AllWithAppUserIdAsync (TKey id);
+        Task<TEntity> FindWithAppUserIdAsync(TKey id, TKey appUserId);
     }
 }

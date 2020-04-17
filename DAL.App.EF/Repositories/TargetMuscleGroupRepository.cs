@@ -4,7 +4,7 @@ using Domain;
 
 namespace DAL.App.EF.Repositories
 {
-    public class TargetMuscleGroupRepository : EFBaseRepository<TargetMuscleGroup, AppDbContext>,
+    public class TargetMuscleGroupRepository : EFBaseRepository<AppDbContext, Domain.TargetMuscleGroup, DAL.App.DTO.TargetMuscleGroup>,
         ITargetMuscleGroupRepository
     {
         public TargetMuscleGroupRepository(AppDbContext repoDbContext) : base(repoDbContext)

@@ -4,7 +4,8 @@ using Domain;
 
 namespace DAL.App.EF.Repositories
 {
-    public class PersonalRecordRepository : EFBaseRepository<PersonalRecord, AppDbContext>, IPersonalRecordRepository
+    public class PersonalRecordRepository : EFBaseRepository<AppDbContext, Domain.PersonalRecord, DAL.App.DTO.PersonalRecord>,
+        IPersonalRecordRepository
     {
         public PersonalRecordRepository(AppDbContext dbContext) : base(dbContext)
         {

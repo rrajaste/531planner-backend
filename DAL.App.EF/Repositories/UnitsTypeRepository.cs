@@ -11,7 +11,7 @@ using PublicApi.DTO.V1;
 
 namespace DAL.App.EF.Repositories
 {
-    public class UnitTypesRepository : EFBaseRepository<UnitType, AppDbContext>, IUnitTypesRepository
+    public class UnitTypesRepository : EFBaseRepository<AppDbContext, Domain.UnitType, DAL.App.DTO.UnitType>, IUnitTypesRepository
     {
         public UnitTypesRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {

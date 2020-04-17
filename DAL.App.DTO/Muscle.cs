@@ -1,5 +1,5 @@
 using System;
-using Contracts.DAL.App;
+
 using Contracts.DAL.Base;
 
 namespace DAL.App.DTO

@@ -4,7 +4,8 @@ using Domain;
 
 namespace DAL.App.EF.Repositories
 {
-    public class RoutineTypeRepository : EFBaseRepository<RoutineType, AppDbContext>, IRoutineTypeRepository
+    public class RoutineTypeRepository : EFBaseRepository<AppDbContext, Domain.RoutineType, DAL.App.DTO.RoutineType>,
+        IRoutineTypeRepository
     {
         public RoutineTypeRepository(AppDbContext repoDbContext) : base(repoDbContext)
         {

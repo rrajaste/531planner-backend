@@ -1,8 +1,5 @@
 using System;
-using System.ComponentModel.DataAnnotations;
-using Contracts.DAL.App;
 using Contracts.DAL.Base;
-using DAL.Base;
 
 namespace DAL.App.DTO
 {

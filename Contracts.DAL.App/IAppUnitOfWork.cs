@@ -1,7 +1,4 @@
-using System;
-using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
-using Contracts.DAL.App.Repositories.Identity;
 using Contracts.DAL.Base;
 
 
@@ -9,8 +6,6 @@ namespace Contracts.DAL.App
 {
     public interface IAppUnitOfWork : IBaseUnitOfWork
     {
-        IAppUserRepository AppUsers { get; }
-        IAppUserRoleRepository AppUserRoles { get; }
         IBodyMeasurementRepository BodyMeasurements { get; }
         IDailyNutritionIntakeRepository DailyNutritionIntakes { get; }
         IPersonalRecordRepository PersonalRecords { get; }

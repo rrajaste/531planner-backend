@@ -1,20 +1,23 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
-using Domain;
+using DAL.App.DTO;
+
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IWorkoutRoutineRepository : IBaseRepository<WorkoutRoutine>
+    public interface IWorkoutRoutineRepository : IWorkoutRoutineRepository<Guid, WorkoutRoutine>
     {
-        // TODO: Abstract the key type
-        WorkoutRoutine ActiveRoutineForUserId(Guid id);
-        Task<WorkoutRoutine> ActiveRoutineForUserIdAsync(Guid id);
-        IEnumerable<WorkoutRoutine> AllNonActiveRoutinesForUserId(Guid id);
-        Task<IEnumerable<WorkoutRoutine>> AllNonActiveRoutinesForUserIdAsync(Guid id);
-        IEnumerable<WorkoutRoutine> AllBaseRoutines();
-        Task<IEnumerable<WorkoutRoutine>> AllBaseRoutinesAsync();
+    }
+
+    public interface IWorkoutRoutineRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
+        where TEntity : class, IDALBaseDTO<TKey>, new() 
+        where TKey : IEquatable<TKey>
+    {
+        Task<TEntity> ActiveRoutineForUserIdAsync(TKey id);
+        Task<IEnumerable<TEntity>> AllNonActiveRoutinesForUserIdAsync(TKey id);
+        Task<IEnumerable<TEntity>> AllBaseRoutinesAsync();
     }
 }
