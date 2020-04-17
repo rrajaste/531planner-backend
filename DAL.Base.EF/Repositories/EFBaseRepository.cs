@@ -1,92 +1,70 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
+using DAL.Base.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Base.EF.Repositories
 {
-    public class EFBaseRepository<TEntity, TDbContext> : EFBaseRepository<TEntity, Guid, TDbContext>, IBaseRepository<TEntity>
-        where TEntity : class, IDomainEntity<Guid>, new()
+    public class EFBaseRepository<TDbContext, TDomainEntity, TDALEntity> :
+        EFBaseRepository<Guid, TDbContext, TDomainEntity, TDALEntity>,
+        IBaseRepository<TDALEntity>
+    
+        where TDomainEntity : class, IDomainEntityBaseMetadata<Guid>, new()
+        where TDALEntity : class, IDALBaseDTO<Guid>, new()
         where TDbContext: DbContext
     {
-        public EFBaseRepository(TDbContext dbContext) : base(dbContext)
+        public EFBaseRepository(TDbContext dbContext, IBaseDALMapper<TDomainEntity, TDALEntity> mapper) : base(dbContext, mapper)
         {
         }
     }
-
-    public class EFBaseRepository<TEntity, TKey, TDbContext> : IBaseRepository<TEntity, TKey>
-        where TEntity : class, IDomainEntity<TKey>, new()
-        where TKey : struct, IEquatable<TKey>
+ 
+    public class EFBaseRepository<TKey, TDbContext, TDomainEntity, TDALEntity> : IBaseRepository<TKey, TDALEntity>
+        where TDALEntity : class, IDALBaseDTO<TKey>, new()
+        where TDomainEntity : class, IDomainEntityBaseMetadata<TKey>, new()
+        where TKey : IEquatable<TKey>
         where TDbContext: DbContext
     {
+        protected IBaseDALMapper<TDomainEntity, TDALEntity> Mapper; 
         protected TDbContext RepoDbContext;
-        protected DbSet<TEntity> RepoDbSet;
-        public EFBaseRepository(TDbContext dbContext)
+        protected DbSet<TDomainEntity> RepoDbSet;
+        
+        public EFBaseRepository(TDbContext dbContext, IBaseDALMapper<TDomainEntity, TDALEntity> mapper)
         {
             RepoDbContext = dbContext;
-            RepoDbSet = RepoDbContext.Set<TEntity>();
+            Mapper = mapper;
+            RepoDbSet = RepoDbContext.Set<TDomainEntity>();
             if (RepoDbSet == null)
             {
-               throw new ArgumentNullException(typeof(TEntity).Name + " was not found as DBSet!");
+               throw new ArgumentNullException(typeof(TDALEntity).Name + " was not found as DBSet!");
             }
         }
         
-        public virtual IEnumerable<TEntity> All()
-        {
-            return RepoDbSet.ToList();
-        }
-
-        public virtual async Task<IEnumerable<TEntity>> AllAsync()
-        {
-            return await RepoDbSet.ToListAsync();
-        }
-
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>>? filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<TEntity>> GetAsync(Expression<Func<TEntity, bool>>? filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual TEntity Find(TKey? id)
-        {
-            return RepoDbSet.Find(id);
-        }
-
-        public virtual async Task<TEntity> FindAsync(TKey? id)
-        {
-            return await RepoDbSet.FindAsync(id);
-        }
-
-        public virtual TEntity Add(TEntity entity)
-        {
-            return RepoDbSet.Add(entity).Entity;
-        }
-
-        public virtual TEntity Update(TEntity entity)
-        {
-            return RepoDbSet.Update(entity).Entity;
-        }
-
-        public virtual TEntity Remove(TEntity entity)
-        {
-            return RepoDbSet.Remove(entity).Entity;
-        }
-
-        public virtual TEntity Remove(TKey? id)
-        {
-            return Remove(Find(id));
-        }
+        public virtual IEnumerable<TDALEntity> All() =>
+            RepoDbSet.ToList().Select(domainEntity => Mapper.Map(domainEntity));
         
-        
+        public virtual async Task<IEnumerable<TDALEntity>> AllAsync() =>
+            (await RepoDbSet.ToListAsync()).Select(domainEntity => Mapper.Map(domainEntity));
 
+        public virtual TDALEntity Find(TKey id) 
+            => Mapper.Map(RepoDbSet.Find(id));
+
+        public virtual async Task<TDALEntity> FindAsync(TKey id) =>
+            Mapper.Map(await RepoDbSet.FindAsync(id));
+        
+        public virtual TDALEntity Add(TDALEntity entity) => 
+            Mapper.Map(RepoDbSet.Add(Mapper.Map<TDALEntity, TDomainEntity>(entity)).Entity);
+        
+        public virtual TDALEntity Update(TDALEntity entity) => 
+            Mapper.Map(RepoDbSet.Update(Mapper.Map<TDALEntity, TDomainEntity>(entity)).Entity);
+
+        public virtual TDALEntity Remove(TDALEntity entity) => 
+            Mapper.Map(RepoDbSet.Remove(Mapper.Map<TDALEntity, TDomainEntity>(entity)).Entity);
+
+        public virtual TDALEntity Remove(TKey id) => Remove(Find(id));
     }
     
 }
