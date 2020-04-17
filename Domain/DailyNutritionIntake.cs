@@ -7,7 +7,12 @@ using Domain.Identity;
 
 namespace Domain
 {
-    public class DailyNutritionIntake : DomainEntity
+    public class DailyNutritionIntake : DailyNutritionIntake<Guid>, IDomainEntityBaseMetadata
+    {
+    }
+
+    public class DailyNutritionIntake<TKey> : DomainEntityBaseMetadata<TKey>
+        where TKey : struct, IEquatable<TKey>
     {
         [Display(Name = nameof(Calories), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
         public int Calories { get; set; }
@@ -27,9 +32,10 @@ namespace Domain
         [Display(Name = nameof(LoggedAt), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
         public DateTime LoggedAt => CreatedAt.Date;
         
-        public Guid? AppUserId { get; set; }
+        public TKey? AppUserId { get; set; }
 
-        public Guid UnitTypeId { get; set; }
+        public TKey UnitTypeId { get; set; }
+        
         public AppUser? User { get; set; }
         
         

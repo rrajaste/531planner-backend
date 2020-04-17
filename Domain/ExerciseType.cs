@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Contracts.DAL.Base;
@@ -7,7 +6,12 @@ using DAL.Base;
 
 namespace Domain
 {
-    public class ExerciseType : DomainEntity
+    public class ExerciseType : ExerciseType<Guid>, IDomainEntityBaseMetadata
+    {
+    }
+
+    public class ExerciseType<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
     {
         [MaxLength(255)]
         [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.ExerciseType))]

@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Contracts.DAL.Base;
 using DAL.Base;
 using Domain.Identity;
+using Resources.Domain;
 
 namespace Domain
 {
-    public class WorkoutRoutine : DomainEntity
+    public class WorkoutRoutine : WorkoutRoutine<Guid>, IDomainEntityBaseMetadata
+    {
+    }
+
+    public class WorkoutRoutine<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
     { 
         [MaxLength(255)]
         [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public string Name { get; set; } = default!;
-        
         
         
         [MaxLength(255)]
@@ -20,8 +26,8 @@ namespace Domain
         
         
         public bool IsBaseRoutine { get; set; } = default!;
-        public Guid RoutineTypeId { get; set; } = default!;
-        public Guid? AppUserId { get; set; }
+        public TKey RoutineTypeId { get; set; } = default!;
+        public TKey? AppUserId { get; set; }
         public AppUser? User { get; set; }
         
         

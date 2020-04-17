@@ -1,10 +1,17 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Contracts.DAL.Base;
 using DAL.Base;
 
 namespace Domain
 {
-    public class ExerciseSet : DomainEntity
+    public class ExerciseSet : ExerciseSet<Guid>, IDomainEntityBaseMetadata
+    {
+        
+    }
+
+    public class ExerciseSet<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
     {
         [Display(Name = nameof(SetNumber), ResourceType = typeof(Resources.Domain.ExerciseSet))]
         public int SetNumber { get; set; } = default!;
@@ -18,10 +25,11 @@ namespace Domain
         public float? Duration { get; set; }
         [Display(Name = nameof(Distance), ResourceType = typeof(Resources.Domain.ExerciseSet))]
         public int? Distance { get; set; }
-        public Guid UnitTypeId { get; set; }
-        public Guid TrainingDayId { get; set; }
-        public Guid ExerciseId { get; set; }
-        public Guid WorkoutRoutineId { get; set; }
+
+        public TKey UnitTypeId { get; set; } = default!;
+        public TKey TrainingDayId { get; set; } = default!;
+        public TKey ExerciseId { get; set; } = default!;
+        public TKey WorkoutRoutineId { get; set; } = default!;
         
         [Display(Name = nameof(Exercise), ResourceType = typeof(Resources.Domain.ExerciseSet))]
         public Exercise? Exercise { get; set; }

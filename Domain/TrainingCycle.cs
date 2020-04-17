@@ -7,9 +7,14 @@ using DAL.Base;
 
 namespace Domain
 {
-    public class TrainingCycle : DomainEntity
+    public class TrainingCycle : TrainingCycle<Guid>, IDomainEntityBaseMetadata
     {
-        public int WorkoutRoutineId { get; set; }
+    }
+
+    public class TrainingCycle<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
+    {
+        public TKey WorkoutRoutineId { get; set; }
         
         [Display(Name = nameof(CycleNumber), ResourceType = typeof(Resources.Domain.TrainingCycle))]
         public int CycleNumber { get; set; }

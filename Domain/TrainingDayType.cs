@@ -7,7 +7,12 @@ using DAL.Base;
 
 namespace Domain
 {
-    public class TrainingDayType : DomainEntity
+    public class TrainingDayType : TrainingDayType<Guid>, IDomainEntityBaseMetadata
+    {
+    }
+
+    public class TrainingDayType<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
     {
         [MaxLength(255)]
         [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.TrainingDayType))]

@@ -1,14 +1,20 @@
 using System;
+using Contracts.DAL.Base;
 using DAL.Base;
 using Domain.Identity;
 
 namespace Domain
 {
-    public class PersonalRecord : DomainEntity
+    public class PersonalRecord : PersonalRecord<Guid>, IDomainEntityBaseMetadata
     {
-        public Guid? WorkoutRoutineId { get; set; }
-        public Guid AppUserId { get; set; }
-        public Guid ExerciseSetId { get; set; }
+    }
+
+    public class PersonalRecord<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
+    {
+        public TKey? WorkoutRoutineId { get; set; }
+        public TKey AppUserId { get; set; }
+        public TKey ExerciseSetId { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public AppUser? User { get; set; }
         public ExerciseSet? ExerciseSet { get; set; }

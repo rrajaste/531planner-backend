@@ -10,7 +10,7 @@ namespace Domain.Identity
     {
     }
 
-    public class AppUser<TKey> : IdentityUser<TKey>, IDomainEntity<TKey> 
+    public class AppUser<TKey> : IdentityUser<TKey>, IDomainEntityBaseMetadata<TKey> 
         where TKey : struct, IEquatable<TKey>
     {
         public ICollection<PersonalRecord>? PersonalRecords { get; set; } 

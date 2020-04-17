@@ -6,12 +6,18 @@ using DAL.Base;
 
 namespace Domain
 {
-    public class Exercise : DomainEntity
+    public class Exercise : Exercise<Guid>, IDomainEntityBaseMetadata
+    {
+    }
+
+    public class Exercise<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
     {
         [MaxLength(255)] public string Name { get; set; } = default!;
         [MaxLength(255)] 
         public string Description { get; set; } = default!;
-        public Guid ExerciseTypeId { get; set; }
+
+        public TKey ExerciseTypeId { get; set; } = default!;
         public ExerciseType? ExerciseType { get; set; }
         public ICollection<TargetMuscleGroup>? TargetMuscleGroups { get; set; }
     }

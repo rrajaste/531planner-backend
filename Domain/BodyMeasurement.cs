@@ -1,13 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Contracts.DAL.Base;
 using DAL.Base;
 using Domain.Identity;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Domain
 {
-    public class BodyMeasurement : DomainEntity
+    public class BodyMeasurement : BodyMeasurement<Guid>, IDomainEntityBaseMetadata
+    {
+    }
+    
+    public class BodyMeasurement<TKey> : DomainEntityBaseMetadata<TKey> 
+        where TKey : struct, IEquatable<TKey>
     {
         
         [Range(1, int.MaxValue)]
@@ -44,8 +50,8 @@ namespace Domain
         [Display(Name = nameof(BodyFatPercentage), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
         public int? BodyFatPercentage { get; set; }
 
-        public Guid AppUserId { get; set; } = default!;
-        public Guid UnitTypeId { get; set; } = default!;
+        public TKey AppUserId { get; set; } = default!;
+        public TKey UnitTypeId { get; set; } = default!;
     
         [Display(Name = nameof(LoggedAt), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
         public DateTime LoggedAt => CreatedAt.Date;
