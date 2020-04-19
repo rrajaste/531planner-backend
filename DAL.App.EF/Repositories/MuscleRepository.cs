@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
+using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace DAL.App.EF.Repositories
 {
     public class MuscleRepository : EFBaseRepository<AppDbContext, Domain.Muscle, DAL.App.DTO.Muscle>, IMuscleRepository
     {
-        public MuscleRepository(AppDbContext repoDbContext) : base(repoDbContext)
+        public MuscleRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<Muscle, DTO.Muscle>())
         {
         }
 

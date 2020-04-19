@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
+using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
@@ -11,7 +13,7 @@ namespace DAL.App.EF.Repositories
     public class WorkoutRoutineRepository : EFBaseRepository<AppDbContext, Domain.WorkoutRoutine, DAL.App.DTO.WorkoutRoutine>,
         IWorkoutRoutineRepository
     {
-        public WorkoutRoutineRepository(AppDbContext repoDbContext) : base(repoDbContext)
+        public WorkoutRoutineRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<WorkoutRoutine, DTO.WorkoutRoutine>())
         {
         }
 

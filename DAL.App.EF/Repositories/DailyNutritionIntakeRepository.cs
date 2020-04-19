@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
+using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,7 @@ namespace DAL.App.EF.Repositories
         EFBaseRepository<AppDbContext, Domain.DailyNutritionIntake, DAL.App.DTO.DailyNutritionIntake>,
         IDailyNutritionIntakeRepository
     {
-        public DailyNutritionIntakeRepository(AppDbContext repoDbContext) : base(repoDbContext)
+        public DailyNutritionIntakeRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<DailyNutritionIntake, DTO.DailyNutritionIntake>())
         {
         }
 

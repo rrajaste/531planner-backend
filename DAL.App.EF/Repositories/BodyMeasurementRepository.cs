@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
-
+using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
     public class BodyMeasurementRepository : EFBaseRepository<AppDbContext, Domain.BodyMeasurement, DAL.App.DTO.BodyMeasurement>, IBodyMeasurementRepository
     {
-        public BodyMeasurementRepository(AppDbContext repoDbContext) : base(repoDbContext)
+        public BodyMeasurementRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<BodyMeasurement, DTO.BodyMeasurement>())
         {
         }
 

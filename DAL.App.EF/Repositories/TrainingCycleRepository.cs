@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
+using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ namespace DAL.App.EF.Repositories
         EFBaseRepository<AppDbContext, Domain.TrainingCycle, DAL.App.DTO.TrainingCycle>,
         ITrainingCycleRepository
     {
-        public TrainingCycleRepository(AppDbContext repoDbContext) : base(repoDbContext)
+        public TrainingCycleRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<TrainingCycle, DTO.TrainingCycle>())
         {
         }
     }

@@ -10,6 +10,7 @@ namespace Contracts.DAL.Base.Repositories
     }
 
     public interface IBaseRepository<in TKey, TDALEntity>
+        where TDALEntity : class, IDALBaseDTO<TKey>, new()
         where TKey : IEquatable<TKey>
     {
         IEnumerable<TDALEntity> All();

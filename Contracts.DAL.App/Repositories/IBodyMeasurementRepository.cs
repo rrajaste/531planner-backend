@@ -12,7 +12,7 @@ namespace Contracts.DAL.App.Repositories
     }
     
     public interface IBodyMeasurementRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
-        where TEntity : class, IDALBaseDTO<TKey>, new() 
+        where TEntity : class, IDALBaseDTO<TKey>, new()
         where TKey : IEquatable<TKey>
     {
         Task<IEnumerable<TEntity>> AllWithAppUserIdAsync (TKey id);

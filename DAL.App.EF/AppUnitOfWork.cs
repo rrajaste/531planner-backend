@@ -1,23 +1,12 @@
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
-using Contracts.DAL.App.Repositories.Identity;
 using DAL.App.EF.Repositories;
-using DAL.App.EF.Repositories.Identity;
 using DAL.Base.EF;
 
 namespace DAL.App.EF
 {
     public class AppUnitOfWork : EFBaseUnitOfWork<AppDbContext>, IAppUnitOfWork
     {
-        
-        public IAppUserRoleRepository AppUserRoles => 
-            GetRepository<IAppUserRoleRepository>(
-                ()=> new AppUserRoleRepository(UnitOfWorkDbContext));
-
-        public IAppUserRepository AppUsers => 
-            GetRepository<IAppUserRepository>(
-            ()=> new AppUserRepository(UnitOfWorkDbContext));
-        
         public IBodyMeasurementRepository BodyMeasurements => 
             GetRepository<IBodyMeasurementRepository>(
                 ()=> new BodyMeasurementRepository(UnitOfWorkDbContext));
