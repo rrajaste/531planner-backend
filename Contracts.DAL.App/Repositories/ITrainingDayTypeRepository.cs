@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface ITrainingDayTypeRepository : ITrainingDayTypeRepository<Guid, TrainingDayType>
+    public interface ITrainingDayTypeRepository : ITrainingDayTypeRepository<Guid, TrainingDayType>, IBaseRepository<TrainingDayType>
     {
     }
 

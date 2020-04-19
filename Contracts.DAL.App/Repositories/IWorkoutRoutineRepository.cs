@@ -8,7 +8,7 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IWorkoutRoutineRepository : IWorkoutRoutineRepository<Guid, WorkoutRoutine>
+    public interface IWorkoutRoutineRepository : IWorkoutRoutineRepository<Guid, WorkoutRoutine>, IBaseRepository<WorkoutRoutine>
     {
     }
 

@@ -5,7 +5,7 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IMuscleRepository : IMuscleRepository<Guid, Muscle>
+    public interface IMuscleRepository : IMuscleRepository<Guid, Muscle>, IBaseRepository<Muscle>
     {
     }
     

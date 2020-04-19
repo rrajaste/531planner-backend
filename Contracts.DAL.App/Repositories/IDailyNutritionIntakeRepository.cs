@@ -7,7 +7,8 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IDailyNutritionIntakeRepository : IBaseRepository<Guid, DailyNutritionIntake>
+    public interface IDailyNutritionIntakeRepository : IBaseRepository<Guid, DailyNutritionIntake>,
+        IBaseRepository<DailyNutritionIntake>
     {
         
     }

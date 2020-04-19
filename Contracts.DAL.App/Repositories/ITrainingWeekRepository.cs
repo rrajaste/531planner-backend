@@ -6,7 +6,7 @@ using TrainingWeek = DAL.App.DTO.TrainingWeek;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface ITrainingWeekRepository : ITrainingWeekRepository<Guid, TrainingWeek> 
+    public interface ITrainingWeekRepository : ITrainingWeekRepository<Guid, TrainingWeek>, IBaseRepository<TrainingWeek>
     {
     }
     

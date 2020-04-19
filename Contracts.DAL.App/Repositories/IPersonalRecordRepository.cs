@@ -5,7 +5,7 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IPersonalRecordRepository : IPersonalRecordRepository<Guid, PersonalRecord>
+    public interface IPersonalRecordRepository : IPersonalRecordRepository<Guid, PersonalRecord>, IBaseRepository<PersonalRecord>
     {
         
     }

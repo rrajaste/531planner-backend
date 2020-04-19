@@ -9,7 +9,7 @@ using UnitType = DAL.App.DTO.UnitType;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IUnitTypesRepository : IUnitTypesRepository<Guid, UnitType>
+    public interface IUnitTypesRepository : IUnitTypesRepository<Guid, UnitType>, IBaseRepository<UnitType>
     {
     }
     

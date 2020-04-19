@@ -5,7 +5,7 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IRoutineTypeRepository : IRoutineTypeRepository<Guid, RoutineType>
+    public interface IRoutineTypeRepository : IRoutineTypeRepository<Guid, RoutineType>, IBaseRepository<RoutineType>
     {
     }
     

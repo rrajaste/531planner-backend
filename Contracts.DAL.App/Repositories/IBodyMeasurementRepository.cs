@@ -7,7 +7,8 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IBodyMeasurementRepository : IBodyMeasurementRepository<Guid, BodyMeasurement>
+    public interface IBodyMeasurementRepository : IBodyMeasurementRepository<Guid, BodyMeasurement>,
+        IBaseRepository<BodyMeasurement>
     {
     }
     

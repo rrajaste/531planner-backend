@@ -6,7 +6,7 @@ using Exercise = DAL.App.DTO.Exercise;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface IExerciseRepository : IExerciseRepository<Guid, Exercise> 
+    public interface IExerciseRepository : IExerciseRepository<Guid, Exercise>, IBaseRepository<Exercise>
     {
     }
     

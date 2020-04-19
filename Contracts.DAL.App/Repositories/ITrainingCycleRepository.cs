@@ -8,7 +8,7 @@ using TrainingCycle = DAL.App.DTO.TrainingCycle;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface ITrainingCycleRepository : ITrainingCycleRepository<Guid, TrainingCycle>
+    public interface ITrainingCycleRepository : ITrainingCycleRepository<Guid, TrainingCycle>, IBaseRepository<TrainingCycle>
     {
     }
 

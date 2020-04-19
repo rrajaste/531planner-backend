@@ -8,7 +8,7 @@ using DAL.App.DTO;
 namespace Contracts.DAL.App.Repositories
 {
 
-    public interface ITrainingDayRepository : ITrainingDayRepository<Guid, TrainingDay>
+    public interface ITrainingDayRepository : ITrainingDayRepository<Guid, TrainingDay>, IBaseRepository<TrainingDay>
     {
     }
     
