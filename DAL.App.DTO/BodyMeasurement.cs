@@ -11,6 +11,7 @@ namespace DAL.App.DTO
         where TKey : IEquatable<TKey>
     {
         public TKey Id { get; set; } = default!;
+        public TKey AppUserId { get; set; } = default!;
         public int Weight { get; set; }
         public int Height { get; set; }
         public int? Chest { get; set; }

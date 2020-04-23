@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Contracts.DAL.Base;
-using DAL.App.DTO.Identity;
 
 namespace DAL.App.DTO
 {
@@ -18,7 +17,6 @@ namespace DAL.App.DTO
         public bool IsBaseRoutine { get; set; } = default!;
         public TKey RoutineTypeId { get; set; } = default!;
         public TKey AppUserId { get; set; } = default!;
-        public AppUser<TKey>? AppUser { get; set; }
         public RoutineType? RoutineType { get; set; }
         public ICollection<PersonalRecord>? PersonalRecord { get; set; }
         public ICollection<TrainingCycle>? TrainingCycles { get; set; }

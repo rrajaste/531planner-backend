@@ -1,6 +1,5 @@
 using System;
 using Contracts.DAL.Base;
-using DAL.App.DTO.Identity;
 
 namespace DAL.App.DTO
 {
@@ -19,7 +18,6 @@ namespace DAL.App.DTO
         public DateTime LoggedAt { get; set; }
         public TKey AppUserId { get; set; } = default!;
         public TKey UnitTypeId { get; set; } = default!;
-        public AppUser<TKey>? AppUser { get; set; }
         public UnitType? UnitType { get; set; }
     }
 }
