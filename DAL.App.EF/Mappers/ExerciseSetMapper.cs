@@ -1,11 +1,16 @@
+using Contracts.DAL.App;
 using DAL.App.DTO;
-using DAL.Base.EF.Mappers;
+using DAL.Base.EF;
 using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class ExerciseSetMapper : IBaseDALMapper<Domain.ExerciseSet, ExerciseSet>
+    public class ExerciseSetMapper : EFBaseMapper, IDALMapper<Domain.ExerciseSet, ExerciseSet>
     {
+        public ExerciseSetMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        {
+        }
+
         public ExerciseSet MapDomainToDAL(Domain.ExerciseSet domainObject) =>
             new ExerciseSet()
             {
@@ -14,10 +19,10 @@ namespace DAL.App.EF.Mappers
                 Distance = domainObject.Distance,
                 Duration = domainObject.Duration,
                 ExerciseId = domainObject.ExerciseId,
-                Exercise = _exerciseMapper.MapDomainToDAL(domainObject.Exercise),
+                Exercise = MapperContext.ExerciseMapper.MapDomainToDAL(domainObject.Exercise),
                 NrOfReps = domainObject.NrOfReps,
                 SetNumber = domainObject.SetNumber,
-                TrainingDay = _trainingDayMapper.MapDomainToDAL(domainObject.TrainingDay),
+                TrainingDay = MapperContext.TrainingDayMapper.MapDomainToDAL(domainObject.TrainingDay),
                 TrainingDayId = domainObject.TrainingDayId,
             };
 

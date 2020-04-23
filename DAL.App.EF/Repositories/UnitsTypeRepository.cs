@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
-using DAL.Base.EF.Mappers;
+using DAL.App.EF.Mappers;
 using DAL.Base.EF.Repositories;
-using Domain;
-using Microsoft.EntityFrameworkCore;
-using PublicApi.DTO.V1;
+using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Repositories
 {
     public class UnitTypesRepository : EFBaseRepository<AppDbContext, Domain.UnitType, DAL.App.DTO.UnitType>, IUnitTypesRepository
     {
-        public UnitTypesRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<UnitType, DTO.UnitType>())
+        public UnitTypesRepository(AppDbContext repoDbContext, IDALMapper<Domain.UnitType, DAL.App.DTO.UnitType> mapper) 
+            : base(repoDbContext, mapper)
         {
         }
     }

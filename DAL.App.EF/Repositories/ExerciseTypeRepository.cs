@@ -1,6 +1,6 @@
 using Contracts.DAL.App.Repositories;
-using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
+using DAL.Base.Mappers;
 using Domain;
 
 namespace DAL.App.EF.Repositories
@@ -8,7 +8,8 @@ namespace DAL.App.EF.Repositories
     public class ExerciseTypeRepository : EFBaseRepository<AppDbContext, Domain.ExerciseType, DAL.App.DTO.ExerciseType>, 
         IExerciseTypeRepository
     {
-        public ExerciseTypeRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<ExerciseType, DTO.ExerciseType>())
+        public ExerciseTypeRepository(AppDbContext repoDbContext, IDALMapper<ExerciseType, DTO.ExerciseType> mapper) 
+            : base(repoDbContext, mapper)
         {
         }
     }

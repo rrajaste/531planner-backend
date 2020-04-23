@@ -1,59 +1,58 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
-using DAL.Base.EF.Mappers;
+using DAL.App.EF.Mappers;
 using DAL.Base.EF.Repositories;
-using Domain;
+using DAL.Base.Mappers;
 using Microsoft.EntityFrameworkCore;
-using PublicApi.DTO.V1.BaseDTOs.BaseDictionaryTypeDto;
 
 namespace DAL.App.EF.Repositories
 {
     public class DailyNutritionIntakeRepository :
-        EFBaseRepository<AppDbContext, Domain.DailyNutritionIntake, DAL.App.DTO.DailyNutritionIntake>,
+        EFBaseRepository<AppDbContext, Domain.DailyNutritionIntake, DTO.DailyNutritionIntake>,
         IDailyNutritionIntakeRepository
     {
-        public DailyNutritionIntakeRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<DailyNutritionIntake, DTO.DailyNutritionIntake>())
+        public DailyNutritionIntakeRepository(AppDbContext repoDbContext, IDALMapper<Domain.DailyNutritionIntake, DTO.DailyNutritionIntake> mapper) 
+            : base(repoDbContext, mapper)
         {
         }
 
-        public override IEnumerable<DAL.App.DTO.DailyNutritionIntake> All() => 
+        public override IEnumerable<DTO.DailyNutritionIntake> All() => 
             RepoDbSet
                 .Include(d => d.UnitType)
                 .ToList()
-            .Select(domainEntity => Mapper.Map(domainEntity));
+            .Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
 
 
-        public override async Task<IEnumerable<DAL.App.DTO.DailyNutritionIntake>> AllAsync() => (
+        public override async Task<IEnumerable<DTO.DailyNutritionIntake>> AllAsync() => (
             await RepoDbSet
                 .Include(d => d.UnitType)
                 .ToListAsync()
-            ).Select(domainEntity => Mapper.Map(domainEntity));
+            ).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
 
-        public override DAL.App.DTO.DailyNutritionIntake Find(Guid id) =>
-            Mapper.Map(RepoDbSet
+        public override DTO.DailyNutritionIntake Find(Guid id) =>
+            Mapper.MapDomainToDAL(RepoDbSet
                 .Include(d => d.UnitType)
                 .SingleOrDefault(d => d.Id == id));
 
-        public override async Task<DAL.App.DTO.DailyNutritionIntake> FindAsync(Guid id) =>
-            Mapper.Map(await RepoDbSet
+        public override async Task<DTO.DailyNutritionIntake> FindAsync(Guid id) =>
+            Mapper.MapDomainToDAL(await RepoDbSet
                 .Include(d => d.UnitType)
                 .SingleOrDefaultAsync(d => d.Id == id));
 
-        public async Task<DAL.App.DTO.DailyNutritionIntake> FindWithAppUserIdAsync(Guid id, Guid appUserId) =>
-            Mapper.Map(await RepoDbSet
+        public async Task<DTO.DailyNutritionIntake> FindWithAppUserIdAsync(Guid id, Guid appUserId) =>
+            Mapper.MapDomainToDAL(await RepoDbSet
                 .Include(d => d.UnitType)
                 .SingleOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId));
 
-        public async Task<IEnumerable<DAL.App.DTO.DailyNutritionIntake>> AllWithAppUserIdAsync(Guid id) => (
+        public async Task<IEnumerable<DTO.DailyNutritionIntake>> AllWithAppUserIdAsync(Guid id) => (
             await RepoDbSet
                 .Include(d => d.UnitType)
                 .Where(b => b.AppUserId == id)
                 .ToListAsync())
-            .Select(domainEntity => Mapper.Map(domainEntity)
+            .Select(domainEntity => Mapper.MapDomainToDAL(domainEntity)
         );
     }
 }

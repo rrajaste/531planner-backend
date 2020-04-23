@@ -17,6 +17,6 @@ namespace DAL.App.DTO
         public DateTime StartingDate { get; set; }
         public DateTime? EndingDate { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
-        public ICollection<TrainingWeek>? TrainingWeeks { get; set; }
+        public IEnumerable<TrainingWeek>? TrainingWeeks { get; set; }
     }
 }

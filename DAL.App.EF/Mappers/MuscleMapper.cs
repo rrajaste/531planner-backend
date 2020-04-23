@@ -1,17 +1,23 @@
+using Contracts.DAL.App;
 using DAL.App.DTO;
+using DAL.Base.EF;
 using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class MuscleMapper : IBaseDALMapper<Domain.Muscle, Muscle>
+    public class MuscleMapper : EFBaseMapper, IDALMapper<Domain.Muscle, Muscle>
     {
+        public MuscleMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        {
+        }
+
         public Muscle MapDomainToDAL(Domain.Muscle domainObject) =>
             new Muscle()
             {
                 Id = domainObject.Id,
                 Description = domainObject.Description,
                 Name = domainObject.Name,
-                MuscleGroup = _muscleGroupMapper.MapDomainToDAL(domainObject.MuscleGroup)
+                MuscleGroup = MapperContext.MuscleGroupMapper.MapDomainToDAL(domainObject.MuscleGroup)
             };
 
         public Domain.Muscle MapDALToDomain(Muscle dalObject) => 
@@ -22,4 +28,4 @@ namespace DAL.App.EF.Mappers
                 Name = dalObject.Name,
             };
     }
-}00
+}

@@ -1,14 +1,14 @@
 using Contracts.DAL.App.Repositories;
-using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
-using Domain;
+using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Repositories
 {
     public class RoutineTypeRepository : EFBaseRepository<AppDbContext, Domain.RoutineType, DAL.App.DTO.RoutineType>,
         IRoutineTypeRepository
     {
-        public RoutineTypeRepository(AppDbContext repoDbContext) : base(repoDbContext, new BaseDALMapper<RoutineType, DTO.RoutineType>())
+        public RoutineTypeRepository(AppDbContext repoDbContext, IDALMapper<Domain.RoutineType, DAL.App.DTO.RoutineType> mapper) 
+            : base(repoDbContext, mapper)
         {
         }
     }

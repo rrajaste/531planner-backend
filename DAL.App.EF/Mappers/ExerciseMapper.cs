@@ -1,14 +1,17 @@
 using System.Linq;
+using Contracts.DAL.App;
 using DAL.App.DTO;
+using DAL.Base.EF;
 using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class ExerciseMapper : IBaseDALMapper<Domain.Exercise, Exercise>
+    public class ExerciseMapper : EFBaseMapper, IDALMapper<Domain.Exercise, Exercise>
     {
-        private readonly ExerciseTypeMapper _exerciseTypeMapper = new ExerciseTypeMapper();
-        private readonly MuscleGroupMapper _muscleGroupMapper = new MuscleGroupMapper();
-        
+        public ExerciseMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        {
+        }
+
         public Exercise MapDomainToDAL(Domain.Exercise domainObject) =>
             new Exercise()
             {
@@ -16,9 +19,9 @@ namespace DAL.App.EF.Mappers
                 Name = domainObject.Name,
                 Description = domainObject.Description,
                 ExerciseTypeId = domainObject.ExerciseTypeId,
-                ExerciseType = _exerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
+                ExerciseType = MapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
                 TargetMuscleGroups = domainObject.TargetMuscleGroups?
-                    .Select(t => _muscleGroupMapper.mapDomainToDAl(t.MuscleGroup))
+                    .Select(t => MapperContext.MuscleGroupMapper.MapDomainToDAL(t.MuscleGroup))
             };
 
         public Domain.Exercise MapDALToDomain(Exercise dalObject) =>
@@ -28,7 +31,6 @@ namespace DAL.App.EF.Mappers
                 Name = dalObject.Name,
                 Description = dalObject.Description,
                 ExerciseTypeId = dalObject.ExerciseTypeId,
-                ExerciseType = _exerciseTypeMapper.MapDomainToDAL(dalObject.ExerciseType),
             };
     }
 }

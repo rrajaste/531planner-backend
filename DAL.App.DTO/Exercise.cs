@@ -16,6 +16,6 @@ namespace DAL.App.DTO
         public string Description { get; set; } = default!;
         public TKey ExerciseTypeId { get; set; } = default!;
         public ExerciseType? ExerciseType { get; set; }
-        public ICollection<TargetMuscleGroup>? TargetMuscleGroups { get; set; }
+        public IEnumerable<MuscleGroup>? TargetMuscleGroups { get; set; }
     }
 }

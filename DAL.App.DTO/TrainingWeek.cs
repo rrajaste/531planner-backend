@@ -19,6 +19,6 @@ namespace DAL.App.DTO
 
         public TKey TrainingCycleId { get; set; } = default!;
         public TrainingCycle? TrainingCycle { get; set; }
-        public ICollection<TrainingDay>? TrainingDays { get; set; }
+        public IEnumerable<TrainingDay>? TrainingDays { get; set; }
     }
 }

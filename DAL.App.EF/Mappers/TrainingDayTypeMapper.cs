@@ -5,22 +5,22 @@ using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class RoutineTypeMapper : EFBaseMapper, IDALMapper<Domain.RoutineType, RoutineType>
+    public class TrainingDayTypeMapper : EFBaseMapper, IDALMapper<Domain.TrainingDayType, TrainingDayType>
     {
-        public RoutineTypeMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public TrainingDayTypeMapper(IAppMapperContext mapperContext) : base(mapperContext)
         {
         }
 
-        public RoutineType MapDomainToDAL(Domain.RoutineType domainObject) =>
-            new RoutineType()
+        public TrainingDayType MapDomainToDAL(Domain.TrainingDayType domainObject) =>
+            new TrainingDayType()
             {
                 Id = domainObject.Id,
                 Name = domainObject.Name,
                 Description = domainObject.Description
             };
 
-        public Domain.RoutineType MapDALToDomain(RoutineType dalObject) =>
-            new Domain.RoutineType()
+        public Domain.TrainingDayType MapDALToDomain(TrainingDayType dalObject) =>
+            new Domain.TrainingDayType()
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,

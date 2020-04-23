@@ -1,10 +1,16 @@
+using Contracts.DAL.App;
 using DAL.App.DTO;
+using DAL.Base.EF;
 using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class BodyMeasurementMapper : IBaseDALMapper<Domain.BodyMeasurement, BodyMeasurement>
+    public class BodyMeasurementMapper : EFBaseMapper, IDALMapper<Domain.BodyMeasurement, BodyMeasurement>
     {
+        public BodyMeasurementMapper(IAppMapperContext context) : base(context)
+        {
+        }
+        
         public BodyMeasurement MapDomainToDAL(Domain.BodyMeasurement domainObject) => 
             new BodyMeasurement(){
                 AppUserId = domainObject.AppUserId,
@@ -15,7 +21,9 @@ namespace DAL.App.EF.Mappers
                 Hip = domainObject.Height,
                 Id = domainObject.Id,
                 LoggedAt = domainObject.LoggedAt,
-                UnitType = _unitTypeMapper.MapDomainToDAL(domainObject.UnitType),
+                UnitType = domainObject.UnitType == null 
+                    ? null 
+                    : MapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType),
                 UnitTypeId = domainObject.UnitTypeId,
                 Waist = domainObject.Waist
             };

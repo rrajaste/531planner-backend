@@ -1,15 +1,17 @@
 using Contracts.DAL.App.Repositories;
-using DAL.Base.EF.Mappers;
 using DAL.Base.EF.Repositories;
+using DAL.Base.Mappers;
 using Domain;
 
 namespace DAL.App.EF.Repositories
 {
-    public class PersonalRecordRepository : EFBaseRepository<AppDbContext, Domain.PersonalRecord, DAL.App.DTO.PersonalRecord>,
+    public class PersonalRecordRepository : EFBaseRepository<AppDbContext, Domain.PersonalRecord, DTO.PersonalRecord>,
         IPersonalRecordRepository
     {
-        public PersonalRecordRepository(AppDbContext dbContext) : base(dbContext, new BaseDALMapper<PersonalRecord, DTO.PersonalRecord>())
+        public PersonalRecordRepository(AppDbContext dbContext, IDALMapper<PersonalRecord, DTO.PersonalRecord> mapper) 
+            : base(dbContext, mapper)
         {
+            
         }
     }
 }

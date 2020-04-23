@@ -19,6 +19,6 @@ namespace DAL.App.DTO
         public TKey AppUserId { get; set; } = default!;
         public RoutineType? RoutineType { get; set; }
         public ICollection<PersonalRecord>? PersonalRecord { get; set; }
-        public ICollection<TrainingCycle>? TrainingCycles { get; set; }
+        public IEnumerable<TrainingCycle>? TrainingCycles { get; set; }
     }
 }

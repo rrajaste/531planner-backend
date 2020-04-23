@@ -1,11 +1,17 @@
 using System.Linq;
+using Contracts.DAL.App;
 using DAL.App.DTO;
+using DAL.Base.EF;
 using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class TrainingCycleMapper : IBaseDALMapper<Domain.TrainingCycle, TrainingCycle>
+    public class TrainingCycleMapper : EFBaseMapper, IDALMapper<Domain.TrainingCycle, TrainingCycle>
     {
+        public TrainingCycleMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        {
+        }
+
         public TrainingCycle MapDomainToDAL(Domain.TrainingCycle domainObject) =>
             new TrainingCycle()
             {
@@ -13,8 +19,8 @@ namespace DAL.App.EF.Mappers
                 CycleNumber = domainObject.CycleNumber,
                 StartingDate = domainObject.StartingDate,
                 EndingDate = domainObject.EndingDate,
-                TrainingWeeks = domainObject.TrainingWeeks?.Select(TrainingWeeksMapper.MapDomainToDAL),
-                WorkoutRoutine = WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
+                TrainingWeeks = domainObject.TrainingWeeks?.Select(MapperContext.TrainingWeekMapper.MapDomainToDAL),
+                WorkoutRoutine = MapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
                 WorkoutRoutineId = domainObject.WorkoutRoutineId
             };
 

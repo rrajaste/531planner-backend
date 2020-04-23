@@ -17,7 +17,7 @@ namespace DAL.Base.EF.Repositories
         where TDALEntity : class, IDALBaseDTO<Guid>, new()
         where TDbContext: DbContext
     {
-        public EFBaseRepository(TDbContext dbContext, IBaseDALMapper<TDomainEntity, TDALEntity> mapper) : base(dbContext, mapper)
+        public EFBaseRepository(TDbContext dbContext, IDALMapper<TDomainEntity, TDALEntity> mapper) : base(dbContext, mapper)
         {
         }
     }
@@ -28,11 +28,11 @@ namespace DAL.Base.EF.Repositories
         where TKey : IEquatable<TKey>
         where TDbContext: DbContext
     {
-        protected IBaseDALMapper<TDomainEntity, TDALEntity> Mapper; 
+        protected IDALMapper<TDomainEntity, TDALEntity> Mapper; 
         protected TDbContext RepoDbContext;
         protected DbSet<TDomainEntity> RepoDbSet;
         
-        public EFBaseRepository(TDbContext dbContext, IBaseDALMapper<TDomainEntity, TDALEntity> mapper)
+        public EFBaseRepository(TDbContext dbContext, IDALMapper<TDomainEntity, TDALEntity> mapper)
         {
             RepoDbContext = dbContext;
             Mapper = mapper;
@@ -44,25 +44,25 @@ namespace DAL.Base.EF.Repositories
         }
         
         public virtual IEnumerable<TDALEntity> All() =>
-            RepoDbSet.ToList().Select(domainEntity => Mapper.Map(domainEntity));
+            RepoDbSet.ToList().Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
         
         public virtual async Task<IEnumerable<TDALEntity>> AllAsync() =>
-            (await RepoDbSet.ToListAsync()).Select(domainEntity => Mapper.Map(domainEntity));
+            (await RepoDbSet.ToListAsync()).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
 
         public virtual TDALEntity Find(TKey id) 
-            => Mapper.Map(RepoDbSet.Find(id));
+            => Mapper.MapDomainToDAL(RepoDbSet.Find(id));
 
         public virtual async Task<TDALEntity> FindAsync(TKey id) =>
-            Mapper.Map(await RepoDbSet.FindAsync(id));
+            Mapper.MapDomainToDAL(await RepoDbSet.FindAsync(id));
         
         public virtual TDALEntity Add(TDALEntity entity) => 
-            Mapper.Map(RepoDbSet.Add(Mapper.Map<TDALEntity, TDomainEntity>(entity)).Entity);
+            Mapper.MapDomainToDAL(RepoDbSet.Add(Mapper.MapDALToDomain(entity)).Entity);
         
         public virtual TDALEntity Update(TDALEntity entity) => 
-            Mapper.Map(RepoDbSet.Update(Mapper.Map<TDALEntity, TDomainEntity>(entity)).Entity);
+            Mapper.MapDomainToDAL(RepoDbSet.Update(Mapper.MapDALToDomain(entity)).Entity);
 
         public virtual TDALEntity Remove(TDALEntity entity) => 
-            Mapper.Map(RepoDbSet.Remove(Mapper.Map<TDALEntity, TDomainEntity>(entity)).Entity);
+            Mapper.MapDomainToDAL(RepoDbSet.Remove(Mapper.MapDALToDomain(entity)).Entity);
 
         public virtual TDALEntity Remove(TKey id) => Remove(Find(id));
     }

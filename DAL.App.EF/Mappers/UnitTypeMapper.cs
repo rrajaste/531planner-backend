@@ -1,10 +1,17 @@
+using Contracts.DAL.App;
 using DAL.App.DTO;
 using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class UnitTypeMapper : IBaseDALMapper<Domain.UnitType, UnitType>
+    public class UnitTypeMapper : IDALMapper<Domain.UnitType, UnitType>
     {
+        private readonly IAppMapperContext _context;
+        public UnitTypeMapper(IAppMapperContext context)
+        {
+            _context = context;
+        }
+        
         public UnitType MapDomainToDAL(Domain.UnitType domainObject) =>
             new UnitType()
             {

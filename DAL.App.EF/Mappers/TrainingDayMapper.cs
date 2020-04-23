@@ -1,20 +1,26 @@
 using System.Linq;
+using Contracts.DAL.App;
 using DAL.App.DTO;
+using DAL.Base.EF;
 using DAL.Base.Mappers;
 
 namespace DAL.App.EF.Mappers
 {
-    public class TrainingDayMapper : IBaseDALMapper<Domain.TrainingDay, TrainingDay>
+    public class TrainingDayMapper : EFBaseMapper, IDALMapper<Domain.TrainingDay, TrainingDay>
     {
+        public TrainingDayMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        {
+        }
+
         public TrainingDay MapDomainToDAL(Domain.TrainingDay domainObject) =>
             new TrainingDay()
             {
                 Id = domainObject.Id,
                 Date = domainObject.Date,
-                ExerciseSets = domainObject.ExerciseSets?.Select(ExerciseSetMapper.MapDomainToDAL),
-                TrainingWeek = TrainingWeekMapper.MapDomainToDAL(domainObject.TrainingWeek),
+                ExerciseSets = domainObject.ExerciseSets?.Select(MapperContext.ExerciseSetMapper.MapDomainToDAL),
+                TrainingWeek = MapperContext.TrainingWeekMapper.MapDomainToDAL(domainObject.TrainingWeek),
                 TrainingWeekId = domainObject.TrainingWeekId,
-                TrainingDayType = TrainingDayTypeMapper.MapDomainToDAL(domainObject.TrainingDayType),
+                TrainingDayType = MapperContext.TrainingDayTypeMapper.MapDomainToDAL(domainObject.TrainingDayType),
                 TrainingDayTypeId = domainObject.TrainingDayTypeId
             };
 
