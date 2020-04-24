@@ -1,7 +1,6 @@
-using App.DTO;
 using Domain;
 
-namespace Contracts.BLL.App
+namespace Contracts.BLL.App.Services
 {
     public interface IBaseRoutineGenerator
     {

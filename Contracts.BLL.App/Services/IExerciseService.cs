@@ -1,5 +1,5 @@
+using BLL.App.DTO;
 using Contracts.BLL.Base.Services;
-using Domain;
 
 namespace Contracts.BLL.App.Services
 {
