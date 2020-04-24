@@ -12,8 +12,8 @@ namespace DAL.App.DTO
         where TKey : IEquatable<TKey>
     {
         public TKey Id { get; set; } = default!;
-        public int SetNumber { get; set; } = default!;
-        public bool Completed { get; set; } = default!;
+        public int SetNumber { get; set; }
+        public bool Completed { get; set; }
         public int? NrOfReps { get; set; }
         public float? Weight { get; set; }
         public float? Duration { get; set; }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Contracts.DAL.Base;
 using DAL.Base;
 using Domain.Identity;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Domain
 {

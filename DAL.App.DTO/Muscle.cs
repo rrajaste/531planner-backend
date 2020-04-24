@@ -15,6 +15,6 @@ namespace DAL.App.DTO
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
         public TKey MuscleGroupId { get; set; } = default!;
-        public MuscleGroup MuscleGroup { get; set; } = default!;
+        public MuscleGroup? MuscleGroup { get; set; } = default!;
     }
 }
