@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App.Mappers;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
-using DAL.Base.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories

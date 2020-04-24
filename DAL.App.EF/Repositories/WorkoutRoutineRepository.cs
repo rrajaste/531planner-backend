@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
-using DAL.Base.Mappers;
+using Contracts.DAL.App.Mappers;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 

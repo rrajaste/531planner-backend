@@ -1,7 +1,6 @@
 using Contracts.DAL.App.Repositories;
-using DAL.App.EF.Mappers;
 using DAL.Base.EF.Repositories;
-using DAL.Base.Mappers;
+using Contracts.DAL.App.Mappers;
 
 namespace DAL.App.EF.Repositories
 {
