@@ -1,4 +1,4 @@
-namespace DAL.Base.Mappers
+namespace Contracts.DAL.App.Mappers
 {
     public interface IDALMapper<TInObject, TOutObject> 
         where TOutObject : class, new()

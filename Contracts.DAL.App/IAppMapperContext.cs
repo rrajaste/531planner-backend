@@ -1,5 +1,5 @@
+using Contracts.DAL.App.Mappers;
 using DAL.App.DTO;
-using DAL.Base.Mappers;
 
 namespace Contracts.DAL.App
 {
