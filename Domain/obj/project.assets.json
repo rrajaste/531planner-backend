@@ -361,7 +361,6 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
-          "Microsoft.Extensions.Identity.Stores": "3.1.2",
           "System.ComponentModel.Annotations": "4.7.0"
         },
         "compile": {
@@ -1074,19 +1073,19 @@
     ]
   },
   "packageFolders": {
-    "/home/bombstrap/.nuget/packages/": {}
+    "/home/ranno/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj",
+      "projectUniqueName": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj",
-      "packagesPath": "/home/bombstrap/.nuget/packages/",
-      "outputPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/obj/",
+      "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/Domain.csproj",
+      "packagesPath": "/home/ranno/.nuget/packages/",
+      "outputPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Domain/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/bombstrap/.nuget/NuGet/NuGet.Config"
+        "/home/ranno/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.1"
@@ -1097,14 +1096,14 @@
       "frameworks": {
         "netstandard2.1": {
           "projectReferences": {
-            "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
-              "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj"
+            "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
+              "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj"
             },
-            "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/DAL.Base/DAL.Base.csproj": {
-              "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/DAL.Base/DAL.Base.csproj"
+            "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base/DAL.Base.csproj": {
+              "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/DAL.Base/DAL.Base.csproj"
             },
-            "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Resources/Resources.csproj": {
-              "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Resources/Resources.csproj"
+            "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/Resources.csproj": {
+              "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Resources/Resources.csproj"
             }
           }
         }
@@ -1142,7 +1141,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
       }
     }
   }

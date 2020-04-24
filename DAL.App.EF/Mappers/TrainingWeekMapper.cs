@@ -20,9 +20,7 @@ namespace DAL.App.EF.Mappers
                 StartingDate = domainObject.StartingDate,
                 EndingDate = domainObject.EndingDate,
                 IsDeload = domainObject.IsDeload,
-                TrainingCycle = domainObject.TrainingCycle == null 
-                    ? null
-                    : MapperContext.TrainingCycleMapper.MapDomainToDAL(domainObject.TrainingCycle),
+                TrainingCycle = MapperContext.TrainingCycleMapper.MapDomainToDAL(domainObject.TrainingCycle),
                 TrainingCycleId = domainObject.TrainingCycleId,
                 TrainingDays = domainObject.TrainingDays?.Select(MapperContext.TrainingDayMapper.MapDomainToDAL),
             };

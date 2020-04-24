@@ -19,14 +19,10 @@ namespace DAL.App.EF.Mappers
                 Distance = domainObject.Distance,
                 Duration = domainObject.Duration,
                 ExerciseId = domainObject.ExerciseId,
-                Exercise = domainObject.Exercise == null 
-                    ? null 
-                    : MapperContext.ExerciseMapper.MapDomainToDAL(domainObject.Exercise),
+                Exercise = MapperContext.ExerciseMapper.MapDomainToDAL(domainObject.Exercise),
                 NrOfReps = domainObject.NrOfReps,
                 SetNumber = domainObject.SetNumber,
-                TrainingDay = domainObject.TrainingDay == null 
-                    ? null 
-                    : MapperContext.TrainingDayMapper.MapDomainToDAL(domainObject.TrainingDay),
+                TrainingDay = MapperContext.TrainingDayMapper.MapDomainToDAL(domainObject.TrainingDay),
                 TrainingDayId = domainObject.TrainingDayId,
             };
 

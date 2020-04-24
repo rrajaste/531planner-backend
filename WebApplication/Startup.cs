@@ -49,7 +49,7 @@ namespace WebApplication
             
             services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
             services.AddScoped<IAppBLL, AppBLL>();
-            services.AddScoped<AppMapperContext>();
+
 
             services.AddIdentity<AppUser, AppUserRole>()
                 .AddDefaultUI()
@@ -96,6 +96,8 @@ namespace WebApplication
                 options.SupportedUICultures = supportedCultures;
             });
 
+
+            
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -132,10 +134,12 @@ namespace WebApplication
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            
+            
             app.UseRequestLocalization(
                 options: app.ApplicationServices
                     .GetService<IOptions<RequestLocalizationOptions>>().Value);
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -144,17 +148,18 @@ namespace WebApplication
             app.UseCors("CorsAllowAll"); 
             
             app.UseSwagger();
-            app.UseSwaggerUI(
-                options =>
-                {
-                    foreach ( var description in provider.ApiVersionDescriptions )
-                    {
-                        options.SwaggerEndpoint(
-                            $"/swagger/{description.GroupName}/swagger.json",
-                            description.GroupName.ToUpperInvariant() );
-                    }
-                } );
-                        
+                        app.UseSwaggerUI(
+                            options =>
+                            {
+                                foreach ( var description in provider.ApiVersionDescriptions )
+                                {
+                                    options.SwaggerEndpoint(
+                                        $"/swagger/{description.GroupName}/swagger.json",
+                                        description.GroupName.ToUpperInvariant() );
+                                }
+                            } );
+
+
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

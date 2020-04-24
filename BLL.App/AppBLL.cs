@@ -3,6 +3,7 @@ using BLL.Services;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
+using DAL.App.EF;
 
 namespace BLL
 {
@@ -24,9 +25,5 @@ namespace BLL
             GetService<IBodyMeasurementService>(() => new BodyMeasurementService(UnitOfWork));
         public IExerciseService Exercises =>
             GetService<IExerciseService>(() => new ExerciseService(UnitOfWork));
-        public ITrainingCycleService TrainingCycles =>
-            GetService<ITrainingCycleService>(() => new TrainingCycleService(TrainingCycle));
-        public IExerciseSetService ExerciseSets =>
-            GetService<IExerciseSetService>(() => new ExerciseSetService(ExerciseSet));
     }
 }

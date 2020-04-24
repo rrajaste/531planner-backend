@@ -1,4 +1,3 @@
-using System.Data.SqlTypes;
 using Contracts.DAL.App;
 using DAL.App.DTO;
 using DAL.Base.EF;
@@ -17,16 +16,12 @@ namespace DAL.App.EF.Mappers
             {
                 Id = domainObject.Id,
                 AppUserId = domainObject.Id,
-                ExerciseSet = domainObject.ExerciseSet == null 
-                    ? null 
-                    : MapperContext.ExerciseSetMapper.MapDomainToDAL(domainObject.ExerciseSet),
+                ExerciseSet = MapperContext.ExerciseSetMapper.MapDomainToDAL(domainObject.ExerciseSet),
                 ExerciseSetId = domainObject.ExerciseSetId,
-                WorkoutRoutine = domainObject.WorkoutRoutine == null 
-                    ? null 
-                    : MapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
+                WorkoutRoutine = MapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
                 WorkoutRoutineId = domainObject.WorkoutRoutineId
             };
-        
+
         public Domain.PersonalRecord MapDALToDomain(PersonalRecord dalObject) =>
             new Domain.PersonalRecord()
             {

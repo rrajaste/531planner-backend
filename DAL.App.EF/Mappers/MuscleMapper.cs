@@ -17,9 +17,7 @@ namespace DAL.App.EF.Mappers
                 Id = domainObject.Id,
                 Description = domainObject.Description,
                 Name = domainObject.Name,
-                MuscleGroup = domainObject.MuscleGroup == null 
-                    ? null 
-                    : MapperContext.MuscleGroupMapper.MapDomainToDAL(domainObject.MuscleGroup)
+                MuscleGroup = MapperContext.MuscleGroupMapper.MapDomainToDAL(domainObject.MuscleGroup)
             };
 
         public Domain.Muscle MapDALToDomain(Muscle dalObject) => 
