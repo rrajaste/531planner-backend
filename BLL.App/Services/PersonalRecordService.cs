@@ -9,10 +9,12 @@ using Domain;
 
 namespace BLL.Services
 {
-    public class PersonalRecordService : BaseEntityService<IPersonalRecordRepository, IAppUnitOfWork, PersonalRecord, PersonalRecord>, IPersonalRecordService 
+    public class PersonalRecordService : BaseEntityService<IPersonalRecordRepository, IAppUnitOfWork, 
+        DAL.App.DTO.PersonalRecord, BLL.App.DTO.PersonalRecord>, IPersonalRecordService 
     {
         public PersonalRecordService(IAppUnitOfWork unitOfWork) 
-            : base(unitOfWork, new BaseBLLMapper<PersonalRecord, PersonalRecord>(), unitOfWork.PersonalRecords)
+            : base(unitOfWork, new BaseBLLMapper<DAL.App.DTO.PersonalRecord, BLL.App.DTO.PersonalRecord>(),
+                unitOfWork.PersonalRecords)
         {
         }
     }

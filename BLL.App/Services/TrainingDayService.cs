@@ -9,10 +9,11 @@ using Domain;
 
 namespace BLL.Services
 {
-    public class TrainingDayService : BaseEntityService<ITrainingDayRepository, IAppUnitOfWork, TrainingDay, TrainingDay>, ITrainingDayService 
+    public class TrainingDayService : BaseEntityService<ITrainingDayRepository, IAppUnitOfWork,
+        DAL.App.DTO.TrainingDay, BLL.App.DTO.TrainingDay>, ITrainingDayService 
     {
         public TrainingDayService(IAppUnitOfWork unitOfWork) 
-            : base(unitOfWork, new BaseBLLMapper<TrainingDay, TrainingDay>(), unitOfWork.TrainingDays)
+            : base(unitOfWork, new BaseBLLMapper<DAL.App.DTO.TrainingDay, BLL.App.DTO.TrainingDay>(), unitOfWork.TrainingDays)
         {
         }
     }

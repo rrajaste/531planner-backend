@@ -9,10 +9,12 @@ using Domain;
 
 namespace BLL.Services
 {
-    public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork, WorkoutRoutine, WorkoutRoutine>, IWorkoutRoutineService 
+    public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork, 
+        DAL.App.DTO.WorkoutRoutine, BLL.App.DTO.WorkoutRoutine>, IWorkoutRoutineService 
     {
         public WorkoutRoutineService(IAppUnitOfWork unitOfWork) 
-            : base(unitOfWork, new BaseBLLMapper<WorkoutRoutine, WorkoutRoutine>(), unitOfWork.WorkoutRoutines)
+            : base(unitOfWork, new BaseBLLMapper<DAL.App.DTO.WorkoutRoutine, BLL.App.DTO.WorkoutRoutine>(), 
+                unitOfWork.WorkoutRoutines)
         {
         }
     }

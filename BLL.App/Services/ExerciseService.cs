@@ -8,10 +8,11 @@ using Domain;
 
 namespace BLL.Services
 {
-    public class ExerciseService : BaseEntityService<IExerciseRepository, IAppUnitOfWork, Exercise, Exercise>, IExerciseService 
+    public class ExerciseService : BaseEntityService<IExerciseRepository, IAppUnitOfWork, DAL.App.DTO.Exercise,
+        BLL.App.DTO.Exercise>, IExerciseService 
     {
         public ExerciseService(IAppUnitOfWork unitOfWork) 
-            : base(unitOfWork, new BaseBLLMapper<Exercise, Exercise>(), unitOfWork.Exercises)
+            : base(unitOfWork, new BaseBLLMapper<DAL.App.DTO.Exercise, BLL.App.DTO.Exercise>(), unitOfWork.Exercises)
         {
         }
     }
