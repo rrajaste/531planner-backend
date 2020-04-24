@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Contracts.DAL.App;
 using DAL.App.DTO;
@@ -19,10 +20,16 @@ namespace DAL.App.EF.Mappers
                 Name = domainObject.Name,
                 Description = domainObject.Description,
                 ExerciseTypeId = domainObject.ExerciseTypeId,
-                ExerciseType = MapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
-                TargetMuscleGroups = domainObject.TargetMuscleGroups?
-                    .Select(t => MapperContext.MuscleGroupMapper.MapDomainToDAL(t.MuscleGroup))
+                ExerciseType = domainObject.ExerciseType == null 
+                    ? null 
+                    : MapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
+                TargetMuscleGroups = GetMuscleGroupsFromTargetMuscleGroups(domainObject.TargetMuscleGroups)
             };
+
+        private IEnumerable<MuscleGroup>? GetMuscleGroupsFromTargetMuscleGroups(IEnumerable<Domain.TargetMuscleGroup>? targetList)
+            => targetList?
+                .Where(targetGroup => targetGroup.MuscleGroup != null)
+                .Select(t => MapperContext.MuscleGroupMapper.MapDomainToDAL(t.MuscleGroup!));
 
         public Domain.Exercise MapDALToDomain(Exercise dalObject) =>
             new Domain.Exercise()

@@ -20,7 +20,9 @@ namespace DAL.App.EF.Mappers
                 StartingDate = domainObject.StartingDate,
                 EndingDate = domainObject.EndingDate,
                 TrainingWeeks = domainObject.TrainingWeeks?.Select(MapperContext.TrainingWeekMapper.MapDomainToDAL),
-                WorkoutRoutine = MapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
+                WorkoutRoutine = domainObject.WorkoutRoutine == null 
+                    ? null 
+                    : MapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
                 WorkoutRoutineId = domainObject.WorkoutRoutineId
             };
 
