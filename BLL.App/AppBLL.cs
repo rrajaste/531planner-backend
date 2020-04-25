@@ -23,7 +23,15 @@ namespace BLL
             GetService<ITrainingDayService>(() => new TrainingDayService(UnitOfWork));
         public IBodyMeasurementService BodyMeasurements =>
             GetService<IBodyMeasurementService>(() => new BodyMeasurementService(UnitOfWork));
+        public IDailyNutritionIntakeService DailyNutritionIntakes => 
+            GetService<IDailyNutritionIntakeService>(() => new DailyNutritionIntakeService(UnitOfWork));
         public IExerciseService Exercises =>
             GetService<IExerciseService>(() => new ExerciseService(UnitOfWork));
+        public IUnitTypeService UnitTypes =>
+            GetService<IUnitTypeService>(() => new UnitTypeService(UnitOfWork));
+        public IMuscleService Muscles =>
+            GetService<IMuscleService>(() => new MuscleService(UnitOfWork));
+        public IMuscleGroupService MuscleGroups =>
+            GetService<IMuscleGroupService>(() => new MuscleGroupService(UnitOfWork));
     }
 }
