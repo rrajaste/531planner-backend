@@ -30,6 +30,7 @@ namespace Domain
         public TKey? AppUserId { get; set; }
         public AppUser? User { get; set; }
         
+        public ICollection<ExerciseSet>? ExerciseSets { get; set; }
         
         [Display(Name = nameof(RoutineType), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public RoutineType? RoutineType { get; set; }
@@ -37,7 +38,6 @@ namespace Domain
         
         
         [Display(Name = nameof(TrainingCycles), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
-
         public ICollection<TrainingCycle>? TrainingCycles { get; set; }
     }
 }
