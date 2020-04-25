@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Contracts.DAL.App;
 using Domain.Identity;
 using Extensions;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +9,9 @@ using PublicApi.DTO.V1.Account;
 
 namespace WebApplication.ApiControllers.Identity
 {
+    /// <summary>
+    /// Controller for managing user account related actions.
+    /// </summary>
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
@@ -22,6 +24,13 @@ namespace WebApplication.ApiControllers.Identity
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
 
+        /// <summary>
+        /// Constructor for AccountController
+        /// </summary>
+        /// <param name="configuration">WebApplication configuration.</param>
+        /// <param name="userManager">WebApplication User Manager</param>
+        /// <param name="signInManager">WebApplication Sign-in Manager</param>
+        /// <param name="logger">WebApplication logger</param>
         public AccountController(
             IConfiguration configuration,
             UserManager<AppUser> userManager,
@@ -36,8 +45,21 @@ namespace WebApplication.ApiControllers.Identity
         }
 
 
+        /// <summary>
+        /// Authenticate user credentials and return JSON Web Token for user. 
+        /// </summary>
+        /// <param name="dto">DTO containing login information.</param>
+        /// <returns>
+        /// Response object containing JSON Web Token for authenticated User
+        /// </returns>
+        /// <response code="200">
+        /// User was successfully authenticated and appropriate login response containing JSON Web Token was returned.
+        /// </response>
+        /// <response code="403">User authentication with provided credentials failed.</response>
+        [ProducesResponseType( typeof(LoginResponse), 200)]
+        [ProducesResponseType(403)]
         [HttpPost]
-        public async Task<ActionResult<string>> Login([FromBody] LoginDto dto)
+        public async Task<ActionResult<string>> Login([FromBody] Login dto)
         {
             var appUser = await _userManager.FindByNameAsync(dto.UserName);
             if (appUser == null)
@@ -63,8 +85,18 @@ namespace WebApplication.ApiControllers.Identity
             return StatusCode(403);
         }
 
+        
+        /// <summary>
+        /// Register new user with provided credentials into system. 
+        /// </summary>
+        /// <param name="dto">DTO containing registration information.</param>
+        /// <returns>Response object containing created user's User Name and Email</returns>
+        /// <response code="200">User was successfully registered into the system.</response>
+        /// <response code="403">User registration failed, see response message for details.</response>
         [HttpPost]
-        public async Task<ActionResult<string>> Register([FromBody] RegisterDto dto)
+        [ProducesResponseType( typeof(RegisterResponse), 200)]
+        [ProducesResponseType(403)]
+        public async Task<ActionResult<string>> Register([FromBody] Register dto)
         {
             if (await _userManager.FindByEmailAsync(dto.Email) != null)
             {
@@ -82,7 +114,7 @@ namespace WebApplication.ApiControllers.Identity
                 return BadRequest();
             }
             await _userManager.AddToRoleAsync(newUser, "user");
-            return Ok(new {username = dto.UserName, email = dto.Email});
+            return Ok(new RegisterResponse(){Email = newUser.Email, UserName = newUser.Email});
         }
     }
 }
