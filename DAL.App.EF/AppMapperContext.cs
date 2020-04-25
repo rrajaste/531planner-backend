@@ -1,7 +1,7 @@
 using Contracts.DAL.App;
 using DAL.App.EF.Mappers;
 using DAL.Base;
-using DAL.Base.Mappers;
+using Contracts.DAL.App.Mappers;
 using Domain;
 
 namespace DAL.App.EF

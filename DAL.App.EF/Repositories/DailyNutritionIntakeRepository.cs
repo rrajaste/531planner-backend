@@ -45,7 +45,7 @@ namespace DAL.App.EF.Repositories
             Mapper.MapDomainToDAL(await RepoDbSet
                 .Include(d => d.UnitType)
                 .SingleOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId));
-
+        
         public async Task<IEnumerable<DTO.DailyNutritionIntake>> AllWithAppUserIdAsync(Guid id) => (
             await RepoDbSet
                 .Include(d => d.UnitType)

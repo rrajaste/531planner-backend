@@ -56,5 +56,6 @@ namespace DAL.App.EF.Repositories
                     .Include(b => b.UnitType)
                     .FirstOrDefaultAsync(d => d.Id == id)
             );
+        
     }
 }
