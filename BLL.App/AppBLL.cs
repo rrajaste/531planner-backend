@@ -33,5 +33,11 @@ namespace BLL
             GetService<IMuscleService>(() => new MuscleService(UnitOfWork));
         public IMuscleGroupService MuscleGroups =>
             GetService<IMuscleGroupService>(() => new MuscleGroupService(UnitOfWork));
+        public ITrainingDayTypeService TrainingDayTypes => 
+            GetService<ITrainingDayTypeService>(() => new TrainingDayTypeService(UnitOfWork));
+        public IExerciseTypeService ExerciseTypes => 
+            GetService<IExerciseTypeService>(() => new ExerciseTypeService(UnitOfWork));
+        public IRoutineTypeService RoutineTypes =>
+            GetService<IRoutineTypeService>(() => new RoutineTypeService(UnitOfWork));
     }
 }

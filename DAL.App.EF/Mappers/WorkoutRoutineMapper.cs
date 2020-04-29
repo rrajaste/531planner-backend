@@ -21,7 +21,9 @@ namespace DAL.App.EF.Mappers
                 Name = domainObject.Name,
                 Description = domainObject.Description,
                 IsBaseRoutine = domainObject.IsBaseRoutine,
-                RoutineType = MapperContext.RoutineTypeMapper.MapDomainToDAL(domainObject.RoutineType),
+                RoutineType = domainObject.RoutineType == null 
+                    ? null 
+                    : MapperContext.RoutineTypeMapper.MapDomainToDAL(domainObject.RoutineType),
                 RoutineTypeId = domainObject.RoutineTypeId,
                 TrainingCycles = domainObject.TrainingCycles?.Select(MapperContext.TrainingCycleMapper.MapDomainToDAL)
             };

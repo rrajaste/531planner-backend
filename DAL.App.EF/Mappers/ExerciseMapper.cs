@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
@@ -19,9 +20,15 @@ namespace DAL.App.EF.Mappers
                 Name = domainObject.Name,
                 Description = domainObject.Description,
                 ExerciseTypeId = domainObject.ExerciseTypeId,
-                ExerciseType = MapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
+                ExerciseType = domainObject.ExerciseType == null 
+                    ? null 
+                    : MapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
                 TargetMuscleGroups = domainObject.TargetMuscleGroups?
-                    .Select(t => MapperContext.MuscleGroupMapper.MapDomainToDAL(t.MuscleGroup))
+                    .Select(
+                        t => t.MuscleGroup != null 
+                            ? MapperContext.MuscleGroupMapper.MapDomainToDAL(t.MuscleGroup) 
+                            : throw new ApplicationException("Muscle group cannot be null!")
+                        )
             };
 
         public Domain.Exercise MapDALToDomain(Exercise dalObject) =>

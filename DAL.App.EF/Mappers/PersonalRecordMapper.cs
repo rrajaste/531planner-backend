@@ -16,10 +16,10 @@ namespace DAL.App.EF.Mappers
             {
                 Id = domainObject.Id,
                 AppUserId = domainObject.Id,
-                ExerciseSet = MapperContext.ExerciseSetMapper.MapDomainToDAL(domainObject.ExerciseSet),
+                ExerciseSet = domainObject.ExerciseSet == null 
+                    ? null 
+                    : MapperContext.ExerciseSetMapper.MapDomainToDAL(domainObject.ExerciseSet),
                 ExerciseSetId = domainObject.ExerciseSetId,
-                WorkoutRoutine = MapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
-                WorkoutRoutineId = domainObject.WorkoutRoutineId
             };
 
         public Domain.PersonalRecord MapDALToDomain(PersonalRecord dalObject) =>
@@ -28,7 +28,6 @@ namespace DAL.App.EF.Mappers
                 Id = dalObject.Id,
                 AppUserId = dalObject.Id,
                 ExerciseSetId = dalObject.ExerciseSetId,
-                WorkoutRoutineId = dalObject.WorkoutRoutineId
             };
     }
 }

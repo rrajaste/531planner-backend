@@ -15,7 +15,7 @@ namespace DAL.App.EF.Mappers
             new DailyNutritionIntake()
             {
                 Id = domainObject.Id,
-                AppUserId = domainObject.Id,
+                AppUserId = domainObject.AppUserId,
                 Calories = domainObject.Calories,
                 Carbohydrates = domainObject.Carbohydrates,
                 LoggedAt = domainObject.LoggedAt,
@@ -31,7 +31,7 @@ namespace DAL.App.EF.Mappers
             new Domain.DailyNutritionIntake()
             {
                 Id = dalObject.Id,
-                AppUserId = dalObject.Id,
+                AppUserId = dalObject.AppUserId,
                 Calories = dalObject.Calories,
                 Carbohydrates = dalObject.Carbohydrates,
                 Fats = dalObject.Fats,
