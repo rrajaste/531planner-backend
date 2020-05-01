@@ -4,7 +4,7 @@ namespace Contracts.BLL.Base.Mappers
         where TOutObject : class, new()
         where TInObject : class, new() 
     {
-        TOutObject Map<TOutObject, TInObject>(TInObject inObject)
+        TOutObject Map<TInObject, TOutObject>(TInObject inObject)
             where TOutObject : class, new()
             where TInObject : class, new();
     }

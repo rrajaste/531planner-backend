@@ -1,3 +1,4 @@
+using System.Linq;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
 using DAL.App.DTO;
@@ -16,7 +17,11 @@ namespace DAL.App.EF.Mappers
             {
                 Id = domainObject.Id,
                 Name = domainObject.Name,
-                Description = domainObject.Description
+                Description = domainObject.Description,
+                ParentType = domainObject.ParentType == null 
+                    ? null 
+                    : MapDomainToDAL(domainObject.ParentType),
+                SubTypes = domainObject.SubTypes?.Select(MapDomainToDAL)
             };
 
         public Domain.RoutineType MapDALToDomain(RoutineType dalObject) =>
@@ -24,7 +29,8 @@ namespace DAL.App.EF.Mappers
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,
-                Description = dalObject.Description
+                Description = dalObject.Description,
+                ParentTypeId = dalObject.ParentTypeId
             };
     }
 }

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.DAL.App.Mappers;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
-using DAL.Base.Mappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Base.EF.Repositories
@@ -50,10 +50,18 @@ namespace DAL.Base.EF.Repositories
             (await RepoDbSet.ToListAsync()).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
 
         public virtual TDALEntity Find(TKey id) 
-            => Mapper.MapDomainToDAL(RepoDbSet.Find(id));
+            => Mapper.MapDomainToDAL(
+                RepoDbSet
+                    .AsNoTracking()
+                    .FirstOrDefault(entity => entity.Id.Equals(id))
+                );
 
         public virtual async Task<TDALEntity> FindAsync(TKey id) =>
-            Mapper.MapDomainToDAL(await RepoDbSet.FindAsync(id));
+            Mapper.MapDomainToDAL(
+                await RepoDbSet
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(entity => entity.Id.Equals(id))
+                );
         
         public virtual TDALEntity Add(TDALEntity entity) => 
             Mapper.MapDomainToDAL(RepoDbSet.Add(Mapper.MapDALToDomain(entity)).Entity);
@@ -63,8 +71,7 @@ namespace DAL.Base.EF.Repositories
 
         public virtual TDALEntity Remove(TDALEntity entity) => 
             Mapper.MapDomainToDAL(RepoDbSet.Remove(Mapper.MapDALToDomain(entity)).Entity);
-
-        public virtual TDALEntity Remove(TKey id) => Remove(Find(id));
+        public virtual TDALEntity Remove(TKey id) => 
+            Mapper.MapDomainToDAL(RepoDbSet.Remove(RepoDbSet.Find(id)).Entity);
     }
-    
 }

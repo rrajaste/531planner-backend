@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {}
+    "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {}
   },
   "projects": {
-    "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
+    "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj",
+        "projectUniqueName": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj",
         "projectName": "Contracts.DAL.Base",
-        "projectPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj",
-        "packagesPath": "/home/ranno/.nuget/packages/",
-        "outputPath": "/home/ranno/Documents/git/distsys/icd0009-2019s/531-planner/Contracts.DAL.Base/obj/",
+        "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.DAL.Base/Contracts.DAL.Base.csproj",
+        "packagesPath": "/home/bombstrap/.nuget/packages/",
+        "outputPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.DAL.Base/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/ranno/.nuget/NuGet/NuGet.Config"
+          "/home/bombstrap/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.1"
@@ -36,6 +36,10 @@
       "frameworks": {
         "netstandard2.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
               "version": "[3.1.2, )"
@@ -60,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
         }
       }
     }
