@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Contracts.DAL.Base;
 using DAL.Base;
 using Domain.Identity;
-using Resources.Domain;
 
 namespace Domain
 {
@@ -15,6 +15,9 @@ namespace Domain
     public class WorkoutRoutine<TKey> : DomainEntityBaseMetadata<TKey> 
         where TKey : struct, IEquatable<TKey>
     { 
+        
+        // TODO: Fix translations
+        
         [MaxLength(255)]
         [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public string Name { get; set; } = default!;

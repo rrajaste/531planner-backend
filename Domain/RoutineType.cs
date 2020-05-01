@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Contracts.DAL.Base;
 using DAL.Base;
@@ -19,5 +20,11 @@ namespace Domain
         [MaxLength(255)]
         [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.RoutineType))]
         public string Description { get; set; } = default!;
+        
+        public TKey? ParentTypeId { get; set; }
+        
+        public RoutineType? ParentType { get; set; }
+        
+        public ICollection<RoutineType>? SubTypes { get; set; }
     }
 }

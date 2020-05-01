@@ -41,5 +41,8 @@ namespace Domain
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         [Display(Name = nameof(UnitType), ResourceType = typeof(Resources.Domain.ExerciseSet))]
         public UnitType? UnitType { get; set; }
+        
+        public SetType? SetType { get; set; }
+        public TKey SetTypeId { get; set; }
     }
 }

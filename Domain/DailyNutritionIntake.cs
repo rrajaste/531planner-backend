@@ -32,7 +32,7 @@ namespace Domain
         [Display(Name = nameof(LoggedAt), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
         public DateTime LoggedAt => CreatedAt.Date;
         
-        public TKey? AppUserId { get; set; }
+        public TKey AppUserId { get; set; }
 
         public TKey UnitTypeId { get; set; }
         
