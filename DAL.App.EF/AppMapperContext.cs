@@ -55,5 +55,8 @@ namespace DAL.App.EF
 
         public IDALMapper<TrainingDayType, DTO.TrainingDayType> TrainingDayTypeMapper =>
             GetMapper(() => new TrainingDayTypeMapper(this));
+        
+        public IDALMapper<SetType, DTO.SetType> SetTypeMapper =>
+            GetMapper(() => new SetTypeMapper(this));
     }
 }

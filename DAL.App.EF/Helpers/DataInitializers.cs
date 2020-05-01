@@ -33,8 +33,8 @@ namespace DAL.App.EF.Helpers
         public static void SeedData(AppDbContext context)
         {
             var path = SeedDataFilePaths.BasePath;
-            SeedDomainEntity(context.UnitTypes, path + SeedDataFilePaths.UnitTypes);
             SeedDomainEntity(context.RoutineTypes, path + SeedDataFilePaths.RoutineTypes);
+            SeedDomainEntity(context.UnitTypes, path + SeedDataFilePaths.UnitTypes);
             SeedDomainEntity(context.ExerciseTypes, path + SeedDataFilePaths.ExerciseTypes);
             SeedDomainEntity(context.MuscleGroups, path + SeedDataFilePaths.MuscleGroups);
             SeedDomainEntity(context.TrainingDaysTypes, path + SeedDataFilePaths.TrainingDayTypes);

@@ -19,7 +19,7 @@ namespace BLL.Base.Mappers
             }).CreateMapper();
         }
 
-        public TOutObject Map<TOutObject, TInObject>(TInObject inObject) 
+        public TOutObject Map<TInObject, TOutObject>(TInObject inObject) 
             where TOutObject : class, new() 
             where TInObject : class, new()
         {

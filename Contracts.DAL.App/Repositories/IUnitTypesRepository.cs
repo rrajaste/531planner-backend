@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
-using Domain;
-using PublicApi.DTO.V1;
-using UnitType = DAL.App.DTO.UnitType;
+using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using App.DTO;
-using Contracts.BLL.App;
-using Domain;
+using Contracts.BLL.App.Services;
+using BLL.App.DTO;
 using Extensions;
 
 namespace BLL

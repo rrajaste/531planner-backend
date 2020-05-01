@@ -1,6 +1,5 @@
 using Contracts.BLL.App.Services;
 using Contracts.BLL.Base;
-using Contracts.BLL.Base.Services;
 
 namespace Contracts.BLL.App
 {
@@ -16,5 +15,8 @@ namespace Contracts.BLL.App
         public IUnitTypeService UnitTypes { get; }
         public IMuscleService Muscles { get; }
         public IMuscleGroupService MuscleGroups { get; }
+        public ITrainingDayTypeService TrainingDayTypes { get; }
+        public IExerciseTypeService ExerciseTypes { get; }
+        public IRoutineTypeService RoutineTypes { get; }
     }
 }

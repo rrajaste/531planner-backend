@@ -74,6 +74,10 @@ namespace DAL.App.EF
             GetRepository<IWorkoutRoutineRepository>(
                 ()=> new WorkoutRoutineRepository(UnitOfWorkDbContext, _mapperContext.WorkoutRoutineMapper));
 
+        public ISetTypeRepository SetTypes => 
+            GetRepository<SetTypeRepository>(
+                ()=> new SetTypeRepository(UnitOfWorkDbContext, _mapperContext.SetTypeMapper));
+        
         public AppUnitOfWork(AppDbContext unitOfWorkDbContext, IAppMapperContext ctx) : base(unitOfWorkDbContext)
         {
             _mapperContext = ctx;

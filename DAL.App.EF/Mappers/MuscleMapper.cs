@@ -28,6 +28,7 @@ namespace DAL.App.EF.Mappers
                 Id = dalObject.Id,
                 Description = dalObject.Description,
                 Name = dalObject.Name,
+                MuscleGroupId = dalObject.MuscleGroupId
             };
     }
 }

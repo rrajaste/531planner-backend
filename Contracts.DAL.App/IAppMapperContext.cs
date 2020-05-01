@@ -21,5 +21,6 @@ namespace Contracts.DAL.App
         IDALMapper<Domain.WorkoutRoutine, WorkoutRoutine> WorkoutRoutineMapper { get; }
         IDALMapper<Domain.TargetMuscleGroup, TargetMuscleGroup> TargetMuscleGroupMapper { get; }
         IDALMapper<Domain.TrainingDayType, TrainingDayType> TrainingDayTypeMapper { get; }
+        IDALMapper<Domain.SetType, SetType> SetTypeMapper { get; }
     }
 }

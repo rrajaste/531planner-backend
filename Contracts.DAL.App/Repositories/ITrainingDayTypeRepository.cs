@@ -2,7 +2,6 @@ using System;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
 using DAL.App.DTO;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace Contracts.DAL.App.Repositories
 {

@@ -35,11 +35,19 @@ namespace DAL.App.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            // Remove second cascade path to get around multiple cascade path issues
             modelBuilder.Entity<WorkoutRoutine>()
-                .HasMany(w => w.ExerciseSets)
+                .HasMany(routine => routine.ExerciseSets)
                 .WithOne(nameof(ExerciseSet.WorkoutRoutine))
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
+            
+            // Add recursive one-to-many relationship
+            modelBuilder.Entity<RoutineType>()
+                .HasMany(type => type.SubTypes)
+                .WithOne(type => type.ParentType)
+                .HasForeignKey(routine => routine.ParentTypeId);
         }
     }
 }
