@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using Contracts.DAL.App;
+using Contracts.BLL.App;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using WebApplication.ViewModels;
+using WebApplication.Areas.Admin.ViewModels;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
@@ -13,17 +13,17 @@ namespace WebApplication.Areas.Admin.Controllers
     [Area("admin")]
     public class MusclesController : Controller
     {
-        private readonly IAppUnitOfWork _unitOfWork;
+        private readonly IAppBLL _bll;
 
-        public MusclesController(IAppUnitOfWork unitOfWork)
+        public MusclesController(IAppBLL bll)
         {
-            _unitOfWork = unitOfWork;
+            _bll = bll;
         }
 
         // GET: Muscles
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.Muscles.AllAsync());
+            return View(await _bll.Muscles.AllAsync());
         }
 
         // GET: Muscles/Details/5
@@ -34,7 +34,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var muscle = await _unitOfWork.Muscles.FindAsync(id);
+            var muscle = await _bll.Muscles.FindAsync((Guid) id);
                 
             if (muscle == null)
             {
@@ -48,7 +48,7 @@ namespace WebApplication.Areas.Admin.Controllers
         public IActionResult Create()
         {
             var viewModel = new MuscleCreateEditViewModel();
-            var muscleGroups = _unitOfWork.MuscleGroups.All();
+            var muscleGroups = _bll.MuscleGroups.All();
             viewModel.MuscleGroupSelectList = new SelectList(muscleGroups, nameof(
                 MuscleGroup.Id), nameof(MuscleGroup.Name));
             return View(viewModel);
@@ -63,13 +63,12 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                viewModel.Muscle.Id = Guid.NewGuid();
-                _unitOfWork.Muscles.Add(viewModel.Muscle);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.Muscles.Add(viewModel.Muscle);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            var muscleGroups = _unitOfWork.MuscleGroups.All();
+            var muscleGroups = await _bll.MuscleGroups.AllAsync();
             viewModel.MuscleGroupSelectList = new SelectList(muscleGroups, nameof(
                 MuscleGroup.Id), nameof(MuscleGroup.Name));
             return View(viewModel);
@@ -85,9 +84,9 @@ namespace WebApplication.Areas.Admin.Controllers
             
             var viewModel = new MuscleCreateEditViewModel
             {
-                Muscle = await _unitOfWork.Muscles.FindAsync(id),
+                Muscle = await _bll.Muscles.FindAsync((Guid) id),
                 MuscleGroupSelectList = new SelectList(
-                    _unitOfWork.MuscleGroups.All(), 
+                    await _bll.MuscleGroups.AllAsync(), 
                     nameof(MuscleGroup.Id), 
                     nameof(MuscleGroup.Name))
             };
@@ -112,13 +111,13 @@ namespace WebApplication.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Muscles.Update(viewModel.Muscle);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.Muscles.Update(viewModel.Muscle);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
             viewModel.MuscleGroupSelectList = new SelectList(
-                _unitOfWork.MuscleGroups.All(),
+                _bll.MuscleGroups.All(),
                 nameof(MuscleGroup.Id),
                 nameof(MuscleGroup.Name));
             
@@ -133,7 +132,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var muscle = await _unitOfWork.Muscles.FindAsync(id);
+            var muscle = await _bll.Muscles.FindAsync((Guid) id);
             if (muscle == null)
             {
                 return NotFound();
@@ -147,9 +146,9 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var muscle = await _unitOfWork.Muscles.FindAsync(id);
-            _unitOfWork.Muscles.Remove(muscle);
-            await _unitOfWork.SaveChangesAsync();
+            var muscle = await _bll.Muscles.FindAsync(id);
+            _bll.Muscles.Remove(muscle);
+            await _bll.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

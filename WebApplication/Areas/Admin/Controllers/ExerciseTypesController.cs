@@ -1,27 +1,28 @@
 using System;
 using System.Threading.Tasks;
-using Contracts.DAL.App;
-using Domain;
+using Contracts.BLL.App;
+using BLL.App.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
+    
     [Authorize(Roles = "admin")]
     [Area("admin")]
     public class ExerciseTypesController : Controller
     {
-        private readonly IAppUnitOfWork _unitOfWork;
+        private readonly IAppBLL _bll;
 
-        public ExerciseTypesController(IAppUnitOfWork unitOfWork)
+        public ExerciseTypesController(IAppBLL bll)
         {
-            _unitOfWork = unitOfWork;
+            _bll = bll;
         }
 
         // GET: ExerciseTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.ExerciseTypes.AllAsync());
+            return View(await _bll.ExerciseTypes.AllAsync());
         }
 
         // GET: ExerciseTypes/Details/5
@@ -32,7 +33,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var exerciseType = await _unitOfWork.ExerciseTypes.FindAsync(id);
+            var exerciseType = await _bll.ExerciseTypes.FindAsync((Guid) id);
             if (exerciseType == null)
             {
                 return NotFound();
@@ -52,13 +53,13 @@ namespace WebApplication.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ExerciseType exerciseType)
+        public async Task<IActionResult> Create(BLL.App.DTO.ExerciseType exerciseType)
         {
             if (ModelState.IsValid)
             {
                 exerciseType.Id = Guid.NewGuid();
-                _unitOfWork.ExerciseTypes.Add(exerciseType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.ExerciseTypes.Add(exerciseType);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(exerciseType);
@@ -72,7 +73,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var exerciseType = await _unitOfWork.ExerciseTypes.FindAsync(id);
+            var exerciseType = await _bll.ExerciseTypes.FindAsync((Guid) id);
             if (exerciseType == null)
             {
                 return NotFound();
@@ -95,8 +96,8 @@ namespace WebApplication.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
             
-                _unitOfWork.ExerciseTypes.Update(exerciseType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.ExerciseTypes.Update(exerciseType);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(exerciseType);
@@ -110,7 +111,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var exerciseType = await _unitOfWork.ExerciseTypes.FindAsync(id);
+            var exerciseType = await _bll.ExerciseTypes.FindAsync((Guid) id);
             if (exerciseType == null)
             {
                 return NotFound();
@@ -124,9 +125,9 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var exerciseType = await _unitOfWork.ExerciseTypes.FindAsync(id);
-            _unitOfWork.ExerciseTypes.Remove(exerciseType);
-            await _unitOfWork.SaveChangesAsync();
+            var exerciseType = await _bll.ExerciseTypes.FindAsync(id);
+            _bll.ExerciseTypes.Remove(exerciseType);
+            await _bll.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

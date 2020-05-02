@@ -15,7 +15,7 @@ namespace PublicApi.DTO.V1.Mappers
                 Fats = bllEntity.Fats,
                 Protein = bllEntity.Protein,
                 LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
-                UnitType = bllEntity.UnitType.Name,
+                UnitType = bllEntity.UnitType == null ? null : bllEntity.UnitType.Name,
                 UnitTypeId = bllEntity.UnitTypeId.ToString()
             };
         }

@@ -46,7 +46,7 @@ namespace DAL.App.EF
             // Add recursive one-to-many relationship
             modelBuilder.Entity<RoutineType>()
                 .HasMany(type => type.SubTypes)
-                .WithOne(type => type.ParentType)
+                .WithOne()
                 .HasForeignKey(routine => routine.ParentTypeId);
         }
     }

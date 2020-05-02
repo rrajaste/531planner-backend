@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Domain;
+using BLL.App.DTO;
 
 namespace App.DTO
 {

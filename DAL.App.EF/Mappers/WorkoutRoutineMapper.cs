@@ -4,7 +4,6 @@ using Contracts.DAL.App.Mappers;
 using DAL.App.DTO;
 using DAL.Base.EF;
 
-
 namespace DAL.App.EF.Mappers
 {
     public class WorkoutRoutineMapper : EFBaseMapper, IDALMapper<Domain.WorkoutRoutine, WorkoutRoutine>
@@ -20,7 +19,7 @@ namespace DAL.App.EF.Mappers
                 AppUserId = domainObject.Id,
                 Name = domainObject.Name,
                 Description = domainObject.Description,
-                IsBaseRoutine = domainObject.IsBaseRoutine,
+                IsBaseRoutine = domainObject.AppUserId == null,
                 RoutineType = domainObject.RoutineType == null 
                     ? null 
                     : MapperContext.RoutineTypeMapper.MapDomainToDAL(domainObject.RoutineType),
@@ -32,7 +31,7 @@ namespace DAL.App.EF.Mappers
             new Domain.WorkoutRoutine()
             {
                 Id = dalObject.Id,
-                AppUserId = dalObject.Id,
+                AppUserId = dalObject.AppUserId,
                 Name = dalObject.Name,
                 Description = dalObject.Description,
                 IsBaseRoutine = dalObject.IsBaseRoutine,

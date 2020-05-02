@@ -23,8 +23,6 @@ namespace Domain
         
         public TKey? ParentTypeId { get; set; }
         
-        public RoutineType? ParentType { get; set; }
-        
         public ICollection<RoutineType>? SubTypes { get; set; }
     }
 }

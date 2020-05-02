@@ -14,7 +14,6 @@ namespace DAL.App.DTO
         public TKey Id { get; set; } = default!;
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
-        public RoutineType? ParentType { get; set; }
         public TKey? ParentTypeId { get; set; }
         public IEnumerable<RoutineType>? SubTypes { get; set; }
     }

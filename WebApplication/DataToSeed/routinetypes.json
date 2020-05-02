@@ -1,14 +1,16 @@
 [
   {
-    "name": "5/3/1 building the monolith",
-    "description": "Maximum focus on building size, challenging and taxing routine."
-  },
-  {
-    "name": "5/3/1 boring but big",
-    "description": "The most popular 5/3/1 variant, uses same exercise for accessory sets as for main lifts."
-  },
-  {
-    "name": "5/3/1 periodization bible",
-    "description": "Changes accessory lifts every workout cycle."
+    "name": "Cyclic progression",
+    "description": "Routines with cyclic non linear progression, typically meant for intermediate to advanced lifters",
+    "subtypes": [
+      {
+        "name": "5/3/1",
+        "description": "Classic 5/3/1 routine by Jim Wendler."
+      },
+      {
+        "name": "Beyond 5/3/1",
+        "description": "5/3/1 revisited"
+      }
+    ]
   }
 ]

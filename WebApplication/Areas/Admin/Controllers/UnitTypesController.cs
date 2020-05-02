@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Domain;
+using BLL.App.DTO;
+using Contracts.BLL.App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,17 +12,17 @@ namespace WebApplication.Areas.Admin.Controllers
     [Authorize(Roles = "admin")]
     public class UnitTypesController : Controller
     {
-        private readonly IAppUnitOfWork _unitOfWork;
+        private readonly IAppBLL _bll;
 
-        public UnitTypesController(IAppUnitOfWork unitOfWork)
+        public UnitTypesController(IAppBLL bll)
         {
-            _unitOfWork = unitOfWork;
+            _bll = bll;
         }
 
         // GET: UnitType
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.UnitTypes.AllAsync());
+            return View(await _bll.UnitTypes.AllAsync());
         }
 
         // GET: UnitType/Details/5
@@ -32,7 +33,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            var unitType = await _bll.UnitTypes.FindAsync((Guid) id);
             if (unitType == null)
             {
                 return NotFound();
@@ -56,8 +57,8 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.UnitTypes.Add(unitType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.UnitTypes.Add(unitType);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(unitType);
@@ -71,7 +72,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var unitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            var unitType = await _bll.UnitTypes.FindAsync((Guid) id);
             if (unitType == null)
             {
                 return NotFound();
@@ -84,20 +85,20 @@ namespace WebApplication.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, UnitType UnitType)
+        public async Task<IActionResult> Edit(Guid id, UnitType unitType)
         {
-            if (id != UnitType.Id)
+            if (id != unitType.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.UnitTypes.Update(UnitType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.UnitTypes.Update(unitType);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(UnitType);
+            return View(unitType);
         }
 
         // GET: UnitType/Delete/5
@@ -108,7 +109,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
+            var UnitType = await _bll.UnitTypes.FindAsync((Guid) id);
             if (UnitType == null)
             {
                 return NotFound();
@@ -122,9 +123,9 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var UnitType = await _unitOfWork.UnitTypes.FindAsync(id);
-            _unitOfWork.UnitTypes.Remove(UnitType);
-            await _unitOfWork.SaveChangesAsync();
+            var UnitType = await _bll.UnitTypes.FindAsync(id);
+            _bll.UnitTypes.Remove(UnitType);
+            await _bll.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

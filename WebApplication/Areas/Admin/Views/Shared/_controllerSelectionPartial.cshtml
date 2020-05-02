@@ -1,6 +1,17 @@
-<ul class="navbar-nav">
+<ul class="navbar-nav">    
     <li class="nav-item dropdown">
-        <a class="nav-link" aria-haspopup="true" aria-expanded="false">Routines</a>
+        <a class="nav-link" id="navbarAdminArea" aria-haspopup="true" aria-expanded="false" asp-area="Admin" asp-controller="Home">
+            Admin area
+        </a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuRoutines" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Routines
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" asp-area="admin" asp-controller="WorkoutRoutines" asp-action="Index">Classic 5/3/1</a>
+            <a class="dropdown-item disabled" asp-area="admin" asp-controller="WorkoutRoutines" asp-action="Index">Beyond 5/3/1 - COMING SOON</a>
+            <a class="dropdown-item disabled" asp-area="admin" asp-controller="WorkoutRoutines" asp-action="Index">Linear progression - COMING SOON</a>
+        </div>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuAccounts" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -16,13 +27,13 @@
             Data
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" asp-area="admin" asp-controller="Muscles">Muscles</a>
-            <a class="dropdown-item" asp-area="admin" asp-controller="MuscleGroups">Muscle groups</a>
-            <a class="dropdown-item" asp-area="admin" asp-controller="Exercises">Exercises</a>
-            <a class="dropdown-item" asp-area="admin" asp-controller="ExerciseTypes">Exercise types</a>
-            <a class="dropdown-item" asp-area="admin" asp-controller="RoutineTypes">Routine types</a>
-            <a class="dropdown-item" asp-area="admin" asp-controller="TrainingDayTypes">Trainig day types</a>
-            <a class="dropdown-item" asp-area="admin" asp-controller="UnitTypes">Unit types</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="Muscles" asp-action="Index">Muscles</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="MuscleGroups" asp-action="Index">Muscle groups</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="Exercises" asp-action="Index">Exercises</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="ExerciseTypes" asp-action="Index">Exercise types</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="RoutineTypes" asp-action="Index">Routine types</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="TrainingDayTypes" asp-action="Index">Trainig day types</a>
+            <a class="dropdown-item" asp-area="admin" asp-controller="UnitTypes" asp-action="Index">Unit types</a>
         </div>
     </li>
 </ul>

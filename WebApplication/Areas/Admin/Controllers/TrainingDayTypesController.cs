@@ -1,7 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Contracts.DAL.App;
-using Domain;
+using BLL.App.DTO;
+using Contracts.BLL.App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,17 +12,17 @@ namespace WebApplication.Areas.Admin.Controllers
     [Area("admin")]
     public class TrainingDayTypesController : Controller
     {
-        private readonly IAppUnitOfWork _unitOfWork;
+        private readonly IAppBLL _bll;
 
-        public TrainingDayTypesController(IAppUnitOfWork unitOfWork)
+        public TrainingDayTypesController(IAppBLL bll)
         {
-            _unitOfWork = unitOfWork;
+            _bll = bll;
         }
 
         // GET: TrainingDayTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.TrainingDayTypes.AllAsync());
+            return View(await _bll.TrainingDayTypes.AllAsync());
         }
 
         // GET: TrainingDayTypes/Details/5
@@ -32,7 +33,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
+            var trainingDayType = await _bll.TrainingDayTypes.FindAsync((Guid) id);
             if (trainingDayType == null)
             {
                 return NotFound();
@@ -52,12 +53,12 @@ namespace WebApplication.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TrainingDayTypeId,Name,Description,Id,CreatedAt,DeletedAt,Comment")] TrainingDayType trainingDayType)
+        public async Task<IActionResult> Create(TrainingDayType trainingDayType)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.TrainingDayTypes.Add(trainingDayType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.TrainingDayTypes.Add(trainingDayType);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingDayType);
@@ -71,7 +72,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
+            var trainingDayType = await _bll.TrainingDayTypes.FindAsync((Guid) id);
             if (trainingDayType == null)
             {
                 return NotFound();
@@ -84,7 +85,7 @@ namespace WebApplication.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("TrainingDayTypeId,Name,Description,Id,CreatedAt,DeletedAt,Comment")] TrainingDayType trainingDayType)
+        public async Task<IActionResult> Edit(Guid id, TrainingDayType trainingDayType)
         {
             if (id != trainingDayType.Id)
             {
@@ -93,8 +94,8 @@ namespace WebApplication.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.TrainingDayTypes.Update(trainingDayType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.TrainingDayTypes.Update(trainingDayType);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(trainingDayType);
@@ -108,7 +109,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
+            var trainingDayType = await _bll.TrainingDayTypes.FindAsync((Guid) id);
             if (trainingDayType == null)
             {
                 return NotFound();
@@ -122,9 +123,9 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var trainingDayType = await _unitOfWork.TrainingDayTypes.FindAsync(id);
-            _unitOfWork.TrainingDayTypes.Remove(trainingDayType);
-            await _unitOfWork.SaveChangesAsync();
+            var trainingDayType = await _bll.TrainingDayTypes.FindAsync(id);
+            _bll.TrainingDayTypes.Remove(trainingDayType);
+            await _bll.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

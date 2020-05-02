@@ -36,7 +36,7 @@ namespace DAL.App.EF.Repositories
 
         public async Task<IEnumerable<DTO.WorkoutRoutine>> AllActiveBaseRoutinesAsync() => (
             await RepoDbSet.Where(
-                w => w.IsBaseRoutine
+                w => w.AppUserId == null
                      && w.ClosedAt > DateTime.Now
                      && w.CreatedAt <= DateTime.Now
                     ).ToListAsync()
@@ -44,7 +44,7 @@ namespace DAL.App.EF.Repositories
 
         public async Task<IEnumerable<DTO.WorkoutRoutine>> AllInactiveBaseRoutinesAsync() => (
             await RepoDbSet.Where(
-                w => w.IsBaseRoutine
+                w => w.AppUserId == null
                      && w.ClosedAt >= DateTime.Now
                      && w.CreatedAt <= DateTime.Now
                 ).ToListAsync()
@@ -52,7 +52,7 @@ namespace DAL.App.EF.Repositories
 
         public async Task<IEnumerable<DTO.WorkoutRoutine>> AllUnPublishedBaseRoutinesAsync() => (
             await RepoDbSet.Where(
-                w => w.IsBaseRoutine
+                w => w.AppUserId == null
                      && w.ClosedAt >= DateTime.Now
                      && w.CreatedAt == DateTime.MaxValue
                 ).ToListAsync()
@@ -61,7 +61,8 @@ namespace DAL.App.EF.Repositories
         public async Task<DTO.WorkoutRoutine> FindBaseRoutineAsync(Guid id) =>
             Mapper.MapDomainToDAL(
                 await RepoDbSet.Where(
-                    w => w.IsBaseRoutine && w.Id == id
+                    w => w.AppUserId == null
+                         && w.Id == id
                 ).SingleOrDefaultAsync()
             );
     }

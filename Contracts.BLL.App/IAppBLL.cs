@@ -9,6 +9,7 @@ namespace Contracts.BLL.App
         public IWorkoutRoutineService WorkoutRoutines { get; }
         public ITrainingWeekService TrainingWeeks { get; }
         public ITrainingDayService TrainingDays { get; }
+        public ITrainingCycleService TrainingCycles { get; }
         public IBodyMeasurementService BodyMeasurements { get; }
         public IDailyNutritionIntakeService DailyNutritionIntakes { get; }
         public IExerciseService Exercises { get; }

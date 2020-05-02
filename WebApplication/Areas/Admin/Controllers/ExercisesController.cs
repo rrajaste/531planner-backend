@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using Contracts.DAL.App;
+using Contracts.BLL.App;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using WebApplication.ViewModels;
+using WebApplication.Areas.Admin.ViewModels;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
@@ -13,20 +13,18 @@ namespace WebApplication.Areas.Admin.Controllers
     [Authorize(Roles = "admin")]
     public class ExercisesController : Controller
     {
-        private readonly IAppUnitOfWork _unitOfWork;
+        private readonly IAppBLL _bll;
 
-        public ExercisesController(IAppUnitOfWork unitOfWork)
+        public ExercisesController(IAppBLL bll)
         {
-            _unitOfWork = unitOfWork;
+            _bll = bll;
         }
-
-        // GET: Exercises
+        
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.Exercises.AllAsync());
+            return View(await _bll.Exercises.AllAsync());
         }
-
-        // GET: Exercises/Details/5
+        
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -34,7 +32,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var exercise = await _unitOfWork.Exercises.FindAsync(id);
+            var exercise = await _bll.Exercises.FindAsync((Guid) id);
             if (exercise == null)
             {
                 return NotFound();
@@ -42,56 +40,48 @@ namespace WebApplication.Areas.Admin.Controllers
 
             return View(exercise);
         }
-
-        // GET: Exercises/Create
+        
         public IActionResult Create()
         {
             var viewModel = new ExerciseCreateEditViewModel();
-            var exerciseTypes = _unitOfWork.ExerciseTypes.All();
+            var exerciseTypes = _bll.ExerciseTypes.All();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }
 
-        // POST: Exercises/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ExerciseCreateEditViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Exercises.Add(viewModel.Exercise);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.Exercises.Add(viewModel.Exercise);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var exerciseTypes = _unitOfWork.ExerciseTypes.All();
+            var exerciseTypes = _bll.ExerciseTypes.All();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }
-
-        // GET: Exercises/Edit/5
+        
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var exercise = await _unitOfWork.Exercises.FindAsync(id);
+            var exercise = await _bll.Exercises.FindAsync((Guid) id);
             if (exercise == null)
             {
                 return NotFound();
             }
 
             var viewModel = new ExerciseCreateEditViewModel {Exercise = exercise};
-            var exerciseTypes = _unitOfWork.ExerciseTypes.All();
+            var exerciseTypes = _bll.ExerciseTypes.All();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }
-
-        // POST: Exercises/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ExerciseCreateEditViewModel viewModel)
@@ -103,25 +93,23 @@ namespace WebApplication.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.Exercises.Update(viewModel.Exercise);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.Exercises.Update(viewModel.Exercise);
+                await _bll.SaveChangesAsync();
                 
                 return RedirectToAction(nameof(Index));
             }
-            var exerciseTypes = _unitOfWork.ExerciseTypes.All();
+            var exerciseTypes = _bll.ExerciseTypes.All();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }
 
-        // GET: Exercises/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var exercise = await _unitOfWork.Exercises.FindAsync(id);
+            var exercise = await _bll.Exercises.FindAsync((Guid) id);
             if (exercise == null)
             {
                 return NotFound();
@@ -129,15 +117,14 @@ namespace WebApplication.Areas.Admin.Controllers
 
             return View(exercise);
         }
-
-        // POST: Exercises/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var exercise = await _unitOfWork.Exercises.FindAsync(id);
-            _unitOfWork.Exercises.Remove(exercise);
-            await _unitOfWork.SaveChangesAsync();
+            var exercise = await _bll.Exercises.FindAsync(id);
+            _bll.Exercises.Remove(exercise);
+            await _bll.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

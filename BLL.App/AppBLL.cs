@@ -21,6 +21,8 @@ namespace BLL
             GetService<ITrainingWeekService>(() => new TrainingWeekService(UnitOfWork));
         public ITrainingDayService TrainingDays =>
             GetService<ITrainingDayService>(() => new TrainingDayService(UnitOfWork));
+        public ITrainingCycleService TrainingCycles => 
+            GetService<ITrainingCycleService>(() => new TrainingCycleService(UnitOfWork));
         public IBodyMeasurementService BodyMeasurements =>
             GetService<IBodyMeasurementService>(() => new BodyMeasurementService(UnitOfWork));
         public IDailyNutritionIntakeService DailyNutritionIntakes => 

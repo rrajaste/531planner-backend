@@ -12,17 +12,17 @@ namespace DAL.App.EF.Mappers
         {
         }
 
-        public RoutineType MapDomainToDAL(Domain.RoutineType domainObject) =>
-            new RoutineType()
+        public RoutineType MapDomainToDAL(Domain.RoutineType domainObject)
+        {
+            return new RoutineType()
             {
                 Id = domainObject.Id,
                 Name = domainObject.Name,
                 Description = domainObject.Description,
-                ParentType = domainObject.ParentType == null 
-                    ? null 
-                    : MapDomainToDAL(domainObject.ParentType),
+                ParentTypeId = domainObject.ParentTypeId,
                 SubTypes = domainObject.SubTypes?.Select(MapDomainToDAL)
             };
+        }
 
         public Domain.RoutineType MapDALToDomain(RoutineType dalObject) =>
             new Domain.RoutineType()

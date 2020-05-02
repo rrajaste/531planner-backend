@@ -1,24 +1,16 @@
 using System;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using BLL;
 using Contracts.BLL.App;
 using Contracts.DAL.App;
-using Contracts.DAL.App.Repositories;
 using DAL.App.EF;
-using DAL.App.EF.Repositories;
-using Domain;
 using Domain.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -48,6 +40,7 @@ namespace WebApplication
                     Configuration.GetConnectionString("MsSqlConnection")));
             
             services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
+            services.AddScoped<IAppMapperContext, AppMapperContext>();
             services.AddScoped<IAppBLL, AppBLL>();
 
 
@@ -91,6 +84,7 @@ namespace WebApplication
                     new CultureInfo(name: "en-GB"),
                     new CultureInfo(name: "et-EE"),
                 };
+                options.DefaultRequestCulture = new RequestCulture(culture: "en-GB", uiCulture: "en-GB");
                 options.DefaultRequestCulture = new RequestCulture(culture: "en-GB", uiCulture: "en-GB");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;

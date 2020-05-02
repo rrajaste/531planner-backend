@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Contracts.DAL.App;
-using Domain;
+using Contracts.BLL.App;
+using BLL.App.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,17 +11,17 @@ namespace WebApplication.Areas.Admin.Controllers
     [Area("admin")]
     public class MuscleGroupsController : Controller
     {
-        private readonly IAppUnitOfWork _unitOfWork;
+        private readonly IAppBLL _bll;
 
-        public MuscleGroupsController(IAppUnitOfWork unitOfWork)
+        public MuscleGroupsController(IAppBLL bll)
         {
-            _unitOfWork = unitOfWork;
+            _bll = bll;
         }
 
         // GET: MuscleGroups
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.MuscleGroups.AllAsync());
+            return View(await _bll.MuscleGroups.AllAsync());
         }
 
         // GET: MuscleGroups/Details/5
@@ -32,7 +32,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            var muscleGroup = await _bll.MuscleGroups.FindAsync((Guid) id);
             if (muscleGroup == null)
             {
                 return NotFound();
@@ -55,8 +55,8 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.MuscleGroups.Add(muscleGroup);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.MuscleGroups.Add(muscleGroup);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(muscleGroup);
@@ -70,7 +70,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            var muscleGroup = await _bll.MuscleGroups.FindAsync((Guid) id);
             if (muscleGroup == null)
             {
                 return NotFound();
@@ -92,8 +92,8 @@ namespace WebApplication.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                _unitOfWork.MuscleGroups.Update(muscleGroup);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.MuscleGroups.Update(muscleGroup);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(muscleGroup);
@@ -107,7 +107,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
+            var muscleGroup = await _bll.MuscleGroups.FindAsync((Guid) id);
             if (muscleGroup == null)
             {
                 return NotFound();
@@ -121,9 +121,9 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var muscleGroup = await _unitOfWork.MuscleGroups.FindAsync(id);
-            _unitOfWork.MuscleGroups.Remove(muscleGroup);
-            await _unitOfWork.SaveChangesAsync();
+            var muscleGroup = await _bll.MuscleGroups.FindAsync(id);
+            _bll.MuscleGroups.Remove(muscleGroup);
+            await _bll.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

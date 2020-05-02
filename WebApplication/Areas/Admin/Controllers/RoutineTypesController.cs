@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Contracts.DAL.App;
-using Domain;
+using BLL.App.DTO;
+using Contracts.BLL.App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,17 +11,17 @@ namespace WebApplication.Areas.Admin.Controllers
     [Area("admin")]
     public class RoutineTypesController : Controller
     {
-        private readonly IAppUnitOfWork _unitOfWork;
+        private readonly IAppBLL _bll;
 
-        public RoutineTypesController(IAppUnitOfWork unitOfWork)
+        public RoutineTypesController(IAppBLL unitOfWork)
         {
-            _unitOfWork = unitOfWork;
+            _bll = unitOfWork;
         }
 
         // GET: RoutineTypes
         public async Task<IActionResult> Index()
         {
-            return View(await _unitOfWork.RoutineTypes.AllAsync());
+            return View(await _bll.RoutineTypes.AllAsync());
         }
 
         // GET: RoutineTypes/Details/5
@@ -32,7 +32,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
+            var routineType = await _bll.RoutineTypes.FindAsync((Guid) id);
             if (routineType == null)
             {
                 return NotFound();
@@ -52,12 +52,12 @@ namespace WebApplication.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,ClosedAt,Id,CreatedAt,DeletedAt,Comment")] RoutineType routineType)
+        public async Task<IActionResult> Create(RoutineType routineType)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.RoutineTypes.Add(routineType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.RoutineTypes.Add(routineType);
+                await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(routineType);
@@ -71,7 +71,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
+            var routineType = await _bll.RoutineTypes.FindAsync((Guid) id);
             if (routineType == null)
             {
                 return NotFound();
@@ -84,7 +84,7 @@ namespace WebApplication.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,ClosedAt,Id,CreatedAt,DeletedAt,Comment")] RoutineType routineType)
+        public async Task<IActionResult> Edit(Guid id, RoutineType routineType)
         {
             if (id != routineType.Id)
             {
@@ -94,15 +94,15 @@ namespace WebApplication.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 
-                _unitOfWork.RoutineTypes.Update(routineType);
-                await _unitOfWork.SaveChangesAsync();
+                _bll.RoutineTypes.Update(routineType);
+                await _bll.SaveChangesAsync();
                 
                 return RedirectToAction(nameof(Index));
             }
             return View(routineType);
         }
 
-        // GET: RoutineTypes/Delete/5
+        // GET: RoutineTypes/Delete/5 
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -110,7 +110,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id); 
+            var routineType = await _bll.RoutineTypes.FindAsync((Guid) id); 
             if (routineType == null)
             {
                 return NotFound();
@@ -124,9 +124,9 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var routineType = await _unitOfWork.RoutineTypes.FindAsync(id);
-            _unitOfWork.RoutineTypes.Remove(routineType);
-            await _unitOfWork.SaveChangesAsync();
+            var routineType = await _bll.RoutineTypes.FindAsync(id);
+            _bll.RoutineTypes.Remove(routineType);
+            await _bll.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

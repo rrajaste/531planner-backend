@@ -5,7 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\BLL.App.DTO\BLL.App.DTO.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="NewFiveThreeOneCycleInfo.cs" />
+      <Compile Remove="NewFiveThreeOneRoutineDto.cs" />
     </ItemGroup>
 
 </Project>

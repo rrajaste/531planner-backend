@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Domain;
-using Domain.Enums;
+using BLL.App.DTO;
+using BLL.App.DTO.Enums;
 
 namespace App.DTO
 {
