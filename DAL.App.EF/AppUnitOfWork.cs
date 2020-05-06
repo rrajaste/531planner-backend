@@ -7,80 +7,80 @@ namespace DAL.App.EF
 {
     public class AppUnitOfWork : EFBaseUnitOfWork<AppDbContext>, IAppUnitOfWork
     {
-        private readonly IAppMapperContext _mapperContext;
+        private readonly IAppDALMapperContext _dalMapperContext;
         
         public IBodyMeasurementRepository BodyMeasurements => 
             GetRepository<IBodyMeasurementRepository>(
-                ()=> new BodyMeasurementRepository(UnitOfWorkDbContext, _mapperContext.BodyMeasurementMapper));
+                ()=> new BodyMeasurementRepository(UnitOfWorkDbContext, _dalMapperContext.BodyMeasurementMapper));
 
         public IDailyNutritionIntakeRepository DailyNutritionIntakes => 
             GetRepository<IDailyNutritionIntakeRepository>(
-                ()=> new DailyNutritionIntakeRepository(UnitOfWorkDbContext, _mapperContext.DailyNutritionIntakeMapper));
+                ()=> new DailyNutritionIntakeRepository(UnitOfWorkDbContext, _dalMapperContext.DailyNutritionIntakeMapper));
 
         public IPersonalRecordRepository PersonalRecords => 
             GetRepository<IPersonalRecordRepository>(
-                ()=> new PersonalRecordRepository(UnitOfWorkDbContext, _mapperContext.PersonalRecordMapper));
+                ()=> new PersonalRecordRepository(UnitOfWorkDbContext, _dalMapperContext.PersonalRecordMapper));
         
         public IExerciseSetRepository ExerciseSets => 
             GetRepository<IExerciseSetRepository>(
-                ()=> new ExerciseSetRepository(UnitOfWorkDbContext, _mapperContext.ExerciseSetMapper));
+                ()=> new ExerciseSetRepository(UnitOfWorkDbContext, _dalMapperContext.ExerciseSetMapper));
 
         public IExerciseRepository Exercises => 
             GetRepository<IExerciseRepository>(
-                ()=> new ExerciseRepository(UnitOfWorkDbContext, _mapperContext.ExerciseMapper));
+                ()=> new ExerciseRepository(UnitOfWorkDbContext, _dalMapperContext.ExerciseMapper));
         
         public IExerciseTypeRepository ExerciseTypes => 
             GetRepository<IExerciseTypeRepository>(
-                ()=> new ExerciseTypeRepository(UnitOfWorkDbContext, _mapperContext.ExerciseTypeMapper));
+                ()=> new ExerciseTypeRepository(UnitOfWorkDbContext, _dalMapperContext.ExerciseTypeMapper));
         
         public IMuscleGroupRepository MuscleGroups => 
             GetRepository<IMuscleGroupRepository>(
-                ()=> new MuscleGroupRepository(UnitOfWorkDbContext, _mapperContext.MuscleGroupMapper));
+                ()=> new MuscleGroupRepository(UnitOfWorkDbContext, _dalMapperContext.MuscleGroupMapper));
         
         public IMuscleRepository Muscles => 
             GetRepository<IMuscleRepository>(
-                ()=> new MuscleRepository(UnitOfWorkDbContext, _mapperContext.MuscleMapper));
+                ()=> new MuscleRepository(UnitOfWorkDbContext, _dalMapperContext.MuscleMapper));
 
         public IRoutineTypeRepository RoutineTypes => 
             GetRepository<IRoutineTypeRepository>(
-                ()=> new RoutineTypeRepository(UnitOfWorkDbContext, _mapperContext.RoutineTypeMapper));
+                ()=> new RoutineTypeRepository(UnitOfWorkDbContext, _dalMapperContext.RoutineTypeMapper));
         
         public ITargetMuscleGroupRepository TargetMuscleGroups => 
             GetRepository<ITargetMuscleGroupRepository>(
-                ()=> new TargetMuscleGroupRepository(UnitOfWorkDbContext, _mapperContext.TargetMuscleGroupMapper));
+                ()=> new TargetMuscleGroupRepository(UnitOfWorkDbContext, _dalMapperContext.TargetMuscleGroupMapper));
         
         public ITrainingCycleRepository TrainingCycles => 
             GetRepository<ITrainingCycleRepository>(
-                ()=> new TrainingCycleRepository(UnitOfWorkDbContext, _mapperContext.TrainingCycleMapper));
+                ()=> new TrainingCycleRepository(UnitOfWorkDbContext, _dalMapperContext.TrainingCycleMapper));
         
         public ITrainingDayRepository TrainingDays => 
             GetRepository<ITrainingDayRepository>(
-                ()=> new TrainingDayRepository(UnitOfWorkDbContext, _mapperContext.TrainingDayMapper));
+                ()=> new TrainingDayRepository(UnitOfWorkDbContext, _dalMapperContext.TrainingDayMapper));
         
         public ITrainingDayTypeRepository TrainingDayTypes => 
             GetRepository<ITrainingDayTypeRepository>(
-                ()=> new TrainingDayTypeRepository(UnitOfWorkDbContext, _mapperContext.TrainingDayTypeMapper));
+                ()=> new TrainingDayTypeRepository(UnitOfWorkDbContext, _dalMapperContext.TrainingDayTypeMapper));
         
         public ITrainingWeekRepository TrainingWeeks => 
             GetRepository<ITrainingWeekRepository>(
-                ()=> new TrainingWeekRepository(UnitOfWorkDbContext, _mapperContext.TrainingWeekMapper));
+                ()=> new TrainingWeekRepository(UnitOfWorkDbContext, _dalMapperContext.TrainingWeekMapper));
         
 
         public IUnitTypesRepository UnitTypes => 
             GetRepository<IUnitTypesRepository>(
-                ()=> new UnitTypesRepository(UnitOfWorkDbContext, _mapperContext.UnitTypeMapper));
+                ()=> new UnitTypesRepository(UnitOfWorkDbContext, _dalMapperContext.UnitTypeMapper));
 
         public IWorkoutRoutineRepository WorkoutRoutines => 
             GetRepository<IWorkoutRoutineRepository>(
-                ()=> new WorkoutRoutineRepository(UnitOfWorkDbContext, _mapperContext.WorkoutRoutineMapper));
+                ()=> new WorkoutRoutineRepository(UnitOfWorkDbContext, _dalMapperContext.WorkoutRoutineMapper));
 
         public ISetTypeRepository SetTypes => 
             GetRepository<SetTypeRepository>(
-                ()=> new SetTypeRepository(UnitOfWorkDbContext, _mapperContext.SetTypeMapper));
+                ()=> new SetTypeRepository(UnitOfWorkDbContext, _dalMapperContext.SetTypeMapper));
         
-        public AppUnitOfWork(AppDbContext unitOfWorkDbContext, IAppMapperContext ctx) : base(unitOfWorkDbContext)
+        public AppUnitOfWork(AppDbContext unitOfWorkDbContext, IAppDALMapperContext ctx) : base(unitOfWorkDbContext)
         {
-            _mapperContext = ctx;
+            _dalMapperContext = ctx;
         }
     }
 }
