@@ -40,10 +40,10 @@ namespace WebApplication
                     Configuration.GetConnectionString("MsSqlConnection")));
             
             services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
-            services.AddScoped<IAppMapperContext, AppMapperContext>();
+            services.AddScoped<IAppDALMapperContext, AppDALMapperContext>();
             services.AddScoped<IAppBLL, AppBLL>();
-
-
+            services.AddScoped<IAppBLLMapperContext, AppBLLMapperContext>();
+            
             services.AddIdentity<AppUser, AppUserRole>()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<AppDbContext>()
