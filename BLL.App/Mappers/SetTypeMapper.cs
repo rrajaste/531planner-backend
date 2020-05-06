@@ -21,12 +21,12 @@ namespace BLL.Mappers
                 Description = dalObject.Description
             };
 
-        public DAL.App.DTO.SetType MapBLLToDAL(SetType dalObject) =>
+        public DAL.App.DTO.SetType MapBLLToDAL(SetType bllObject) =>
             new DAL.App.DTO.SetType()
             {
-                Id = dalObject.Id,
-                Name = dalObject.Name,
-                Description = dalObject.Description
+                Id = bllObject.Id,
+                Name = bllObject.Name,
+                Description = bllObject.Description
             };
     }
 }

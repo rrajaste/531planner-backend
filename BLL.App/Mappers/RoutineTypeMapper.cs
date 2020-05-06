@@ -26,13 +26,13 @@ namespace BLL.Mappers
             };
         }
 
-        public DAL.App.DTO.RoutineType MapBLLToDAL(RoutineType dalObject) =>
+        public DAL.App.DTO.RoutineType MapBLLToDAL(RoutineType bllObject) =>
             new DAL.App.DTO.RoutineType()
             {
-                Id = dalObject.Id,
-                Name = dalObject.Name,
-                Description = dalObject.Description,
-                ParentTypeId = dalObject.ParentTypeId
+                Id = bllObject.Id,
+                Name = bllObject.Name,
+                Description = bllObject.Description,
+                ParentTypeId = bllObject.ParentTypeId
             };
     }
 }

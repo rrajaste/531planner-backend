@@ -1,9 +1,7 @@
 using Contracts.DAL.App;
-using Contracts.DAL.App.Mappers;
 using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App.Mappers;
-using DAL.Base.EF;
 
 namespace BLL.Mappers
 {
@@ -17,6 +15,7 @@ namespace BLL.Mappers
             new Muscle()
             {
                 Id = dalObject.Id,
+                MuscleGroupId = dalObject.MuscleGroupId,
                 Description = dalObject.Description,
                 Name = dalObject.Name,
                 MuscleGroup = dalObject.MuscleGroup == null 
@@ -24,13 +23,13 @@ namespace BLL.Mappers
                     : BLLMapperContext.MuscleGroupMapper.MapDALToBLL(dalObject.MuscleGroup)
             };
 
-        public DAL.App.DTO.Muscle MapBLLToDAL(Muscle dalObject) => 
+        public DAL.App.DTO.Muscle MapBLLToDAL(Muscle bllObject) => 
             new DAL.App.DTO.Muscle()
             {
-                Id = dalObject.Id,
-                Description = dalObject.Description,
-                Name = dalObject.Name,
-                MuscleGroupId = dalObject.MuscleGroupId
+                Id = bllObject.Id,
+                Description = bllObject.Description,
+                Name = bllObject.Name,
+                MuscleGroupId = bllObject.MuscleGroupId
             };
     }
 }

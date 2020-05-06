@@ -6,9 +6,9 @@ namespace BLL.Base.Mappers
     {
         protected readonly IAppBLLMapperContext BLLMapperContext;
 
-        public BLLBaseMapper(IAppBLLMapperContext BLLMapperContext)
+        public BLLBaseMapper(IAppBLLMapperContext bllMapperContext)
         {
-            BLLMapperContext = BLLMapperContext;
+            BLLMapperContext = bllMapperContext;
         }
     
     }

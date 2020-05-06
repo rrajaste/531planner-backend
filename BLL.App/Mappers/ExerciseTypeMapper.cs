@@ -23,13 +23,13 @@ namespace BLL.Mappers
             };
 
 
-        public DAL.App.DTO.ExerciseType MapBLLToDAL(ExerciseType dalObject) =>
+        public DAL.App.DTO.ExerciseType MapBLLToDAL(ExerciseType bllObject) =>
             new DAL.App.DTO.ExerciseType()
             {
-                Id = dalObject.Id,
-                Name = dalObject.Name,
-                Description = dalObject.Description,
-                TypeCode = dalObject.TypeCode
+                Id = bllObject.Id,
+                Name = bllObject.Name,
+                Description = bllObject.Description,
+                TypeCode = bllObject.TypeCode
             };
     }
 }

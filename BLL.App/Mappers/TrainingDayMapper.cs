@@ -30,13 +30,13 @@ namespace BLL.Mappers
                 TrainingDayTypeId = dalObject.TrainingDayTypeId
             };
 
-        public DAL.App.DTO.TrainingDay MapBLLToDAL(TrainingDay dalObject) =>
+        public DAL.App.DTO.TrainingDay MapBLLToDAL(TrainingDay bllObject) =>
             new DAL.App.DTO.TrainingDay()
             {
-                Id = dalObject.Id,
-                Date = dalObject.Date,
-                TrainingWeekId = dalObject.TrainingWeekId,
-                TrainingDayTypeId = dalObject.TrainingDayTypeId
+                Id = bllObject.Id,
+                Date = bllObject.Date,
+                TrainingWeekId = bllObject.TrainingWeekId,
+                TrainingDayTypeId = bllObject.TrainingDayTypeId
             };
     }
 }

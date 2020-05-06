@@ -29,13 +29,13 @@ namespace BLL.Mappers
                     .Select(BLLMapperContext.MuscleGroupMapper.MapDALToBLL)
             };
 
-        public DAL.App.DTO.Exercise MapBLLToDAL(Exercise dalObject) =>
+        public DAL.App.DTO.Exercise MapBLLToDAL(Exercise bllObject) =>
             new DAL.App.DTO.Exercise()
             {
-                Id = dalObject.Id,
-                Name = dalObject.Name,
-                Description = dalObject.Description,
-                ExerciseTypeId = dalObject.ExerciseTypeId,
+                Id = bllObject.Id,
+                Name = bllObject.Name,
+                Description = bllObject.Description,
+                ExerciseTypeId = bllObject.ExerciseTypeId,
             };
     }
 }

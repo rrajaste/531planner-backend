@@ -28,14 +28,14 @@ namespace BLL.Mappers
                 WorkoutRoutineId = dalObject.WorkoutRoutineId
             };
 
-        public DAL.App.DTO.TrainingCycle MapBLLToDAL(TrainingCycle dalObject) =>
+        public DAL.App.DTO.TrainingCycle MapBLLToDAL(TrainingCycle bllObject) =>
             new DAL.App.DTO.TrainingCycle()
             {
-                Id = dalObject.Id,
-                CycleNumber = dalObject.CycleNumber,
-                StartingDate = dalObject.StartingDate,
-                EndingDate = dalObject.EndingDate,
-                WorkoutRoutineId = dalObject.WorkoutRoutineId
+                Id = bllObject.Id,
+                CycleNumber = bllObject.CycleNumber,
+                StartingDate = bllObject.StartingDate,
+                EndingDate = bllObject.EndingDate,
+                WorkoutRoutineId = bllObject.WorkoutRoutineId
             };
     }
 }

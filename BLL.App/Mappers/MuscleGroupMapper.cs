@@ -23,12 +23,12 @@ namespace BLL.Mappers
                 Muscles = dalObject.Muscles?.Select(BLLMapperContext.MuscleMapper.MapDALToBLL)
             };
 
-        public DAL.App.DTO.MuscleGroup MapBLLToDAL(MuscleGroup dalObject) =>
+        public DAL.App.DTO.MuscleGroup MapBLLToDAL(MuscleGroup bllObject) =>
             new DAL.App.DTO.MuscleGroup()
             {
-                Id = dalObject.Id,
-                Name = dalObject.Name,
-                Description = dalObject.Description,
+                Id = bllObject.Id,
+                Name = bllObject.Name,
+                Description = bllObject.Description,
             };
     }
 }

@@ -4,11 +4,11 @@ namespace DAL.Base.EF
 {
     public class EFBaseMapper
     {
-        protected readonly IAppMapperContext MapperContext;
+        protected readonly IAppDALMapperContext DALMapperContext;
 
-        public EFBaseMapper(IAppMapperContext mapperContext)
+        public EFBaseMapper(IAppDALMapperContext dalMapperContext)
         {
-            MapperContext = mapperContext;
+            DALMapperContext = dalMapperContext;
         }
     }
 }

@@ -29,15 +29,15 @@ namespace BLL.Mappers
                 TrainingDays = dalObject.TrainingDays?.Select(BLLMapperContext.TrainingDayMapper.MapDALToBLL),
             };
 
-        public DAL.App.DTO.TrainingWeek MapBLLToDAL(TrainingWeek dalObject) =>
+        public DAL.App.DTO.TrainingWeek MapBLLToDAL(TrainingWeek bllObject) =>
             new DAL.App.DTO.TrainingWeek()
             {
-                Id = dalObject.Id,
-                WeekNumber = dalObject.WeekNumber,
-                StartingDate = dalObject.StartingDate,
-                EndingDate = dalObject.EndingDate,
-                IsDeload = dalObject.IsDeload,
-                TrainingCycleId = dalObject.TrainingCycleId,
+                Id = bllObject.Id,
+                WeekNumber = bllObject.WeekNumber,
+                StartingDate = bllObject.StartingDate,
+                EndingDate = bllObject.EndingDate,
+                IsDeload = bllObject.IsDeload,
+                TrainingCycleId = bllObject.TrainingCycleId,
             };
     }
 }

@@ -3,7 +3,7 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App
 {
-    public interface IAppMapperContext
+    public interface IAppDALMapperContext
     {
         IDALMapper<Domain.UnitType, UnitType> UnitTypeMapper { get; }
         IDALMapper<Domain.BodyMeasurement, BodyMeasurement> BodyMeasurementMapper { get; }

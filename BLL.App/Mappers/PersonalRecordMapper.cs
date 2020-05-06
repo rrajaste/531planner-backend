@@ -24,12 +24,12 @@ namespace BLL.Mappers
                 ExerciseSetId = dalObject.ExerciseSetId,
             };
 
-        public DAL.App.DTO.PersonalRecord MapBLLToDAL(PersonalRecord dalObject) =>
+        public DAL.App.DTO.PersonalRecord MapBLLToDAL(PersonalRecord bllObject) =>
             new DAL.App.DTO.PersonalRecord()
             {
-                Id = dalObject.Id,
-                AppUserId = dalObject.Id,
-                ExerciseSetId = dalObject.ExerciseSetId,
+                Id = bllObject.Id,
+                AppUserId = bllObject.Id,
+                ExerciseSetId = bllObject.ExerciseSetId,
             };
     }
 }

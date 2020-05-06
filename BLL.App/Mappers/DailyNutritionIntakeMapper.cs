@@ -27,16 +27,16 @@ namespace BLL.Mappers
                     : BLLMapperContext.UnitTypeMapper.MapDALToBLL(dalObject.UnitType)
             };
 
-        public DAL.App.DTO.DailyNutritionIntake MapBLLToDAL(DailyNutritionIntake dalObject) =>
+        public DAL.App.DTO.DailyNutritionIntake MapBLLToDAL(DailyNutritionIntake bllObject) =>
             new DAL.App.DTO.DailyNutritionIntake()
             {
-                Id = dalObject.Id,
-                AppUserId = dalObject.AppUserId,
-                Calories = dalObject.Calories,
-                Carbohydrates = dalObject.Carbohydrates,
-                Fats = dalObject.Fats,
-                Protein = dalObject.Protein,
-                UnitTypeId = dalObject.UnitTypeId,
+                Id = bllObject.Id,
+                AppUserId = bllObject.AppUserId,
+                Calories = bllObject.Calories,
+                Carbohydrates = bllObject.Carbohydrates,
+                Fats = bllObject.Fats,
+                Protein = bllObject.Protein,
+                UnitTypeId = bllObject.UnitTypeId,
             };
     }
 }

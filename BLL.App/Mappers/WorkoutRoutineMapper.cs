@@ -29,15 +29,15 @@ namespace BLL.Mappers
                 TrainingCycles = dalObject.TrainingCycles?.Select(BLLMapperContext.TrainingCycleMapper.MapDALToBLL)
             };
 
-        public DAL.App.DTO.WorkoutRoutine MapBLLToDAL(WorkoutRoutine dalObject) =>
+        public DAL.App.DTO.WorkoutRoutine MapBLLToDAL(WorkoutRoutine bllObject) =>
             new DAL.App.DTO.WorkoutRoutine()
             {
-                Id = dalObject.Id,
-                AppUserId = dalObject.AppUserId,
-                Name = dalObject.Name,
-                Description = dalObject.Description,
-                IsBaseRoutine = dalObject.IsBaseRoutine,
-                RoutineTypeId = dalObject.RoutineTypeId,
+                Id = bllObject.Id,
+                AppUserId = bllObject.AppUserId,
+                Name = bllObject.Name,
+                Description = bllObject.Description,
+                IsBaseRoutine = bllObject.IsBaseRoutine,
+                RoutineTypeId = bllObject.RoutineTypeId,
             };
     }
 }

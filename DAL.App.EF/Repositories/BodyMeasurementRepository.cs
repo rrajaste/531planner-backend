@@ -16,12 +16,15 @@ namespace DAL.App.EF.Repositories
         {
         }
 
-        public async Task<IEnumerable<DAL.App.DTO.BodyMeasurement>> AllWithAppUserIdAsync(Guid id) => (
-            await RepoDbSet
+        public async Task<IEnumerable<DAL.App.DTO.BodyMeasurement>> AllWithAppUserIdAsync(Guid id)
+        {
+            var items = await RepoDbSet
                 .Include(b => b.UnitType)
                 .Where(b => b.AppUserId.Equals(id))
-                .ToListAsync()
-            ).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
+                .ToListAsync();
+            var mappedItems = items.Select(Mapper.MapDomainToDAL);
+            return mappedItems;
+        }
 
         public async Task<DAL.App.DTO.BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId) => 
             Mapper.MapDomainToDAL(

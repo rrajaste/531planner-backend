@@ -32,17 +32,17 @@ namespace BLL.Mappers
                 TrainingDayId = dalObject.TrainingDayId,
             };
 
-        public DAL.App.DTO.ExerciseSet MapBLLToDAL(ExerciseSet dalObject) =>
+        public DAL.App.DTO.ExerciseSet MapBLLToDAL(ExerciseSet bllObject) =>
             new DAL.App.DTO.ExerciseSet()
             {
-                Id = dalObject.Id,
-                Completed = dalObject.Completed,
-                Distance = dalObject.Distance,
-                Duration = dalObject.Duration,
-                ExerciseId = dalObject.ExerciseId,
-                NrOfReps = dalObject.NrOfReps,
-                SetNumber = dalObject.SetNumber,
-                TrainingDayId = dalObject.TrainingDayId,
+                Id = bllObject.Id,
+                Completed = bllObject.Completed,
+                Distance = bllObject.Distance,
+                Duration = bllObject.Duration,
+                ExerciseId = bllObject.ExerciseId,
+                NrOfReps = bllObject.NrOfReps,
+                SetNumber = bllObject.SetNumber,
+                TrainingDayId = bllObject.TrainingDayId,
             };
     }
 }
