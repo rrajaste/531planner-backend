@@ -8,7 +8,7 @@ namespace DAL.App.EF.Mappers
 {
     public class RoutineTypeMapper : EFBaseMapper, IDALMapper<Domain.RoutineType, RoutineType>
     {
-        public RoutineTypeMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public RoutineTypeMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 

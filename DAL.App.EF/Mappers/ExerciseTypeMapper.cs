@@ -7,7 +7,7 @@ namespace DAL.App.EF.Mappers
 {
     public class ExerciseTypeMapper : EFBaseMapper, IDALMapper<Domain.ExerciseType, ExerciseType>
     {
-        public ExerciseTypeMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public ExerciseTypeMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 

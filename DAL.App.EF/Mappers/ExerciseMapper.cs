@@ -9,7 +9,7 @@ namespace DAL.App.EF.Mappers
 {
     public class ExerciseMapper : EFBaseMapper, IDALMapper<Domain.Exercise, Exercise>
     {
-        public ExerciseMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public ExerciseMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
@@ -22,11 +22,11 @@ namespace DAL.App.EF.Mappers
                 ExerciseTypeId = domainObject.ExerciseTypeId,
                 ExerciseType = domainObject.ExerciseType == null 
                     ? null 
-                    : MapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
+                    : DALMapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
                 TargetMuscleGroups = domainObject.TargetMuscleGroups?
                     .Select(
                         t => t.MuscleGroup != null 
-                            ? MapperContext.MuscleGroupMapper.MapDomainToDAL(t.MuscleGroup) 
+                            ? DALMapperContext.MuscleGroupMapper.MapDomainToDAL(t.MuscleGroup) 
                             : throw new ApplicationException("Muscle group cannot be null!")
                         )
             };

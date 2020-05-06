@@ -7,7 +7,7 @@ namespace DAL.App.EF.Mappers
 {
     public class TrainingDayTypeMapper : EFBaseMapper, IDALMapper<Domain.TrainingDayType, TrainingDayType>
     {
-        public TrainingDayTypeMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public TrainingDayTypeMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 

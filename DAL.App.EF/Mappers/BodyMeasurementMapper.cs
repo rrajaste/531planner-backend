@@ -7,7 +7,7 @@ namespace DAL.App.EF.Mappers
 {
     public class BodyMeasurementMapper : EFBaseMapper, IDALMapper<Domain.BodyMeasurement, BodyMeasurement>
     {
-        public BodyMeasurementMapper(IAppMapperContext context) : base(context)
+        public BodyMeasurementMapper(IAppDALMapperContext context) : base(context)
         {
         }
         
@@ -23,7 +23,7 @@ namespace DAL.App.EF.Mappers
                 LoggedAt = domainObject.LoggedAt,
                 UnitType = domainObject.UnitType == null 
                     ? null 
-                    : MapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType),
+                    : DALMapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType),
                 UnitTypeId = domainObject.UnitTypeId,
                 Waist = domainObject.Waist
             };

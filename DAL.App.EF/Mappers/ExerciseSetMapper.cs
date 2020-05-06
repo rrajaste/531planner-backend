@@ -7,7 +7,7 @@ namespace DAL.App.EF.Mappers
 {
     public class ExerciseSetMapper : EFBaseMapper, IDALMapper<Domain.ExerciseSet, ExerciseSet>
     {
-        public ExerciseSetMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public ExerciseSetMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
@@ -21,12 +21,12 @@ namespace DAL.App.EF.Mappers
                 ExerciseId = domainObject.ExerciseId,
                 Exercise = domainObject.Exercise == null 
                     ? null 
-                    : MapperContext.ExerciseMapper.MapDomainToDAL(domainObject.Exercise),
+                    : DALMapperContext.ExerciseMapper.MapDomainToDAL(domainObject.Exercise),
                 NrOfReps = domainObject.NrOfReps,
                 SetNumber = domainObject.SetNumber,
                 TrainingDay = domainObject.TrainingDay == null 
                 ? null 
-                : MapperContext.TrainingDayMapper.MapDomainToDAL(domainObject.TrainingDay),
+                : DALMapperContext.TrainingDayMapper.MapDomainToDAL(domainObject.TrainingDay),
                 TrainingDayId = domainObject.TrainingDayId,
             };
 

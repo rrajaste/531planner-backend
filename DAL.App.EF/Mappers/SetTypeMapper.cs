@@ -6,8 +6,8 @@ namespace DAL.App.EF.Mappers
 {
     public class SetTypeMapper : IDALMapper<Domain.SetType, SetType>
     {
-        private readonly IAppMapperContext _context;
-        public SetTypeMapper(IAppMapperContext context)
+        private readonly IAppDALMapperContext _context;
+        public SetTypeMapper(IAppDALMapperContext context)
         {
             _context = context;
         }

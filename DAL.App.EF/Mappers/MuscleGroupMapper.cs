@@ -8,7 +8,7 @@ namespace DAL.App.EF.Mappers
 {
     public class MuscleGroupMapper : EFBaseMapper, IDALMapper<Domain.MuscleGroup, MuscleGroup>
     {
-        public MuscleGroupMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public MuscleGroupMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
@@ -18,7 +18,7 @@ namespace DAL.App.EF.Mappers
                 Id = domainObject.Id,
                 Name = domainObject.Name,
                 Description = domainObject.Description,
-                Muscles = domainObject.Muscles?.Select(MapperContext.MuscleMapper.MapDomainToDAL)
+                Muscles = domainObject.Muscles?.Select(DALMapperContext.MuscleMapper.MapDomainToDAL)
             };
 
         public Domain.MuscleGroup MapDALToDomain(MuscleGroup dalObject) =>

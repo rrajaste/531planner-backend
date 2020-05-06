@@ -6,8 +6,8 @@ namespace DAL.App.EF.Mappers
 {
     public class UnitTypeMapper : IDALMapper<Domain.UnitType, UnitType>
     {
-        private readonly IAppMapperContext _context;
-        public UnitTypeMapper(IAppMapperContext context)
+        private readonly IAppDALMapperContext _context;
+        public UnitTypeMapper(IAppDALMapperContext context)
         {
             _context = context;
         }

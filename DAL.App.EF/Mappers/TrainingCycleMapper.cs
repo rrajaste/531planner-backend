@@ -8,7 +8,7 @@ namespace DAL.App.EF.Mappers
 {
     public class TrainingCycleMapper : EFBaseMapper, IDALMapper<Domain.TrainingCycle, TrainingCycle>
     {
-        public TrainingCycleMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public TrainingCycleMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
@@ -19,10 +19,10 @@ namespace DAL.App.EF.Mappers
                 CycleNumber = domainObject.CycleNumber,
                 StartingDate = domainObject.StartingDate,
                 EndingDate = domainObject.EndingDate,
-                TrainingWeeks = domainObject.TrainingWeeks?.Select(MapperContext.TrainingWeekMapper.MapDomainToDAL),
+                TrainingWeeks = domainObject.TrainingWeeks?.Select(DALMapperContext.TrainingWeekMapper.MapDomainToDAL),
                 WorkoutRoutine = domainObject.WorkoutRoutine == null 
                     ? null 
-                    : MapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
+                    : DALMapperContext.WorkoutRoutineMapper.MapDomainToDAL(domainObject.WorkoutRoutine),
                 WorkoutRoutineId = domainObject.WorkoutRoutineId
             };
 

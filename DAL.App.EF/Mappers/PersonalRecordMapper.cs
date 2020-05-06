@@ -7,7 +7,7 @@ namespace DAL.App.EF.Mappers
 {
     public class PersonalRecordMapper : EFBaseMapper, IDALMapper<Domain.PersonalRecord, PersonalRecord>
     {
-        public PersonalRecordMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public PersonalRecordMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
@@ -18,7 +18,7 @@ namespace DAL.App.EF.Mappers
                 AppUserId = domainObject.Id,
                 ExerciseSet = domainObject.ExerciseSet == null 
                     ? null 
-                    : MapperContext.ExerciseSetMapper.MapDomainToDAL(domainObject.ExerciseSet),
+                    : DALMapperContext.ExerciseSetMapper.MapDomainToDAL(domainObject.ExerciseSet),
                 ExerciseSetId = domainObject.ExerciseSetId,
             };
 

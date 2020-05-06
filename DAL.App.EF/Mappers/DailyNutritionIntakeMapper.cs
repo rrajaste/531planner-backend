@@ -7,7 +7,7 @@ namespace DAL.App.EF.Mappers
 {
     public class DailyNutritionIntakeMapper : EFBaseMapper, IDALMapper<Domain.DailyNutritionIntake, DailyNutritionIntake>
     {
-        public DailyNutritionIntakeMapper(IAppMapperContext context) : base(context)
+        public DailyNutritionIntakeMapper(IAppDALMapperContext context) : base(context)
         {
         }
         
@@ -24,7 +24,7 @@ namespace DAL.App.EF.Mappers
                 UnitTypeId = domainObject.UnitTypeId,
                 UnitType = domainObject.UnitType == null 
                     ? null 
-                    : MapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType)
+                    : DALMapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType)
             };
 
         public Domain.DailyNutritionIntake MapDALToDomain(DailyNutritionIntake dalObject) =>

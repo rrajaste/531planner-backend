@@ -7,7 +7,7 @@ namespace DAL.App.EF.Mappers
 {
     public class TargetMuscleGroupMapper : EFBaseMapper, IDALMapper<Domain.TargetMuscleGroup, TargetMuscleGroup>
     {
-        public TargetMuscleGroupMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public TargetMuscleGroupMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 

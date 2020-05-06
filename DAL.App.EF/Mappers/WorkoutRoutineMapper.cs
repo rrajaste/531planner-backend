@@ -8,7 +8,7 @@ namespace DAL.App.EF.Mappers
 {
     public class WorkoutRoutineMapper : EFBaseMapper, IDALMapper<Domain.WorkoutRoutine, WorkoutRoutine>
     {
-        public WorkoutRoutineMapper(IAppMapperContext mapperContext) : base(mapperContext)
+        public WorkoutRoutineMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
@@ -22,9 +22,9 @@ namespace DAL.App.EF.Mappers
                 IsBaseRoutine = domainObject.AppUserId == null,
                 RoutineType = domainObject.RoutineType == null 
                     ? null 
-                    : MapperContext.RoutineTypeMapper.MapDomainToDAL(domainObject.RoutineType),
+                    : DALMapperContext.RoutineTypeMapper.MapDomainToDAL(domainObject.RoutineType),
                 RoutineTypeId = domainObject.RoutineTypeId,
-                TrainingCycles = domainObject.TrainingCycles?.Select(MapperContext.TrainingCycleMapper.MapDomainToDAL)
+                TrainingCycles = domainObject.TrainingCycles?.Select(DALMapperContext.TrainingCycleMapper.MapDomainToDAL)
             };
 
         public Domain.WorkoutRoutine MapDALToDomain(WorkoutRoutine dalObject) =>
