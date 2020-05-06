@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Contracts.BLL.App.Mappers;
 using Contracts.BLL.Base;
 using Contracts.BLL.Base.Mappers;
 using Contracts.BLL.Base.Services;
@@ -18,9 +19,9 @@ namespace BLL.Base.Services
     {
         protected readonly TServiceRepository ServiceRepository;
         protected readonly TUnitOfWork UnitOfWork;
-        protected readonly IBaseBLLMapper<TDALEntity, TBLLEntity> Mapper;
+        protected readonly IBLLMapper<TDALEntity, TBLLEntity> Mapper;
 
-        public BaseEntityService(TUnitOfWork unitOfWork, IBaseBLLMapper<TDALEntity, TBLLEntity> mapper, TServiceRepository serviceRepository)
+        public BaseEntityService(TUnitOfWork unitOfWork, IBLLMapper<TDALEntity, TBLLEntity> mapper, TServiceRepository serviceRepository)
         {
             UnitOfWork = unitOfWork;
             ServiceRepository = serviceRepository;
@@ -28,33 +29,32 @@ namespace BLL.Base.Services
         }
 
         public virtual IEnumerable<TBLLEntity> All() => 
-            ServiceRepository.All().Select(e => Mapper.Map<TDALEntity, TBLLEntity>(e));
+            ServiceRepository.All().Select(e => Mapper.MapDALToBLL(e));
 
         public virtual async Task<IEnumerable<TBLLEntity>> AllAsync() => 
-            (await ServiceRepository.AllAsync()).Select(e => Mapper.Map<TDALEntity, TBLLEntity>(e));
+            (await ServiceRepository.AllAsync()).Select(e => Mapper.MapDALToBLL(e));
         
 
         public virtual TBLLEntity Find(Guid id) => 
-            Mapper.Map<TDALEntity, TBLLEntity>(ServiceRepository.Find(id));
+            Mapper.MapDALToBLL(ServiceRepository.Find(id));
 
         public virtual async Task<TBLLEntity> FindAsync(Guid id) => 
-            Mapper.Map<TDALEntity, TBLLEntity>(await ServiceRepository.FindAsync(id));
+            Mapper.MapDALToBLL(await ServiceRepository.FindAsync(id));
         
 
         public virtual TBLLEntity Add(TBLLEntity entity) => 
-            Mapper.Map<TDALEntity, TBLLEntity>(
-                ServiceRepository.Add( Mapper.Map<TBLLEntity, TDALEntity>(entity)));
+            Mapper.MapDALToBLL(
+                ServiceRepository.Add( Mapper.MapBLLToDAL(entity)));
 
         public virtual TBLLEntity Update(TBLLEntity entity) => 
-            Mapper.Map<TDALEntity, TBLLEntity>(ServiceRepository.Update( 
-                Mapper.Map<TBLLEntity, TDALEntity>(entity)));
+            Mapper.MapDALToBLL(ServiceRepository.Update( 
+                Mapper.MapBLLToDAL(entity)));
 
         public virtual TBLLEntity Remove(TBLLEntity entity)  => 
-            Mapper.Map<TDALEntity, TBLLEntity>(ServiceRepository.Remove(
-                Mapper.Map<TBLLEntity, TDALEntity>(entity)));
+            Mapper.MapDALToBLL(ServiceRepository.Remove(
+                Mapper.MapBLLToDAL(entity)));
         
         public virtual TBLLEntity Remove(Guid id) 
-            => Mapper.Map<TDALEntity, TBLLEntity>(ServiceRepository.Find(id));
-        
+            => Mapper.MapDALToBLL(ServiceRepository.Find(id));
     }
 }

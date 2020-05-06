@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.App.DTO;
-using BLL.Base.Mappers;
 using BLL.Base.Services;
+using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
@@ -17,8 +17,8 @@ namespace BLL.Services
         
         protected IEnumerable<RoutineType> TypeCache = new List<RoutineType>();
         
-        public RoutineTypeService(IAppUnitOfWork unitOfWork) 
-            : base(unitOfWork, new BaseBLLMapper<DAL.App.DTO.RoutineType, BLL.App.DTO.RoutineType>(), unitOfWork.RoutineTypes)
+        public RoutineTypeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.RoutineType, RoutineType> mapper) 
+            : base(unitOfWork, mapper, unitOfWork.RoutineTypes)
         {
         }
         
