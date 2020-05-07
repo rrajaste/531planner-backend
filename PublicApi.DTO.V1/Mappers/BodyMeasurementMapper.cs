@@ -18,7 +18,7 @@ namespace PublicApi.DTO.V1.Mappers
                 Arm = bllEntity.Arm,
                 BodyFatPercentage = bllEntity.BodyFatPercentage,
                 LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
-                UnitType = bllEntity.UnitType.Name,
+                UnitType = bllEntity.UnitType == null ? "" : bllEntity.UnitType.Name,
                 UnitTypeId = bllEntity.UnitTypeId.ToString()
             };
         }
@@ -36,7 +36,7 @@ namespace PublicApi.DTO.V1.Mappers
             bllEntity.Waist = dto.Waist;
             bllEntity.Hip = dto.Hip;
             bllEntity.Arm = dto.Arm;
-            bllEntity.BodyFatPercentage = bllEntity.BodyFatPercentage;
+            bllEntity.BodyFatPercentage = dto.BodyFatPercentage;
             bllEntity.UnitTypeId = Guid.Parse(dto.UnitTypeId);
             return bllEntity;
         }

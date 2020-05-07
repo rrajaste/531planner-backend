@@ -7,6 +7,7 @@ namespace PublicApi.DTO.V1.Mappers
             return new Muscle()
             {
                 Id = bllEntity.Id.ToString(),
+                MuscleGroupId = bllEntity.MuscleGroupId.ToString(),
                 Name = bllEntity.Name,
                 Description = bllEntity.Description
             };

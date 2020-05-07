@@ -147,7 +147,6 @@ namespace WebApplication.ApiControllers
             {
                 return NotFound();
             }
-
             _bll.DailyNutritionIntakes.Remove(dailyNutritionIntake);
             await _bll.SaveChangesAsync();
             return Ok(Mapper.MapBLLEntityToPublicDTO(dailyNutritionIntake));

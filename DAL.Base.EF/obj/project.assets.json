@@ -941,6 +941,19 @@
           "bin/placeholder/Contracts.DAL.Base.dll": {}
         }
       },
+      "Contracts.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Microsoft.Extensions.Identity.Stores": "3.1.2"
+        },
+        "compile": {
+          "bin/placeholder/Contracts.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Contracts.Domain.dll": {}
+        }
+      },
       "DAL.App.DTO/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
@@ -972,7 +985,9 @@
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "Contracts.DAL.Base": "1.0.0",
+          "Contracts.Domain": "1.0.0",
           "DAL.Base": "1.0.0",
+          "Domain.Base": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.2",
           "Microsoft.Extensions.Identity.Stores": "3.1.2",
           "Resources": "1.0.0",
@@ -983,6 +998,19 @@
         },
         "runtime": {
           "bin/placeholder/Domain.dll": {}
+        }
+      },
+      "Domain.Base/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "Contracts.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Domain.Base.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.Base.dll": {}
         }
       },
       "PublicApi.DTO.V1/1.0.0": {
@@ -2841,6 +2869,11 @@
       "path": "../Contracts.DAL.Base/Contracts.DAL.Base.csproj",
       "msbuildProject": "../Contracts.DAL.Base/Contracts.DAL.Base.csproj"
     },
+    "Contracts.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Contracts.Domain/Contracts.Domain.csproj",
+      "msbuildProject": "../Contracts.Domain/Contracts.Domain.csproj"
+    },
     "DAL.App.DTO/1.0.0": {
       "type": "project",
       "path": "../DAL.App.DTO/DAL.App.DTO.csproj",
@@ -2855,6 +2888,11 @@
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
+    },
+    "Domain.Base/1.0.0": {
+      "type": "project",
+      "path": "../Domain.Base/Domain.Base.csproj",
+      "msbuildProject": "../Domain.Base/Domain.Base.csproj"
     },
     "PublicApi.DTO.V1/1.0.0": {
       "type": "project",

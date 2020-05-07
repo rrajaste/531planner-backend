@@ -114,7 +114,7 @@ namespace WebApplication.ApiControllers.Identity
                 return BadRequest();
             }
             await _userManager.AddToRoleAsync(newUser, "user");
-            return Ok(new RegisterResponse(){Email = newUser.Email, UserName = newUser.Email});
+            return Ok(new RegisterResponse(){Email = newUser.Email, UserName = newUser.UserName});
         }
     }
 }

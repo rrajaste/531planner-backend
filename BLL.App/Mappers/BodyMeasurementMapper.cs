@@ -11,36 +11,36 @@ namespace BLL.Mappers
         {
         }
 
-        public BodyMeasurement MapDALToBLL(DAL.App.DTO.BodyMeasurement dalObject)
-        {
-            var bodyMeasurement = new BodyMeasurement() {
-            };
-            bodyMeasurement.AppUserId = dalObject.AppUserId;
-            bodyMeasurement.Arm = dalObject.Arm;
-            bodyMeasurement.BodyFatPercentage = dalObject.BodyFatPercentage;
-            bodyMeasurement.Chest = dalObject.Chest;
-            bodyMeasurement.Height = dalObject.Height;
-            bodyMeasurement.Hip = dalObject.Height;
-            bodyMeasurement.Id = dalObject.Id;
-            bodyMeasurement.LoggedAt = dalObject.LoggedAt;
-            if (dalObject.UnitType != null)
+        public BodyMeasurement MapDALToBLL(DAL.App.DTO.BodyMeasurement dalObject) =>
+            new BodyMeasurement()
             {
-                BLLMapperContext.UnitTypeMapper.MapDALToBLL(dalObject.UnitType);
-            }
-            bodyMeasurement.UnitTypeId = dalObject.UnitTypeId;
-            bodyMeasurement.Waist = dalObject.Waist;
-            return bodyMeasurement;
-        }
+                AppUserId = dalObject.AppUserId,
+                Arm = dalObject.Arm,
+                BodyFatPercentage = dalObject.BodyFatPercentage,
+                Chest = dalObject.Chest,
+                Height = dalObject.Height,
+                Hip = dalObject.Hip,
+                Id = dalObject.Id,
+                LoggedAt = dalObject.LoggedAt,
+                UnitType = dalObject.UnitType == null
+                    ? null
+                    : BLLMapperContext.UnitTypeMapper.MapDALToBLL(dalObject.UnitType),
+                UnitTypeId = dalObject.UnitTypeId,
+                Weight = dalObject.Weight,
+                Waist = dalObject.Waist
+            };
+        
         public DAL.App.DTO.BodyMeasurement MapBLLToDAL(BodyMeasurement bllObject)
         {
             return new DAL.App.DTO.BodyMeasurement()
             {
                 AppUserId = bllObject.AppUserId,
+                Weight = bllObject.Weight,
                 Arm = bllObject.Arm,
                 BodyFatPercentage = bllObject.BodyFatPercentage,
                 Chest = bllObject.Chest,
                 Height = bllObject.Height,
-                Hip = bllObject.Height,
+                Hip = bllObject.Hip,
                 Id = bllObject.Id,
                 UnitTypeId = bllObject.UnitTypeId,
                 Waist = bllObject.Waist
