@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Contracts.BLL.App;
 using Domain;
+using Domain.App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
