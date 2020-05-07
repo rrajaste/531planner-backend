@@ -1,14 +1,15 @@
 ﻿using System;
 
-namespace Contracts.DAL.Base
+namespace Contracts.Domain
 {
-    public interface IDomainEntityId : IDomainBaseEntity<Guid>
+    public interface IDomainEntityId : IDomainEntityId<Guid>
     {
+        
     }
-
-    public interface IDomainBaseEntity<TKey> 
-        where TKey : IEquatable<TKey>
+    
+    public interface IDomainEntityId<TKey>
+        where TKey: IEquatable<TKey>
     {
-        public TKey Id { get; set; }
+        TKey Id { get; set; }
     }
 }

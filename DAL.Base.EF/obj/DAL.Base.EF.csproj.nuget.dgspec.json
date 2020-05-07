@@ -139,8 +139,8 @@
               "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj": {
                 "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/DAL.App.DTO/DAL.App.DTO.csproj"
               },
-              "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj": {
-                "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj"
+              "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj": {
+                "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj"
               },
               "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/PublicApi.DTO.V1/PublicApi.DTO.V1.csproj": {
                 "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/PublicApi.DTO.V1/PublicApi.DTO.V1.csproj"
@@ -473,68 +473,14 @@
         }
       }
     },
-    "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/Domain.Base.csproj": {
+    "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/Domain.Base.csproj",
-        "projectName": "Domain.Base",
-        "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/Domain.Base.csproj",
+        "projectUniqueName": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj",
+        "projectName": "Domain.App",
+        "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj",
         "packagesPath": "/home/bombstrap/.nuget/packages/",
-        "outputPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/bombstrap/.nuget/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "netstandard2.1"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "netstandard2.1": {
-            "projectReferences": {
-              "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.Domain/Contracts.Domain.csproj": {
-                "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.Domain/Contracts.Domain.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "netstandard2.1": {
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "NETStandard.Library": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj",
-        "projectName": "Domain",
-        "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj",
-        "packagesPath": "/home/bombstrap/.nuget/packages/",
-        "outputPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/obj/",
+        "outputPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/bombstrap/.nuget/NuGet/NuGet.Config"
@@ -607,6 +553,60 @@
         }
       }
     },
+    "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/Domain.Base.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/Domain.Base.csproj",
+        "projectName": "Domain.Base",
+        "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/Domain.Base.csproj",
+        "packagesPath": "/home/bombstrap/.nuget/packages/",
+        "outputPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.Base/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/bombstrap/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.Domain/Contracts.Domain.csproj": {
+                "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Contracts.Domain/Contracts.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/PublicApi.DTO.V1/PublicApi.DTO.V1.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -631,8 +631,8 @@
               "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/BLL.App.DTO/BLL.App.DTO.csproj": {
                 "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/BLL.App.DTO/BLL.App.DTO.csproj"
               },
-              "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj": {
-                "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj"
+              "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj": {
+                "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj"
               }
             }
           }

@@ -21,9 +21,6 @@ namespace DAL.Base
             _repoCache.Add(typeof(TRepository), repo);
             return (TRepository) repo;
         }
-
-        public abstract int SaveChanges();
-
         public abstract Task<int> SaveChangesAsync();
         
     }

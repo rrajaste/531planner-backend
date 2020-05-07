@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Contracts.DAL.App.Mappers;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
+using Domain.App;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class BodyMeasurementRepository : EFBaseRepository<AppDbContext, Domain.BodyMeasurement, DAL.App.DTO.BodyMeasurement>, IBodyMeasurementRepository
+    public class BodyMeasurementRepository : EFBaseRepository<AppDbContext, BodyMeasurement, DAL.App.DTO.BodyMeasurement>, IBodyMeasurementRepository
     {
-        public BodyMeasurementRepository(AppDbContext repoDbContext, IDALMapper<Domain.BodyMeasurement, DAL.App.DTO.BodyMeasurement> mapper) 
+        public BodyMeasurementRepository(AppDbContext repoDbContext, IDALMapper<BodyMeasurement, DAL.App.DTO.BodyMeasurement> mapper) 
             : base(repoDbContext, mapper)
         {
         }
@@ -34,26 +35,11 @@ namespace DAL.App.EF.Repositories
                     .FirstOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId)
             );
 
-        public override IEnumerable<DAL.App.DTO.BodyMeasurement> All() => 
-            RepoDbSet
-                .Include(b => b.UnitType)
-                .ToList()
-            .Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
-
         public override async Task<IEnumerable<DAL.App.DTO.BodyMeasurement>> AllAsync() => (
             await RepoDbSet
                 .Include(b => b.UnitType)
                 .ToListAsync()
             ).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
-
-        public override DAL.App.DTO.BodyMeasurement Find(Guid id) => 
-            Mapper.MapDomainToDAL(
-                RepoDbSet
-                    .AsNoTracking()
-                    .Include(b => b.UnitType)
-                    .FirstOrDefault(d => d.Id == id)
-            );
-
 
         public override async Task<DAL.App.DTO.BodyMeasurement> FindAsync(Guid id) =>
             Mapper.MapDomainToDAL(

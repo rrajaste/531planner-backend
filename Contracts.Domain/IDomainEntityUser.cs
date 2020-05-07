@@ -1,17 +1,16 @@
 using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace Contracts.DAL.Base
+namespace Contracts.Domain
 {
-    public interface IDomainEntityUser<TUser> : IDomainEntityUser<TUser, Guid>
-        where TUser : IdentityUser<Guid>
+    public interface IDomainEntityUser : IDomainEntityUser<Guid>
     {
     }
-    
-    public interface IDomainEntityUser<TUser, TKey> 
-        where TKey : IEquatable<TKey> 
-        where TUser : IdentityUser<TKey>
+
+    public interface IDomainEntityUser<TKey>
+        where TKey : IEquatable<TKey>
     {
         public TKey AppUserId { get; set; }
+        public IdentityUser<TKey>? AppUser { get; set; }
     }
 }

@@ -6,13 +6,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class RoutineTypeMapper : EFBaseMapper, IDALMapper<Domain.RoutineType, RoutineType>
+    public class RoutineTypeMapper : EFBaseMapper, IDALMapper<Domain.App.RoutineType, RoutineType>
     {
         public RoutineTypeMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public RoutineType MapDomainToDAL(Domain.RoutineType domainObject)
+        public RoutineType MapDomainToDAL(Domain.App.RoutineType domainObject)
         {
             return new RoutineType()
             {
@@ -24,8 +24,8 @@ namespace DAL.App.EF.Mappers
             };
         }
 
-        public Domain.RoutineType MapDALToDomain(RoutineType dalObject) =>
-            new Domain.RoutineType()
+        public Domain.App.RoutineType MapDALToDomain(RoutineType dalObject) =>
+            new Domain.App.RoutineType()
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,

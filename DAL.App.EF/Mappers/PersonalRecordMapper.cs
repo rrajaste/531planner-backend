@@ -5,13 +5,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class PersonalRecordMapper : EFBaseMapper, IDALMapper<Domain.PersonalRecord, PersonalRecord>
+    public class PersonalRecordMapper : EFBaseMapper, IDALMapper<Domain.App.PersonalRecord, PersonalRecord>
     {
         public PersonalRecordMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public PersonalRecord MapDomainToDAL(Domain.PersonalRecord domainObject) =>
+        public PersonalRecord MapDomainToDAL(Domain.App.PersonalRecord domainObject) =>
             new PersonalRecord()
             {
                 Id = domainObject.Id,
@@ -22,8 +22,8 @@ namespace DAL.App.EF.Mappers
                 ExerciseSetId = domainObject.ExerciseSetId,
             };
 
-        public Domain.PersonalRecord MapDALToDomain(PersonalRecord dalObject) =>
-            new Domain.PersonalRecord()
+        public Domain.App.PersonalRecord MapDALToDomain(PersonalRecord dalObject) =>
+            new Domain.App.PersonalRecord()
             {
                 Id = dalObject.Id,
                 AppUserId = dalObject.Id,

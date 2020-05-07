@@ -5,22 +5,22 @@ namespace Contracts.DAL.App
 {
     public interface IAppDALMapperContext
     {
-        IDALMapper<Domain.UnitType, UnitType> UnitTypeMapper { get; }
-        IDALMapper<Domain.BodyMeasurement, BodyMeasurement> BodyMeasurementMapper { get; }
-        IDALMapper<Domain.DailyNutritionIntake, DailyNutritionIntake> DailyNutritionIntakeMapper { get; }
-        IDALMapper<Domain.Exercise, Exercise> ExerciseMapper { get; }
-        IDALMapper<Domain.ExerciseSet, ExerciseSet> ExerciseSetMapper { get; }
-        IDALMapper<Domain.ExerciseType, ExerciseType> ExerciseTypeMapper { get; }
-        IDALMapper<Domain.MuscleGroup, MuscleGroup> MuscleGroupMapper { get; }
-        IDALMapper<Domain.Muscle, Muscle> MuscleMapper { get; }
-        IDALMapper<Domain.PersonalRecord, PersonalRecord> PersonalRecordMapper { get; }
-        IDALMapper<Domain.RoutineType, RoutineType> RoutineTypeMapper { get; }
-        IDALMapper<Domain.TrainingCycle, TrainingCycle> TrainingCycleMapper { get; }
-        IDALMapper<Domain.TrainingDay, TrainingDay> TrainingDayMapper { get; }
-        IDALMapper<Domain.TrainingWeek, TrainingWeek> TrainingWeekMapper { get; }
-        IDALMapper<Domain.WorkoutRoutine, WorkoutRoutine> WorkoutRoutineMapper { get; }
-        IDALMapper<Domain.TargetMuscleGroup, TargetMuscleGroup> TargetMuscleGroupMapper { get; }
-        IDALMapper<Domain.TrainingDayType, TrainingDayType> TrainingDayTypeMapper { get; }
-        IDALMapper<Domain.SetType, SetType> SetTypeMapper { get; }
+        IDALMapper<global::Domain.App.UnitType, UnitType> UnitTypeMapper { get; }
+        IDALMapper<global::Domain.App.BodyMeasurement, BodyMeasurement> BodyMeasurementMapper { get; }
+        IDALMapper<global::Domain.App.DailyNutritionIntake, DailyNutritionIntake> DailyNutritionIntakeMapper { get; }
+        IDALMapper<global::Domain.App.Exercise, Exercise> ExerciseMapper { get; }
+        IDALMapper<global::Domain.App.ExerciseSet, ExerciseSet> ExerciseSetMapper { get; }
+        IDALMapper<global::Domain.App.ExerciseType, ExerciseType> ExerciseTypeMapper { get; }
+        IDALMapper<global::Domain.App.MuscleGroup, MuscleGroup> MuscleGroupMapper { get; }
+        IDALMapper<global::Domain.App.Muscle, Muscle> MuscleMapper { get; }
+        IDALMapper<global::Domain.App.PersonalRecord, PersonalRecord> PersonalRecordMapper { get; }
+        IDALMapper<global::Domain.App.RoutineType, RoutineType> RoutineTypeMapper { get; }
+        IDALMapper<global::Domain.App.TrainingCycle, TrainingCycle> TrainingCycleMapper { get; }
+        IDALMapper<global::Domain.App.TrainingDay, TrainingDay> TrainingDayMapper { get; }
+        IDALMapper<global::Domain.App.TrainingWeek, TrainingWeek> TrainingWeekMapper { get; }
+        IDALMapper<global::Domain.App.WorkoutRoutine, WorkoutRoutine> WorkoutRoutineMapper { get; }
+        IDALMapper<global::Domain.App.TargetMuscleGroup, TargetMuscleGroup> TargetMuscleGroupMapper { get; }
+        IDALMapper<global::Domain.App.TrainingDayType, TrainingDayType> TrainingDayTypeMapper { get; }
+        IDALMapper<global::Domain.App.SetType, SetType> SetTypeMapper { get; }
     }
 }

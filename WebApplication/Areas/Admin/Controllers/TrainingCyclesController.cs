@@ -43,9 +43,9 @@ namespace WebApplication.Areas.Admin.Controllers
             return View(trainingCycle);
         }
 
-        public IActionResult Create(Guid id)
+        public async Task<IActionResult> Create(Guid id)
         {
-            var workoutRoutine = _bll.WorkoutRoutines.Find(id);
+            var workoutRoutine = await _bll.WorkoutRoutines.FindAsync(id);
             if (!workoutRoutine.IsBaseRoutine)
             {
                 return BadRequest();

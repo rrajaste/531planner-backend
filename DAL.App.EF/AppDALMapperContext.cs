@@ -3,6 +3,7 @@ using DAL.App.EF.Mappers;
 using DAL.Base;
 using Contracts.DAL.App.Mappers;
 using Domain;
+using Domain.App;
 
 namespace DAL.App.EF
 {

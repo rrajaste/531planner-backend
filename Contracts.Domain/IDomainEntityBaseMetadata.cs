@@ -1,12 +1,13 @@
 using System;
+using Contracts.DAL.Base;
 
-namespace Contracts.DAL.Base
+namespace Contracts.Domain
 {
-    public interface IDomainEntityBaseMetadata : IDomainEntityBaseMetadata<Guid>
+    public interface IDomainEntityIdMetadata : IDomainEntityIdMetadata<Guid>
     {
     }
 
-    public interface IDomainEntityBaseMetadata<TKey> : IDomainBaseEntity<TKey>, IDomainEntityMetadata
+    public interface IDomainEntityIdMetadata<TKey> : IDomainEntityId<TKey>, IDomainEntityMetadata
         where TKey : IEquatable<TKey>
     {
     }

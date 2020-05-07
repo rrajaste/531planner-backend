@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Contracts.DAL.App.Mappers;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
+using Domain.App;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class MuscleRepository : EFBaseRepository<AppDbContext, Domain.Muscle, DAL.App.DTO.Muscle>, IMuscleRepository
+    public class MuscleRepository : EFBaseRepository<AppDbContext, Muscle, DAL.App.DTO.Muscle>, IMuscleRepository
     {
-        public MuscleRepository(AppDbContext repoDbContext, IDALMapper<Domain.Muscle, DAL.App.DTO.Muscle> mapper) 
+        public MuscleRepository(AppDbContext repoDbContext, IDALMapper<Muscle, DAL.App.DTO.Muscle> mapper) 
             : base(repoDbContext, mapper)
         {
         }

@@ -6,13 +6,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class MuscleGroupMapper : EFBaseMapper, IDALMapper<Domain.MuscleGroup, MuscleGroup>
+    public class MuscleGroupMapper : EFBaseMapper, IDALMapper<Domain.App.MuscleGroup, MuscleGroup>
     {
         public MuscleGroupMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public MuscleGroup MapDomainToDAL(Domain.MuscleGroup domainObject) =>
+        public MuscleGroup MapDomainToDAL(Domain.App.MuscleGroup domainObject) =>
             new MuscleGroup()
             {
                 Id = domainObject.Id,
@@ -21,8 +21,8 @@ namespace DAL.App.EF.Mappers
                 Muscles = domainObject.Muscles?.Select(DALMapperContext.MuscleMapper.MapDomainToDAL)
             };
 
-        public Domain.MuscleGroup MapDALToDomain(MuscleGroup dalObject) =>
-            new Domain.MuscleGroup()
+        public Domain.App.MuscleGroup MapDALToDomain(MuscleGroup dalObject) =>
+            new Domain.App.MuscleGroup()
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,

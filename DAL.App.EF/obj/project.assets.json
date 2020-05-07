@@ -2436,7 +2436,7 @@
         "dependencies": {
           "Contracts.DAL.Base": "1.0.0",
           "DAL.App.DTO": "1.0.0",
-          "Domain": "1.0.0",
+          "Domain.App": "1.0.0",
           "PublicApi.DTO.V1": "1.0.0"
         },
         "compile": {
@@ -2517,7 +2517,7 @@
           "bin/placeholder/DAL.Base.EF.dll": {}
         }
       },
-      "Domain/1.0.0": {
+      "Domain.App/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -2531,10 +2531,10 @@
           "System.ComponentModel.Annotations": "4.7.0"
         },
         "compile": {
-          "bin/placeholder/Domain.dll": {}
+          "bin/placeholder/Domain.App.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Domain.dll": {}
+          "bin/placeholder/Domain.App.dll": {}
         }
       },
       "Domain.Base/1.0.0": {
@@ -2555,7 +2555,7 @@
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
           "BLL.App.DTO": "1.0.0",
-          "Domain": "1.0.0",
+          "Domain.App": "1.0.0",
           "System.ComponentModel.Annotations": "4.7.0"
         },
         "compile": {
@@ -8229,10 +8229,10 @@
       "path": "../DAL.Base.EF/DAL.Base.EF.csproj",
       "msbuildProject": "../DAL.Base.EF/DAL.Base.EF.csproj"
     },
-    "Domain/1.0.0": {
+    "Domain.App/1.0.0": {
       "type": "project",
-      "path": "../Domain/Domain.csproj",
-      "msbuildProject": "../Domain/Domain.csproj"
+      "path": "../Domain.App/Domain.App.csproj",
+      "msbuildProject": "../Domain.App/Domain.App.csproj"
     },
     "Domain.Base/1.0.0": {
       "type": "project",
@@ -8255,7 +8255,7 @@
       "Contracts.DAL.App >= 1.0.0",
       "DAL.App.DTO >= 1.0.0",
       "DAL.Base.EF >= 1.0.0",
-      "Domain >= 1.0.0",
+      "Domain.App >= 1.0.0",
       "EntityFramework >= 6.4.0",
       "Microsoft.EntityFrameworkCore >= 3.1.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.2",
@@ -8296,8 +8296,8 @@
             "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/DAL.Base.EF/DAL.Base.EF.csproj": {
               "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/DAL.Base.EF/DAL.Base.EF.csproj"
             },
-            "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj": {
-              "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain/Domain.csproj"
+            "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj": {
+              "projectPath": "/home/bombstrap/Documents/git/icd0009-2019s/531-planner/Domain.App/Domain.App.csproj"
             }
           }
         }

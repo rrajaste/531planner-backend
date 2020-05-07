@@ -5,13 +5,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class DailyNutritionIntakeMapper : EFBaseMapper, IDALMapper<Domain.DailyNutritionIntake, DailyNutritionIntake>
+    public class DailyNutritionIntakeMapper : EFBaseMapper, IDALMapper<Domain.App.DailyNutritionIntake, DailyNutritionIntake>
     {
         public DailyNutritionIntakeMapper(IAppDALMapperContext context) : base(context)
         {
         }
         
-        public DailyNutritionIntake MapDomainToDAL(Domain.DailyNutritionIntake domainObject) => 
+        public DailyNutritionIntake MapDomainToDAL(Domain.App.DailyNutritionIntake domainObject) => 
             new DailyNutritionIntake()
             {
                 Id = domainObject.Id,
@@ -27,8 +27,8 @@ namespace DAL.App.EF.Mappers
                     : DALMapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType)
             };
 
-        public Domain.DailyNutritionIntake MapDALToDomain(DailyNutritionIntake dalObject) =>
-            new Domain.DailyNutritionIntake()
+        public Domain.App.DailyNutritionIntake MapDALToDomain(DailyNutritionIntake dalObject) =>
+            new Domain.App.DailyNutritionIntake()
             {
                 Id = dalObject.Id,
                 AppUserId = dalObject.AppUserId,

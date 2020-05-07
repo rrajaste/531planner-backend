@@ -7,13 +7,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class ExerciseMapper : EFBaseMapper, IDALMapper<Domain.Exercise, Exercise>
+    public class ExerciseMapper : EFBaseMapper, IDALMapper<Domain.App.Exercise, Exercise>
     {
         public ExerciseMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public Exercise MapDomainToDAL(Domain.Exercise domainObject) =>
+        public Exercise MapDomainToDAL(Domain.App.Exercise domainObject) =>
             new Exercise()
             {
                 Id = domainObject.Id,
@@ -31,8 +31,8 @@ namespace DAL.App.EF.Mappers
                         )
             };
 
-        public Domain.Exercise MapDALToDomain(Exercise dalObject) =>
-            new Domain.Exercise()
+        public Domain.App.Exercise MapDALToDomain(Exercise dalObject) =>
+            new Domain.App.Exercise()
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,

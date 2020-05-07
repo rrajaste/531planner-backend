@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Contracts.DAL.App.Mappers;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
+using Domain.App;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class TrainingDayRepository : EFBaseRepository<AppDbContext, Domain.TrainingDay, DAL.App.DTO.TrainingDay>, ITrainingDayRepository
+    public class TrainingDayRepository : EFBaseRepository<AppDbContext, TrainingDay, DAL.App.DTO.TrainingDay>, ITrainingDayRepository
     {
-        public TrainingDayRepository(AppDbContext repoDbContext, IDALMapper<Domain.TrainingDay, DAL.App.DTO.TrainingDay> mapper) 
+        public TrainingDayRepository(AppDbContext repoDbContext, IDALMapper<TrainingDay, DAL.App.DTO.TrainingDay> mapper) 
             : base(repoDbContext, mapper)
         {
         }

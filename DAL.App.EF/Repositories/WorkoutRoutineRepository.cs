@@ -6,11 +6,12 @@ using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
 using Contracts.DAL.App.Mappers;
 using Domain;
+using Domain.App;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class WorkoutRoutineRepository : EFBaseRepository<AppDbContext, Domain.WorkoutRoutine, DAL.App.DTO.WorkoutRoutine>,
+    public class WorkoutRoutineRepository : EFBaseRepository<AppDbContext, WorkoutRoutine, DAL.App.DTO.WorkoutRoutine>,
         IWorkoutRoutineRepository
     {
         public WorkoutRoutineRepository(AppDbContext repoDbContext, IDALMapper<WorkoutRoutine, DTO.WorkoutRoutine> mapper) 

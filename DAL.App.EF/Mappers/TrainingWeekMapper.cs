@@ -6,13 +6,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class TrainingWeekMapper : EFBaseMapper, IDALMapper<Domain.TrainingWeek, TrainingWeek>
+    public class TrainingWeekMapper : EFBaseMapper, IDALMapper<Domain.App.TrainingWeek, TrainingWeek>
     {
         public TrainingWeekMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public TrainingWeek MapDomainToDAL(Domain.TrainingWeek domainObject) =>
+        public TrainingWeek MapDomainToDAL(Domain.App.TrainingWeek domainObject) =>
             new TrainingWeek()
             {
                 Id = domainObject.Id,
@@ -27,8 +27,8 @@ namespace DAL.App.EF.Mappers
                 TrainingDays = domainObject.TrainingDays?.Select(DALMapperContext.TrainingDayMapper.MapDomainToDAL),
             };
 
-        public Domain.TrainingWeek MapDALToDomain(TrainingWeek dalObject) =>
-            new Domain.TrainingWeek()
+        public Domain.App.TrainingWeek MapDALToDomain(TrainingWeek dalObject) =>
+            new Domain.App.TrainingWeek()
             {
                 Id = dalObject.Id,
                 WeekNumber = dalObject.WeekNumber,

@@ -1,11 +1,16 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Contracts.DAL.Base;
+using Contracts.Domain;
 
-namespace DAL.Base
+namespace Domain.Base
 {
-    public abstract class DomainEntityId : IDomainEntityId
+    public abstract class DomainEntityId : DomainEntityId<Guid>, IDomainEntityId
     {
-        public virtual Guid Id { get; set; }
+        
+    }
+
+    public abstract class DomainEntityId<TKey> : IDomainEntityId<TKey> 
+        where TKey : IEquatable<TKey>
+    {
+        public virtual TKey Id { get; set; } = default!;
     }
 }

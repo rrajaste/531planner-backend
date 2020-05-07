@@ -6,13 +6,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class TrainingCycleMapper : EFBaseMapper, IDALMapper<Domain.TrainingCycle, TrainingCycle>
+    public class TrainingCycleMapper : EFBaseMapper, IDALMapper<Domain.App.TrainingCycle, TrainingCycle>
     {
         public TrainingCycleMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public TrainingCycle MapDomainToDAL(Domain.TrainingCycle domainObject) =>
+        public TrainingCycle MapDomainToDAL(Domain.App.TrainingCycle domainObject) =>
             new TrainingCycle()
             {
                 Id = domainObject.Id,
@@ -26,8 +26,8 @@ namespace DAL.App.EF.Mappers
                 WorkoutRoutineId = domainObject.WorkoutRoutineId
             };
 
-        public Domain.TrainingCycle MapDALToDomain(TrainingCycle dalObject) =>
-            new Domain.TrainingCycle()
+        public Domain.App.TrainingCycle MapDALToDomain(TrainingCycle dalObject) =>
+            new Domain.App.TrainingCycle()
             {
                 Id = dalObject.Id,
                 CycleNumber = dalObject.CycleNumber,

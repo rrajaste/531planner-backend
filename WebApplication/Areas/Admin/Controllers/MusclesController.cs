@@ -46,10 +46,10 @@ namespace WebApplication.Areas.Admin.Controllers
         }
 
         // GET: Muscles/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var viewModel = new MuscleCreateEditViewModel();
-            var muscleGroups = _bll.MuscleGroups.All();
+            var muscleGroups = await _bll.MuscleGroups.AllAsync();
             viewModel.MuscleGroupSelectList = new SelectList(muscleGroups, nameof(
                 MuscleGroup.Id), nameof(MuscleGroup.Name));
             return View(viewModel);
@@ -118,7 +118,7 @@ namespace WebApplication.Areas.Admin.Controllers
             }
 
             viewModel.MuscleGroupSelectList = new SelectList(
-                _bll.MuscleGroups.All(),
+                await _bll.MuscleGroups.AllAsync(),
                 nameof(MuscleGroup.Id),
                 nameof(MuscleGroup.Name));
             

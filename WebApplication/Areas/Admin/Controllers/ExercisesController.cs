@@ -42,10 +42,10 @@ namespace WebApplication.Areas.Admin.Controllers
             return View(exercise);
         }
         
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var viewModel = new ExerciseCreateEditViewModel();
-            var exerciseTypes = _bll.ExerciseTypes.All();
+            var exerciseTypes = await _bll.ExerciseTypes.AllAsync();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }
@@ -60,7 +60,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            var exerciseTypes = _bll.ExerciseTypes.All();
+            var exerciseTypes = await _bll.ExerciseTypes.AllAsync();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }
@@ -78,7 +78,7 @@ namespace WebApplication.Areas.Admin.Controllers
             }
 
             var viewModel = new ExerciseCreateEditViewModel {Exercise = exercise};
-            var exerciseTypes = _bll.ExerciseTypes.All();
+            var exerciseTypes = await _bll.ExerciseTypes.AllAsync();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }
@@ -99,7 +99,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 
                 return RedirectToAction(nameof(Index));
             }
-            var exerciseTypes = _bll.ExerciseTypes.All();
+            var exerciseTypes = await _bll.ExerciseTypes.AllAsync();
             viewModel.ExerciseTypeSelectList = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             return View(viewModel);
         }

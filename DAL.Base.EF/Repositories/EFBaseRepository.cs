@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Contracts.DAL.App.Mappers;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
+using Contracts.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Base.EF.Repositories
@@ -13,7 +14,7 @@ namespace DAL.Base.EF.Repositories
         EFBaseRepository<Guid, TDbContext, TDomainEntity, TDALEntity>,
         IBaseRepository<TDALEntity>
     
-        where TDomainEntity : class, IDomainEntityBaseMetadata<Guid>, new()
+        where TDomainEntity : class, IDomainEntityIdMetadata<Guid>, new()
         where TDALEntity : class, IDALBaseDTO<Guid>, new()
         where TDbContext: DbContext
     {
@@ -24,7 +25,7 @@ namespace DAL.Base.EF.Repositories
  
     public class EFBaseRepository<TKey, TDbContext, TDomainEntity, TDALEntity> : IBaseRepository<TKey, TDALEntity>
         where TDALEntity : class, IDALBaseDTO<TKey>, new()
-        where TDomainEntity : class, IDomainEntityBaseMetadata<TKey>, new()
+        where TDomainEntity : class, IDomainEntityIdMetadata<TKey>, new()
         where TKey : IEquatable<TKey>
         where TDbContext: DbContext
     {
@@ -42,19 +43,8 @@ namespace DAL.Base.EF.Repositories
                throw new ArgumentNullException(typeof(TDALEntity).Name + " was not found as DBSet!");
             }
         }
-        
-        public virtual IEnumerable<TDALEntity> All() =>
-            RepoDbSet.ToList().Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
-        
         public virtual async Task<IEnumerable<TDALEntity>> AllAsync() =>
             (await RepoDbSet.ToListAsync()).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
-
-        public virtual TDALEntity Find(TKey id) 
-            => Mapper.MapDomainToDAL(
-                RepoDbSet
-                    .AsNoTracking()
-                    .FirstOrDefault(entity => entity.Id.Equals(id))
-                );
 
         public virtual async Task<TDALEntity> FindAsync(TKey id) =>
             Mapper.MapDomainToDAL(
@@ -71,7 +61,7 @@ namespace DAL.Base.EF.Repositories
 
         public virtual TDALEntity Remove(TDALEntity entity) => 
             Mapper.MapDomainToDAL(RepoDbSet.Remove(Mapper.MapDALToDomain(entity)).Entity);
-        public virtual TDALEntity Remove(TKey id) => 
-            Mapper.MapDomainToDAL(RepoDbSet.Remove(RepoDbSet.Find(id)).Entity);
+        public virtual async Task<TDALEntity> Remove(TKey id) => 
+            Mapper.MapDomainToDAL(RepoDbSet.Remove(await RepoDbSet.FindAsync(id)).Entity);
     }
 }

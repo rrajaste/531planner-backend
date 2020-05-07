@@ -11,10 +11,10 @@ using DAL.Base.EF.Repositories;
 namespace DAL.App.EF.Repositories
 {
     public class TrainingCycleRepository :
-        EFBaseRepository<AppDbContext, Domain.TrainingCycle, DAL.App.DTO.TrainingCycle>,
+        EFBaseRepository<AppDbContext, Domain.App.TrainingCycle, DAL.App.DTO.TrainingCycle>,
         ITrainingCycleRepository
     {
-        public TrainingCycleRepository(AppDbContext repoDbContext, IDALMapper<Domain.TrainingCycle, DAL.App.DTO.TrainingCycle> mapper) 
+        public TrainingCycleRepository(AppDbContext repoDbContext, IDALMapper<Domain.App.TrainingCycle, DAL.App.DTO.TrainingCycle> mapper) 
             : base(repoDbContext, mapper)
         {
         }

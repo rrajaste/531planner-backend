@@ -13,13 +13,11 @@ namespace Contracts.DAL.Base.Repositories
         where TDALEntity : class, IDALBaseDTO<TKey>, new()
         where TKey : IEquatable<TKey>
     {
-        IEnumerable<TDALEntity> All();
         Task<IEnumerable<TDALEntity>> AllAsync();
-        TDALEntity Find(TKey id);
         Task<TDALEntity> FindAsync(TKey id);
         TDALEntity Add(TDALEntity entity);
         TDALEntity Update(TDALEntity entity);
         TDALEntity Remove(TDALEntity entity);
-        TDALEntity Remove(TKey id);
+        Task<TDALEntity> Remove(TKey id);
     }
 }

@@ -10,7 +10,7 @@
       <ProjectReference Include="..\BLL.Base\BLL.Base.csproj" />
       <ProjectReference Include="..\Contracts.BLL.App\Contracts.BLL.App.csproj" />
       <ProjectReference Include="..\DAL.App.EF\DAL.App.EF.csproj" />
-      <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\Domain.App\Domain.App.csproj" />
       <ProjectReference Include="..\Extensions\Extensions.csproj" />
     </ItemGroup>
 

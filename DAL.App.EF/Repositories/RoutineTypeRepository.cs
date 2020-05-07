@@ -5,11 +5,12 @@ using Contracts.DAL.App.Mappers;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
 using Domain;
+using Domain.App;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class RoutineTypeRepository : EFBaseRepository<AppDbContext, Domain.RoutineType, DTO.RoutineType>,
+    public class RoutineTypeRepository : EFBaseRepository<AppDbContext, RoutineType, DTO.RoutineType>,
         IRoutineTypeRepository
     {
         public RoutineTypeRepository(AppDbContext dbContext, IDALMapper<RoutineType, DTO.RoutineType> mapper)
@@ -24,10 +25,5 @@ namespace DAL.App.EF.Repositories
                 .ToListAsync();
             return items.Select(Mapper.MapDomainToDAL);
         }
-        
-        public override IEnumerable<DTO.RoutineType> All() => (
-                RepoDbSet.Where(entity => entity.ParentTypeId == null).ToList()
-            ).Select(Mapper.MapDomainToDAL);
-
     }
 }

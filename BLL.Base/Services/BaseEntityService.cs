@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.BLL.App.Mappers;
 using Contracts.BLL.Base;
-using Contracts.BLL.Base.Mappers;
 using Contracts.BLL.Base.Services;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
@@ -27,17 +26,9 @@ namespace BLL.Base.Services
             ServiceRepository = serviceRepository;
             Mapper = mapper;
         }
-
-        public virtual IEnumerable<TBLLEntity> All() => 
-            ServiceRepository.All().Select(e => Mapper.MapDALToBLL(e));
-
         public virtual async Task<IEnumerable<TBLLEntity>> AllAsync() => 
             (await ServiceRepository.AllAsync()).Select(e => Mapper.MapDALToBLL(e));
         
-
-        public virtual TBLLEntity Find(Guid id) => 
-            Mapper.MapDALToBLL(ServiceRepository.Find(id));
-
         public virtual async Task<TBLLEntity> FindAsync(Guid id) => 
             Mapper.MapDALToBLL(await ServiceRepository.FindAsync(id));
         
@@ -54,7 +45,7 @@ namespace BLL.Base.Services
             Mapper.MapDALToBLL(ServiceRepository.Remove(
                 Mapper.MapBLLToDAL(entity)));
         
-        public virtual TBLLEntity Remove(Guid id) 
-            => Mapper.MapDALToBLL(ServiceRepository.Find(id));
+        public virtual async Task<TBLLEntity> Remove(Guid id) 
+            => Mapper.MapDALToBLL(await ServiceRepository.FindAsync(id));
     }
 }

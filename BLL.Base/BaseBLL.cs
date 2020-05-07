@@ -22,11 +22,6 @@ namespace BLL.Base
             return UnitOfWork.SaveChangesAsync();
         }
 
-        public int SaveChanges()
-        {
-            return UnitOfWork.SaveChanges();
-        }
-
         public TService GetService<TService>(Func<TService> serviceCreationMethod)
         {
             if (_serviceCache.TryGetValue(typeof(TService), out var repo))

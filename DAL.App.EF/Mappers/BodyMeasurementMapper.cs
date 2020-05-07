@@ -5,13 +5,13 @@ using DAL.Base.EF;
 
 namespace DAL.App.EF.Mappers
 {
-    public class BodyMeasurementMapper : EFBaseMapper, IDALMapper<Domain.BodyMeasurement, BodyMeasurement>
+    public class BodyMeasurementMapper : EFBaseMapper, IDALMapper<Domain.App.BodyMeasurement, BodyMeasurement>
     {
         public BodyMeasurementMapper(IAppDALMapperContext context) : base(context)
         {
         }
         
-        public BodyMeasurement MapDomainToDAL(Domain.BodyMeasurement domainObject) => 
+        public BodyMeasurement MapDomainToDAL(Domain.App.BodyMeasurement domainObject) => 
             new BodyMeasurement(){
                 AppUserId = domainObject.AppUserId,
                 Arm = domainObject.Arm,
@@ -29,9 +29,9 @@ namespace DAL.App.EF.Mappers
                 Waist = domainObject.Waist
             };
 
-        public Domain.BodyMeasurement MapDALToDomain(BodyMeasurement dalObject)
+        public Domain.App.BodyMeasurement MapDALToDomain(BodyMeasurement dalObject)
         {
-            return new Domain.BodyMeasurement()
+            return new Domain.App.BodyMeasurement()
             {
                 AppUserId = dalObject.AppUserId,
                 Arm = dalObject.Arm,

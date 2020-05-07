@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Data.Entity;
-using Domain;
+using Domain.App;
 using Domain.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

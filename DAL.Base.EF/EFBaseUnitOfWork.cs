@@ -16,11 +16,6 @@ namespace DAL.Base.EF
             UnitOfWorkDbContext = unitOfWorkDbContext;
         }
 
-        public override int SaveChanges()
-        {
-            return UnitOfWorkDbContext.SaveChanges();
-        }
-
         public override Task<int> SaveChangesAsync()
         {
             return UnitOfWorkDbContext.SaveChangesAsync();

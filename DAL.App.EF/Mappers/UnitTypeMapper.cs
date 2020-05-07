@@ -4,7 +4,7 @@ using DAL.App.DTO;
 
 namespace DAL.App.EF.Mappers
 {
-    public class UnitTypeMapper : IDALMapper<Domain.UnitType, UnitType>
+    public class UnitTypeMapper : IDALMapper<Domain.App.UnitType, UnitType>
     {
         private readonly IAppDALMapperContext _context;
         public UnitTypeMapper(IAppDALMapperContext context)
@@ -12,7 +12,7 @@ namespace DAL.App.EF.Mappers
             _context = context;
         }
         
-        public UnitType MapDomainToDAL(Domain.UnitType domainObject) =>
+        public UnitType MapDomainToDAL(Domain.App.UnitType domainObject) =>
             new UnitType()
             {
                 Id = domainObject.Id,
@@ -20,8 +20,8 @@ namespace DAL.App.EF.Mappers
                 Description = domainObject.Description
             };
 
-        public Domain.UnitType MapDALToDomain(UnitType dalObject) =>
-            new Domain.UnitType()
+        public Domain.App.UnitType MapDALToDomain(UnitType dalObject) =>
+            new Domain.App.UnitType()
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,

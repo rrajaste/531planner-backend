@@ -29,7 +29,7 @@ namespace Resources.Domain {
         public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Domain.WorkoutRoutine", typeof(WorkoutRoutine).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Domain.App.WorkoutRoutine", typeof(WorkoutRoutine).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
