@@ -29,8 +29,9 @@ namespace DAL.App.EF.Repositories
         public async Task<DAL.App.DTO.BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId) => 
             Mapper.MapDomainToDAL(
                 await RepoDbSet
-                .Include(b => b.UnitType)
-                .FirstOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId)
+                    .AsNoTracking()
+                    .Include(b => b.UnitType)
+                    .FirstOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId)
             );
 
         public override IEnumerable<DAL.App.DTO.BodyMeasurement> All() => 
@@ -48,6 +49,7 @@ namespace DAL.App.EF.Repositories
         public override DAL.App.DTO.BodyMeasurement Find(Guid id) => 
             Mapper.MapDomainToDAL(
                 RepoDbSet
+                    .AsNoTracking()
                     .Include(b => b.UnitType)
                     .FirstOrDefault(d => d.Id == id)
             );
@@ -56,9 +58,9 @@ namespace DAL.App.EF.Repositories
         public override async Task<DAL.App.DTO.BodyMeasurement> FindAsync(Guid id) =>
             Mapper.MapDomainToDAL(
                 await RepoDbSet
+                    .AsNoTracking()
                     .Include(b => b.UnitType)
                     .FirstOrDefaultAsync(d => d.Id == id)
             );
-        
     }
 }

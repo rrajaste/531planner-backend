@@ -18,7 +18,8 @@ namespace DAL.App.EF.Mappers
                 BodyFatPercentage = domainObject.BodyFatPercentage,
                 Chest = domainObject.Chest,
                 Height = domainObject.Height,
-                Hip = domainObject.Height,
+                Hip = domainObject.Hip,
+                Weight = domainObject.Weight,
                 Id = domainObject.Id,
                 LoggedAt = domainObject.LoggedAt,
                 UnitType = domainObject.UnitType == null 
@@ -37,10 +38,11 @@ namespace DAL.App.EF.Mappers
                 BodyFatPercentage = dalObject.BodyFatPercentage,
                 Chest = dalObject.Chest,
                 Height = dalObject.Height,
-                Hip = dalObject.Height,
+                Hip = dalObject.Hip,
                 Id = dalObject.Id,
                 UnitTypeId = dalObject.UnitTypeId,
-                Waist = dalObject.Waist
+                Waist = dalObject.Waist,
+                Weight = dalObject.Weight,
             };
         }
     }

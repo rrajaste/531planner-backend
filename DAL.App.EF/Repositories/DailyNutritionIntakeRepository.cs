@@ -21,6 +21,7 @@ namespace DAL.App.EF.Repositories
 
         public override IEnumerable<DTO.DailyNutritionIntake> All() => 
             RepoDbSet
+                .AsNoTracking()
                 .Include(d => d.UnitType)
                 .ToList()
             .Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
@@ -28,22 +29,26 @@ namespace DAL.App.EF.Repositories
 
         public override async Task<IEnumerable<DTO.DailyNutritionIntake>> AllAsync() => (
             await RepoDbSet
+                .AsNoTracking()
                 .Include(d => d.UnitType)
                 .ToListAsync()
             ).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
 
         public override DTO.DailyNutritionIntake Find(Guid id) =>
             Mapper.MapDomainToDAL(RepoDbSet
+                .AsNoTracking()
                 .Include(d => d.UnitType)
                 .SingleOrDefault(d => d.Id == id));
 
         public override async Task<DTO.DailyNutritionIntake> FindAsync(Guid id) =>
             Mapper.MapDomainToDAL(await RepoDbSet
+                .AsNoTracking()
                 .Include(d => d.UnitType)
                 .SingleOrDefaultAsync(d => d.Id == id));
 
         public async Task<DTO.DailyNutritionIntake> FindWithAppUserIdAsync(Guid id, Guid appUserId) =>
             Mapper.MapDomainToDAL(await RepoDbSet
+                .AsNoTracking()
                 .Include(d => d.UnitType)
                 .SingleOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId));
         
