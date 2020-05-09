@@ -1,0 +1,52 @@
+@model IEnumerable<BLL.App.DTO.ExerciseSet>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Exercise set in training day</h1>
+
+<p>
+    <a asp-action="Create" asp-route-id="@ViewContext.RouteData.Values["id"]">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Exercise)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SetType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NrOfReps)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exercise.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SetType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NrOfReps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
