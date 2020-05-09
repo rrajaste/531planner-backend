@@ -1,4 +1,4 @@
-@model WorkoutRoutineCreateEditViewModel
+@model WebApplication.Areas.Admin.ViewModels.TrainingWeekViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,19 +6,19 @@
 
 <h1>Edit</h1>
 
-<h4>Base routine</h4>
+<h4>TrainingWeek</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
-            <input type="hidden" asp-for="WorkoutRoutine.Id" />
+            <input type="hidden" asp-for="TrainingWeek.Id" />
             <partial name="_CreateEditPartial"/>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-id="@Model.WorkoutRoutineId">Back to List</a>
 </div>
 
 @section Scripts {

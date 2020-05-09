@@ -1,0 +1,28 @@
+@model WebApplication.Areas.Admin.ViewModels.TrainingWeekViewModel
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<input type="hidden" asp-for="TrainingWeek.TrainingCycleId" value="@Model.TrainingWeek.TrainingCycleId"/>
+<input type="hidden" asp-for="WorkoutRoutineId" value="@Model.WorkoutRoutineId"/>
+<div class="form-group">
+    <label asp-for="TrainingWeek.WeekNumber" class="control-label"></label>
+    <input asp-for="TrainingWeek.WeekNumber" class="form-control" />
+    <span asp-validation-for="TrainingWeek.WeekNumber" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="TrainingWeek.IsDeload" /> @Html.DisplayNameFor(model => model.TrainingWeek.IsDeload)
+    </label>
+</div>
+<div class="form-group">
+    <label asp-for="TrainingWeek.StartingDate" class="control-label"></label>
+    <input asp-for="TrainingWeek.StartingDate" class="form-control" />
+    <span asp-validation-for="TrainingWeek.StartingDate" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="TrainingWeek.EndingDate" class="control-label"></label>
+    <input asp-for="TrainingWeek.EndingDate" class="form-control" />
+    <span asp-validation-for="TrainingWeek.EndingDate" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <input type="submit" value="Create" class="btn btn-primary" />
+</div>

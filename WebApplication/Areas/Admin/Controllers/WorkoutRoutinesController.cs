@@ -25,32 +25,13 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             return View(await _bll.WorkoutRoutines.AllActiveBaseRoutinesAsync());
         }
-
-        // public async Task<IActionResult> Inactive() => View(await _bll.WorkoutRoutines.AllInactiveBaseRoutinesAsync());
-        //
-        // public async Task<IActionResult> Unpublished() => View(await _bll.WorkoutRoutines.AllUnPublishedBaseRoutinesAsync());
-
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var workoutRoutine = await _bll.WorkoutRoutines.FindBaseRoutineAsync((Guid) id);
-            if (workoutRoutine == null)
-            {
-                return NotFound();
-            }
-
-            return View(workoutRoutine);
-        }
-
+        
         public async Task<IActionResult> Create()
         {
             var viewModel = new WorkoutRoutineCreateEditViewModel
             {
-                RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(), nameof(RoutineType.Id), nameof(RoutineType.Name))
+                RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(), 
+                    nameof(RoutineType.Id), nameof(RoutineType.Name))
             };
             return View(viewModel);
         }
@@ -61,79 +42,77 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var a = _bll.WorkoutRoutines.Add(viewModel.WorkoutRoutine);
+                await _bll.WorkoutRoutines.AddWithBaseCycleAsync(viewModel.WorkoutRoutine);
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            // if (id == null)
-            // {
-            //     return NotFound();
-            // }
-            //
-            // var workoutRoutine = await _bll.WorkoutRoutines.FindAsync(id);
-            // if (workoutRoutine == null)
-            // {
-            //     return NotFound();
-            // }
-            // return View(workoutRoutine);
-            return RedirectToAction(nameof(Index));
+            if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id))
+            {
+                var workoutRoutine = await _bll.WorkoutRoutines.FindBaseRoutineAsync(id);
+                var viewModel = new WorkoutRoutineCreateEditViewModel
+                {
+                    WorkoutRoutine = workoutRoutine,
+                    RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(), 
+                        nameof(RoutineType.Id), nameof(RoutineType.Name))
+                };
+                return View(viewModel);
+            }
+            return NotFound();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id,
-            [Bind("WorkoutRoutineId,Name,Description,RoutineTypeId,AppUserId,Id,CreatedAt,ClosedAt,Comment")]
-            WorkoutRoutine workoutRoutine)
+        public async Task<IActionResult> Edit(Guid id, WorkoutRoutine workoutRoutine)
         {
-            // if (id != workoutRoutine.Id)
-            // {
-            //     return NotFound();
-            // }
-            //
-            // if (ModelState.IsValid)
-            // {
-            //     
-            //     _bll.WorkoutRoutines.Update(workoutRoutine);
-            //     await _bll.SaveChangesAsync();
-            //
-            //     return RedirectToAction(nameof(Index));
-            // }
-            //
-            // return View(workoutRoutine);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                
+                _bll.WorkoutRoutines.Update(workoutRoutine);
+                await _bll.SaveChangesAsync();
+                return RedirectToAction(nameof(Index), workoutRoutine);
+            }
+            var viewModel = new WorkoutRoutineCreateEditViewModel
+            {
+                WorkoutRoutine = workoutRoutine,
+                RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(), 
+                    nameof(RoutineType.Id), nameof(RoutineType.Name))
+            };
+            return View(viewModel);
         }
 
         // GET: WorkoutRoutines/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var workoutRoutine = await _bll.WorkoutRoutines.FindBaseRoutineAsync((Guid) id);
-            if (workoutRoutine == null)
+            if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id))
             {
-                return NotFound();
+                var workoutRoutine = await _bll.WorkoutRoutines.FindBaseRoutineAsync(id);
+                return View(workoutRoutine);
             }
-
-            return View(workoutRoutine);
+            return NotFound();
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var workoutRoutine = await _bll.WorkoutRoutines.FindAsync(id);
-            _bll.WorkoutRoutines.Remove(workoutRoutine);
-            await _bll.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id))
+            {
+                var workoutRoutine = await _bll.WorkoutRoutines.FindAsync(id);
+                _bll.WorkoutRoutines.Remove(workoutRoutine);
+                await _bll.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
         }
     }
 }

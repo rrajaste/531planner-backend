@@ -1,19 +1,23 @@
-@model IEnumerable<BLL.App.DTO.TrainingCycle>
+@model IEnumerable<BLL.App.DTO.TrainingWeek>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Training weeks";
 }
 
-<h1>Index</h1>
+<h1>Training weeks</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-route-id="@ViewContext.RouteData.Values["id"]">Create New</a> |
+    <a asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index">Back</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CycleNumber)
+                @Html.DisplayNameFor(model => model.WeekNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeload)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartingDate)
@@ -28,7 +32,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CycleNumber)
+                @Html.DisplayFor(modelItem => item.WeekNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeload)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartingDate)
@@ -37,7 +44,6 @@
                 @Html.DisplayFor(modelItem => item.EndingDate)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">View</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>

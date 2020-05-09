@@ -1,10 +1,10 @@
 @model IEnumerable<BLL.App.DTO.WorkoutRoutine>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Base routines";
 }
 
-<h1>Index</h1>
+<h1>Base routines</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            <a asp-controller="TrainingCycles" asp-action="Index" asp-route-id="@item.Id">View</a> |
+            <a asp-controller="TrainingWeeks" asp-action="Index" asp-route-id="@item.Id">View</a> |
             <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | 
             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
         </td>
