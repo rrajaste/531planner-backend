@@ -19,5 +19,7 @@ namespace Contracts.BLL.App
         public ITrainingDayTypeService TrainingDayTypes { get; }
         public IExerciseTypeService ExerciseTypes { get; }
         public IRoutineTypeService RoutineTypes { get; }
+        public IExerciseSetService ExerciseSets { get; }
+        public ISetTypeService SetTypes { get; }
     }
 }

@@ -1,4 +1,4 @@
-namespace Domain.Enums
+namespace Domain.App.Enums
 {
     public static class ExerciseTypeCodes
     {

@@ -15,7 +15,7 @@ namespace BLL.Services
         DAL.App.DTO.RoutineType, BLL.App.DTO.RoutineType>, IRoutineTypeService 
     {
         
-        protected IEnumerable<RoutineType> TypeCache = new List<RoutineType>();
+        protected IEnumerable<RoutineType>? TypeCache;
         
         public RoutineTypeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.RoutineType, RoutineType> mapper) 
             : base(unitOfWork, mapper, unitOfWork.RoutineTypes)
@@ -30,14 +30,11 @@ namespace BLL.Services
         
         public async Task<IEnumerable<RoutineType>> GetTypeTreeLeafsAsync()
         {
-            if (!TypeCache.Any())
-            {
-                TypeCache = await AllAsync();
-            }
+            TypeCache ??= await AllAsync();
             var collector = new List<RoutineType>();
             foreach (var type in TypeCache)
             {
-                CollectTypeTreeChildren(type, collector, t => !t.SubTypes.Any());
+                CollectTypeTreeChildren(type, collector, t => t.SubTypes == null);
             }
             return collector;
         }

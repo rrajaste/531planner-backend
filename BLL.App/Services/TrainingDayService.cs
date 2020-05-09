@@ -1,12 +1,12 @@
-using BLL.Base.Mappers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BLL.Base.Services;
-using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
-using DAL.App.EF;
-using Domain;
 using TrainingDay = BLL.App.DTO.TrainingDay;
 
 namespace BLL.Services
@@ -18,5 +18,11 @@ namespace BLL.Services
             : base(unitOfWork, mapper, unitOfWork.TrainingDays)
         {
         }
+
+        public async Task<IEnumerable<TrainingDay>> AllWithTrainingWeekIdAsync(Guid trainingWeekId) =>
+            (await ServiceRepository.AllWithTrainingWeekIdAsync(trainingWeekId)).Select(Mapper.MapDALToBLL);
+
+        public Task<bool> IsPartOfBaseRoutineAsync(Guid trainingDayId) =>
+            ServiceRepository.IsPartOfBaseRoutineAsync(trainingDayId);
     }
 }

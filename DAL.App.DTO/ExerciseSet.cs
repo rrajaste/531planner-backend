@@ -23,6 +23,8 @@ namespace DAL.App.DTO
         public TKey ExerciseId { get; set; } = default!;
         public TKey WorkoutRoutineId { get; set; } = default!;
         public Exercise? Exercise { get; set; }
+        public TKey SetTypeId { get; set; }
+        public SetType? SetType { get; set; }
         public TrainingDay? TrainingDay { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public UnitType? UnitType { get; set; }

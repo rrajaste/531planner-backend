@@ -34,7 +34,6 @@ namespace DAL.App.EF.Mappers
                 AppUserId = dalObject.AppUserId,
                 Name = dalObject.Name,
                 Description = dalObject.Description,
-                IsBaseRoutine = dalObject.IsBaseRoutine,
                 RoutineTypeId = dalObject.RoutineTypeId,
             };
     }

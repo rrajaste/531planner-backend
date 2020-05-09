@@ -42,5 +42,11 @@ namespace BLL.Services
             Mapper.MapDALToBLL(
                 await ServiceRepository.FindBaseRoutineAsync(id)
             );
+
+        public Task<bool> BaseRoutineWithIdExistsAsync(Guid id) =>
+            ServiceRepository.BaseRoutineWithIdExistsAsync(id);
+
+        public Task<DAL.App.DTO.WorkoutRoutine> AddWithBaseCycleAsync(WorkoutRoutine dto) =>
+            ServiceRepository.AddWithBaseCycleAsync(Mapper.MapBLLToDAL(dto));
     }
 }

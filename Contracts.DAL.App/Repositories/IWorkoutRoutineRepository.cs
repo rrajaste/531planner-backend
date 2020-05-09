@@ -22,5 +22,7 @@ namespace Contracts.DAL.App.Repositories
         Task<IEnumerable<TEntity>> AllInactiveBaseRoutinesAsync();
         Task<IEnumerable<TEntity>> AllUnPublishedBaseRoutinesAsync();
         Task<TEntity> FindBaseRoutineAsync(TKey id);
+        Task<bool> BaseRoutineWithIdExistsAsync(TKey id);
+        Task<WorkoutRoutine> AddWithBaseCycleAsync(TEntity dto);
     }
 }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
 using Contracts.DAL.App.Mappers;
-using Domain;
 using Domain.App;
 using Microsoft.EntityFrameworkCore;
 
@@ -66,5 +65,23 @@ namespace DAL.App.EF.Repositories
                          && w.Id == id
                 ).SingleOrDefaultAsync()
             );
+
+        public async Task<bool> BaseRoutineWithIdExistsAsync(Guid id) =>
+            await RepoDbSet.AnyAsync(w => w.AppUserId == null && w.Id.Equals(id));
+
+        public async Task<DTO.WorkoutRoutine> AddWithBaseCycleAsync(DTO.WorkoutRoutine dto)
+        {
+            var domainEntity = Mapper.MapDALToDomain(dto);
+            var baseCycle = new TrainingCycle()
+            {
+                Id = new Guid(),
+                CycleNumber = 1,
+                StartingDate = DateTime.Now,
+            };
+            domainEntity.TrainingCycles = new List<TrainingCycle>();
+            domainEntity.TrainingCycles.Add(baseCycle);
+            await RepoDbContext.WorkoutRoutines.AddAsync(domainEntity);
+            return Mapper.MapDomainToDAL(domainEntity);
+        }
     }
 }

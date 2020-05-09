@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
-using Domain;
 using TrainingWeek = DAL.App.DTO.TrainingWeek;
 
 namespace Contracts.DAL.App.Repositories
@@ -14,5 +15,7 @@ namespace Contracts.DAL.App.Repositories
         where TEntity : class, IDALBaseDTO<TKey>, new() 
         where TKey : IEquatable<TKey>
     {
+        Task<IEnumerable<TEntity>> AllWithBaseRoutineIdAsync(Guid baseRoutineId);
+        Task<bool> IsPartOfBaseRoutineAsync(Guid id);
     }
 }

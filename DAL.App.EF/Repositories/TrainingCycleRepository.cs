@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using Contracts.DAL.App.Mappers;
@@ -19,27 +19,37 @@ namespace DAL.App.EF.Repositories
         {
         }
 
-        public async Task<IEnumerable<TrainingCycle>> AllWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId) => (
-            await RepoDbSet
-                .Include(cycle => cycle.WorkoutRoutine)
-                .Where(cycle => 
-                    cycle.WorkoutRoutineId == id && cycle.WorkoutRoutine.AppUserId == userId
-                    ).ToListAsync()
-            ).Select(Mapper.MapDomainToDAL);
+        public async Task<IEnumerable<TrainingCycle>> AllWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId)
+        {
+            var trainingCycles = RepoDbSet
+                .Include(c => c.WorkoutRoutine)
+                .Where(c => c.WorkoutRoutineId.Equals(id));
+            var authorizedCycles = trainingCycles
+                .Where(c => c.WorkoutRoutine!.AppUserId.Equals(userId));
+            var cyclesList = await authorizedCycles.ToListAsync();
+            return cyclesList.Select(Mapper.MapDomainToDAL);
+        }
 
-        public async Task<IEnumerable<TrainingCycle>> AllWithBaseRoutineIdAsync(Guid id) =>
-            await AllWithRoutineIdForUserWithIdAsync(id, null);
+        public async Task<TrainingCycle> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId)
+        {
+            var cycle = await RepoDbSet
+                .Include(c => c.WorkoutRoutine)
+                .FirstOrDefaultAsync(c => c.WorkoutRoutineId == id && c.WorkoutRoutine!.AppUserId == userId);
+            var mappedCycle = Mapper.MapDomainToDAL(cycle);
+            return mappedCycle;
+        }
 
-        public async Task<TrainingCycle> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId) =>
-            Mapper.MapDomainToDAL(
-                await RepoDbSet
-                    .Include(cycle => cycle.WorkoutRoutine)
-                    .FirstOrDefaultAsync(cycle => 
-                        cycle.WorkoutRoutine.Id == id 
-                        && cycle.WorkoutRoutine.AppUserId == userId)
-                );
+        public async Task<TrainingCycle> FindWithBaseRoutineIdAsync(Guid id)
+        {
+            var cycle = await RepoDbSet
+                .Include(c => c.WorkoutRoutine)
+                .FirstOrDefaultAsync(c => c.WorkoutRoutineId == id && c.WorkoutRoutine!.AppUserId == null);
+            var mappedCycle = Mapper.MapDomainToDAL(cycle);
+            return mappedCycle;
+        }
 
-        public Task<TrainingCycle> FindWithBaseRoutineIdAsync(Guid id) => 
-            FindWithRoutineIdForUserWithIdAsync(id, null);
+        public Task<bool> IsPartOfBaseRoutineAsync(Guid cycleId) =>
+            RepoDbSet.Include(c => c.WorkoutRoutine)
+                .AnyAsync(c => c.Id == cycleId && c.WorkoutRoutine!.AppUserId == null);
     }
 }

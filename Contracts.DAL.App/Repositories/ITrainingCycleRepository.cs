@@ -18,8 +18,8 @@ namespace Contracts.DAL.App.Repositories
         where TKey : IEquatable<TKey>
     {
         Task<IEnumerable<TEntity>> AllWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId);
-        Task<IEnumerable<TEntity>> AllWithBaseRoutineIdAsync(Guid id);
         Task<TEntity> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId);
         Task<TEntity> FindWithBaseRoutineIdAsync(Guid id);
+        Task<bool> IsPartOfBaseRoutineAsync(Guid cycleId);
     }
 }

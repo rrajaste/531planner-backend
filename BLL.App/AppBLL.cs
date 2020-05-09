@@ -57,5 +57,13 @@ namespace BLL
         public IRoutineTypeService RoutineTypes =>
             GetService<IRoutineTypeService>(
                 () => new RoutineTypeService(UnitOfWork, MapperContext.RoutineTypeMapper));
+
+        public IExerciseSetService ExerciseSets =>
+            GetService<IExerciseSetService>(
+                () => new ExerciseSetService(UnitOfWork, MapperContext.ExerciseSetMapper));
+
+        public ISetTypeService SetTypes =>
+            GetService<ISetTypeService>(
+                () => new SetTypeService(UnitOfWork, MapperContext.SetTypeMapper));
     }
 }

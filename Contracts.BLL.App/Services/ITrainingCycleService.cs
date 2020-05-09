@@ -8,5 +8,6 @@ namespace Contracts.BLL.App.Services
     public interface ITrainingCycleService : IBaseEntityService<TrainingCycle>, 
         ITrainingCycleRepository<Guid, TrainingCycle>
     {
+        TrainingCycle GenerateBaseCycle(Guid workoutRoutineId);
     }
 }

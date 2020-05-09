@@ -10,5 +10,6 @@ namespace DAL.App.EF.Helpers
         public const string AppRoles = "roles.json";
         public const string MuscleGroups = "musclegroups.json";
         public const string TrainingDayTypes = "trainingdaytypes.json";
+        public const string SetTypes = "settypes.json";
     }
 }

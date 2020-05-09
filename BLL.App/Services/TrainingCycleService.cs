@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.App.DTO;
-using BLL.Base.Mappers;
 using BLL.Base.Services;
-using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
@@ -24,11 +22,7 @@ namespace BLL.Services
         public async Task<IEnumerable<TrainingCycle>> AllWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId) => (
                 await UnitOfWork.TrainingCycles.AllWithRoutineIdForUserWithIdAsync(id, userId)
             ).Select(Mapper.MapDALToBLL);
-
-        public async Task<IEnumerable<TrainingCycle>> AllWithBaseRoutineIdAsync(Guid id) => (
-            await UnitOfWork.TrainingCycles.AllWithBaseRoutineIdAsync(id)
-        ).Select(Mapper.MapDALToBLL);
-
+        
         public async Task<TrainingCycle> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId) =>
             Mapper.MapDALToBLL(
                 await UnitOfWork.TrainingCycles.FindWithRoutineIdForUserWithIdAsync(id, userId)
@@ -38,5 +32,16 @@ namespace BLL.Services
             Mapper.MapDALToBLL(
                 await UnitOfWork.TrainingCycles.FindWithBaseRoutineIdAsync(id)
             );
+
+        public Task<bool> IsPartOfBaseRoutineAsync(Guid cycleId) =>
+            ServiceRepository.IsPartOfBaseRoutineAsync(cycleId);
+
+        public TrainingCycle GenerateBaseCycle(Guid workoutRoutineId) =>
+            new TrainingCycle()
+            {
+                CycleNumber = 1,
+                StartingDate = DateTime.Now,
+                WorkoutRoutineId = workoutRoutineId
+            };
     }
 }

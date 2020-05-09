@@ -9,7 +9,7 @@ namespace BLL.Mappers
 {
     public class ExerciseSetMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.ExerciseSet, ExerciseSet>
     {
-        public ExerciseSetMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public ExerciseSetMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
@@ -30,8 +30,12 @@ namespace BLL.Mappers
                 ? null 
                 : BLLMapperContext.TrainingDayMapper.MapDALToBLL(dalObject.TrainingDay),
                 TrainingDayId = dalObject.TrainingDayId,
+                SetTypeId = dalObject.SetTypeId,
+                SetType = dalObject.SetType == null 
+                    ? null 
+                    : BLLMapperContext.SetTypeMapper.MapDALToBLL(dalObject.SetType)  
             };
-
+        
         public DAL.App.DTO.ExerciseSet MapBLLToDAL(ExerciseSet bllObject) =>
             new DAL.App.DTO.ExerciseSet()
             {
@@ -43,6 +47,7 @@ namespace BLL.Mappers
                 NrOfReps = bllObject.NrOfReps,
                 SetNumber = bllObject.SetNumber,
                 TrainingDayId = bllObject.TrainingDayId,
+                SetTypeId = bllObject.SetTypeId
             };
     }
 }

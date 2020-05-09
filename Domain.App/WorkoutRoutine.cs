@@ -27,7 +27,7 @@ namespace Domain.App
         public string Description { get; set; } = default!;
         
         
-        public bool IsBaseRoutine { get; set; } = default!;
+        public bool IsBaseRoutine { get; set; } = false;
         public TKey RoutineTypeId { get; set; } = default!;
         public TKey? AppUserId { get; set; }
         public AppUser? User { get; set; }

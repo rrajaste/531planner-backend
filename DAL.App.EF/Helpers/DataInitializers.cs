@@ -39,6 +39,7 @@ namespace DAL.App.EF.Helpers
             SeedDomainEntity(context.ExerciseTypes, path + SeedDataFilePaths.ExerciseTypes);
             SeedDomainEntity(context.MuscleGroups, path + SeedDataFilePaths.MuscleGroups);
             SeedDomainEntity(context.TrainingDaysTypes, path + SeedDataFilePaths.TrainingDayTypes);
+            SeedDomainEntity(context.SetTypes, path + SeedDataFilePaths.SetTypes);
             context.SaveChanges();
         }
 

@@ -13,6 +13,7 @@ namespace DAL.App.EF
         public Microsoft.EntityFrameworkCore.DbSet<Exercise> Exercises { get; set; } = default!;
         public Microsoft.EntityFrameworkCore.DbSet<ExerciseType> ExerciseTypes { get; set; } = default!;
         public Microsoft.EntityFrameworkCore.DbSet<Muscle> Muscles { get; set; } = default!;
+        public Microsoft.EntityFrameworkCore.DbSet<SetType> SetTypes { get; set; } = default!;
         public Microsoft.EntityFrameworkCore.DbSet<MuscleGroup> MuscleGroups { get; set; } = default!;
         public Microsoft.EntityFrameworkCore.DbSet<ExerciseSet> ExerciseSets { get; set; } = default!;
         public Microsoft.EntityFrameworkCore.DbSet<PersonalRecord> PersonalRecords { get; set; } = default!;
