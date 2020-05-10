@@ -1,4 +1,4 @@
-@model IEnumerable<BLL.App.DTO.ExerciseSet>
+@model IEnumerable<BLL.App.DTO.BaseLiftSet>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,7 +22,7 @@
             @Html.DisplayNameFor(model => model.NrOfReps)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Weight)
+            @Html.DisplayNameFor(model => model.WeightPercentageOfOneRepMax)
         </th>
         <th></th>
     </tr>
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.NrOfReps)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Weight)
+                @Html.DisplayFor(modelItem => item.WeightPercentageOfOneRepMax)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

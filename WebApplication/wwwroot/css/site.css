@@ -69,3 +69,28 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* CUSTOM 
+-----------------------------------------------------*/
+
+body {
+  background-color: #efefef;
+}
+
+.add-new-main {
+    font-size: 24px;
+}
+
+.jumbotron {
+  background-color: white;
+  margin-top: 90px;
+}
+
+.view-edit-delete {
+  font-size: 1.25rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #efefef;
+  padding: 0.5em;
+}

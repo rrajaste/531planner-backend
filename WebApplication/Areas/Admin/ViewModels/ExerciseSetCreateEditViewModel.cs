@@ -5,7 +5,7 @@ namespace WebApplication.Areas.Admin.ViewModels
 {
     public class ExerciseSetCreateEditViewModel
     {
-        public ExerciseSet ExerciseSet { get; set; }
+        public BaseLiftSet ExerciseSet { get; set; }
         public SelectList? SetTypes { get; set; }
         public SelectList? Exercises { get; set; }
     }

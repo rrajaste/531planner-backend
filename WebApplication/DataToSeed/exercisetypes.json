@@ -1,22 +1,12 @@
 [
   {
-    "name": "Main lift working set",
-    "description": "Main compound lift work sets",
+    "name": "Main lift",
+    "description": "Main compound lift",
     "typecode": "MainLiftWorkSet"
-  },
-  {
-    "name": "Main lift warm-up set",
-    "description": "Warm-up sets before main compound lift",
-    "typecode": "MainLiftWarmUp"
   },
   {
     "name": "AccessoryLift",
     "description": "Accessory exercise to compliment main lifts",
     "typecode": "Accessory"
-  },
-  {
-    "name": "Cardio",
-    "description": "Exercise to increase cardiovascular health",
-    "typecode": "Cardio"
   }
 ]

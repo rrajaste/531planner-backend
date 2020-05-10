@@ -24,7 +24,7 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(id))
             {
-                return View(await _bll.ExerciseSets.AllWithTrainingDayIdAsync(id));
+                return View(await _bll.ExerciseSets.AllBaseLiftSetsWithTrainingDayIdAsync(id));
             }
             return NotFound();
         }
@@ -35,7 +35,7 @@ namespace WebApplication.Areas.Admin.Controllers
             {
                 var viewModel = new ExerciseSetCreateEditViewModel()
                 {
-                    ExerciseSet = new ExerciseSet()
+                    ExerciseSet = new BaseLiftSet()
                 };
                 viewModel.ExerciseSet.TrainingDayId = id;
                 return View(await AddSelectListsToViewModelAsync(viewModel));
@@ -52,7 +52,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     viewModel.ExerciseSet.Id = Guid.NewGuid();
-                    await _bll.ExerciseSets.AddBaseSetAsync(viewModel.ExerciseSet);
+                    await _bll.ExerciseSets.AddAsync(viewModel.ExerciseSet);
                     await _bll.SaveChangesAsync();
                     return RedirectToAction(nameof(Index), new {id = viewModel.ExerciseSet.TrainingDayId});
                 }
@@ -65,7 +65,7 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.ExerciseSets.IsPartOfBaseRoutineAsync(id))
             {
-                var exerciseSet = await _bll.ExerciseSets.FindAsync(id);
+                var exerciseSet = await _bll.ExerciseSets.FindBaseLiftSetAsync(id);
                 var viewModel = new ExerciseSetCreateEditViewModel()
                 {
                     ExerciseSet = exerciseSet
@@ -88,7 +88,7 @@ namespace WebApplication.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    _bll.ExerciseSets.Update(viewModel.ExerciseSet);
+                    await _bll.ExerciseSets.UpdateAsync(viewModel.ExerciseSet);
                     await _bll.SaveChangesAsync();
                     return RedirectToAction(nameof(Index), new {id = viewModel.ExerciseSet.TrainingDayId});
                 }
@@ -101,7 +101,7 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.ExerciseSets.IsPartOfBaseRoutineAsync(id))
             {
-                var exerciseSet = await _bll.ExerciseSets.FindAsync(id);
+                var exerciseSet = await _bll.ExerciseSets.FindBaseLiftSetAsync(id);
                 return View(exerciseSet);
             }
             return NotFound();

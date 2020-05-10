@@ -1,3 +1,5 @@
+@using WebApplication.Areas.Admin.ViewModels
+@using BLL.App.DTO
 @model IEnumerable<BLL.App.DTO.TrainingWeek>
 
 @{
@@ -7,7 +9,7 @@
 <h1>Training weeks</h1>
 
 <p>
-    <a asp-action="Create" asp-route-id="@ViewContext.RouteData.Values["id"]">Create New</a> |
+    <partial name="_CreateNewPartial" model="@GetCreateViewModel()"/>
     <a asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index">Back</a>
 </p>
 <table class="table">
@@ -18,12 +20,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsDeload)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndingDate)
             </th>
             <th></th>
         </tr>
@@ -38,12 +34,6 @@
                 @Html.DisplayFor(modelItem => item.IsDeload)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndingDate)
-            </td>
-            <td>
                 <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Index" asp-route-id="@item.Id">View</a> |
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -52,3 +42,14 @@
 }
     </tbody>
 </table>
+
+@functions
+{
+    public TrainingWeekViewModel GetCreateViewModel()
+    {
+        return new TrainingWeekViewModel()
+        {
+            WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
+        };
+    }
+}

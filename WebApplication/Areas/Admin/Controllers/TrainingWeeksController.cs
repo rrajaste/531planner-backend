@@ -30,39 +30,17 @@ namespace WebApplication.Areas.Admin.Controllers
             return View(trainingWeeks);
         }
         
-        public async Task<IActionResult> Create(Guid id)
-        {
-            if (!await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id))
-            {
-                return NotFound();
-            }
-
-            var trainingCycle = await _bll.TrainingCycles.FindWithBaseRoutineIdAsync(id);
-            var viewModel = new TrainingWeekViewModel()
-            {
-                TrainingWeek = new TrainingWeek(){TrainingCycleId = trainingCycle.Id},
-                WorkoutRoutineId = id
-            };
-            return View(viewModel);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TrainingWeekViewModel viewModel)
         {
-            if (!await _bll.TrainingCycles.IsPartOfBaseRoutineAsync(viewModel.TrainingWeek.TrainingCycleId))
+            if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(viewModel.WorkoutRoutineId))
             {
-                return BadRequest();
-            }
-            viewModel.TrainingWeek.Id = new Guid();
-            if (ModelState.IsValid)
-            {
-                
-                _bll.TrainingWeeks.Add(viewModel.TrainingWeek);
+                await _bll.TrainingWeeks.AddNewWeekToBaseRoutineWithIdAsync(viewModel.WorkoutRoutineId);
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
             }
-            return View(viewModel);
+            return BadRequest();
         }
         
         public async Task<IActionResult> Edit(Guid id)

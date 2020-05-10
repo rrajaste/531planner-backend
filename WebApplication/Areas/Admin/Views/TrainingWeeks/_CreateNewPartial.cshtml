@@ -1,0 +1,9 @@
+@model WebApplication.Areas.Admin.ViewModels.TrainingWeekViewModel
+
+<form asp-action="Create">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="WorkoutRoutineId" value="@Model.WorkoutRoutineId"/>
+    <div class="form-group">
+        <input type="submit" value="Add new" class="btn btn-primary"/>
+    </div>
+</form>
