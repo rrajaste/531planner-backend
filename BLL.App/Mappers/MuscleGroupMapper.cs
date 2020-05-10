@@ -11,7 +11,7 @@ namespace BLL.Mappers
 {
     public class MuscleGroupMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.MuscleGroup, MuscleGroup>
     {
-        public MuscleGroupMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public MuscleGroupMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 

@@ -1,16 +1,13 @@
-using Contracts.DAL.App;
-using Contracts.DAL.App.Mappers;
 using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
-using DAL.Base.EF;
 
 namespace BLL.Mappers
 {
     public class TargetMuscleGroupMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.TargetMuscleGroup, TargetMuscleGroup>
     {
-        public TargetMuscleGroupMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public TargetMuscleGroupMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 

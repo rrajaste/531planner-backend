@@ -1,8 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Contracts.DAL.App.Repositories;
 using DAL.Base.EF.Repositories;
 using Contracts.DAL.App.Mappers;
 using Domain.App;
-
+using Microsoft.EntityFrameworkCore;
 namespace DAL.App.EF.Repositories
 {
     public class TrainingWeekRepository : EFBaseRepository<AppDbContext, TrainingWeek, DAL.App.DTO.TrainingWeek>,
@@ -12,5 +16,24 @@ namespace DAL.App.EF.Repositories
             : base(repoDbContext, mapper)
         {
         }
+
+        public async Task<IEnumerable<DTO.TrainingWeek>> AllWithBaseRoutineIdAsync(Guid baseRoutineId)
+        {
+            var trainingCycle = await RepoDbContext.TrainingCycles
+                .Include(c => c.TrainingWeeks)
+                .FirstOrDefaultAsync(c => c.WorkoutRoutineId.Equals(baseRoutineId));
+            var mappedWeeks = trainingCycle.TrainingWeeks.Select(Mapper.MapDomainToDAL);
+            return mappedWeeks;
+        }
+
+        public async Task<bool> IsPartOfBaseRoutineAsync(Guid id) => 
+            await RepoDbSet
+                .Include(w => w.TrainingCycle)
+                .ThenInclude(c => c!.WorkoutRoutine)
+                .AnyAsync( w=> 
+                    w.Id == id 
+                    && w.TrainingCycle!.WorkoutRoutine!.AppUserId == null
+                );
+        
     }
 }

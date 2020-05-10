@@ -10,17 +10,18 @@ using Contracts.DAL.Base.Repositories;
 
 namespace BLL.Base.Services
 {
-    public class BaseEntityService<TServiceRepository, TUnitOfWork, TDALEntity, TBLLEntity> : BaseService,  IBaseEntityService<TBLLEntity> 
+    public class BaseEntityService<TServiceRepository, TUnitOfWork, TDALEntity, TBLLEntity, TMapper> : BaseService,  IBaseEntityService<TBLLEntity> 
         where TBLLEntity : class, IBLLBaseDTO, new() 
+        where TMapper : IBLLMapper<TDALEntity,  TBLLEntity>
         where TDALEntity : class, IDALBaseDTO, new()
         where TUnitOfWork : IBaseUnitOfWork
         where TServiceRepository : IBaseRepository<TDALEntity>
     {
-        protected readonly TServiceRepository ServiceRepository;
-        protected readonly TUnitOfWork UnitOfWork;
-        protected readonly IBLLMapper<TDALEntity, TBLLEntity> Mapper;
+        protected TServiceRepository ServiceRepository;
+        protected TUnitOfWork UnitOfWork;
+        protected TMapper Mapper;
 
-        public BaseEntityService(TUnitOfWork unitOfWork, IBLLMapper<TDALEntity, TBLLEntity> mapper, TServiceRepository serviceRepository)
+        public BaseEntityService(TUnitOfWork unitOfWork, TMapper mapper, TServiceRepository serviceRepository)
         {
             UnitOfWork = unitOfWork;
             ServiceRepository = serviceRepository;

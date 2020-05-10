@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
@@ -20,6 +21,7 @@ namespace DAL.App.EF.Mappers
                 Name = domainObject.Name,
                 Description = domainObject.Description,
                 IsBaseRoutine = domainObject.AppUserId == null,
+                IsPublished = domainObject.CreatedAt <= DateTime.Now && domainObject.ClosedAt > DateTime.Now,
                 RoutineType = domainObject.RoutineType == null 
                     ? null 
                     : DALMapperContext.RoutineTypeMapper.MapDomainToDAL(domainObject.RoutineType),

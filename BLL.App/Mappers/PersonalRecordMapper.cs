@@ -10,7 +10,7 @@ namespace BLL.Mappers
 {
     public class PersonalRecordMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.PersonalRecord, PersonalRecord>
     {
-        public PersonalRecordMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public PersonalRecordMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 

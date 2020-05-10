@@ -41,21 +41,15 @@ namespace DAL.App.EF.Repositories
                     s.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
 
-        public async Task<DTO.ExerciseSet> AddBaseSetAsync(DTO.ExerciseSet dto)
+        public async Task<Guid> GetRoutineIdForExerciseSetAsync(DTO.ExerciseSet entity)
         {
-            var domainEntity = Mapper.MapDALToDomain(dto);
-            var unitType = await RepoDbContext
-                .UnitTypes
-                .FirstOrDefaultAsync(t => t.Name == Domain.App.Enums.UnitTypes.Metric);
-            var trainingDay = await RepoDbContext.TrainingDays
-                .Include(d => d!.TrainingWeek)
-                .ThenInclude(w => w!.TrainingCycle)
-                .FirstOrDefaultAsync(d => d.Id == dto.TrainingDayId);
-            var workoutRoutineId = trainingDay.TrainingWeek!.TrainingCycle!.WorkoutRoutineId;
-            domainEntity.UnitTypeId = unitType.Id;
-            domainEntity.WorkoutRoutineId = workoutRoutineId;
-            await RepoDbSet.AddAsync(domainEntity);
-            return Mapper.MapDomainToDAL(domainEntity);
+            var exerciseSetWithIncludes =
+                await RepoDbContext
+                    .TrainingDays
+                    .Include(d => d.TrainingWeek)
+                    .ThenInclude(w => w!.TrainingCycle)
+                    .FirstOrDefaultAsync(d => d.Id == entity.TrainingDayId);
+            return exerciseSetWithIncludes!.TrainingWeek!.TrainingCycle!.WorkoutRoutineId;
         }
     }
 }

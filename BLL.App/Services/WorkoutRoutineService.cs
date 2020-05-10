@@ -12,7 +12,7 @@ using WorkoutRoutine = BLL.App.DTO.WorkoutRoutine;
 namespace BLL.Services
 {
     public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork, 
-        DAL.App.DTO.WorkoutRoutine, BLL.App.DTO.WorkoutRoutine, IBLLMapper<DAL.App.DTO.WorkoutRoutine, BLL.App.DTO.WorkoutRoutine>>,
+        DAL.App.DTO.WorkoutRoutine, WorkoutRoutine, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine>>,
         IWorkoutRoutineService 
     {
         public WorkoutRoutineService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine> mapper) 
@@ -47,7 +47,10 @@ namespace BLL.Services
         public Task<bool> BaseRoutineWithIdExistsAsync(Guid id) =>
             ServiceRepository.BaseRoutineWithIdExistsAsync(id);
 
-        public Task<DAL.App.DTO.WorkoutRoutine> AddWithBaseCycleAsync(WorkoutRoutine dto) =>
-            ServiceRepository.AddWithBaseCycleAsync(Mapper.MapBLLToDAL(dto));
+        public async Task<WorkoutRoutine> AddWithBaseCycleAsync(WorkoutRoutine dto) =>
+            Mapper.MapDALToBLL(await ServiceRepository.AddWithBaseCycleAsync(Mapper.MapBLLToDAL(dto)));
+
+        public async Task<WorkoutRoutine> ChangeRoutinePublishStatus(Guid routineId, bool isPublished) => 
+            Mapper.MapDALToBLL(await ServiceRepository.ChangeRoutinePublishStatus(routineId, isPublished));
     }
 }

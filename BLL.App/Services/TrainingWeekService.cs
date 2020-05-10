@@ -25,5 +25,24 @@ namespace BLL.Services
 
         public async Task<bool> IsPartOfBaseRoutineAsync(Guid id) => 
             await ServiceRepository.IsPartOfBaseRoutineAsync(id);
+
+        public async Task<TrainingWeek> AddNewWeekToBaseRoutineWithIdAsync(Guid routineId)
+        {
+            var parentCycle = await UnitOfWork.TrainingCycles.FindWithBaseRoutineIdAsync(routineId);
+            var trainingWeeks = 
+                (await UnitOfWork.TrainingWeeks.AllWithBaseRoutineIdAsync(routineId)).ToList();
+            var weekNumber = 1;
+            if (trainingWeeks.Count != 0)
+            {
+                weekNumber = weekNumber + trainingWeeks.Max(w => w.WeekNumber);
+            }
+            var trainingWeek = new TrainingWeek()
+            {
+                TrainingCycleId = parentCycle.Id,
+                WeekNumber = weekNumber
+            };
+            ServiceRepository.Add(Mapper.MapBLLToDAL(trainingWeek));
+            return trainingWeek;
+        }
     }
 }

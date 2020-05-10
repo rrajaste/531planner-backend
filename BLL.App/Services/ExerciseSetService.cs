@@ -26,17 +26,44 @@ namespace BLL.Services
         public Task<bool> IsPartOfBaseRoutineAsync(Guid exerciseSetId) =>
             ServiceRepository.IsPartOfBaseRoutineAsync(exerciseSetId);
 
-        public async Task<ExerciseSet> AddBaseSetAsync(ExerciseSet dto) =>
-            Mapper.MapDALToBLL(await ServiceRepository.AddBaseSetAsync(Mapper.MapBLLToDAL(dto)));
+        public async Task<Guid> GetRoutineIdForExerciseSetAsync(ExerciseSet entity) =>
+            await ServiceRepository.GetRoutineIdForExerciseSetAsync(Mapper.MapBLLToDAL(entity));
 
-        public async Task<BaseLiftSet> AddBaseLiftSetAsync(BaseLiftSet baseSet) =>
-            Mapper.MapDALToBaseLiftSet(
-                await ServiceRepository.AddBaseSetAsync(Mapper.MapBaseLiftSetToDALEntity(baseSet)));
+        public async Task<BaseLiftSet> AddAsync(BaseLiftSet baseSet)
+        {
+            var entityToAdd = await GetDALEntityWithRoutineId(baseSet);
+            ServiceRepository.Add(entityToAdd);
+            return Mapper.MapDALToBaseLiftSet(entityToAdd);
+        }
+        public async Task<BaseLiftSet> UpdateAsync(BaseLiftSet baseLiftSet)
+        {
+            var entityToAdd = await GetDALEntityWithRoutineId(baseLiftSet);
+            ServiceRepository.Update(entityToAdd);
+            return Mapper.MapDALToBaseLiftSet(entityToAdd);
+        }
+
+        public async Task<BaseLiftSet> RemoveAsync(BaseLiftSet baseLiftSet)
+        {
+            var entityToAdd = await GetDALEntityWithRoutineId(baseLiftSet);
+            ServiceRepository.Remove(entityToAdd);
+            return Mapper.MapDALToBaseLiftSet(entityToAdd);
+        }
 
         public async Task<BaseLiftSet> FindBaseLiftSetAsync(Guid setId) =>
             Mapper.MapDALToBaseLiftSet(await ServiceRepository.FindAsync(setId));
 
         public void UpdateBaseExerciseSets(BaseLiftSet baseSet) =>
             ServiceRepository.Update(Mapper.MapBaseLiftSetToDALEntity(baseSet));
+
+        public async Task<IEnumerable<BaseLiftSet>> AllBaseLiftSetsWithTrainingDayIdAsync(Guid id) =>
+            (await ServiceRepository.AllWithTrainingDayIdAsync(id)).Select(Mapper.MapDALToBaseLiftSet);
+
+        private async Task<DAL.App.DTO.ExerciseSet> GetDALEntityWithRoutineId(BaseLiftSet liftSet)
+        {
+            var bllEntity = Mapper.MapDALToBLL(Mapper.MapBaseLiftSetToDALEntity(liftSet));
+            var routineId = await GetRoutineIdForExerciseSetAsync(bllEntity);
+            bllEntity.WorkoutRoutineId = routineId;
+            return Mapper.MapBLLToDAL(bllEntity);
+        }
     }
 }

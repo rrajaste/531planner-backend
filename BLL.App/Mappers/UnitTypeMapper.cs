@@ -1,16 +1,15 @@
 using Contracts.DAL.App;
 using BLL.App.DTO;
+using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
 
 namespace BLL.Mappers
 {
-    public class UnitTypeMapper : IBLLMapper<DAL.App.DTO.UnitType, UnitType>
+    public class UnitTypeMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.UnitType, UnitType>
     {
-        private readonly IAppBLLMapperContext _context;
-        public UnitTypeMapper(IAppBLLMapperContext context)
+        public UnitTypeMapper(IAppBLLMapperContext context) : base(context)
         {
-            _context = context;
         }
         
         public UnitType MapDALToBLL(DAL.App.DTO.UnitType dalObject) =>

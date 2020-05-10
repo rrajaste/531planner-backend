@@ -2,7 +2,7 @@ using Contracts.BLL.App.Mappers;
 using bllDTO =  BLL.App.DTO;
 using dalDTO = DAL.App.DTO;
 
-namespace Contracts.DAL.App
+namespace Contracts.BLL.App
 {
     public interface IAppBLLMapperContext
     {
@@ -10,7 +10,7 @@ namespace Contracts.DAL.App
         IBLLMapper<dalDTO.BodyMeasurement, bllDTO.BodyMeasurement> BodyMeasurementMapper { get; }
         IBLLMapper<dalDTO.DailyNutritionIntake, bllDTO.DailyNutritionIntake> DailyNutritionIntakeMapper { get; }
         IBLLMapper<dalDTO.Exercise, bllDTO.Exercise> ExerciseMapper { get; }
-        IBLLMapper<dalDTO.ExerciseSet, bllDTO.ExerciseSet> ExerciseSetMapper { get; }
+        IExerciseSetMapper ExerciseSetMapper { get; }
         IBLLMapper<dalDTO.ExerciseType, bllDTO.ExerciseType> ExerciseTypeMapper { get; }
         IBLLMapper<dalDTO.MuscleGroup, bllDTO.MuscleGroup> MuscleGroupMapper { get; }
         IBLLMapper<dalDTO.Muscle, bllDTO.Muscle> MuscleMapper { get; }

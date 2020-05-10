@@ -11,7 +11,7 @@ namespace BLL.Mappers
 {
     public class WorkoutRoutineMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine>
     {
-        public WorkoutRoutineMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public WorkoutRoutineMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
@@ -22,6 +22,7 @@ namespace BLL.Mappers
                 AppUserId = dalObject.Id,
                 Name = dalObject.Name,
                 Description = dalObject.Description,
+                IsPublished = dalObject.IsPublished,
                 IsBaseRoutine = dalObject.AppUserId == null,
                 RoutineType = dalObject.RoutineType == null 
                     ? null 
@@ -38,6 +39,7 @@ namespace BLL.Mappers
                 Name = bllObject.Name,
                 Description = bllObject.Description,
                 IsBaseRoutine = bllObject.IsBaseRoutine,
+                IsPublished = bllObject.IsPublished,
                 RoutineTypeId = bllObject.RoutineTypeId,
             };
     }

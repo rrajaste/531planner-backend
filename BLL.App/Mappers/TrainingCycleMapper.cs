@@ -11,7 +11,7 @@ namespace BLL.Mappers
 {
     public class TrainingCycleMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.TrainingCycle, TrainingCycle>
     {
-        public TrainingCycleMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public TrainingCycleMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 

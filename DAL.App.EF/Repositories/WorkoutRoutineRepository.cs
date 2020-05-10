@@ -38,23 +38,21 @@ namespace DAL.App.EF.Repositories
             await RepoDbSet.Where(
                 w => w.AppUserId == null
                      && w.ClosedAt > DateTime.Now
-                     && w.CreatedAt <= DateTime.Now
-                    ).ToListAsync()
+            ).ToListAsync()
                 ).Select(Mapper.MapDomainToDAL);
 
         public async Task<IEnumerable<DTO.WorkoutRoutine>> AllInactiveBaseRoutinesAsync() => (
             await RepoDbSet.Where(
                 w => w.AppUserId == null
-                     && w.ClosedAt >= DateTime.Now
-                     && w.CreatedAt <= DateTime.Now
-                ).ToListAsync()
+                     && w.ClosedAt <= DateTime.Now
+            ).ToListAsync()
             ).Select(Mapper.MapDomainToDAL);
 
         public async Task<IEnumerable<DTO.WorkoutRoutine>> AllUnPublishedBaseRoutinesAsync() => (
             await RepoDbSet.Where(
                 w => w.AppUserId == null
                      && w.ClosedAt >= DateTime.Now
-                     && w.CreatedAt == DateTime.MaxValue
+                     && w.CreatedAt >= DateTime.MaxValue
                 ).ToListAsync()
             ).Select(Mapper.MapDomainToDAL);
 
@@ -72,16 +70,25 @@ namespace DAL.App.EF.Repositories
         public async Task<DTO.WorkoutRoutine> AddWithBaseCycleAsync(DTO.WorkoutRoutine dto)
         {
             var domainEntity = Mapper.MapDALToDomain(dto);
+            domainEntity.CreatedAt = DateTime.MaxValue;
+            domainEntity.ClosedAt = DateTime.MaxValue;
             var baseCycle = new TrainingCycle()
             {
                 Id = new Guid(),
                 CycleNumber = 1,
                 StartingDate = DateTime.Now,
             };
-            domainEntity.TrainingCycles = new List<TrainingCycle>();
-            domainEntity.TrainingCycles.Add(baseCycle);
+            domainEntity.TrainingCycles = new List<TrainingCycle> {baseCycle};
             await RepoDbContext.WorkoutRoutines.AddAsync(domainEntity);
             return Mapper.MapDomainToDAL(domainEntity);
+        }
+
+        public async Task<DTO.WorkoutRoutine> ChangeRoutinePublishStatus(Guid routineId, bool isPublished)
+        {
+            var routineToPublish = await RepoDbSet.FindAsync(routineId);
+            routineToPublish.CreatedAt = isPublished ? DateTime.Now : DateTime.MaxValue;
+            RepoDbSet.Update(routineToPublish);
+            return Mapper.MapDomainToDAL(routineToPublish);
         }
     }
 }

@@ -12,12 +12,12 @@ namespace Contracts.DAL.App.Repositories
     {
     }
     
-    public interface IExerciseSetRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
+    public interface IExerciseSetRepository<TKey, TEntity> : IBaseRepository<TKey, TEntity> 
         where TEntity : class, IDALBaseDTO<TKey>, new() 
         where TKey : IEquatable<TKey>
     {
         Task<IEnumerable<TEntity>> AllWithTrainingDayIdAsync(Guid trainingDayId);
         Task<bool> IsPartOfBaseRoutineAsync(Guid exerciseSetId);
-        Task<TEntity> AddBaseSetAsync(TEntity dto);
+        Task<TKey> GetRoutineIdForExerciseSetAsync(TEntity entity);
     }
 }

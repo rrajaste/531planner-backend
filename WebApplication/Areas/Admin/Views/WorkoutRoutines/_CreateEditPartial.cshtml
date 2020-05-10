@@ -1,21 +1,24 @@
 @model WorkoutRoutineCreateEditViewModel
 
-<div asp-validation-summary="All" class="text-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="WorkoutRoutine.Name" class="control-label"></label>
-        <input asp-for="WorkoutRoutine.Name" class="form-control" />
-        <span asp-validation-for="WorkoutRoutine.Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="WorkoutRoutine.Description" class="control-label"></label>
-        <input asp-for="WorkoutRoutine.Description" class="form-control" />
-        <span asp-validation-for="WorkoutRoutine.Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="WorkoutRoutine.RoutineType" class="control-label"></label>
-        <select asp-for="WorkoutRoutine.RoutineTypeId" class="form-control" asp-items="@Model.RoutineTypeSelectList"></select>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="WorkoutRoutine.RoutineType" class="control-label"></label>
+    <select asp-for="WorkoutRoutine.RoutineTypeId" class="form-control" asp-items="@Model.RoutineTypeSelectList">
+        <option value=""> ---------------- SELECT TYPE ----------------- </option>
+    </select>
+    <span asp-validation-for="WorkoutRoutine.RoutineTypeId" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="WorkoutRoutine.Name" class="control-label"></label>
+    <input asp-for="WorkoutRoutine.Name" class="form-control" />
+    <span asp-validation-for="WorkoutRoutine.Name" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="WorkoutRoutine.Description" class="control-label"></label>
+    <textarea asp-for="WorkoutRoutine.Description" class="form-control"></textarea>
+    <span asp-validation-for="WorkoutRoutine.Description" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <input type="submit" value="SUBMIT" class="btn btn-success" />
+</div>

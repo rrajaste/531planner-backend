@@ -1,23 +1,21 @@
 @model WorkoutRoutineCreateEditViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create new base routine";
 }
 
-<h1>Create</h1>
-
-<h4>WorkoutRoutine</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <partial name="_CreateEditPartial"/>
-        </form>
+<div class="jumbotron shadow rounded pb-1">
+    <h4>CREATE A NEW BASE ROUTINE</h4>
+    <hr/>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <partial name="_CreateEditPartial"/>                                
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <hr/>
+    <a class="btn btn-link mx-1" asp-action="Index">BACK TO LIST</a>
 </div>
 
 @section Scripts {

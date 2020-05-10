@@ -8,7 +8,7 @@ namespace BLL.Mappers
 {
     public class MuscleMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.Muscle, Muscle>
     {
-        public MuscleMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public MuscleMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 

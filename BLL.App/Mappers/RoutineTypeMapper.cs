@@ -11,7 +11,7 @@ namespace BLL.Mappers
 {
     public class RoutineTypeMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.RoutineType, RoutineType>
     {
-        public RoutineTypeMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public RoutineTypeMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 

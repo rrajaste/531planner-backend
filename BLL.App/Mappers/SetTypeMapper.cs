@@ -1,17 +1,17 @@
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
 using BLL.App.DTO;
+using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
+using Contracts.BLL.Base.Mappers;
 
 namespace BLL.Mappers
 {
-    public class SetTypeMapper : IBLLMapper<DAL.App.DTO.SetType, SetType>
+    public class SetTypeMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.SetType, SetType>
     {
-        private readonly IAppBLLMapperContext _context;
-        public SetTypeMapper(IAppBLLMapperContext context)
+        public SetTypeMapper(IAppBLLMapperContext context) : base(context)
         {
-            _context = context;
         }
         
         public SetType MapDALToBLL(DAL.App.DTO.SetType dalObject) =>

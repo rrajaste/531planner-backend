@@ -3,6 +3,7 @@ using BLL.Mappers;
 using Contracts.BLL.App.Mappers;
 using Contracts.DAL.App;
 using BLL.App.DTO;
+using Contracts.BLL.App;
 
 namespace BLL
 {
@@ -20,7 +21,8 @@ namespace BLL
         public IBLLMapper<DAL.App.DTO.Exercise, Exercise> ExerciseMapper =>
             GetMapper(() => new ExerciseMapper(this));
         
-        public IBLLMapper<DAL.App.DTO.ExerciseSet, ExerciseSet> ExerciseSetMapper =>
+        
+        public IExerciseSetMapper ExerciseSetMapper =>
             GetMapper(() => new ExerciseSetMapper(this));
         
         public IBLLMapper<DAL.App.DTO.ExerciseType, ExerciseType> ExerciseTypeMapper =>

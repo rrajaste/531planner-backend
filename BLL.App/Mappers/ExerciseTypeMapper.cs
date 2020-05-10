@@ -10,7 +10,7 @@ namespace BLL.Mappers
 {
     public class ExerciseTypeMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.ExerciseType, ExerciseType>
     {
-        public ExerciseTypeMapper(IAppBLLMapperContext BLLMapperContext) : base(BLLMapperContext)
+        public ExerciseTypeMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 

@@ -1,10 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Contracts.BLL.App;
 using BLL.App.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using WebApplication.Areas.Admin.ViewModels;
 using WebApplication.ViewModels;
 
 namespace WebApplication.Areas.Admin.Controllers
@@ -23,9 +27,28 @@ namespace WebApplication.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _bll.WorkoutRoutines.AllActiveBaseRoutinesAsync());
+            var routines = await _bll.WorkoutRoutines.AllActiveBaseRoutinesAsync();
+            var publishedRoutines = new Collection<WorkoutRoutine>();
+            var unpublishedRoutines = new Collection<WorkoutRoutine>();
+            foreach (var routine in routines)
+            {
+                if (routine.IsPublished)
+                {
+                    publishedRoutines.Add(routine);
+                }
+                else
+                {
+                    unpublishedRoutines.Add(routine);
+                }
+            }
+            var viewModel = new WorkoutRoutineViewModel()
+            {
+                PublishedRoutines = publishedRoutines,
+                UnPublishedRoutines = unpublishedRoutines
+            };
+            return View(viewModel);
         }
-        
+
         public async Task<IActionResult> Create()
         {
             var viewModel = new WorkoutRoutineCreateEditViewModel
@@ -42,10 +65,17 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var workoutRoutineId = Guid.NewGuid();;
+                viewModel.WorkoutRoutine.Id = workoutRoutineId;
                 await _bll.WorkoutRoutines.AddWithBaseCycleAsync(viewModel.WorkoutRoutine);
                 await _bll.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "TrainingWeeks", new
+                {
+                    area = "Admin", id = workoutRoutineId
+                });
             }
+            viewModel.RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(),
+                nameof(RoutineType.Id), nameof(RoutineType.Name));
             return View(viewModel);
         }
 
@@ -67,21 +97,19 @@ namespace WebApplication.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, WorkoutRoutine workoutRoutine)
+        public async Task<IActionResult> Edit(Guid id, WorkoutRoutineCreateEditViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 
-                _bll.WorkoutRoutines.Update(workoutRoutine);
+                _bll.WorkoutRoutines.Update(viewModel.WorkoutRoutine);
                 await _bll.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), workoutRoutine);
+                return RedirectToAction(nameof(Index));
             }
-            var viewModel = new WorkoutRoutineCreateEditViewModel
-            {
-                WorkoutRoutine = workoutRoutine,
-                RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(), 
-                    nameof(RoutineType.Id), nameof(RoutineType.Name))
-            };
+
+            viewModel.RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(),
+                nameof(RoutineType.Id), nameof(RoutineType.Name));
+            
             return View(viewModel);
         }
 
@@ -112,7 +140,33 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return NotFound();
+            return BadRequest();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Publish(WorkoutRoutinePublishViewModel viewModel)
+        {
+            if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(viewModel.WorkoutRoutineId))
+            {
+                await _bll.WorkoutRoutines.ChangeRoutinePublishStatus(viewModel.WorkoutRoutineId, true);
+                await _bll.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return BadRequest();
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UnPublish(WorkoutRoutinePublishViewModel viewModel)
+        {
+            if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(viewModel.WorkoutRoutineId))
+            {
+                await _bll.WorkoutRoutines.ChangeRoutinePublishStatus(viewModel.WorkoutRoutineId, false);
+                await _bll.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return BadRequest();
         }
     }
 }
