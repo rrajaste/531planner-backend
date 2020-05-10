@@ -10,7 +10,8 @@ namespace BLL.Services
 {
     public class UnitTypeService :
         BaseEntityService<IUnitTypesRepository, IAppUnitOfWork, DAL.App.DTO.UnitType,
-            BLL.App.DTO.UnitType>, IUnitTypeService 
+            BLL.App.DTO.UnitType, IBLLMapper<DAL.App.DTO.UnitType,
+                BLL.App.DTO.UnitType>>, IUnitTypeService
     {
         public UnitTypeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.UnitType, UnitType> mapper) 
             : base(unitOfWork, mapper, unitOfWork.UnitTypes)

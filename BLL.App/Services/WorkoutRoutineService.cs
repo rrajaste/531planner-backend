@@ -12,7 +12,8 @@ using WorkoutRoutine = BLL.App.DTO.WorkoutRoutine;
 namespace BLL.Services
 {
     public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork, 
-        DAL.App.DTO.WorkoutRoutine, BLL.App.DTO.WorkoutRoutine>, IWorkoutRoutineService 
+        DAL.App.DTO.WorkoutRoutine, BLL.App.DTO.WorkoutRoutine, IBLLMapper<DAL.App.DTO.WorkoutRoutine, BLL.App.DTO.WorkoutRoutine>>,
+        IWorkoutRoutineService 
     {
         public WorkoutRoutineService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine> mapper) 
             : base(unitOfWork, mapper, unitOfWork.WorkoutRoutines)

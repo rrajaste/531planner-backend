@@ -8,7 +8,8 @@ using Contracts.DAL.App.Repositories;
 namespace BLL.Services
 {
     public class ExerciseTypeService : BaseEntityService<IExerciseTypeRepository, IAppUnitOfWork, DAL.App.DTO.ExerciseType,
-        BLL.App.DTO.ExerciseType>, IExerciseTypeService 
+        BLL.App.DTO.ExerciseType, IBLLMapper<DAL.App.DTO.ExerciseType,
+            BLL.App.DTO.ExerciseType>>, IExerciseTypeService 
     {
         public ExerciseTypeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.ExerciseType, ExerciseType> mapper) 
             : base(unitOfWork, mapper, unitOfWork.ExerciseTypes)

@@ -12,7 +12,8 @@ using Contracts.DAL.App.Repositories;
 namespace BLL.Services
 {
     public class TrainingCycleService : BaseEntityService<ITrainingCycleRepository, IAppUnitOfWork,
-        DAL.App.DTO.TrainingCycle, BLL.App.DTO.TrainingCycle>, ITrainingCycleService 
+        DAL.App.DTO.TrainingCycle, BLL.App.DTO.TrainingCycle, IBLLMapper<DAL.App.DTO.TrainingCycle, BLL.App.DTO.TrainingCycle>>,
+        ITrainingCycleService 
     {
         public TrainingCycleService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.TrainingCycle, TrainingCycle> mapper) 
             : base(unitOfWork, mapper, unitOfWork.TrainingCycles)

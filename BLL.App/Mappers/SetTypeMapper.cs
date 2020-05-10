@@ -1,6 +1,7 @@
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
 using BLL.App.DTO;
+using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
 
 namespace BLL.Mappers

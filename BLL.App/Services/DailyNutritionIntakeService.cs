@@ -13,7 +13,8 @@ namespace BLL.Services
 {
     public class DailyNutritionIntakeService :
         BaseEntityService<IDailyNutritionIntakeRepository, IAppUnitOfWork, DAL.App.DTO.DailyNutritionIntake,
-            BLL.App.DTO.DailyNutritionIntake>, IDailyNutritionIntakeService
+            BLL.App.DTO.DailyNutritionIntake, IBLLMapper<DAL.App.DTO.DailyNutritionIntake, BLL.App.DTO.DailyNutritionIntake>>,
+        IDailyNutritionIntakeService
     {
         public DailyNutritionIntakeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.DailyNutritionIntake, DailyNutritionIntake> mapper) 
             : base(unitOfWork, mapper, unitOfWork.DailyNutritionIntakes)

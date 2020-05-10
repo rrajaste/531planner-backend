@@ -12,7 +12,8 @@ using Contracts.DAL.App.Repositories;
 namespace BLL.Services
 {
     public class RoutineTypeService : BaseEntityService<IRoutineTypeRepository, IAppUnitOfWork,
-        DAL.App.DTO.RoutineType, BLL.App.DTO.RoutineType>, IRoutineTypeService 
+        DAL.App.DTO.RoutineType, BLL.App.DTO.RoutineType, IBLLMapper<DAL.App.DTO.RoutineType, BLL.App.DTO.RoutineType>>,
+        IRoutineTypeService 
     {
         
         protected IEnumerable<RoutineType>? TypeCache;

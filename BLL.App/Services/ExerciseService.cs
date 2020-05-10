@@ -8,7 +8,7 @@ using BLL.App.DTO;
 namespace BLL.Services
 {
     public class ExerciseService : BaseEntityService<IExerciseRepository, IAppUnitOfWork, DAL.App.DTO.Exercise,
-        BLL.App.DTO.Exercise>, IExerciseService 
+        BLL.App.DTO.Exercise, IBLLMapper<DAL.App.DTO.Exercise, BLL.App.DTO.Exercise>>, IExerciseService 
     {
         public ExerciseService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.Exercise, Exercise> mapper) 
             : base(unitOfWork, mapper, unitOfWork.Exercises)

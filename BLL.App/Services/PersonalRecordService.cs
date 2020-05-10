@@ -10,7 +10,8 @@ using BLL.App.DTO;
 namespace BLL.Services
 {
     public class PersonalRecordService : BaseEntityService<IPersonalRecordRepository, IAppUnitOfWork, 
-        DAL.App.DTO.PersonalRecord, BLL.App.DTO.PersonalRecord>, IPersonalRecordService 
+        DAL.App.DTO.PersonalRecord, BLL.App.DTO.PersonalRecord, IBLLMapper<DAL.App.DTO.PersonalRecord,
+            BLL.App.DTO.PersonalRecord>>, IPersonalRecordService 
     {
         public PersonalRecordService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.PersonalRecord, PersonalRecord> mapper) 
             : base(unitOfWork, mapper, unitOfWork.PersonalRecords)

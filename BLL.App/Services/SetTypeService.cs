@@ -9,7 +9,7 @@ using Contracts.DAL.App.Repositories;
 namespace BLL.Services
 {
     public class SetTypeService : BaseEntityService<ISetTypeRepository, IAppUnitOfWork,
-        DAL.App.DTO.SetType, BLL.App.DTO.SetType>, ISetTypeService 
+        DAL.App.DTO.SetType, BLL.App.DTO.SetType, IBLLMapper<DAL.App.DTO.SetType, BLL.App.DTO.SetType>>, ISetTypeService 
     {
         public SetTypeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.SetType, SetType> mapper) 
             : base(unitOfWork, mapper, unitOfWork.SetTypes)

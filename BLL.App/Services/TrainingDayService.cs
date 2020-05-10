@@ -12,7 +12,8 @@ using TrainingDay = BLL.App.DTO.TrainingDay;
 namespace BLL.Services
 {
     public class TrainingDayService : BaseEntityService<ITrainingDayRepository, IAppUnitOfWork,
-        DAL.App.DTO.TrainingDay, BLL.App.DTO.TrainingDay>, ITrainingDayService 
+        DAL.App.DTO.TrainingDay, BLL.App.DTO.TrainingDay, IBLLMapper<DAL.App.DTO.TrainingDay, BLL.App.DTO.TrainingDay>>,
+        ITrainingDayService 
     {
         public TrainingDayService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.TrainingDay, TrainingDay> mapper) 
             : base(unitOfWork, mapper, unitOfWork.TrainingDays)

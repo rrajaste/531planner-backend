@@ -12,9 +12,10 @@ using Contracts.DAL.App.Repositories;
 namespace BLL.Services
 {
     public class ExerciseSetService : BaseEntityService<IExerciseSetRepository, IAppUnitOfWork, DAL.App.DTO.ExerciseSet,
-        BLL.App.DTO.ExerciseSet>, IExerciseSetService 
+        BLL.App.DTO.ExerciseSet, IExerciseSetMapper>, IExerciseSetService 
     {
-        public ExerciseSetService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.ExerciseSet, ExerciseSet> mapper) 
+        
+        public ExerciseSetService(IAppUnitOfWork unitOfWork, IExerciseSetMapper mapper) 
             : base(unitOfWork, mapper, unitOfWork.ExerciseSets)
         {
         }
@@ -27,5 +28,15 @@ namespace BLL.Services
 
         public async Task<ExerciseSet> AddBaseSetAsync(ExerciseSet dto) =>
             Mapper.MapDALToBLL(await ServiceRepository.AddBaseSetAsync(Mapper.MapBLLToDAL(dto)));
+
+        public async Task<BaseLiftSet> AddBaseLiftSetAsync(BaseLiftSet baseSet) =>
+            Mapper.MapDALToBaseLiftSet(
+                await ServiceRepository.AddBaseSetAsync(Mapper.MapBaseLiftSetToDALEntity(baseSet)));
+
+        public async Task<BaseLiftSet> FindBaseLiftSetAsync(Guid setId) =>
+            Mapper.MapDALToBaseLiftSet(await ServiceRepository.FindAsync(setId));
+
+        public void UpdateBaseExerciseSets(BaseLiftSet baseSet) =>
+            ServiceRepository.Update(Mapper.MapBaseLiftSetToDALEntity(baseSet));
     }
 }

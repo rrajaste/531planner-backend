@@ -14,7 +14,7 @@ namespace BLL.Services
 {
     public class BodyMeasurementService :
         BaseEntityService<IBodyMeasurementRepository, IAppUnitOfWork, DAL.App.DTO.BodyMeasurement,
-            BLL.App.DTO.BodyMeasurement>, IBodyMeasurementService
+            BLL.App.DTO.BodyMeasurement, IBLLMapper<DAL.App.DTO.BodyMeasurement, BLL.App.DTO.BodyMeasurement>>, IBodyMeasurementService
     {
         public BodyMeasurementService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.BodyMeasurement, BodyMeasurement> mapper) 
             : base(unitOfWork, mapper, unitOfWork.BodyMeasurements)
