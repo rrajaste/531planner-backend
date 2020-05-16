@@ -5,6 +5,7 @@ using Contracts.DAL.Base;
 using Contracts.Domain;
 using DAL.Base;
 using Domain;
+using Domain.App.Identity;
 using Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -17,5 +17,6 @@ namespace Contracts.DAL.App.Repositories
     {
         Task<IEnumerable<TEntity>> AllWithBaseRoutineIdAsync(Guid baseRoutineId);
         Task<bool> IsPartOfBaseRoutineAsync(Guid id);
+        Task<TEntity> FindAsync(Guid id, bool includeTrainingDays = false);
     }
 }

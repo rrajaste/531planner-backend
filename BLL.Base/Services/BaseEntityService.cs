@@ -47,6 +47,6 @@ namespace BLL.Base.Services
                 Mapper.MapBLLToDAL(entity)));
         
         public virtual async Task<TBLLEntity> Remove(Guid id) 
-            => Mapper.MapDALToBLL(await ServiceRepository.FindAsync(id));
+            => Mapper.MapDALToBLL(await ServiceRepository.Remove(id));
     }
 }

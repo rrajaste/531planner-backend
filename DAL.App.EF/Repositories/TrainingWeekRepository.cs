@@ -19,9 +19,13 @@ namespace DAL.App.EF.Repositories
 
         public async Task<IEnumerable<DTO.TrainingWeek>> AllWithBaseRoutineIdAsync(Guid baseRoutineId)
         {
-            var trainingCycle = await RepoDbContext.TrainingCycles
-                .Include(c => c.TrainingWeeks)
-                .FirstOrDefaultAsync(c => c.WorkoutRoutineId.Equals(baseRoutineId));
+            var trainingCycle = await RepoDbContext
+                .TrainingCycles
+                    .Include(c => c.TrainingWeeks)
+                    .ThenInclude(w => w.TrainingDays)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(c => c.WorkoutRoutineId.Equals(baseRoutineId));
+            
             var mappedWeeks = trainingCycle.TrainingWeeks.Select(Mapper.MapDomainToDAL);
             return mappedWeeks;
         }
@@ -34,6 +38,16 @@ namespace DAL.App.EF.Repositories
                     w.Id == id 
                     && w.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
-        
+
+        public async Task<DTO.TrainingWeek> FindAsync(Guid id, bool includeTrainingDays=false)
+        {
+            var query = RepoDbSet;
+            if (includeTrainingDays)
+            {
+                query.Include(w => w.TrainingDays);
+            }
+            var result = await query.AsNoTracking().FirstOrDefaultAsync(w => w.Id == id);
+            return Mapper.MapDomainToDAL(result);
+        }
     }
 }

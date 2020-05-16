@@ -44,7 +44,7 @@ namespace DAL.Base.EF.Repositories
             }
         }
         public virtual async Task<IEnumerable<TDALEntity>> AllAsync() =>
-            (await RepoDbSet.ToListAsync()).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
+            (await RepoDbSet.AsNoTracking().ToListAsync()).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
 
         public virtual async Task<TDALEntity> FindAsync(TKey id) =>
             Mapper.MapDomainToDAL(
