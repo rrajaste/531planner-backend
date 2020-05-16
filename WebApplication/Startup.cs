@@ -6,6 +6,7 @@ using BLL;
 using Contracts.BLL.App;
 using Contracts.DAL.App;
 using DAL.App.EF;
+using Domain.App.Identity;
 using Domain.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -142,17 +143,16 @@ namespace WebApplication
             app.UseCors("CorsAllowAll"); 
             
             app.UseSwagger();
-                        app.UseSwaggerUI(
-                            options =>
-                            {
-                                foreach ( var description in provider.ApiVersionDescriptions )
-                                {
-                                    options.SwaggerEndpoint(
-                                        $"/swagger/{description.GroupName}/swagger.json",
-                                        description.GroupName.ToUpperInvariant() );
-                                }
-                            } );
-
+            app.UseSwaggerUI(
+                options =>
+                {
+                    foreach ( var description in provider.ApiVersionDescriptions )
+                    {
+                        options.SwaggerEndpoint(
+                            $"/swagger/{description.GroupName}/swagger.json",
+                            description.GroupName.ToUpperInvariant() );
+                    }
+                } );
 
             app.UseAuthentication();
             app.UseAuthorization();

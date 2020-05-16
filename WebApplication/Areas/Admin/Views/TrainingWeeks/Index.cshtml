@@ -1,31 +1,44 @@
 @using WebApplication.Areas.Admin.ViewModels
-@model IEnumerable<BLL.App.DTO.TrainingWeek>
+@model TrainingWeekIndexViewModel
 
 @{
     ViewData["Title"] = "Training weeks";
 }
 <div class="jumbotron shadow rounded">
-    <h1>TRAINING WEEKS</h1>
+    <h1 class="">@Model.WorkoutRoutineName</h1>
     <p>
-        <a asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index">BACK TO ROUTINES VIEW</a>
+        <a asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index">Back</a>
     </p>
 </div>
 <hr/>
 <div>
+    <h3 class="text-left my-1 mx-1">TRAINING WEEKS</h3>
     <div class="row text-left mx-1">
         <partial name="_CreateNewPartial" model="GetCreateViewModel()"/>
     </div>
 </div>
 <hr/>
-
+@if (!Model.TrainingWeeks.Any())
+{
+    <p>No training weeks added yet!</p>
+}
 <div class="row d-flex justify-content-center">
-    @foreach (var item in Model)
+    @foreach (var item in Model.TrainingWeeks)
     {
         <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-10 col-xl-8">
             <div class="card-body">
-                <div class="row">
+                <h5 class="card-title">Training week @item.WeekNumber</h5>
+                <hr/>
+                @if (item.TrainingDays == null || !item.TrainingDays.Any())
+                {
+                    <p>No training days added yet!</p>
+                }
+                else
+                {
+                    <div class="row">
                     
-                </div>
+                    </div>   
+                }
                 <div class="view-edit-delete">
                     <a asp-controller="TrainingDays" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
                     <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> |

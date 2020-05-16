@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Domain.App.Identity;
 using Domain.Identity;
 using Extensions;
 using Microsoft.AspNetCore.Identity;

@@ -1,6 +1,6 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
-using BLL.App.DTO;
 using Contracts.BLL.App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +27,13 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
             var trainingWeeks = await _bll.TrainingWeeks.AllWithBaseRoutineIdAsync(id);
-            return View(trainingWeeks);
+            var workoutRoutineName = (await _bll.WorkoutRoutines.FindBaseRoutineAsync(id)).Name;
+            var viewModel = new TrainingWeekIndexViewModel()
+            {
+                TrainingWeeks = trainingWeeks.OrderBy(w => w.WeekNumber),
+                WorkoutRoutineName = workoutRoutineName
+            };
+            return View(viewModel);
         }
         
         [HttpPost]
@@ -103,8 +109,9 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(id))
             {
-                var trainingWeek = await _bll.TrainingWeeks.FindAsync(id);
-                _bll.TrainingWeeks.Remove(trainingWeek);
+                await _bll.TrainingWeeks.Remove(id);
+                await _bll.SaveChangesAsync();
+                await _bll.TrainingWeeks.AdjustWeekNumbersAsync(viewModel.WorkoutRoutineId);
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
             }

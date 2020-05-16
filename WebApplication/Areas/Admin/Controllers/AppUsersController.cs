@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.App.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Domain.Identity;
