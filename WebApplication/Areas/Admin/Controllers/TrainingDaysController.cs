@@ -1,4 +1,6 @@
 using System;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using BLL.App.DTO;
 using Contracts.BLL.App;
@@ -35,7 +37,8 @@ namespace WebApplication.Areas.Admin.Controllers
             {
                 var viewModel = new TrainingDayCreateEditViewModel()
                 {
-                    TrainingDay = new TrainingDay(){TrainingWeekId = id},
+                    TrainingDay = new BaseTrainingDay(){TrainingWeekId = id},
+                    DaysOfWeek = GetDaysOfWeekSelectList(),
                     TrainingDayTypes = await GetTrainingDayTypesSelectListAsync()
                 };
                 return View(viewModel);
@@ -67,7 +70,7 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(id))
             {
-                var trainingDay = await _bll.TrainingDays.FindAsync(id);
+                var trainingDay = await _bll.TrainingDays.FindBaseTrainingDay(id);
                 var viewModel = new TrainingDayCreateEditViewModel()
                 {
                     TrainingDay = trainingDay,
@@ -78,28 +81,28 @@ namespace WebApplication.Areas.Admin.Controllers
             return NotFound();
         }
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, TrainingDayCreateEditViewModel viewModel)
-        {
-            if (id != viewModel.TrainingDay.Id)
-            {
-                return NotFound();
-            }
-
-            if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(viewModel.TrainingDay.Id))
-            {
-                if (ModelState.IsValid)
-                {
-                    _bll.TrainingDays.Update(viewModel.TrainingDay);
-                    await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index), new {id = viewModel.TrainingDay.TrainingWeekId});
-                }
-                viewModel.TrainingDayTypes = await GetTrainingDayTypesSelectListAsync();
-                return View(viewModel);   
-            }
-            return BadRequest();
-        }
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public async Task<IActionResult> Edit(Guid id, TrainingDayCreateEditViewModel viewModel)
+        // {
+        //     if (id != viewModel.TrainingDay.Id)
+        //     {
+        //         return NotFound();
+        //     }
+        //
+        //     if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(viewModel.TrainingDay.Id))
+        //     {
+        //         if (ModelState.IsValid)
+        //         {
+        //             _bll.TrainingDays.Update(viewModel.TrainingDay);
+        //             await _bll.SaveChangesAsync();
+        //             return RedirectToAction(nameof(Index), new {id = viewModel.TrainingDay.TrainingWeekId});
+        //         }
+        //         viewModel.TrainingDayTypes = await GetTrainingDayTypesSelectListAsync();
+        //         return View(viewModel);   
+        //     }
+        //     return BadRequest();
+        // }
 
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -134,6 +137,12 @@ namespace WebApplication.Areas.Admin.Controllers
                 nameof(TrainingDayType.Name)
                 );
             return trainingDayTypesSelectList;
+        }
+
+        private SelectList GetDaysOfWeekSelectList()
+        {
+            var days = CultureInfo.CurrentUICulture.DateTimeFormat.DayNames.ToArray();
+            return new SelectList(days);
         }
     }
 }

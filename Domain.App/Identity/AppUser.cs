@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Contracts.DAL.Base;
 using Contracts.Domain;
-using DAL.Base;
-using Domain.App;
 using Microsoft.AspNetCore.Identity;
 
-namespace Domain.Identity
+namespace Domain.App.Identity
 {
     public class AppUser : AppUser<Guid>
     {

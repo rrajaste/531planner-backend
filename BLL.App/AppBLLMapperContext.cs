@@ -43,7 +43,7 @@ namespace BLL
         public IBLLMapper<DAL.App.DTO.TrainingCycle, TrainingCycle> TrainingCycleMapper =>
             GetMapper(() => new TrainingCycleMapper(this));
         
-        public IBLLMapper<DAL.App.DTO.TrainingDay, TrainingDay> TrainingDayMapper =>
+        public ITrainingDayMapper TrainingDayMapper =>
             GetMapper(() => new TrainingDayMapper(this));
         
         public IBLLMapper<DAL.App.DTO.TrainingWeek, TrainingWeek> TrainingWeekMapper =>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Contracts.Domain;
+using Domain.App.Identity;
 using Domain.Base;
 using Domain.Identity;
 
