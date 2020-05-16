@@ -27,11 +27,11 @@
                 <div class="view-edit-delete">
                     <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
                     <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
-                    <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" title="Delete"><i class="fas fa-trash delete text-danger"></i></a>
+                    <partial name="_DeletePartial" model="@item"/>
                 </div>
             </div>
             <div class="card-footer">
-                <partial name="_PublishPartial" model="GetPublishViewModel(item.Id)"/>
+                <partial name="_PublishPartial" model="GetPublishViewModel(@item.Id)"/>
             </div>
         </div>
     }
@@ -51,11 +51,11 @@
                 <div class="view-edit-delete">
                     <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
                     <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
-                    <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" title="Delete"><i class="fas fa-trash delete text-danger"></i></a>
+                    <partial name="_DeletePartial" model="@item"/>
                 </div>
             </div>
             <div class="card-footer">
-                <partial name="_UnPublishPartial" model="GetPublishViewModel(item.Id)"/>
+                <partial name="_UnPublishPartial" model="GetPublishViewModel(@item.Id)"/>
             </div>
         </div>
     }
@@ -70,5 +70,5 @@
         {
             WorkoutRoutineId = id
         };
-    } 
+    }
 }

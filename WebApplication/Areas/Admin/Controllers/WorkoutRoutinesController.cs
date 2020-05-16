@@ -113,22 +113,6 @@ namespace WebApplication.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-        // GET: WorkoutRoutines/Delete/5
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id))
-            {
-                var workoutRoutine = await _bll.WorkoutRoutines.FindBaseRoutineAsync(id);
-                return View(workoutRoutine);
-            }
-            return NotFound();
-        }
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
