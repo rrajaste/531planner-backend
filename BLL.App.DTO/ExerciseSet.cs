@@ -28,5 +28,6 @@ namespace BLL.App.DTO
         public UnitType? UnitType { get; set; }
         public SetType? SetType { get; set; }
         public TKey SetTypeId { get; set; }
+        
     }
 }

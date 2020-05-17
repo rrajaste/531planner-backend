@@ -17,5 +17,19 @@ namespace BLL.App.DTO
         public TKey ExerciseTypeId { get; set; } = default!;
         public ExerciseType? ExerciseType { get; set; }
         public IEnumerable<MuscleGroup>? TargetMuscleGroups { get; set; }
+        
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Exercise item))
+            {
+                return false;
+            }
+            return Id.Equals(item.Id);
+        }
+        
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }
