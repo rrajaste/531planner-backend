@@ -22,8 +22,12 @@ namespace DAL.App.EF.Repositories
             var trainingCycle = await RepoDbContext
                 .TrainingCycles
                     .Include(c => c.TrainingWeeks)
-                    .ThenInclude(w => w.TrainingDays)
-                    .ThenInclude(d => d.TrainingDayType)
+                        .ThenInclude(w => w.TrainingDays)
+                        .ThenInclude(d => d.TrainingDayType)
+                    .Include(c => c.TrainingWeeks)
+                        .ThenInclude(w => w.TrainingDays)
+                        .ThenInclude(d => d.ExerciseSets)
+                        .ThenInclude(s => s.Exercise)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(c => c.WorkoutRoutineId.Equals(baseRoutineId));
             

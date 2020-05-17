@@ -24,9 +24,6 @@ namespace DAL.App.EF.Mappers
                     : DALMapperContext.ExerciseMapper.MapDomainToDAL(domainObject.Exercise),
                 NrOfReps = domainObject.NrOfReps,
                 SetNumber = domainObject.SetNumber,
-                TrainingDay = domainObject.TrainingDay == null 
-                ? null 
-                : DALMapperContext.TrainingDayMapper.MapDomainToDAL(domainObject.TrainingDay),
                 TrainingDayId = domainObject.TrainingDayId,
                 SetTypeId = domainObject.SetTypeId,
                 SetType = domainObject.SetType == null 
@@ -47,7 +44,8 @@ namespace DAL.App.EF.Mappers
                 SetNumber = dalObject.SetNumber,
                 TrainingDayId = dalObject.TrainingDayId,
                 SetTypeId = dalObject.SetTypeId,
-                Weight = dalObject.Weight
+                Weight = dalObject.Weight,
+                WorkoutRoutineId = dalObject.WorkoutRoutineId
             };
     }
 }
