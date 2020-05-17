@@ -90,5 +90,16 @@ namespace DAL.App.EF.Repositories
             RepoDbSet.Update(routineToPublish);
             return Mapper.MapDomainToDAL(routineToPublish);
         }
+
+        public async Task<DTO.WorkoutRoutine> FindWithWeekIdAsync(Guid weekId)
+        {
+            var trainingWeek = await RepoDbContext.TrainingWeeks
+                .Include(w => w.TrainingCycle)
+                .ThenInclude(c => c!.WorkoutRoutine)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(w => w.Id == weekId);
+            var parentRoutine = trainingWeek.TrainingCycle!.WorkoutRoutine;
+            return Mapper.MapDomainToDAL(parentRoutine!);
+        }
     }
 }

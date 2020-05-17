@@ -1,20 +1,21 @@
 @using WebApplication.Areas.Admin.ViewModels
+@using System.Globalization
+@using BLL.App.DTO
 @model TrainingWeekIndexViewModel
 
 @{
     ViewData["Title"] = "Training weeks";
 }
 <div class="jumbotron shadow rounded">
-    <h1 class="">@Model.WorkoutRoutineName</h1>
+    <h1 class="text-uppercase">@Model.WorkoutRoutineName</h1>
     <p>
-        <a asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index">Back</a>
+        <a class="text-uppercase" asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index">Back</a>
     </p>
-</div>
 <hr/>
 <div>
-    <h3 class="text-left my-1 mx-1">TRAINING WEEKS</h3>
+    <h3 class="text-left my-1 mx-1 text-uppercase">TRAINING WEEKS</h3>
     <div class="row text-left mx-1">
-        <partial name="_CreateNewPartial" model="GetCreateViewModel()"/>
+        <partial name="_CreatePartial" model="GetCreateViewModel()"/>
     </div>
 </div>
 <hr/>
@@ -25,36 +26,73 @@
 <div class="row d-flex justify-content-center">
     @foreach (var item in Model.TrainingWeeks)
     {
-        <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-10 col-xl-8">
+        <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-10 col-xl-10">
             <div class="card-body">
-                <h5 class="card-title">Training week @item.WeekNumber</h5>
+                @if (item.IsDeload)
+                {
+                    <h5 class="text-uppercase text-dark">Deload week</h5>
+                }
+                <h4 class="card-title">Training week @item.WeekNumber</h4>
                 <hr/>
                 @if (item.TrainingDays == null || !item.TrainingDays.Any())
                 {
-                    <p>No training days added yet!</p>
+                    <p class="text-secondary">No training days added yet!</p>
                 }
                 else
                 {
-                    <div class="row">
-                    
+                    <div class="row d-flex justify-content-center">
+                    @foreach (var day in item.TrainingDays.OrderBy(day => day.Date))
+                    {
+                        <div class="card mx-1 my-1 training-day-card">
+                            <div class="card-body">
+                                <h5>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(day.Date.DayOfWeek)</h5>
+                                <hr/>
+                                <p>@day.TrainingDayType?.Name</p>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-primary" asp-controller="ExerciseSets" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id">VIEW</a>
+                            </div>
+                        </div>
+                    }
                     </div>   
                 }
+                <div class="move-items">
+                    <partial name="_MoveWeekUpPartial" model="@GetEditViewModel(item)"/>
+                    <partial name="_MoveWeekDownPartial" model="@GetEditViewModel(item)"/>
+                </div>
                 <div class="view-edit-delete">
-                    <a asp-controller="TrainingDays" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
                     <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="tooltip" title="Delete"><i class="fas fa-trash delete text-danger"></i></a>
+                    <partial name="_DeletePartial" model="@GetDeleteViewModel(item)"/>
                 </div>
             </div>
         </div>
     }
+    </div>
 </div>
-
 @functions
 {
-    public TrainingWeekViewModel GetCreateViewModel()
+    public TrainingWeekCreateViewModel GetCreateViewModel()
+    {
+        return new TrainingWeekCreateViewModel()
+        {
+            WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
+        };
+    }
+    
+    public TrainingWeekViewModel GetDeleteViewModel(TrainingWeek trainingWeek)
     {
         return new TrainingWeekViewModel()
         {
+            TrainingWeek = trainingWeek,
+            WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
+        };
+    }
+    
+    public TrainingWeekEditViewModel GetEditViewModel(TrainingWeek trainingWeek)
+    {
+        return new TrainingWeekEditViewModel()
+        {
+            TrainingWeekId = trainingWeek.Id,
             WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
         };
     }

@@ -8,7 +8,9 @@ namespace Contracts.BLL.App.Services
 {
     public interface ITrainingWeekService : ITrainingWeekRepository<Guid, TrainingWeek>, IBaseEntityService<TrainingWeek>
     {
-        Task<TrainingWeek> AddNewWeekToBaseRoutineWithIdAsync(Guid routineId);
-        Task AdjustWeekNumbersAsync(Guid routineId);
+        Task<TrainingWeek> AddNewWeekToBaseRoutineWithIdAsync(Guid routineId, bool isDeload);
+        Task NormalizeWeekNumbersAsync(Guid routineId);
+        Task<TrainingWeek> DecrementWeekNumberAsync(Guid trainingWeekId);
+        Task<TrainingWeek> IncrementWeekNumberAsync(Guid trainingWeekId);
     }
 }

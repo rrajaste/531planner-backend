@@ -78,7 +78,7 @@ body {
 }
 
 .add-new-main {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .jumbotron {
@@ -91,6 +91,28 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #efefef;
   padding: 0.5em;
+}
+
+.view-edit-delete-small{
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
+}
+
+.move-items {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.25em;
+}
+
+.move-arrow {
+  font-size: 1.25rem;
+}
+
+.training-day-card{
+  
 }

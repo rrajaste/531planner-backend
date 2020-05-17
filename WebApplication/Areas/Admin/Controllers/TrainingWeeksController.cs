@@ -38,11 +38,11 @@ namespace WebApplication.Areas.Admin.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TrainingWeekViewModel viewModel)
+        public async Task<IActionResult> Create(TrainingWeekCreateViewModel viewModel)
         {
             if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(viewModel.WorkoutRoutineId))
             {
-                await _bll.TrainingWeeks.AddNewWeekToBaseRoutineWithIdAsync(viewModel.WorkoutRoutineId);
+                await _bll.TrainingWeeks.AddNewWeekToBaseRoutineWithIdAsync(viewModel.WorkoutRoutineId, viewModel.IsDeload);
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
             }
@@ -86,36 +86,43 @@ namespace WebApplication.Areas.Admin.Controllers
             return BadRequest();
         }
 
-        // GET: TrainingWeeks/Delete/5
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(id))
-            {
-                var trainingWeek = await _bll.TrainingWeeks.FindAsync(id);
-                var trainingCycle = await _bll.TrainingCycles.FindAsync(trainingWeek.TrainingCycleId);
-                var viewModel = new TrainingWeekViewModel()
-                {
-                    TrainingWeek = trainingWeek,
-                    WorkoutRoutineId = trainingCycle.WorkoutRoutineId
-                };
-                return View(viewModel);
-            }
-            return NotFound();
-        }
-
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id, TrainingWeekViewModel viewModel)
+        public async Task<IActionResult> Delete(TrainingWeekViewModel viewModel)
         {
-            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(id))
+            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeek.Id) && 
+                (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(viewModel.WorkoutRoutineId)))
             {
-                await _bll.TrainingWeeks.Remove(id);
+                await _bll.TrainingWeeks.Remove(viewModel.TrainingWeek.Id);
                 await _bll.SaveChangesAsync();
-                await _bll.TrainingWeeks.AdjustWeekNumbersAsync(viewModel.WorkoutRoutineId);
+                await _bll.TrainingWeeks.NormalizeWeekNumbersAsync(viewModel.WorkoutRoutineId);
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
             }
             return BadRequest();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DecrementWeekNumber(TrainingWeekEditViewModel viewModel)
+        {
+            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeekId))
+            {
+                await _bll.TrainingWeeks.DecrementWeekNumberAsync(viewModel.TrainingWeekId);
+                await _bll.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
+        }
+        
+        
+        [HttpPost]
+        public async Task<IActionResult> IncrementWeekNumber(TrainingWeekEditViewModel viewModel)
+        {
+            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeekId))
+            {
+                await _bll.TrainingWeeks.IncrementWeekNumberAsync(viewModel.TrainingWeekId);
+                await _bll.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
         }
     }
 }

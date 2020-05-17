@@ -1,0 +1,17 @@
+@model WebApplication.Areas.Admin.ViewModels.TrainingWeekCreateViewModel
+
+<form asp-action="Create" xmlns="http://www.w3.org/1999/html">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <input type="hidden" asp-for="WorkoutRoutineId" value="@Model.WorkoutRoutineId"/>
+    <div class="row">
+        <div class="form-group mx-2">
+            <input type="submit" class="btn btn-outline-success" value="ADD NEW WEEK">
+        </div>
+        <div class="form-check my-2">
+            <input class="form-check-input" asp-for="@Model.IsDeload">
+            <label class="form-check-label text-secondary" asp-for="@Model.IsDeload">
+            Deload?
+            </label>
+        </div>
+    </div>
+</form>

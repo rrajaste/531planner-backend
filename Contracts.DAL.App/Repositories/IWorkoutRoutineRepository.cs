@@ -25,5 +25,6 @@ namespace Contracts.DAL.App.Repositories
         Task<bool> BaseRoutineWithIdExistsAsync(TKey id);
         Task<TEntity> AddWithBaseCycleAsync(TEntity dto);
         Task<TEntity> ChangeRoutinePublishStatus(TKey routineId, bool isPublished);
+        Task<TEntity> FindWithWeekIdAsync(TKey weekId);
     }
 }

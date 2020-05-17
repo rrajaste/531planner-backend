@@ -23,6 +23,7 @@ namespace DAL.App.EF.Repositories
                 .TrainingCycles
                     .Include(c => c.TrainingWeeks)
                     .ThenInclude(w => w.TrainingDays)
+                    .ThenInclude(d => d.TrainingDayType)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(c => c.WorkoutRoutineId.Equals(baseRoutineId));
             
