@@ -52,7 +52,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     viewModel.ExerciseSet.Id = Guid.NewGuid();
-                    await _bll.ExerciseSets.AddAsync(viewModel.ExerciseSet);
+                    await _bll.ExerciseSets.Add(viewModel.ExerciseSet);
                     await _bll.SaveChangesAsync();
                     return RedirectToAction(nameof(Index), new {id = viewModel.ExerciseSet.TrainingDayId});
                 }

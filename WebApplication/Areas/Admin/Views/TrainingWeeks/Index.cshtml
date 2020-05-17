@@ -34,35 +34,72 @@
                 }
                 <h4 class="card-title">Training week @item.WeekNumber</h4>
                 <hr/>
+                <div class="row d-flex justify-content-center">
                 @if (item.TrainingDays == null || !item.TrainingDays.Any())
                 {
                     <p class="text-secondary">No training days added yet!</p>
                 }
                 else
                 {
-                    <div class="row d-flex justify-content-center">
                     @foreach (var day in item.TrainingDays.OrderBy(day => day.Date))
                     {
-                        <div class="card mx-1 my-1 training-day-card">
-                            <div class="card-body">
-                                <h5>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(day.Date.DayOfWeek)</h5>
-                                <hr/>
-                                <p>@day.TrainingDayType?.Name</p>
-                            </div>
-                            <div class="card-footer">
-                                <a class="btn btn-outline-primary" asp-controller="ExerciseSets" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id">VIEW</a>
-                            </div>
-                        </div>
+                        <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Index" asp-route-id="@item.Id">
+                <div class="m-1">
+                    <table class="table table-hover table-sm table-bordered">
+                        <thead>
+                        <tr>
+                            <th>
+                                <p>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(day.Date.DayOfWeek)</p>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (day.TrainingDayExercises == null || !day.TrainingDayExercises.Any())
+                        {
+                            <tr>
+                                <td>
+                                    <p class="text-secondary">No exercises added yet!</p>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var exercise in day.TrainingDayExercises)
+                            {
+                                <tr>
+                                    <td>
+                                    <p>@exercise.Key.Name</p>
+                                        <ul>
+                                        @foreach (var set in exercise.Value)
+                                        {
+                                            <li>
+                                                <span>@set.NrOfReps x @set.Weight %</span>
+                                            </li>
+                                        }
+                                    </ul>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                </a>
                     }
-                    </div>   
                 }
+                <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">
+                    <span class="text-success"><i class="fas fa-plus ml-2"></i> Add</span>
+                </a>
+                </div>
                 <div class="move-items">
-                    <partial name="_MoveWeekUpPartial" model="@GetEditViewModel(item)"/>
-                    <partial name="_MoveWeekDownPartial" model="@GetEditViewModel(item)"/>
+                    <partial name="_MoveWeekUpPartial" model="@GetWeekNumberEditViewModel(item)"/>
+                    <partial name="_MoveWeekDownPartial" model="@GetWeekNumberEditViewModel(item)"/>
                 </div>
                 <div class="view-edit-delete">
-                    <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> |
-                    <partial name="_DeletePartial" model="@GetDeleteViewModel(item)"/>
+                    <span>
+                        <partial name="_EditDeloadPartial" model="@GetIsDeloadEditViewModel(item)"/>
+                        <partial name="_DeletePartial" model="@GetDeleteViewModel(item)"/>
+                    </span>
                 </div>
             </div>
         </div>
@@ -88,12 +125,22 @@
         };
     }
     
-    public TrainingWeekEditViewModel GetEditViewModel(TrainingWeek trainingWeek)
+    public TrainingWeekNumberEditViewModel GetWeekNumberEditViewModel(TrainingWeek trainingWeek)
     {
-        return new TrainingWeekEditViewModel()
+        return new TrainingWeekNumberEditViewModel()
         {
             TrainingWeekId = trainingWeek.Id,
             WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
+        };
+    }
+    
+    public TrainingWeekDeloadEditViewModel GetIsDeloadEditViewModel(TrainingWeek trainingWeek)
+    {
+        return new TrainingWeekDeloadEditViewModel()
+        {
+            TrainingWeekId = trainingWeek.Id,
+            WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!),
+            IsDeload = trainingWeek.IsDeload
         };
     }
 }

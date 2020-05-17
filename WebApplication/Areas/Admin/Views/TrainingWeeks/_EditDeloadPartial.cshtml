@@ -1,0 +1,30 @@
+@model WebApplication.Areas.Admin.ViewModels.TrainingWeekDeloadEditViewModel
+
+<a asp-action="Edit" data-toggle="modal" title="Edit" data-target="#modal-edit-id-@Model.TrainingWeekId">
+    <i class="fa fa-pencil edit text-success ml-1" aria-hidden="true"></i>
+</a>
+
+<div class="modal fade" id="modal-edit-id-@Model.TrainingWeekId" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <form asp-action="Edit">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center" id="deleteModalLabel">Edit</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label asp-for="@Model.IsDeload"></label>
+                <input type="hidden" asp-for="@Model.TrainingWeekId"/>
+                <input type="hidden" asp-for="@Model.WorkoutRoutineId"/>
+                <input asp-for="@Model.IsDeload"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>

@@ -1,10 +1,10 @@
 @model WebApplication.Areas.Admin.ViewModels.TrainingWeekViewModel
 
-<a data-toggle="modal" data-target="#modalId-@Model.TrainingWeek.Id" asp-action="Delete" asp-route-id="@Model.TrainingWeek.Id">
-    <i class="fas fa-trash delete text-danger"></i>
+<a data-toggle="modal" title="Delete" data-target="#modal-delete-id-@Model.TrainingWeek.Id" asp-action="Delete" asp-route-id="@Model.TrainingWeek.Id">
+    <i class="fas fa-trash delete text-danger ml-1"></i>
 </a>
 
-<div class="modal fade" id="modalId-@Model.TrainingWeek.Id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" title="Delete" id="modal-delete-id-@Model.TrainingWeek.Id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

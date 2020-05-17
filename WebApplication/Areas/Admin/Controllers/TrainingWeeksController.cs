@@ -49,39 +49,17 @@ namespace WebApplication.Areas.Admin.Controllers
             return BadRequest();
         }
         
-        public async Task<IActionResult> Edit(Guid id)
-        {
-            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(id))
-            {
-                var trainingWeek = await _bll.TrainingWeeks.FindAsync(id);
-                var trainingCycle = await _bll.TrainingCycles.FindAsync(trainingWeek.TrainingCycleId);
-                var viewModel = new TrainingWeekViewModel()
-                {
-                    TrainingWeek = trainingWeek,
-                    WorkoutRoutineId = trainingCycle.WorkoutRoutineId
-                };
-                return View(viewModel);
-            }
-            return NotFound();
-        }
-        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, TrainingWeekViewModel viewModel)
+        public async Task<IActionResult> Edit(TrainingWeekDeloadEditViewModel viewModel)
         {
-            if (id != viewModel.TrainingWeek.Id)
+            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeekId))
             {
-                return NotFound();
-            }
-            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeek.Id))
-            {
-                if (ModelState.IsValid)
-                {
-                    _bll.TrainingWeeks.Update(viewModel.TrainingWeek);
-                    await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
-                }
-                return View(viewModel);
+                var trainingWeek = await _bll.TrainingWeeks.FindAsync(viewModel.TrainingWeekId);
+                trainingWeek.IsDeload = viewModel.IsDeload;
+                _bll.TrainingWeeks.Update(trainingWeek);
+                await _bll.SaveChangesAsync();
+                return RedirectToAction(nameof(Index), new {id = viewModel.WorkoutRoutineId});
             }
             return BadRequest();
         }
@@ -103,7 +81,7 @@ namespace WebApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DecrementWeekNumber(TrainingWeekEditViewModel viewModel)
+        public async Task<IActionResult> DecrementWeekNumber(TrainingWeekNumberEditViewModel viewModel)
         {
             if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeekId))
             {
@@ -115,7 +93,7 @@ namespace WebApplication.Areas.Admin.Controllers
         
         
         [HttpPost]
-        public async Task<IActionResult> IncrementWeekNumber(TrainingWeekEditViewModel viewModel)
+        public async Task<IActionResult> IncrementWeekNumber(TrainingWeekNumberEditViewModel viewModel)
         {
             if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeekId))
             {
