@@ -10,5 +10,6 @@ namespace Contracts.BLL.App.Services
     {
         BaseTrainingDay Add(BaseTrainingDay dto);
         Task<BaseTrainingDay> FindBaseTrainingDay(Guid id);
+        
     }
 }

@@ -29,9 +29,11 @@ namespace BLL.Services
         public async Task<Guid> GetRoutineIdForExerciseSetAsync(ExerciseSet entity) =>
             await ServiceRepository.GetRoutineIdForExerciseSetAsync(Mapper.MapBLLToDAL(entity));
 
-        public async Task<BaseLiftSet> AddAsync(BaseLiftSet baseSet)
+        public async Task<BaseLiftSet> Add(BaseLiftSet baseSet)
         {
-            var entityToAdd = await GetDALEntityWithRoutineId(baseSet);
+            var entityToAdd = Mapper.MapBaseLiftSetToDALEntity(baseSet);
+            var routineId = await ServiceRepository.GetRoutineIdForExerciseSetAsync(entityToAdd);
+            entityToAdd.WorkoutRoutineId = routineId;
             ServiceRepository.Add(entityToAdd);
             return Mapper.MapDALToBaseLiftSet(entityToAdd);
         }

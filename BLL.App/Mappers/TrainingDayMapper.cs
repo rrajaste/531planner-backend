@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using BLL.App.DTO;
@@ -19,13 +20,15 @@ namespace BLL.Mappers
             {
                 Id = dalObject.Id,
                 Date = dalObject.Date,
-                ExerciseSets = dalObject.ExerciseSets?.Select(BLLMapperContext.ExerciseSetMapper.MapDALToBLL),
-                TrainingWeek = dalObject.TrainingWeek == null 
+                TrainingDayExercises = dalObject.ExerciseSets == null 
                     ? null 
+                    : GetTrainingDayExercises(dalObject),
+                TrainingWeek = dalObject.TrainingWeek == null
+                    ? null
                     : BLLMapperContext.TrainingWeekMapper.MapDALToBLL(dalObject.TrainingWeek),
                 TrainingWeekId = dalObject.TrainingWeekId,
-                TrainingDayType = dalObject.TrainingDayType == null 
-                    ? null 
+                TrainingDayType = dalObject.TrainingDayType == null
+                    ? null
                     : BLLMapperContext.TrainingDayTypeMapper.MapDALToBLL(dalObject.TrainingDayType),
                 TrainingDayTypeId = dalObject.TrainingDayTypeId
             };
@@ -45,12 +48,12 @@ namespace BLL.Mappers
                 Id = dalEntity.Id,
                 DayOfWeek = dalEntity.Date.DayOfWeek,
                 ExerciseSets = dalEntity.ExerciseSets?.Select(BLLMapperContext.ExerciseSetMapper.MapDALToBLL),
-                TrainingWeek = dalEntity.TrainingWeek == null 
-                    ? null 
+                TrainingWeek = dalEntity.TrainingWeek == null
+                    ? null
                     : BLLMapperContext.TrainingWeekMapper.MapDALToBLL(dalEntity.TrainingWeek),
                 TrainingWeekId = dalEntity.TrainingWeekId,
-                TrainingDayType = dalEntity.TrainingDayType == null 
-                    ? null 
+                TrainingDayType = dalEntity.TrainingDayType == null
+                    ? null
                     : BLLMapperContext.TrainingDayTypeMapper.MapDALToBLL(dalEntity.TrainingDayType),
                 TrainingDayTypeId = dalEntity.TrainingDayTypeId
             };
@@ -63,7 +66,7 @@ namespace BLL.Mappers
                 TrainingWeekId = baseTrainingDay.TrainingWeekId,
                 TrainingDayTypeId = baseTrainingDay.TrainingDayTypeId
             };
-        
+
         private static DateTime GetDateFromDayOfWeek(DayOfWeek dayOfWeek)
         {
             var cultureInfo = CultureInfo.GetCultureInfo("ee-EE");
@@ -79,6 +82,38 @@ namespace BLL.Mappers
             };
             var dayNumber = (int) dayOfWeek;
             return baseDates[dayNumber];
+        }
+
+        private Dictionary<Exercise, List<ExerciseSet>> GetTrainingDayExercises(DAL.App.DTO.TrainingDay dalObject)
+        {
+            if (dalObject.ExerciseSets == null)
+            {
+                throw new ApplicationException("Training day mapping failed: " +
+                                               "cannot map training day exercises: exercise sets are null");
+            }
+            var exerciseSetDictionary = new Dictionary<Exercise, List<ExerciseSet>>();
+            
+            foreach (var exerciseSet in dalObject.ExerciseSets)
+            {
+                var exercise = exerciseSet.Exercise;
+                if (exercise == null)
+                {
+                    throw new ApplicationException("Training day mapping failed: " +
+                                                   "cannot map training day exercises: exercise in exercise set is null");
+                }
+                var mappedExercise = BLLMapperContext.ExerciseMapper.MapDALToBLL(exercise);
+                var mappedExerciseSet = BLLMapperContext.ExerciseSetMapper.MapDALToBLL(exerciseSet);
+                
+                if (exerciseSetDictionary.ContainsKey(mappedExercise))
+                {
+                    exerciseSetDictionary[mappedExercise].Add(mappedExerciseSet);
+                }
+                else
+                {
+                    exerciseSetDictionary[mappedExercise] = new List<ExerciseSet> {mappedExerciseSet};;
+                }
+            }
+            return exerciseSetDictionary;
         }
     }
 }
