@@ -10,7 +10,7 @@ namespace Contracts.Domain
     public interface IDomainEntityUser<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey AppUserId { get; set; }
-        public IdentityUser<TKey>? AppUser { get; set; }
+        TKey AppUserId { get; set; }
+        IdentityUser<TKey>? AppUser { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace Contracts.DAL.Base
     public interface IDALBaseDTO<TKey> 
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; }
+        TKey Id { get; set; }
     }
 }

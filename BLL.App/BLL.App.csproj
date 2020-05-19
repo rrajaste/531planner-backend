@@ -6,7 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\App.DTO\App.DTO.csproj" />
       <ProjectReference Include="..\BLL.Base\BLL.Base.csproj" />
       <ProjectReference Include="..\Contracts.BLL.App\Contracts.BLL.App.csproj" />
       <ProjectReference Include="..\DAL.App.EF\DAL.App.EF.csproj" />

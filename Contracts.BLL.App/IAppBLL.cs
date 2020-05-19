@@ -5,21 +5,21 @@ namespace Contracts.BLL.App
 {
     public interface IAppBLL : IBaseBLL
     {
-        public IExerciseInTrainingDayService ExercisesInTrainingDays { get; }
-        public IWorkoutRoutineService WorkoutRoutines { get; }
-        public ITrainingWeekService TrainingWeeks { get; }
-        public ITrainingDayService TrainingDays { get; }
-        public ITrainingCycleService TrainingCycles { get; }
-        public IBodyMeasurementService BodyMeasurements { get; }
-        public IDailyNutritionIntakeService DailyNutritionIntakes { get; }
-        public IExerciseService Exercises { get; }
-        public IUnitTypeService UnitTypes { get; }
-        public IMuscleService Muscles { get; }
-        public IMuscleGroupService MuscleGroups { get; }
-        public ITrainingDayTypeService TrainingDayTypes { get; }
-        public IExerciseTypeService ExerciseTypes { get; }
-        public IRoutineTypeService RoutineTypes { get; }
-        public IExerciseSetService ExerciseSets { get; }
-        public ISetTypeService SetTypes { get; }
+        IExerciseInTrainingDayService ExercisesInTrainingDays { get; }
+        IWorkoutRoutineService WorkoutRoutines { get; }
+        ITrainingWeekService TrainingWeeks { get; }
+        ITrainingDayService TrainingDays { get; }
+        ITrainingCycleService TrainingCycles { get; }
+        IBodyMeasurementService BodyMeasurements { get; }
+        IDailyNutritionIntakeService DailyNutritionIntakes { get; }
+        IExerciseService Exercises { get; }
+        IUnitTypeService UnitTypes { get; }
+        IMuscleService Muscles { get; }
+        IMuscleGroupService MuscleGroups { get; }
+        ITrainingDayTypeService TrainingDayTypes { get; }
+        IExerciseTypeService ExerciseTypes { get; }
+        IRoutineTypeService RoutineTypes { get; }
+        IExerciseSetService ExerciseSets { get; }
+        ISetTypeService SetTypes { get; }
     }
 }

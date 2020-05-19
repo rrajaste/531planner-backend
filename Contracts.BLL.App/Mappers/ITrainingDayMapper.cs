@@ -4,7 +4,7 @@ namespace Contracts.BLL.App.Mappers
 {
     public interface ITrainingDayMapper : IBLLMapper<DALTrainingDay, TrainingDay>
     {
-        public BaseTrainingDay MapDALToBaseTrainingDay(DALTrainingDay dalEntity);
-        public DALTrainingDay MapBaseTrainingDayToDALEntity(BaseTrainingDay baseTrainingDay);
+        BaseTrainingDay MapDALToBaseTrainingDay(DALTrainingDay dalEntity);
+        DALTrainingDay MapBaseTrainingDayToDALEntity(BaseTrainingDay baseTrainingDay);
     }
 }
