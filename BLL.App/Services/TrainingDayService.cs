@@ -30,10 +30,13 @@ namespace BLL.Services
         public Task<bool> IsPartOfBaseRoutineAsync(Guid trainingDayId) =>
             ServiceRepository.IsPartOfBaseRoutineAsync(trainingDayId);
 
-        public BaseTrainingDay Add(BaseTrainingDay dto) => 
+        public BaseTrainingDay Add(BaseTrainingDay dto) =>
             Mapper.MapDALToBaseTrainingDay(ServiceRepository.Add(Mapper.MapBaseTrainingDayToDALEntity(dto)));
 
-        public async Task<BaseTrainingDay> FindBaseTrainingDay(Guid id) =>
-            Mapper.MapDALToBaseTrainingDay(await ServiceRepository.FindAsync(id));
+        public async Task<BaseTrainingDay> FindBaseTrainingDay(Guid id)
+        {
+            var entity = await ServiceRepository.FindAsync(id);
+            return Mapper.MapDALToBaseTrainingDay(entity);
+        }
     }
 }

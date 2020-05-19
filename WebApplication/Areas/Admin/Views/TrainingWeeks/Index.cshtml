@@ -43,9 +43,8 @@
                 {
                     @foreach (var day in item.TrainingDays.OrderBy(day => day.Date))
                     {
-                        <a asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@item.Id">
                 <div class="m-1">
-                    <table class="table table-hover table-sm table-bordered">
+                    <table class="table table-sm table-bordered border-thick">
                         <thead>
                         <tr>
                             <th>
@@ -68,23 +67,36 @@
                             {
                                 <tr>
                                     <td>
-                                    <p>@exerciseInTrainingDay.Exercise.Name</p>
+                                    <p title="@exerciseInTrainingDay.Exercise?.Description" class="font-weight-bold text-left m-0 border-bottom">@exerciseInTrainingDay.Exercise?.Name</p>
                                         <ul>
-                                        @foreach (var set in exerciseInTrainingDay.ExerciseSets)
+                                        @if (exerciseInTrainingDay.ExerciseSets == null || !exerciseInTrainingDay.ExerciseSets.Any())
                                         {
-                                            <li>
-                                                <span>@set.NrOfReps x @set.Weight %</span>
-                                            </li>
+                                            <p class="text-muted mr-2 mt-2">No sets added yet!</p>
+                                        }
+                                        else
+                                        {
+                                            @foreach (var set in exerciseInTrainingDay.ExerciseSets)
+                                            {
+                                                <li>
+                                                    <span>@set.NrOfReps x @set.Weight %</span>
+                                                </li>
+                                            }
                                         }
                                     </ul>
                                     </td>
                                 </tr>
                             }
                         }
+                        <tr>
+                            <td>
+                                <a class="btn btn-outline-info text-uppercase" asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@day.Id">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
-                </a>
                     }
                 }
                 <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">

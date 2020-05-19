@@ -5,26 +5,40 @@
     ViewData["Title"] = "Index";
 }
 <div class="jumbotron">
-    <h1>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(Model.DayOfWeek)</h1>
-    <h3>@Model.TrainingDayType.Name</h3>
+    <h1 class="text-uppercase">@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(Model.DayOfWeek)</h1>
+    <h3>@Model.TrainingDayType?.Name</h3>
     <hr/>
     <h3 class="text-left">
         Exercises
     </h3>
         <partial name="_ExerciseCreateEditPartial"/>
     <hr/>
-    @foreach (var exerciseInTrainingDay in @Model.ExercisesInTrainingDay)
+    @if (Model.ExercisesInTrainingDay == null || !Model.ExercisesInTrainingDay.Any())
     {
-        <h5>
-            @exerciseInTrainingDay.Exercise.Name 
-            <i class="fa fa-question-circle" aria-hidden="true" title="@exerciseInTrainingDay.Exercise.Description"></i>
-        </h5>
-        <partial name="_ExerciseSetCreateEditPartial"/>
-        <ul>
-            @foreach (var set in exerciseInTrainingDay.ExerciseSets)
+        <p class="text-secondary">No exercises added yet!</p>
+    }
+    else
+    {
+        @foreach (var exerciseInTrainingDay in @Model.ExercisesInTrainingDay)
+        {
+            <h5>
+                @exerciseInTrainingDay.Exercise?.Name 
+                <i class="fa fa-question-circle" aria-hidden="true" title="@exerciseInTrainingDay.Exercise?.Description"></i>
+            </h5>
+            <partial name="_ExerciseSetCreateEditPartial"/>
+            @if (exerciseInTrainingDay.ExerciseSets == null || !exerciseInTrainingDay.ExerciseSets.Any())
             {
-                <li>@set.NrOfReps x @set.Weight%</li>
+                <p class="text-secondary">No exercise sets added yet!</p>
             }
-        </ul>
+            else
+            {
+                <ul>
+                    @foreach (var set in exerciseInTrainingDay.ExerciseSets)
+                    {
+                        <li>@set.NrOfReps x @set.Weight%</li>
+                    }
+                </ul>
+            }
+        }
     }
 </div>

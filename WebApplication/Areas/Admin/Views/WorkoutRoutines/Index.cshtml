@@ -18,22 +18,29 @@
 </div>
 <hr/>
 <div class="row d-flex justify-content-center">
-    @foreach (var item in Model.UnPublishedRoutines)
+    @if (! Model.UnPublishedRoutines.Any())
     {
-        <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-8 col-xl-5">
-            <div class="card-body text-center">
-                <h5 class="card-title">@item.Name</h5>
-                <p class="card-text">@item.Description</p>
-                <div class="view-edit-delete">
-                    <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
-                    <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
-                    <partial name="_DeletePartial" model="@item"/>
+        <p class="text-secondary">No unpublished routines</p>
+    }
+    else
+    {
+        @foreach (var item in Model.UnPublishedRoutines)
+        {
+            <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-8 col-xl-5">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                    <div class="view-edit-delete">
+                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
+                        <partial name="_DeletePartial" model="@item"/>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <partial name="_PublishPartial" model="GetPublishViewModel(@item.Id)"/>
                 </div>
             </div>
-            <div class="card-footer">
-                <partial name="_PublishPartial" model="GetPublishViewModel(@item.Id)"/>
-            </div>
-        </div>
+        }
     }
 </div>
 <hr/>
@@ -42,22 +49,29 @@
 </div>
 <hr/>
 <div class="row d-flex justify-content-center">
-    @foreach (var item in Model.PublishedRoutines)
+    @if (!Model.PublishedRoutines.Any())
     {
-        <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-8 col-xl-5">
-            <div class="card-body text-center">
-                <h5 class="card-title">@item.Name</h5>
-                <p class="card-text">@item.Description</p>
-                <div class="view-edit-delete">
-                    <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
-                    <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
-                    <partial name="_DeletePartial" model="@item"/>
+        <p class="text-secondary">No published routines</p>
+    }
+    else
+    {
+        @foreach (var item in Model.PublishedRoutines)
+        {
+            <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-8 col-xl-5">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">@item.Description</p>
+                    <div class="view-edit-delete">
+                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
+                        <partial name="_DeletePartial" model="@item"/>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <partial name="_UnPublishPartial" model="GetPublishViewModel(@item.Id)"/>
                 </div>
             </div>
-            <div class="card-footer">
-                <partial name="_UnPublishPartial" model="GetPublishViewModel(@item.Id)"/>
-            </div>
-        </div>
+        }
     }
 </div>
 <hr/>

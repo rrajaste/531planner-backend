@@ -39,15 +39,19 @@ namespace DAL.App.EF.Repositories
                 .Include(d => d.TrainingWeek)
                 .ThenInclude(w => w!.TrainingCycle)
                 .ThenInclude(c => c!.WorkoutRoutine)
-                .AnyAsync(d => d.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
+                .AnyAsync(d => d.Id == trainingDayId && d.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
 
         public override async Task<DTO.TrainingDay> FindAsync(Guid id)
         {
             var domainEntity = await RepoDbSet
                 .AsNoTracking()
-                .Include(d => d.TrainingWeek)
                 .Include(d => d.TrainingDayType)
+                .Include(d => d.ExercisesInTrainingDay)
+                .ThenInclude(e => e.ExerciseSets)
+                .ThenInclude(s => s.SetType)
+                .Include(d => d.ExercisesInTrainingDay)
+                .ThenInclude(e => e.ExerciseType)
                 .FirstOrDefaultAsync(d => d.Id == id);
             var dalEntity = Mapper.MapDomainToDAL(domainEntity);
             return dalEntity;

@@ -19,9 +19,6 @@ namespace DAL.App.EF.Mappers
                 Date = domainObject.Date,
                 ExercisesInTrainingDay = domainObject.ExercisesInTrainingDay?
                     .Select(DALMapperContext.ExerciseInTrainingDayMapper.MapDomainToDAL),
-                TrainingWeek = domainObject.TrainingWeek == null 
-                    ? null 
-                    : DALMapperContext.TrainingWeekMapper.MapDomainToDAL(domainObject.TrainingWeek),
                 TrainingWeekId = domainObject.TrainingWeekId,
                 TrainingDayType = domainObject.TrainingDayType == null 
                     ? null 

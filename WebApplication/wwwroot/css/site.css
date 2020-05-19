@@ -113,6 +113,10 @@ body {
   font-size: 1.25rem;
 }
 
-.training-day-card{
-  
+.training-day-card-link{
+  text-decoration: none;
+}
+
+.border-thick {
+  border-width: 3px;
 }

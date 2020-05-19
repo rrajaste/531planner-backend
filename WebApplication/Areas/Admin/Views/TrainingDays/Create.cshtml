@@ -3,23 +3,23 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>TrainingDay</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <partial name="_CreateEditPartial"/>
-        </form>
+<div class="jumbotron shadow rounded text-center">
+    
+    <h3 class="text-uppercase">Create a new training day</h3>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-4 d-flex">
+            <form asp-action="Create">
+                <partial name="_CreateEditPartial"/>
+            </form>
+        </div>
     </div>
-</div>
+    <hr/>
+    <div>
+        <a class="text-uppercase" asp-controller="TrainingWeeks" asp-action="Index" asp-route-id="@Model.WorkoutRoutineId">Back to List</a>
+    </div>
 
-<div>
-    <a asp-action="View" asp-route-id="@Model.TrainingDay.TrainingWeekId">Back to List</a>
 </div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -35,13 +35,13 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(id))
             {
+                var parentRoutine = await _bll.WorkoutRoutines.FindWithWeekIdAsync(id);
                 var viewModel = new TrainingDayCreateEditViewModel()
                 {
                     TrainingDay = new BaseTrainingDay(){TrainingWeekId = id},
-                    DaysOfWeek = GetDaysOfWeekSelectList(),
-                    TrainingDayTypes = await GetTrainingDayTypesSelectListAsync()
+                    WorkoutRoutineId = parentRoutine.Id
                 };
-                return View(viewModel);
+                return View(await AddSelectListsToViewModelAsync(viewModel));
             }
             return NotFound();
         }
@@ -57,11 +57,9 @@ namespace WebApplication.Areas.Admin.Controllers
                     viewModel.TrainingDay.Id = Guid.NewGuid();
                     _bll.TrainingDays.Add(viewModel.TrainingDay);
                     await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(View), new {id = viewModel.TrainingDay.TrainingWeekId});
+                    return RedirectToAction(nameof(Index), "TrainingWeeks", new {id = viewModel.WorkoutRoutineId});
                 }
-
-                viewModel.TrainingDayTypes = await GetTrainingDayTypesSelectListAsync();
-                return View(viewModel);
+                return View(await AddSelectListsToViewModelAsync(viewModel));
             }
             return BadRequest();
         }
@@ -74,9 +72,8 @@ namespace WebApplication.Areas.Admin.Controllers
                 var viewModel = new TrainingDayCreateEditViewModel()
                 {
                     TrainingDay = trainingDay,
-                    TrainingDayTypes = await GetTrainingDayTypesSelectListAsync()
                 };
-                return View(viewModel);
+                return View(await AddSelectListsToViewModelAsync(viewModel));
             }
             return NotFound();
         }
@@ -128,21 +125,25 @@ namespace WebApplication.Areas.Admin.Controllers
             return BadRequest();
         }
 
-        private async Task<SelectList> GetTrainingDayTypesSelectListAsync()
-        {
-            var trainingDayTypes = await _bll.TrainingDayTypes.AllAsync();
-            var trainingDayTypesSelectList = new SelectList(
-                trainingDayTypes,
-                nameof(TrainingDayType.Id),
-                nameof(TrainingDayType.Name)
-                );
-            return trainingDayTypesSelectList;
-        }
-
-        private SelectList GetDaysOfWeekSelectList()
+        private static SelectList GetDaysOfWeekSelectList()
         {
             var days = CultureInfo.CurrentUICulture.DateTimeFormat.DayNames.ToArray();
             return new SelectList(days);
+            
+        }
+        
+        private async Task<TrainingDayCreateEditViewModel> AddSelectListsToViewModelAsync(TrainingDayCreateEditViewModel viewModel)
+        {
+            var trainingDayTypes = await _bll.TrainingDayTypes.AllAsync();
+            var returnViewModel = new TrainingDayCreateEditViewModel()
+            {
+                TrainingDayTypes = new SelectList(
+                    trainingDayTypes, nameof(TrainingDayType.Id), nameof(TrainingDayType.Name)),
+                WorkoutRoutineId = viewModel.WorkoutRoutineId,
+                DaysOfWeek = GetDaysOfWeekSelectList(),
+                TrainingDay = viewModel.TrainingDay
+            };
+            return returnViewModel;
         }
     }
 }
