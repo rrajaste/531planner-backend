@@ -14,7 +14,7 @@ namespace Domain.App
         where TKey : struct, IEquatable<TKey>
     {
         [MaxLength(255)] public string Name { get; set; } = default!;
-        [MaxLength(255)] 
+        [MaxLength(10240)]
         public string Description { get; set; } = default!;
         public ICollection<TargetMuscleGroup>? TargetMuscleGroups { get; set; }
     }

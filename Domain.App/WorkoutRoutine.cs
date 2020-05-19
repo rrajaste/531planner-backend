@@ -23,7 +23,7 @@ namespace Domain.App
         public string Name { get; set; } = default!;
         
         
-        [MaxLength(255)]
+        [MaxLength(1024)]
         [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public string Description { get; set; } = default!;
         

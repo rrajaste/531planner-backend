@@ -15,7 +15,7 @@ namespace Domain.App
         [MaxLength(255)]
         [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.Muscle))]
         public string Name { get; set; } = default!;
-        [MaxLength(255)]
+        [MaxLength(10240)]
         [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.Muscle))]
         public string Description { get; set; } = default!;
         public TKey MuscleGroupId { get; set; } = default!;

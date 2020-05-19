@@ -16,8 +16,7 @@ namespace Domain.App
         [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.UnitType))]
         public string Name { get; set; } = default!;
         
-        
-        [MaxLength(255)]
+        [MaxLength(10240)]
         [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.UnitType))]
         public string Description { get; set; } = default!;
     }
