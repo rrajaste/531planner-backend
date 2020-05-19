@@ -23,9 +23,12 @@ namespace DAL.App.EF.Repositories
         {
             var domainItemsList = await RepoDbSet
                 .Include(d => d.TrainingDayType)
-                .Include(d => d.TrainingWeek)
-                .Include(d => d.ExerciseSets)
+                .Include(d => d.ExercisesInTrainingDay)
                 .ThenInclude(s => s.Exercise)
+                .Include(d => d.ExercisesInTrainingDay)
+                .ThenInclude(s => s.ExerciseType)
+                .Include(d => d.ExercisesInTrainingDay)
+                .ThenInclude(s => s.ExerciseSets)
                 .Where(d => d.TrainingWeekId.Equals(trainingWeekId)).ToListAsync();
             var dalItemsList = domainItemsList.Select(Mapper.MapDomainToDAL);
             return dalItemsList;

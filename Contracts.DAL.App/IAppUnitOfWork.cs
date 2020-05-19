@@ -7,7 +7,7 @@ namespace Contracts.DAL.App
     {
         IBodyMeasurementRepository BodyMeasurements { get; }
         IDailyNutritionIntakeRepository DailyNutritionIntakes { get; }
-        IPersonalRecordRepository PersonalRecords { get; }
+        IExerciseInTrainingDayRepository ExercisesInTrainingDay { get; }
         IExerciseSetRepository ExerciseSets { get; }
         IExerciseRepository Exercises { get; }
         IExerciseTypeRepository ExerciseTypes { get; }

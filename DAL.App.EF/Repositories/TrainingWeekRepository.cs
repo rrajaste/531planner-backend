@@ -26,8 +26,16 @@ namespace DAL.App.EF.Repositories
                         .ThenInclude(d => d.TrainingDayType)
                     .Include(c => c.TrainingWeeks)
                         .ThenInclude(w => w.TrainingDays)
-                        .ThenInclude(d => d.ExerciseSets)
-                        .ThenInclude(s => s.Exercise)
+                        .ThenInclude(d => d.ExercisesInTrainingDay)
+                        .ThenInclude(e => e.Exercise)
+                    .Include(c => c.TrainingWeeks)
+                        .ThenInclude(w => w.TrainingDays)
+                        .ThenInclude(d => d.ExercisesInTrainingDay)
+                        .ThenInclude(e => e.ExerciseType)
+                    .Include(c => c.TrainingWeeks)
+                        .ThenInclude(w => w.TrainingDays)
+                        .ThenInclude(d => d.ExercisesInTrainingDay)
+                        .ThenInclude(e => e.ExerciseSets)
                     .AsNoTracking()
                     .FirstOrDefaultAsync(c => c.WorkoutRoutineId.Equals(baseRoutineId));
             

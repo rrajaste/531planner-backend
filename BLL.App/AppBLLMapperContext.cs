@@ -34,8 +34,8 @@ namespace BLL
         public IBLLMapper<DAL.App.DTO.Muscle, Muscle> MuscleMapper =>
             GetMapper(() => new MuscleMapper(this));
         
-        public IBLLMapper<DAL.App.DTO.PersonalRecord, PersonalRecord> PersonalRecordMapper =>
-            GetMapper(() => new PersonalRecordMapper(this));
+        public IBLLMapper<DAL.App.DTO.ExerciseInTrainingDay, ExerciseInTrainingDay> ExerciseInTrainingDayMapper =>
+            GetMapper(() => new ExerciseInTrainingDayMapper(this));
         
         public IBLLMapper<DAL.App.DTO.RoutineType, RoutineType> RoutineTypeMapper =>
             GetMapper(() => new RoutineTypeMapper(this));

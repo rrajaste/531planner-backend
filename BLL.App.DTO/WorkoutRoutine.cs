@@ -19,7 +19,6 @@ namespace BLL.App.DTO
         public TKey RoutineTypeId { get; set; } = default!;
         public TKey? AppUserId { get; set; } = default!;
         public RoutineType? RoutineType { get; set; }
-        public IEnumerable<PersonalRecord>? PersonalRecord { get; set; }
         public IEnumerable<TrainingCycle>? TrainingCycles { get; set; }
     }
 }

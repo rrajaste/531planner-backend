@@ -21,10 +21,10 @@ namespace DAL.App.EF.Repositories
         public async Task<IEnumerable<DAL.App.DTO.ExerciseSet>> AllWithTrainingDayIdAsync(Guid trainingDayId)
         {
             var domainObjects = await RepoDbSet
-                .Include(s => s.TrainingDay)
                 .Include(s => s.SetType)
-                .Include(s => s.UnitType).Include(s => s.Exercise)
-                .Where(s => s.TrainingDayId == trainingDayId)
+                .Include(s => s.UnitType)
+                .Include(s => s.ExerciseInTrainingDay)
+                .Where(s => s.ExerciseInTrainingDay.TrainingDayId == trainingDayId)
                 .ToListAsync();
             var dalObjects = domainObjects.Select(Mapper.MapDomainToDAL);
             return dalObjects;
@@ -32,24 +32,26 @@ namespace DAL.App.EF.Repositories
 
         public async Task<bool> IsPartOfBaseRoutineAsync(Guid exerciseSetId) =>
             await RepoDbSet
-                .Include(s => s.TrainingDay)
+                .Include(s => s.ExerciseInTrainingDay)
+                .ThenInclude(e => e.TrainingDay)
                 .ThenInclude(d => d!.TrainingWeek)
                 .ThenInclude(w => w!.TrainingCycle)
                 .ThenInclude(c => c!.WorkoutRoutine)
                 .AnyAsync(s =>
                     s.Id == exerciseSetId &&
-                    s.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
+                    s.ExerciseInTrainingDay.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
 
         public async Task<Guid> GetRoutineIdForExerciseSetAsync(DTO.ExerciseSet entity)
         {
-            var exerciseSetWithIncludes =
+            var exerciseInTrainingDayWithIncludes =
                 await RepoDbContext
-                    .TrainingDays
-                    .Include(d => d.TrainingWeek)
+                    .ExercisesInTrainingDay
+                    .Include(d => d.TrainingDay)
+                    .ThenInclude(d => d!.TrainingWeek)
                     .ThenInclude(w => w!.TrainingCycle)
-                    .FirstOrDefaultAsync(d => d.Id == entity.TrainingDayId);
-            return exerciseSetWithIncludes!.TrainingWeek!.TrainingCycle!.WorkoutRoutineId;
+                    .FirstOrDefaultAsync(e => e.TrainingDay!.Id == entity.ExerciseInTrainingDayId);
+            return exerciseInTrainingDayWithIncludes!.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutineId;
         }
     }
 }

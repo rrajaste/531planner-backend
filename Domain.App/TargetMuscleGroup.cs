@@ -1,6 +1,8 @@
 ﻿using System;
 using Contracts.Domain;
+using Domain.App.Enums;
 using Domain.Base;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.App
 {
@@ -15,5 +17,6 @@ namespace Domain.App
         public TKey ExerciseId { get; set; }
         public MuscleGroup? MuscleGroup { get; set; }
         public Exercise? Exercise { get; set; }
+        public TargetMuscleGroupIntensity Intensity { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Domain.Base
     {
     }
 
-    public abstract class DomainEntityIdMetadata<TKey> : DomainEntityId<TKey> 
+    public abstract class DomainEntityIdMetadata<TKey> : DomainEntityId<TKey>, IDomainEntityIdMetadata<TKey>
         where TKey : IEquatable<TKey>
     {
         public DateTime CreatedAt { get; set; } = DateTime.Now;

@@ -17,9 +17,9 @@ namespace DAL.App.EF
             GetRepository<IDailyNutritionIntakeRepository>(
                 ()=> new DailyNutritionIntakeRepository(UnitOfWorkDbContext, _dalMapperContext.DailyNutritionIntakeMapper));
 
-        public IPersonalRecordRepository PersonalRecords => 
-            GetRepository<IPersonalRecordRepository>(
-                ()=> new PersonalRecordRepository(UnitOfWorkDbContext, _dalMapperContext.PersonalRecordMapper));
+        public IExerciseInTrainingDayRepository ExercisesInTrainingDay => 
+            GetRepository<IExerciseInTrainingDayRepository>(
+                ()=> new ExerciseInTrainingDayRepository(UnitOfWorkDbContext, _dalMapperContext.ExerciseInTrainingDayMapper));
         
         public IExerciseSetRepository ExerciseSets => 
             GetRepository<IExerciseSetRepository>(

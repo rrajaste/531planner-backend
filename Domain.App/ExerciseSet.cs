@@ -27,15 +27,9 @@ namespace Domain.App
         public int? Distance { get; set; }
 
         public TKey? UnitTypeId { get; set; } = default!;
-        public TKey TrainingDayId { get; set; } = default!;
-        public TKey ExerciseId { get; set; } = default!;
+        public TKey ExerciseInTrainingDayId { get; set; } = default!;
+        public ExerciseInTrainingDay ExerciseInTrainingDay { get; set; } = default!;
         public TKey WorkoutRoutineId { get; set; } = default!;
-        
-        [Display(Name = nameof(Exercise), ResourceType = typeof(Resources.Domain.ExerciseSet))]
-        public Exercise? Exercise { get; set; }
-        
-        [Display(Name = nameof(TrainingDay), ResourceType = typeof(Resources.Domain.ExerciseSet))]
-        public TrainingDay? TrainingDay { get; set; }
         
         [Display(Name = nameof(WorkoutRoutine), ResourceType = typeof(Resources.Domain.ExerciseSet))]
         public WorkoutRoutine? WorkoutRoutine { get; set; }

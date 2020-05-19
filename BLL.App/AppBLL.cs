@@ -15,9 +15,9 @@ namespace BLL
             MapperContext = mapperContext;
         }
 
-        public IPersonalRecordService PersonalRecords =>
-            GetService<IPersonalRecordService>(
-                () => new PersonalRecordService(UnitOfWork, MapperContext.PersonalRecordMapper));
+        public IExerciseInTrainingDayService ExercisesInTrainingDays =>
+            GetService<IExerciseInTrainingDayService>(
+                () => new ExerciseInTrainingDayService(UnitOfWork, MapperContext.ExerciseInTrainingDayMapper));
         public IWorkoutRoutineService WorkoutRoutines =>
             GetService<IWorkoutRoutineService>(
                 () => new WorkoutRoutineService(UnitOfWork, MapperContext.WorkoutRoutineMapper));

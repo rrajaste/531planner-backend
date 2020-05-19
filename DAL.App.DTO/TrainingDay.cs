@@ -17,6 +17,6 @@ namespace DAL.App.DTO
         public TKey TrainingDayTypeId { get; set; } = default!;
         public TrainingWeek? TrainingWeek { get; set; }
         public TrainingDayType? TrainingDayType { get; set; }
-        public IEnumerable<ExerciseSet>? ExerciseSets { get; set; }
+        public IEnumerable<ExerciseInTrainingDay>? ExercisesInTrainingDay { get; set; }
     }
 }

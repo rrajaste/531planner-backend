@@ -5,7 +5,7 @@ namespace Contracts.BLL.App
 {
     public interface IAppBLL : IBaseBLL
     {
-        public IPersonalRecordService PersonalRecords { get; }
+        public IExerciseInTrainingDayService ExercisesInTrainingDays { get; }
         public IWorkoutRoutineService WorkoutRoutines { get; }
         public ITrainingWeekService TrainingWeeks { get; }
         public ITrainingDayService TrainingDays { get; }

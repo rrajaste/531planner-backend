@@ -37,9 +37,7 @@ namespace Domain.App
         
         [Display(Name = nameof(RoutineType), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public RoutineType? RoutineType { get; set; }
-        public ICollection<PersonalRecord>? PersonalRecord { get; set; }
-        
-        
+
         [Display(Name = nameof(TrainingCycles), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public ICollection<TrainingCycle>? TrainingCycles { get; set; }
     }

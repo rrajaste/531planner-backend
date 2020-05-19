@@ -1,5 +1,6 @@
 using System;
 using Contracts.BLL.Base;
+using Domain.App.Enums;
 
 namespace BLL.App.DTO
 {
@@ -14,5 +15,6 @@ namespace BLL.App.DTO
         public TKey MuscleGroupId { get; set; } = default!;
         public TKey ExerciseId { get; set; } = default!;
         public MuscleGroup? MuscleGroup { get; set; }
+        public TargetMuscleGroupIntensity Intensity { get; set; }
     }
 }

@@ -22,10 +22,6 @@ namespace BLL.Mappers
                 Id = dalObject.Id,
                 Name = dalObject.Name,
                 Description = dalObject.Description,
-                ExerciseTypeId = dalObject.ExerciseTypeId,
-                ExerciseType = dalObject.ExerciseType == null 
-                    ? null 
-                    : BLLMapperContext.ExerciseTypeMapper.MapDALToBLL(dalObject.ExerciseType),
                 TargetMuscleGroups = dalObject.TargetMuscleGroups?
                     .Select(BLLMapperContext.MuscleGroupMapper.MapDALToBLL)
             };
@@ -36,7 +32,6 @@ namespace BLL.Mappers
                 Id = bllObject.Id,
                 Name = bllObject.Name,
                 Description = bllObject.Description,
-                ExerciseTypeId = bllObject.ExerciseTypeId,
             };
     }
 }

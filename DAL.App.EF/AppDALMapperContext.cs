@@ -33,8 +33,8 @@ namespace DAL.App.EF
         public IDALMapper<Muscle, DTO.Muscle> MuscleMapper =>
             GetMapper(() => new MuscleMapper(this));
         
-        public IDALMapper<PersonalRecord, DTO.PersonalRecord> PersonalRecordMapper =>
-            GetMapper(() => new PersonalRecordMapper(this));
+        public IDALMapper<ExerciseInTrainingDay, DTO.ExerciseInTrainingDay> ExerciseInTrainingDayMapper =>
+            GetMapper(() => new ExerciseInTrainingDayMapper(this));
         
         public IDALMapper<RoutineType, DTO.RoutineType> RoutineTypeMapper =>
             GetMapper(() => new RoutineTypeMapper(this));

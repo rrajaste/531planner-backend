@@ -16,9 +16,6 @@ namespace Domain.App
         [MaxLength(255)] public string Name { get; set; } = default!;
         [MaxLength(255)] 
         public string Description { get; set; } = default!;
-
-        public TKey ExerciseTypeId { get; set; } = default!;
-        public ExerciseType? ExerciseType { get; set; }
         public ICollection<TargetMuscleGroup>? TargetMuscleGroups { get; set; }
     }
 }

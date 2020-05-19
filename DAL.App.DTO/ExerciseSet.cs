@@ -19,10 +19,8 @@ namespace DAL.App.DTO
         public float? Duration { get; set; }
         public int? Distance { get; set; }
         public TKey UnitTypeId { get; set; } = default!;
-        public TKey TrainingDayId { get; set; } = default!;
-        public TKey ExerciseId { get; set; } = default!;
+        public TKey ExerciseInTrainingDayId { get; set; } = default!;
         public TKey WorkoutRoutineId { get; set; } = default!;
-        public Exercise? Exercise { get; set; }
         public TKey SetTypeId { get; set; }
         public SetType? SetType { get; set; }
         public TrainingDay? TrainingDay { get; set; }

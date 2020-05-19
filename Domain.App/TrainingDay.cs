@@ -19,6 +19,6 @@ namespace Domain.App
         public TKey TrainingDayTypeId { get; set; } = default!;
         public TrainingWeek? TrainingWeek { get; set; }
         public TrainingDayType? TrainingDayType { get; set; }
-        public ICollection<ExerciseSet>? ExerciseSets { get; set; }
+        public ICollection<ExerciseInTrainingDay>? ExercisesInTrainingDay { get; set; }
     }
 }

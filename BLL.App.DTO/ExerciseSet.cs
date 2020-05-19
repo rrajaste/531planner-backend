@@ -19,11 +19,10 @@ namespace BLL.App.DTO
         public float? Duration { get; set; }
         public int? Distance { get; set; }
         public TKey UnitTypeId { get; set; } = default!;
-        public TKey TrainingDayId { get; set; } = default!;
         public TKey ExerciseId { get; set; } = default!;
+        public TKey ExerciseInTrainingDayId { get; set; } = default!;
         public TKey WorkoutRoutineId { get; set; } = default!;
         public Exercise? Exercise { get; set; }
-        public TrainingDay? TrainingDay { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public UnitType? UnitType { get; set; }
         public SetType? SetType { get; set; }

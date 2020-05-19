@@ -13,7 +13,7 @@ namespace Contracts.DAL.App
         IDALMapper<global::Domain.App.ExerciseType, ExerciseType> ExerciseTypeMapper { get; }
         IDALMapper<global::Domain.App.MuscleGroup, MuscleGroup> MuscleGroupMapper { get; }
         IDALMapper<global::Domain.App.Muscle, Muscle> MuscleMapper { get; }
-        IDALMapper<global::Domain.App.PersonalRecord, PersonalRecord> PersonalRecordMapper { get; }
+        IDALMapper<global::Domain.App.ExerciseInTrainingDay, ExerciseInTrainingDay> ExerciseInTrainingDayMapper { get; }
         IDALMapper<global::Domain.App.RoutineType, RoutineType> RoutineTypeMapper { get; }
         IDALMapper<global::Domain.App.TrainingCycle, TrainingCycle> TrainingCycleMapper { get; }
         IDALMapper<global::Domain.App.TrainingDay, TrainingDay> TrainingDayMapper { get; }

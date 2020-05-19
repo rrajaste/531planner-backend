@@ -19,10 +19,6 @@ namespace DAL.App.EF.Mappers
                 Id = domainObject.Id,
                 Name = domainObject.Name,
                 Description = domainObject.Description,
-                ExerciseTypeId = domainObject.ExerciseTypeId,
-                ExerciseType = domainObject.ExerciseType == null 
-                    ? null 
-                    : DALMapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
                 TargetMuscleGroups = domainObject.TargetMuscleGroups?
                     .Select(
                         t => t.MuscleGroup != null 
@@ -37,7 +33,6 @@ namespace DAL.App.EF.Mappers
                 Id = dalObject.Id,
                 Name = dalObject.Name,
                 Description = dalObject.Description,
-                ExerciseTypeId = dalObject.ExerciseTypeId,
             };
     }
 }

@@ -12,7 +12,6 @@ namespace Domain.App.Identity
     public class AppUser<TKey> : IdentityUser<TKey>, IDomainEntityIdMetadata<TKey> 
         where TKey : struct, IEquatable<TKey>
     {
-        public ICollection<PersonalRecord>? PersonalRecords { get; set; } 
         public ICollection<WorkoutRoutine>? WorkoutRoutines { get; set; }
         public ICollection<BodyMeasurement>? BodyMeasurements { get; set; }
         public ICollection<DailyNutritionIntake>? DailyNutritionIntakes { get; set; }

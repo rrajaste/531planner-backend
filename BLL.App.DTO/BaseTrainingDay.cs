@@ -15,8 +15,7 @@ namespace BLL.App.DTO
         public DayOfWeek DayOfWeek { get; set; }
         public TKey TrainingWeekId { get; set; } = default!;
         public TKey TrainingDayTypeId { get; set; } = default!;
-        public TrainingWeek? TrainingWeek { get; set; }
         public TrainingDayType? TrainingDayType { get; set; }
-        public IEnumerable<ExerciseSet>? ExerciseSets { get; set; }
+        public IEnumerable<ExerciseInTrainingDay>? ExercisesInTrainingDay { get; set; }
     }
 }

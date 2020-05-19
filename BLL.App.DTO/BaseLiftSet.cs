@@ -14,8 +14,7 @@ namespace BLL.App.DTO
         public int SetNumber { get; set; }
         public int NrOfReps { get; set; }
         public float WeightPercentageOfOneRepMax { get; set; }
-        public TKey TrainingDayId { get; set; } = default!;
-        public TKey ExerciseId { get; set; } = default!;
+        public TKey ExerciseInTrainingDayId { get; set; } = default!;
         public TKey WorkoutRoutineId { get; set; } = default!;
         public TKey SetTypeId { set; get; } = default!;
         public Exercise? Exercise { get; set; }

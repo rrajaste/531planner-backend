@@ -16,7 +16,8 @@ namespace DAL.App.EF.Mappers
             {
                 Id = domainObject.Id,
                 ExerciseId = domainObject.ExerciseId,
-                MuscleGroupId = domainObject.MuscleGroupId
+                MuscleGroupId = domainObject.MuscleGroupId,
+                Intensity = domainObject.Intensity
             };
 
         public Domain.App.TargetMuscleGroup MapDALToDomain(TargetMuscleGroup dalObject) =>
@@ -24,7 +25,8 @@ namespace DAL.App.EF.Mappers
             {
                 Id = dalObject.Id,
                 ExerciseId = dalObject.ExerciseId,
-                MuscleGroupId = dalObject.MuscleGroupId
+                MuscleGroupId = dalObject.MuscleGroupId,
+                Intensity = dalObject.Intensity
             };
     }
 }

@@ -4,7 +4,7 @@ namespace Contracts.DAL.App.Mappers
         where TOutObject : class, new()
         where TInObject : class, new()
     {
-        TOutObject MapDomainToDAL(TInObject dalObject);
+        TOutObject MapDomainToDAL(TInObject domainObject);
         TInObject MapDALToDomain(TOutObject dalObject);
     }
 }

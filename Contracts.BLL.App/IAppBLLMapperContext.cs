@@ -14,7 +14,7 @@ namespace Contracts.BLL.App
         IBLLMapper<dalDTO.ExerciseType, bllDTO.ExerciseType> ExerciseTypeMapper { get; }
         IBLLMapper<dalDTO.MuscleGroup, bllDTO.MuscleGroup> MuscleGroupMapper { get; }
         IBLLMapper<dalDTO.Muscle, bllDTO.Muscle> MuscleMapper { get; }
-        IBLLMapper<dalDTO.PersonalRecord, bllDTO.PersonalRecord> PersonalRecordMapper { get; }
+        IBLLMapper<dalDTO.ExerciseInTrainingDay, bllDTO.ExerciseInTrainingDay> ExerciseInTrainingDayMapper { get; }
         IBLLMapper<dalDTO.RoutineType, bllDTO.RoutineType> RoutineTypeMapper { get; }
         IBLLMapper<dalDTO.TrainingCycle, bllDTO.TrainingCycle> TrainingCycleMapper { get; }
         ITrainingDayMapper TrainingDayMapper { get; }
