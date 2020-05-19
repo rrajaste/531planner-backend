@@ -1,4 +1,4 @@
-@model WebApplication.Areas.Admin.ViewModels.ExerciseSetCreateEditViewModel
+@model WebApplication.Areas.Admin.ViewModels.ExerciseInTrainingDayCreateEditViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -11,13 +11,13 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <partial name="_LiftCreateEditPartial"/>
+            <partial name="_CreateEditPartial"/>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-id="@Model.ExerciseSet.TrainingDayId">Back to List</a>
+    <a asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@Model.ExerciseInTrainingDay.TrainingDayId">Back to List</a>
 </div>
 
 @section Scripts {

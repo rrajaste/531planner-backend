@@ -1,10 +1,10 @@
 [
   {
     "name": "Warm up",
-    "description": "Weight: KG, height: cm, distance: m"
+    "description": "Warm up sets used to increase blood flow in muscles to reduce the risk of injury and mentally as well as physically prepare the muscle for heavier main lift sets"
   },
   {
     "name": "Main set",
-    "description": "Weight: Lbs, height: inches, distance: yards"
+    "description": "Main lift sets meant for actual muscle training."
   }
 ]

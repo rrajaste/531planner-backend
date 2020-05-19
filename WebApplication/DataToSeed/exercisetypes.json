@@ -5,7 +5,7 @@
     "typecode": "MainLiftWorkSet"
   },
   {
-    "name": "AccessoryLift",
+    "name": "Accessory lift",
     "description": "Accessory exercise to compliment main lifts",
     "typecode": "Accessory"
   }

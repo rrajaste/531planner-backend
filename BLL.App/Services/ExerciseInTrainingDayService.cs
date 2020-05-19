@@ -1,4 +1,8 @@
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using BLL.Base.Services;
 using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
@@ -15,5 +19,11 @@ namespace BLL.Services
             : base(unitOfWork, mapper, unitOfWork.ExercisesInTrainingDay)
         {
         }
+
+        public async Task<IEnumerable<ExerciseInTrainingDay>> AllWithBaseTrainingDayIdAsync(Guid trainingDayId) =>
+            (await ServiceRepository.AllWithBaseTrainingDayIdAsync(trainingDayId)).Select(Mapper.MapDALToBLL);
+
+        public async Task<bool> IsPartOfBaseRoutineAsync(Guid id) => 
+            await ServiceRepository.IsPartOfBaseRoutineAsync(id);
     }
 }

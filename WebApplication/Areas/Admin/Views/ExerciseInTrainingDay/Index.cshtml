@@ -1,4 +1,4 @@
-@model IEnumerable<BLL.App.DTO.BaseLiftSet>
+﻿@model IEnumerable<BLL.App.DTO.ExerciseInTrainingDay>
 
 @{
     ViewData["Title"] = "Index";
@@ -15,15 +15,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Exercise)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SetType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NrOfReps)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WeightPercentageOfOneRepMax)
-        </th>
         <th></th>
     </tr>
     </thead>
@@ -32,15 +23,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Exercise.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SetType.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NrOfReps)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WeightPercentageOfOneRepMax)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

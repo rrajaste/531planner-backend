@@ -43,7 +43,7 @@
                 {
                     @foreach (var day in item.TrainingDays.OrderBy(day => day.Date))
                     {
-                        <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Index" asp-route-id="@item.Id">
+                        <a asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@item.Id">
                 <div class="m-1">
                     <table class="table table-hover table-sm table-bordered">
                         <thead>
@@ -54,7 +54,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if (day.TrainingDayExercises == null || !day.TrainingDayExercises.Any())
+                        @if (day.ExercisesInTrainingDay == null || !day.ExercisesInTrainingDay.Any())
                         {
                             <tr>
                                 <td>
@@ -64,13 +64,13 @@
                         }
                         else
                         {
-                            @foreach (var exercise in day.TrainingDayExercises)
+                            @foreach (var exerciseInTrainingDay in day.ExercisesInTrainingDay)
                             {
                                 <tr>
                                     <td>
-                                    <p>@exercise.Key.Name</p>
+                                    <p>@exerciseInTrainingDay.Exercise.Name</p>
                                         <ul>
-                                        @foreach (var set in exercise.Value)
+                                        @foreach (var set in exerciseInTrainingDay.ExerciseSets)
                                         {
                                             <li>
                                                 <span>@set.NrOfReps x @set.Weight %</span>

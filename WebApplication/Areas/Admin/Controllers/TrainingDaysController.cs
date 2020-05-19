@@ -22,11 +22,11 @@ namespace WebApplication.Areas.Admin.Controllers
             _bll = bll;
         }
 
-        public async Task<IActionResult> Index(Guid id)
+        public async Task<IActionResult> View(Guid id)
         {
-            if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(id))
+            if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(id))
             {
-                return View(await _bll.TrainingDays.AllWithTrainingWeekIdAsync(id));
+                return View(await _bll.TrainingDays.FindBaseTrainingDay(id));
             }
             return NotFound();
         }
@@ -57,7 +57,7 @@ namespace WebApplication.Areas.Admin.Controllers
                     viewModel.TrainingDay.Id = Guid.NewGuid();
                     _bll.TrainingDays.Add(viewModel.TrainingDay);
                     await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index), new {id = viewModel.TrainingDay.TrainingWeekId});
+                    return RedirectToAction(nameof(View), new {id = viewModel.TrainingDay.TrainingWeekId});
                 }
 
                 viewModel.TrainingDayTypes = await GetTrainingDayTypesSelectListAsync();
@@ -123,7 +123,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 var trainingDay = await _bll.TrainingDays.FindAsync(id);
                 _bll.TrainingDays.Remove(trainingDay);
                 await _bll.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new {id = trainingDay.TrainingWeekId});
+                return RedirectToAction(nameof(View), new {id = trainingDay.TrainingWeekId});
             }
             return BadRequest();
         }
