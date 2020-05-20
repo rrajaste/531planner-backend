@@ -19,7 +19,7 @@ namespace BLL.Mappers
             {
                 Id = dalObject.Id,
                 Date = dalObject.Date,
-                ExercisesInTrainingDay = dalObject.ExercisesInTrainingDay.Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL),
+                ExercisesInTrainingDay = dalObject.ExercisesInTrainingDay?.Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL),
                 TrainingWeekId = dalObject.TrainingWeekId,
                 TrainingDayType = dalObject.TrainingDayType == null
                     ? null

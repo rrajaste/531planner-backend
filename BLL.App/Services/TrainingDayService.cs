@@ -33,6 +33,9 @@ namespace BLL.Services
         public BaseTrainingDay Add(BaseTrainingDay dto) =>
             Mapper.MapDALToBaseTrainingDay(ServiceRepository.Add(Mapper.MapBaseTrainingDayToDALEntity(dto)));
 
+        public BaseTrainingDay Update(BaseTrainingDay dto) =>
+            Mapper.MapDALToBaseTrainingDay(ServiceRepository.Update(Mapper.MapBaseTrainingDayToDALEntity(dto)));
+
         public async Task<BaseTrainingDay> FindBaseTrainingDay(Guid id)
         {
             var entity = await ServiceRepository.FindAsync(id);

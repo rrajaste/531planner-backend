@@ -9,6 +9,7 @@ namespace Contracts.BLL.App.Services
     public interface ITrainingDayService : ITrainingDayRepository<Guid, TrainingDay>, IBaseEntityService<TrainingDay>
     {
         BaseTrainingDay Add(BaseTrainingDay dto);
+        BaseTrainingDay Update(BaseTrainingDay dto);
         Task<BaseTrainingDay> FindBaseTrainingDay(Guid id);
     }
 }
