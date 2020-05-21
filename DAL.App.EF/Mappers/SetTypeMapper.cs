@@ -17,7 +17,8 @@ namespace DAL.App.EF.Mappers
             {
                 Id = domainObject.Id,
                 Name = domainObject.Name,
-                Description = domainObject.Description
+                Description = domainObject.Description,
+                TypeCode = domainObject.TypeCode
             };
 
         public Domain.App.SetType MapDALToDomain(SetType dalObject) =>
@@ -25,7 +26,8 @@ namespace DAL.App.EF.Mappers
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,
-                Description = dalObject.Description
+                Description = dalObject.Description,
+                TypeCode = dalObject.TypeCode
             };
     }
 }

@@ -18,6 +18,6 @@ namespace Contracts.DAL.Base.Repositories
         TDALEntity Add(TDALEntity entity);
         TDALEntity Update(TDALEntity entity);
         TDALEntity Remove(TDALEntity entity);
-        Task<TDALEntity> Remove(TKey id);
+        Task<TDALEntity> RemoveAsync(TKey id);
     }
 }

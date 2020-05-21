@@ -13,5 +13,6 @@ namespace BLL.App.DTO
         public TKey Id { get; set; } = default!;
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
+        public string TypeCode { get; set; } = default!;
     }
 }
