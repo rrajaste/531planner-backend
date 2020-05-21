@@ -17,7 +17,7 @@ namespace DAL.App.EF.Mappers
             new ExerciseInTrainingDay()
             {
                 Id = domainObject.Id,
-                TrainingDayId = domainObject.Id,
+                TrainingDayId = domainObject.TrainingDayId,
                 ExerciseTypeId = domainObject.ExerciseTypeId,
                 ExerciseType = domainObject.ExerciseType == null 
                     ? null 

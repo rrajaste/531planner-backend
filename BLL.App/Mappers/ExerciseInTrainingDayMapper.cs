@@ -21,6 +21,7 @@ namespace BLL.Mappers
             {
                 Id = dalObject.Id,
                 ExerciseId = dalObject.ExerciseId,
+                TrainingDayId = dalObject.TrainingDayId,
                 Exercise = dalObject.Exercise == null
                     ? null
                     : BLLMapperContext.ExerciseMapper.MapDALToBLL(dalObject.Exercise),
