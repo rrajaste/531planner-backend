@@ -1,6 +1,6 @@
 @using System.Globalization
 @using WebApplication.Areas.Admin.ViewModels
-@model BLL.App.DTO.TrainingDay
+@model BLL.App.DTO.UserTrainingDay
 
 <a class="view-edit-delete-small" asp-action="Delete" asp-controller="TrainingDays"
    data-toggle="modal" title="Delete training day" data-target="#modal-delete-day-id-@Model.Id">
@@ -25,7 +25,10 @@
                         @Model.TrainingDayType?.Name
                     </h5>
                     <h5 class="text-muted">
-                        Number of exercises: @Model.ExercisesInTrainingDay?.Count()
+                        Number of main lifts: @Model.MainLifts?.Count()
+                    </h5>
+                    <h5 class="text-muted">
+                        Number of accessory lifts: @Model.AccessoryLifts?.Count()
                     </h5>
                 </div>
                 <div class="modal-footer">
