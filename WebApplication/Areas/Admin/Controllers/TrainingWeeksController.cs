@@ -71,7 +71,7 @@ namespace WebApplication.Areas.Admin.Controllers
             if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(viewModel.TrainingWeek.Id) && 
                 (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(viewModel.WorkoutRoutineId)))
             {
-                await _bll.TrainingWeeks.Remove(viewModel.TrainingWeek.Id);
+                await _bll.TrainingWeeks.RemoveAsync(viewModel.TrainingWeek.Id);
                 await _bll.SaveChangesAsync();
                 await _bll.TrainingWeeks.NormalizeWeekNumbersAsync(viewModel.WorkoutRoutineId);
                 await _bll.SaveChangesAsync();

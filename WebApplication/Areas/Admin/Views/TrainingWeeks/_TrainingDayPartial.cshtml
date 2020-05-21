@@ -1,0 +1,40 @@
+@using System.Globalization
+@model BLL.App.DTO.TrainingDay
+
+<div class="m-1 p-0 col-sm-2 col-md-2 col-lg-2">
+    <table class="table table-sm table-bordered border-thick">
+        <thead>
+        <tr>
+            <th>
+                <p>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(@Model.Date.DayOfWeek)</p>
+                <partial name="_DeleteDayPartial" model="Model"/>
+            </th>
+        </tr>
+        </thead>
+        <tbody class="training-day-table">
+        @if (@Model.ExercisesInTrainingDay == null || !@Model.ExercisesInTrainingDay.Any())
+        {
+            <tr>
+                <td>
+                    <p class="text-secondary">No exercises added yet!</p>
+                </td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var exerciseInTrainingDay in @Model.ExercisesInTrainingDay)
+            {
+                <partial name="_ExercisePartial" model="exerciseInTrainingDay"/>
+            }
+        }
+        <tr class="training-day-table">
+            <td>
+                <a class="btn btn-outline-info btn-sm text-uppercase stretched-link" asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@Model.Id">
+                    Edit
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+

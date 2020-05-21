@@ -1,0 +1,20 @@
+@model BLL.App.DTO.ExerciseInTrainingDay
+
+<tr>
+    <td>
+        <p title="@Model.Exercise?.Description" class="font-weight-bold text-left m-0 border-bottom">@Model.Exercise?.Name</p>
+        @if (Model.ExerciseSets == null || !Model.ExerciseSets.Any())
+        {
+            <p class="text-muted mr-2 mt-2">No sets added yet!</p>
+        }
+        else
+        {
+            <div class="text-left ml-3 text-secondary">
+            @foreach (var set in Model.ExerciseSets)
+            {
+                <span>- @set.NrOfReps x @set.Weight%</span><br/>
+            }
+            </div>
+        }
+    </td>
+</tr>

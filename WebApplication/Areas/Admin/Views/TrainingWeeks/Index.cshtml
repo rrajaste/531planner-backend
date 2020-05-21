@@ -1,5 +1,4 @@
 @using WebApplication.Areas.Admin.ViewModels
-@using System.Globalization
 @using BLL.App.DTO
 @model TrainingWeekIndexViewModel
 
@@ -15,7 +14,7 @@
 <div>
     <h3 class="text-left my-1 mx-1 text-uppercase">TRAINING WEEKS</h3>
     <div class="row text-left mx-1">
-        <partial name="_CreatePartial" model="GetCreateViewModel()"/>
+        <partial name="_CreateWeekPartial" model="GetCreateViewModel()"/>
     </div>
 </div>
 <hr/>
@@ -43,60 +42,7 @@
                 {
                     @foreach (var day in item.TrainingDays.OrderBy(day => day.Date))
                     {
-                <div class="m-1">
-                    <table class="table table-sm table-bordered border-thick">
-                        <thead>
-                        <tr>
-                            <th>
-                                <p>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(day.Date.DayOfWeek)</p>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if (day.ExercisesInTrainingDay == null || !day.ExercisesInTrainingDay.Any())
-                        {
-                            <tr>
-                                <td>
-                                    <p class="text-secondary">No exercises added yet!</p>
-                                </td>
-                            </tr>
-                        }
-                        else
-                        {
-                            @foreach (var exerciseInTrainingDay in day.ExercisesInTrainingDay)
-                            {
-                                <tr>
-                                    <td>
-                                    <p title="@exerciseInTrainingDay.Exercise?.Description" class="font-weight-bold text-left m-0 border-bottom">@exerciseInTrainingDay.Exercise?.Name</p>
-                                        <ul>
-                                        @if (exerciseInTrainingDay.ExerciseSets == null || !exerciseInTrainingDay.ExerciseSets.Any())
-                                        {
-                                            <p class="text-muted mr-2 mt-2">No sets added yet!</p>
-                                        }
-                                        else
-                                        {
-                                            @foreach (var set in exerciseInTrainingDay.ExerciseSets)
-                                            {
-                                                <li>
-                                                    <span>@set.NrOfReps x @set.Weight %</span>
-                                                </li>
-                                            }
-                                        }
-                                    </ul>
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        <tr>
-                            <td>
-                                <a class="btn btn-outline-info text-uppercase" asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@day.Id">
-                                    Edit
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <partial name="_TrainingDayPartial" model="day"/>
                     }
                 }
                 <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">
@@ -110,7 +56,7 @@
                 <div class="view-edit-delete">
                     <span>
                         <partial name="_EditDeloadPartial" model="@GetIsDeloadEditViewModel(item)"/>
-                        <partial name="_DeletePartial" model="@GetDeleteViewModel(item)"/>
+                        <partial name="_DeleteWeekPartial" model="@GetDeleteViewModel(item)"/>
                     </span>
                 </div>
             </div>
