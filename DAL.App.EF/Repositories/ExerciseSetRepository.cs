@@ -21,6 +21,7 @@ namespace DAL.App.EF.Repositories
         public async Task<IEnumerable<DAL.App.DTO.ExerciseSet>> AllWithExerciseInTrainingDayIdAsync(Guid exerciseInTrainingDayId)
         {
             var domainObjects = await RepoDbSet
+                .AsNoTracking()
                 .Include(s => s.SetType)
                 .Include(s => s.UnitType)
                 .Where(s => s.ExerciseInTrainingDay.Id == exerciseInTrainingDayId)
@@ -41,15 +42,16 @@ namespace DAL.App.EF.Repositories
                     s.ExerciseInTrainingDay.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
 
-        public async Task<Guid> GetRoutineIdForExerciseSetAsync(DTO.ExerciseSet entity)
+        public async Task<Guid> GetRoutineIdForExerciseSetAsync(Guid exerciseInTrainingDayId)
         {
             var exerciseInTrainingDayWithIncludes =
                 await RepoDbContext
                     .ExercisesInTrainingDay
+                    .AsNoTracking()
                     .Include(d => d.TrainingDay)
                     .ThenInclude(d => d!.TrainingWeek)
                     .ThenInclude(w => w!.TrainingCycle)
-                    .FirstOrDefaultAsync(e => e.Id == entity.ExerciseInTrainingDayId);
+                    .FirstOrDefaultAsync(e => e.Id == exerciseInTrainingDayId);
             return exerciseInTrainingDayWithIncludes!.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutineId;
         }
     }

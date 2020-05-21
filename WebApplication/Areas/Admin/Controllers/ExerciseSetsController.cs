@@ -101,9 +101,11 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.ExerciseSets.IsPartOfBaseRoutineAsync(id))
             {
-                await _bll.ExercisesInTrainingDays.RemoveAsync(id);
+                var parentTrainingDay = await _bll.TrainingDays.FindWithExerciseSetIdAsync(id);
+                var removedEntity = await _bll.ExerciseSets.RemoveAsync(id);
                 await _bll.SaveChangesAsync();
-                return RedirectToAction(nameof(View), "TrainingDays");
+                await _bll.ExerciseSets.NormalizeSetNumbersAsync(removedEntity.ExerciseInTrainingDayId);
+                return RedirectToAction(nameof(View), "TrainingDays", new {id = parentTrainingDay.Id});
             }
             return BadRequest();
         }

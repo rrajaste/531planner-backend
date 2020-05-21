@@ -45,19 +45,29 @@ namespace DAL.App.EF.Repositories
         public async Task<DTO.TrainingDay> FindWithExerciseSetIdAsync(Guid id)
         {
             var exerciseSet = await RepoDbContext.ExerciseSets
+                .AsNoTracking()
                 .Include(s => s.ExerciseInTrainingDay)
                 .ThenInclude(e => e.TrainingDay)
-                .FirstOrDefaultAsync(s => s.ExerciseInTrainingDay!.TrainingDayId == id);
+                .FirstOrDefaultAsync(s => s.Id == id);
             var parentTrainingDay = exerciseSet.ExerciseInTrainingDay!.TrainingDay;
+            if (parentTrainingDay == null)
+            {
+                throw new ApplicationException("Cannot find TrainingDay with ExerciseSetId: " + id);
+            }
             return Mapper.MapDomainToDAL(parentTrainingDay);
         }
 
         public async Task<DTO.TrainingDay> FindWithExerciseInTrainingDayIdAsync(Guid id)
         {
             var exerciseInTrainingDay = await RepoDbContext.ExercisesInTrainingDay
+                .AsNoTracking()
                 .Include(e => e.TrainingDay)
                 .FirstOrDefaultAsync(e => e.Id == id);
             var parentTrainingDay = exerciseInTrainingDay.TrainingDay;
+            if (parentTrainingDay == null)
+            {
+                throw new ApplicationException("Cannot find TrainingDay with ExerciseInTrainingDayId: " + id);
+            }
             return Mapper.MapDomainToDAL(parentTrainingDay);
         }
 

@@ -1,0 +1,28 @@
+@model BLL.App.DTO.ExerciseSet
+
+<a data-toggle="modal" title="Delete exercise" data-target="#modal-delete-id-@Model.Id" asp-action="Delete" asp-route-id="@Model.Id">
+    <i class="fas fa-trash small delete text-danger ml-1 small"></i>
+</a>
+
+<div class="modal fade" title="Delete" id="modal-delete-id-@Model.Id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center text-danger" id="deleteModalLabel">Are you sure you wish to remove this exercise set?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>@Model.NrOfReps x @Model.Weight%</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <form asp-controller="ExerciseSets" asp-action="Delete">
+                    <input type="hidden" value="@Model.Id" name="Id"/>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

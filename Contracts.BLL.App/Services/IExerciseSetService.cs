@@ -15,5 +15,6 @@ namespace Contracts.BLL.App.Services
         Task<BaseLiftSet> RemoveAsync(BaseLiftSet baseLiftSet);
         Task<BaseLiftSet> FindBaseLiftSetAsync(Guid setId);
         Task<IEnumerable<BaseLiftSet>> AllBaseLiftSetsWithTrainingDayIdAsync(Guid id);
+        Task NormalizeSetNumbersAsync(Guid exerciseInTrainingDayId);
     }
 }

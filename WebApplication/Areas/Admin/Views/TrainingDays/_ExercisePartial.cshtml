@@ -1,0 +1,45 @@
+@using Extensions
+@model BLL.App.DTO.ExerciseInTrainingDay
+
+
+<li class="list-group-item">
+    <div class="text-center row justify-content-center">
+        <h4 title="@Model.Exercise?.Description">
+            @Model.Exercise?.Name
+            <a asp-controller="ExerciseInTrainingDay" asp-action="Edit" asp-route-id="@Model.Id" title="Edit exercise">
+                <i class="fa fa-pencil edit text-success small ml-1" aria-hidden="true"></i>
+            </a>
+            <partial name="_ExerciseDeletePartial"/>
+        </h4>
+    </div>
+    <partial name="_ExerciseSetCreateEditPartial" model="Model"/>
+</li>
+<li class="list-group-item">
+    @if (Model.WorkSets.IsEmptyOrNull() && Model.WarmUpSets.IsEmptyOrNull())
+    {
+        <p class="text-secondary">No sets added yet!</p>
+    }
+    else
+    {
+        @if (!Model.WarmUpSets.IsEmptyOrNull())
+        {
+            <h5 class="">Warmup</h5>
+            @foreach (var set in Model.WarmUpSets!.OrderBy(set => set.SetNumber))
+            {
+                <partial name="_ExerciseSetPartial" model="set"/>
+            }
+        }
+        <h5 class="">Work sets</h5>
+        @if (Model.WorkSets.IsEmptyOrNull())
+        {
+            <p class="text-secondary">No sets added yet!</p>
+        }
+        else
+        {
+            @foreach (var set in Model.WorkSets!.OrderBy(set => set.SetNumber))
+            {
+                <partial name="_ExerciseSetPartial" model="set"/>
+            }   
+        }
+    }
+</li>
