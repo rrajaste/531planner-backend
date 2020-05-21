@@ -17,6 +17,8 @@ namespace Contracts.DAL.App.Repositories
         where TKey : IEquatable<TKey>
     {
         Task<IEnumerable<TEntity>> AllWithTrainingWeekIdAsync(TKey trainingWeekId);
-        Task<bool> IsPartOfBaseRoutineAsync(Guid trainingDayId);
+        Task<bool> IsPartOfBaseRoutineAsync(TKey trainingDayId);
+        Task<TEntity> FindWithExerciseSetIdAsync(TKey id);
+        Task<TEntity> FindWithExerciseInTrainingDayIdAsync(TKey id);
     }
 }

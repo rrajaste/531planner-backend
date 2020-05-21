@@ -8,6 +8,5 @@ namespace Contracts.BLL.App.Services
     public interface IExerciseInTrainingDayService : IExerciseInTrainingDayRepository<Guid, ExerciseInTrainingDay>,
         IBaseEntityService<ExerciseInTrainingDay>
     {
-        
     }
 }

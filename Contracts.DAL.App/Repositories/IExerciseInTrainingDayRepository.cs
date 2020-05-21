@@ -19,5 +19,6 @@ namespace Contracts.DAL.App.Repositories
     {
         Task<IEnumerable<TEntity>> AllWithBaseTrainingDayIdAsync(TKey trainingDayId);
         Task<bool> IsPartOfBaseRoutineAsync(TKey id);
+        
     }
 }

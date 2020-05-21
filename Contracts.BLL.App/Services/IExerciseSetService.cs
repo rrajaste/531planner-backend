@@ -10,7 +10,7 @@ namespace Contracts.BLL.App.Services
     public interface IExerciseSetService : IBaseEntityService<ExerciseSet>, 
         IExerciseSetRepository<Guid, ExerciseSet>
     {
-        Task<BaseLiftSet> Add(BaseLiftSet baseSet);
+        Task<BaseLiftSet> AddBaseLiftSetAsync(BaseLiftSet baseSet);
         Task<BaseLiftSet> UpdateAsync(BaseLiftSet baseLiftSet);
         Task<BaseLiftSet> RemoveAsync(BaseLiftSet baseLiftSet);
         Task<BaseLiftSet> FindBaseLiftSetAsync(Guid setId);
