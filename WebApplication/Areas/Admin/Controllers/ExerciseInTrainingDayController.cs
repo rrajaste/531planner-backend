@@ -19,15 +19,6 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             _bll = bll;
         }
-
-        public async Task<IActionResult> Index(Guid id)
-        {
-            if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(id))
-            {
-                return View(await _bll.ExercisesInTrainingDays.AllWithBaseTrainingDayIdAsync(id));
-            }
-            return NotFound();
-        }
         
         public async Task<IActionResult> Create(Guid id)
         {
@@ -54,13 +45,14 @@ namespace WebApplication.Areas.Admin.Controllers
                     viewModel.ExerciseInTrainingDay.Id = Guid.NewGuid();
                     _bll.ExercisesInTrainingDays.Add(viewModel.ExerciseInTrainingDay);
                     await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index), new {id = viewModel.ExerciseInTrainingDay.TrainingDayId});
+                    return RedirectToAction(nameof(View), "TrainingDays", 
+                        new {id = viewModel.ExerciseInTrainingDay.TrainingDayId});
                 }
                 return View(await AddSelectListsToViewModelAsync(viewModel));
             }
             return BadRequest();
         }
-        
+
         public async Task<IActionResult> Edit(Guid id)
         {
             if (await _bll.ExercisesInTrainingDays.IsPartOfBaseRoutineAsync(id))
@@ -90,7 +82,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 {
                     _bll.ExercisesInTrainingDays.Update(viewModel.ExerciseInTrainingDay);
                     await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index), new {id = viewModel.ExerciseInTrainingDay.TrainingDayId});
+                    return RedirectToAction(nameof(View), "TrainingDays", new {id = viewModel.ExerciseInTrainingDay.TrainingDayId});
                 }
                 return View(await AddSelectListsToViewModelAsync(viewModel));   
             }
@@ -106,7 +98,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 var exerciseInTrainingDay = await _bll.ExercisesInTrainingDays.FindAsync(id);
                 _bll.ExercisesInTrainingDays.Remove(exerciseInTrainingDay);
                 await _bll.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), new {id = exerciseInTrainingDay.TrainingDayId});
+                return RedirectToAction(nameof(View), "TrainingDays", new {id = exerciseInTrainingDay.TrainingDayId});
             }
             return BadRequest();
         }
