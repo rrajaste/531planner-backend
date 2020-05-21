@@ -55,5 +55,8 @@ namespace BLL.Services
 
         public async Task<WorkoutRoutine> FindWithWeekIdAsync(Guid weekId) =>
             Mapper.MapDALToBLL(await ServiceRepository.FindWithWeekIdAsync(weekId));
+
+        public async Task<WorkoutRoutine> FindWithTrainingDayIdAsync(Guid trainingDayId) =>
+            Mapper.MapDALToBLL(await ServiceRepository.FindWithTrainingDayIdAsync(trainingDayId));
     }
 }

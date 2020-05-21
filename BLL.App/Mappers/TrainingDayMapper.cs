@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
+using Domain.App.Enums;
 
 namespace BLL.Mappers
 {
@@ -14,48 +15,52 @@ namespace BLL.Mappers
         {
         }
 
-        public TrainingDay MapDALToBLL(DAL.App.DTO.TrainingDay dalObject) =>
-            new TrainingDay()
+        public BaseTrainingDay MapDALToBLL(DAL.App.DTO.TrainingDay dalObject)
+        {
+            var trainingDay = new BaseTrainingDay()
             {
                 Id = dalObject.Id,
-                Date = dalObject.Date,
-                ExercisesInTrainingDay = dalObject.ExercisesInTrainingDay?.Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL),
+                DayOfWeek = dalObject.Date.DayOfWeek,
                 TrainingWeekId = dalObject.TrainingWeekId,
                 TrainingDayType = dalObject.TrainingDayType == null
                     ? null
                     : BLLMapperContext.TrainingDayTypeMapper.MapDALToBLL(dalObject.TrainingDayType),
                 TrainingDayTypeId = dalObject.TrainingDayTypeId
             };
-
-        public DAL.App.DTO.TrainingDay MapBLLToDAL(TrainingDay bllObject) =>
+            return AddExercisesToTrainingDay(trainingDay, dalObject);
+        }
+        
+        public DAL.App.DTO.TrainingDay MapBLLToDAL(BaseTrainingDay bllObject) =>
             new DAL.App.DTO.TrainingDay()
             {
                 Id = bllObject.Id,
-                Date = bllObject.Date,
+                Date = GetDateFromDayOfWeek(bllObject.DayOfWeek),
                 TrainingWeekId = bllObject.TrainingWeekId,
                 TrainingDayTypeId = bllObject.TrainingDayTypeId
             };
 
-        public BaseTrainingDay MapDALToBaseTrainingDay(DAL.App.DTO.TrainingDay dalEntity) =>
-            new BaseTrainingDay()
+        public UserTrainingDay MapDALToUserTrainingDay(DAL.App.DTO.TrainingDay dalEntity)
+        {
+            var userTrainingDay = new UserTrainingDay()
             {
                 Id = dalEntity.Id,
-                DayOfWeek = dalEntity.Date.DayOfWeek,
-                ExercisesInTrainingDay = dalEntity.ExercisesInTrainingDay?.Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL),
+                Date = dalEntity.Date,
                 TrainingWeekId = dalEntity.TrainingWeekId,
                 TrainingDayType = dalEntity.TrainingDayType == null
                     ? null
                     : BLLMapperContext.TrainingDayTypeMapper.MapDALToBLL(dalEntity.TrainingDayType),
                 TrainingDayTypeId = dalEntity.TrainingDayTypeId
             };
+            return AddExercisesToTrainingDay(userTrainingDay, dalEntity);
+        }
 
-        public DAL.App.DTO.TrainingDay MapBaseTrainingDayToDALEntity(BaseTrainingDay baseTrainingDay) =>
+        public DAL.App.DTO.TrainingDay MapUserTrainingDayToDALEntity(UserTrainingDay userTrainingDay) =>
             new DAL.App.DTO.TrainingDay()
             {
-                Id = baseTrainingDay.Id,
-                Date = GetDateFromDayOfWeek(baseTrainingDay.DayOfWeek),
-                TrainingWeekId = baseTrainingDay.TrainingWeekId,
-                TrainingDayTypeId = baseTrainingDay.TrainingDayTypeId
+                Id = userTrainingDay.Id,
+                Date = userTrainingDay.Date,
+                TrainingWeekId = userTrainingDay.TrainingWeekId,
+                TrainingDayTypeId = userTrainingDay.TrainingDayTypeId
             };
 
         private static DateTime GetDateFromDayOfWeek(DayOfWeek dayOfWeek)
@@ -73,6 +78,36 @@ namespace BLL.Mappers
             };
             var dayNumber = (int) dayOfWeek;
             return baseDates[dayNumber];
+        }
+        
+        private TDay AddExercisesToTrainingDay<TDay>(TDay returnDto, DAL.App.DTO.TrainingDay sourceDto)
+            where TDay : TrainingDay<Guid>
+        {
+            var mainLifts = new List<ExerciseInTrainingDay>();
+            var accessoryLifts = new List<ExerciseInTrainingDay>();
+            
+            if (sourceDto.ExercisesInTrainingDay != null)
+                foreach (var exercise in sourceDto.ExercisesInTrainingDay)
+                {
+                    switch (exercise.ExerciseType?.TypeCode)
+                    {
+                        case ExerciseTypeCodes.MainLift:
+                        {
+                            var mappedExercise = BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL(exercise);
+                            mainLifts.Add(mappedExercise);
+                            break;
+                        }
+                        case ExerciseTypeCodes.Accessory:
+                        {
+                            var mappedExercise = BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL(exercise);
+                            accessoryLifts.Add(mappedExercise);
+                            break;
+                        }
+                    }
+                }
+            returnDto.MainLifts = mainLifts;
+            returnDto.AccessoryLifts = accessoryLifts;
+            return returnDto;
         }
     }
 }

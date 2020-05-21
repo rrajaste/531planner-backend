@@ -2,9 +2,8 @@ namespace Domain.App.Enums
 {
     public static class ExerciseTypeCodes
     {
-        public const string MainLiftWorkSet = "MainLift";
-        public const string MainLiftWarmUp = "WarmUp";
-        public const string AccessoryLift = "AccessoryLift";
+        public const string MainLift = "mainlift";
+        public const string Accessory = "accessory";
         public const string Cardio = "Cardio";
     }
 }

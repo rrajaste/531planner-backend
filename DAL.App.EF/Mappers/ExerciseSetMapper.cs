@@ -33,6 +33,7 @@ namespace DAL.App.EF.Mappers
             new Domain.App.ExerciseSet()
             {
                 Id = dalObject.Id,
+                ExerciseInTrainingDayId = dalObject.ExerciseInTrainingDayId,
                 Completed = dalObject.Completed,
                 Distance = dalObject.Distance,
                 Duration = dalObject.Duration,

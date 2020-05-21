@@ -2,11 +2,11 @@
   {
     "name": "Main lift",
     "description": "Main compound lift",
-    "typecode": "MainLiftWorkSet"
+    "typecode": "mainlift"
   },
   {
     "name": "Accessory lift",
     "description": "Accessory exercise to compliment main lifts",
-    "typecode": "Accessory"
+    "typecode": "accessory"
   }
 ]

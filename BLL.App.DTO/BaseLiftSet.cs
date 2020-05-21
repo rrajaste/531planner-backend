@@ -17,8 +17,6 @@ namespace BLL.App.DTO
         public TKey ExerciseInTrainingDayId { get; set; } = default!;
         public TKey WorkoutRoutineId { get; set; } = default!;
         public TKey SetTypeId { set; get; } = default!;
-        public Exercise? Exercise { get; set; }
-        public TrainingDay? TrainingDay { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public SetType? SetType { get; set; }
     }

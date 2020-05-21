@@ -19,7 +19,8 @@ namespace BLL.Mappers
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,
-                Description = dalObject.Description
+                Description = dalObject.Description,
+                TypeCode = dalObject.TypeCode
             };
 
         public DAL.App.DTO.SetType MapBLLToDAL(SetType bllObject) =>
@@ -27,7 +28,8 @@ namespace BLL.Mappers
             {
                 Id = bllObject.Id,
                 Name = bllObject.Name,
-                Description = bllObject.Description
+                Description = bllObject.Description,
+                TypeCode = bllObject.TypeCode
             };
     }
 }

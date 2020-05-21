@@ -42,6 +42,25 @@ namespace DAL.App.EF.Repositories
                 .AnyAsync(d => d.Id == trainingDayId && d.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
 
+        public async Task<DTO.TrainingDay> FindWithExerciseSetIdAsync(Guid id)
+        {
+            var exerciseSet = await RepoDbContext.ExerciseSets
+                .Include(s => s.ExerciseInTrainingDay)
+                .ThenInclude(e => e.TrainingDay)
+                .FirstOrDefaultAsync(s => s.ExerciseInTrainingDay!.TrainingDayId == id);
+            var parentTrainingDay = exerciseSet.ExerciseInTrainingDay!.TrainingDay;
+            return Mapper.MapDomainToDAL(parentTrainingDay);
+        }
+
+        public async Task<DTO.TrainingDay> FindWithExerciseInTrainingDayIdAsync(Guid id)
+        {
+            var exerciseInTrainingDay = await RepoDbContext.ExercisesInTrainingDay
+                .Include(e => e.TrainingDay)
+                .FirstOrDefaultAsync(e => e.Id == id);
+            var parentTrainingDay = exerciseInTrainingDay.TrainingDay;
+            return Mapper.MapDomainToDAL(parentTrainingDay);
+        }
+
         public override async Task<DTO.TrainingDay> FindAsync(Guid id)
         {
             var domainEntity = await RepoDbSet
@@ -52,6 +71,8 @@ namespace DAL.App.EF.Repositories
                 .ThenInclude(s => s.SetType)
                 .Include(d => d.ExercisesInTrainingDay)
                 .ThenInclude(e => e.ExerciseType)
+                .Include(d => d.ExercisesInTrainingDay)
+                .ThenInclude(e => e.Exercise)
                 .FirstOrDefaultAsync(d => d.Id == id);
             var dalEntity = Mapper.MapDomainToDAL(domainEntity);
             return dalEntity;

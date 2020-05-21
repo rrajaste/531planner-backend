@@ -16,12 +16,8 @@
     "description": "The deadlift is a weight training exercise in which a loaded barbell or bar is lifted off the ground to the level of the hips, torso perpendicular to the floor, before being placed back on the ground"
   },
   {
-    "name": "Deadlift",
-    "description": "The deadlift is a weight training exercise in which a loaded barbell or bar is lifted off the ground to the level of the hips, torso perpendicular to the floor, before being placed back on the ground"
-  },
-  {
     "name": "Leg curl",
-    "description": "The leg curl, also known as the hamstring curl, is an isolation exercise that targets the hamstring muscles. The exercise involves flexing the lower leg against resistance towards the buttocks.\n"
+    "description": "The leg curl, also known as the hamstring curl, is an isolation exercise that targets the hamstring muscles. The exercise involves flexing the lower leg against resistance towards the buttocks."
   },
   {
     "name": "Calf raises",
@@ -52,10 +48,6 @@
     "description": "A bent-over row (or barbell row) is a weight training exercise that targets a variety of back muscles. Which ones are targeted varies on form. The bent over row is often used for both bodybuilding and powerlifting. It is a good exercise for increasing strength and size."
   },
   {
-    "name": "Overhead press",
-    "description": "The press, overhead press (abbreviated OHP) or shoulder press is a weight training exercise with many variations, typically performed while standing, in which a weight is pressed straight upwards from racking position until the arms are locked out overhead, while the legs, lower back and abs maintain balance. The exercise helps build muscular shoulders with bigger arms, and is one of the most difficult compound upper-body exercises."
-  },
-  {
     "name": "Lateral raise",
     "description": "Later raise works the deltoid muscle of the shoulder. The movement starts with the arms straight, and the hands holding weights at the sides or in front of the body. Body is in a slight forward-leaning position with hips and knees bent a little. Arms are kept straight or slightly bent, and raised through an arc of movement in the coronal plane that terminates when the hands are at approximately shoulder height."
   },
@@ -66,10 +58,6 @@
   {
     "name": "Shoulder shrug",
     "description": "The shoulder shrug (usually called simply the shrug) is an exercise in weight training used to develop the upper trapezius muscle."
-  },
-  {
-    "name": "Tricep pushdown",
-    "description": "A pushdown is a strength training exercise used for strengthening the triceps muscles in the back of the arm. The exercise is completed by pushing an object downward against resistance. This exercise is an example of the primary function of the triceps, extension of the elbow joint. "
   },
   {
     "name": "Tricep pushdown",

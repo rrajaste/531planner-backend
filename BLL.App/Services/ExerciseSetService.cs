@@ -20,8 +20,8 @@ namespace BLL.Services
         {
         }
 
-        public async Task<IEnumerable<ExerciseSet>> AllWithTrainingDayIdAsync(Guid trainingDayId) =>
-            (await ServiceRepository.AllWithTrainingDayIdAsync(trainingDayId)).Select(Mapper.MapDALToBLL);
+        public async Task<IEnumerable<ExerciseSet>> AllWithExerciseInTrainingDayIdAsync(Guid exerciseInTrainingDayId) =>
+            (await ServiceRepository.AllWithExerciseInTrainingDayIdAsync(exerciseInTrainingDayId)).Select(Mapper.MapDALToBLL);
 
         public Task<bool> IsPartOfBaseRoutineAsync(Guid exerciseSetId) =>
             ServiceRepository.IsPartOfBaseRoutineAsync(exerciseSetId);
@@ -29,17 +29,19 @@ namespace BLL.Services
         public async Task<Guid> GetRoutineIdForExerciseSetAsync(ExerciseSet entity) =>
             await ServiceRepository.GetRoutineIdForExerciseSetAsync(Mapper.MapBLLToDAL(entity));
 
-        public async Task<BaseLiftSet> Add(BaseLiftSet baseSet)
+        public async Task<BaseLiftSet> AddBaseLiftSetAsync(BaseLiftSet baseSet)
         {
             var entityToAdd = Mapper.MapBaseLiftSetToDALEntity(baseSet);
             var routineId = await ServiceRepository.GetRoutineIdForExerciseSetAsync(entityToAdd);
             entityToAdd.WorkoutRoutineId = routineId;
+            entityToAdd.SetNumber = await GetSetNumber(baseSet);
             ServiceRepository.Add(entityToAdd);
             return Mapper.MapDALToBaseLiftSet(entityToAdd);
         }
         public async Task<BaseLiftSet> UpdateAsync(BaseLiftSet baseLiftSet)
         {
             var entityToAdd = await GetDALEntityWithRoutineId(baseLiftSet);
+            entityToAdd.SetNumber = await GetSetNumber(baseLiftSet);
             ServiceRepository.Update(entityToAdd);
             return Mapper.MapDALToBaseLiftSet(entityToAdd);
         }
@@ -53,12 +55,9 @@ namespace BLL.Services
 
         public async Task<BaseLiftSet> FindBaseLiftSetAsync(Guid setId) =>
             Mapper.MapDALToBaseLiftSet(await ServiceRepository.FindAsync(setId));
-
-        public void UpdateBaseExerciseSets(BaseLiftSet baseSet) =>
-            ServiceRepository.Update(Mapper.MapBaseLiftSetToDALEntity(baseSet));
-
+        
         public async Task<IEnumerable<BaseLiftSet>> AllBaseLiftSetsWithTrainingDayIdAsync(Guid id) =>
-            (await ServiceRepository.AllWithTrainingDayIdAsync(id)).Select(Mapper.MapDALToBaseLiftSet);
+            (await ServiceRepository.AllWithExerciseInTrainingDayIdAsync(id)).Select(Mapper.MapDALToBaseLiftSet);
 
         private async Task<DAL.App.DTO.ExerciseSet> GetDALEntityWithRoutineId(BaseLiftSet liftSet)
         {
@@ -66,6 +65,29 @@ namespace BLL.Services
             var routineId = await GetRoutineIdForExerciseSetAsync(bllEntity);
             bllEntity.WorkoutRoutineId = routineId;
             return Mapper.MapBLLToDAL(bllEntity);
+        }
+        
+        private async Task<int> GetSetNumber(BaseLiftSet liftSet)
+        {
+            var exerciseSets = await UnitOfWork.ExerciseSets.AllWithExerciseInTrainingDayIdAsync(liftSet.ExerciseInTrainingDayId);
+            var setNumber = 1;
+            if (exerciseSets != null && exerciseSets.Any())
+            {
+                setNumber += exerciseSets.Max(set => set.SetNumber);
+            }
+            return setNumber;
+        }
+        
+        public async Task NormalizeWeekNumbersAsync(Guid exerciseInTrainingDayId)
+        {
+            var exerciseSets = await UnitOfWork.ExerciseSets.AllWithExerciseInTrainingDayIdAsync(exerciseInTrainingDayId);
+            var exerciseSetsList = exerciseSets.ToList();
+            for (var i = 1; i <= exerciseSetsList.Count(); i++)
+            {
+                var exerciseSet = exerciseSetsList[i - 1];
+                exerciseSet.SetNumber = i;
+                ServiceRepository.Update(exerciseSet);
+            }
         }
     }
 }

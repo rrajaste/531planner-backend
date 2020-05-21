@@ -1,1 +1,9 @@
-﻿
+﻿@model BLL.App.DTO.ExerciseInTrainingDay
+
+<div>
+    <a asp-area="Admin" asp-controller="ExerciseSets" asp-action="Create" asp-route-id="@Model.Id">
+        <i class="far fas fa-plus text-success add-new-main add-link-small ml-2" title="Add" aria-hidden="true">
+        </i>
+        <span class="mx-1 text-success text-sm add-link-small">ADD</span>
+    </a>    
+</div>

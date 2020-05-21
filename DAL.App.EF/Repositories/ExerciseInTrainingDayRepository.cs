@@ -35,11 +35,11 @@ namespace DAL.App.EF.Repositories
         {
             var query = RepoDbSet
                 .Include(e => e.TrainingDay)
-                .ThenInclude(d => d.TrainingWeek)
-                .ThenInclude(w => w.TrainingCycle)
-                .ThenInclude(c => c.WorkoutRoutine);
+                .ThenInclude(d => d!.TrainingWeek)
+                .ThenInclude(w => w!.TrainingCycle)
+                .ThenInclude(c => c!.WorkoutRoutine);
             var isPartOfBaseRoutine = await 
-                query.AnyAsync(e => e.TrainingDay.TrainingWeek.TrainingCycle.WorkoutRoutine.AppUserId == null);
+                query.AnyAsync(e => e.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null);
             return isPartOfBaseRoutine;
         }
     }

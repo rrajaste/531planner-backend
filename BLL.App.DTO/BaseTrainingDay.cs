@@ -8,14 +8,9 @@ namespace BLL.App.DTO
     {
     }
 
-    public class BaseTrainingDay<TKey> : IBLLBaseDTO<TKey> 
+    public class BaseTrainingDay<TKey> : TrainingDay<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public DayOfWeek DayOfWeek { get; set; }
-        public TKey TrainingWeekId { get; set; } = default!;
-        public TKey TrainingDayTypeId { get; set; } = default!;
-        public TrainingDayType? TrainingDayType { get; set; }
-        public IEnumerable<ExerciseInTrainingDay>? ExercisesInTrainingDay { get; set; }
     }
 }

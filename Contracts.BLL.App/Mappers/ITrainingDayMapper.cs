@@ -2,9 +2,9 @@ using BLL.App.DTO;
 using DALTrainingDay = global::DAL.App.DTO.TrainingDay;
 namespace Contracts.BLL.App.Mappers
 {
-    public interface ITrainingDayMapper : IBLLMapper<DALTrainingDay, TrainingDay>
+    public interface ITrainingDayMapper : IBLLMapper<DALTrainingDay, BaseTrainingDay>
     {
-        BaseTrainingDay MapDALToBaseTrainingDay(DALTrainingDay dalEntity);
-        DALTrainingDay MapBaseTrainingDayToDALEntity(BaseTrainingDay baseTrainingDay);
+        UserTrainingDay MapDALToUserTrainingDay(DALTrainingDay dalEntity);
+        DALTrainingDay MapUserTrainingDayToDALEntity(UserTrainingDay userTrainingDay);
     }
 }

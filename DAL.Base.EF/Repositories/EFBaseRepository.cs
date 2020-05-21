@@ -61,7 +61,7 @@ namespace DAL.Base.EF.Repositories
 
         public virtual TDALEntity Remove(TDALEntity entity) => 
             Mapper.MapDomainToDAL(RepoDbSet.Remove(Mapper.MapDALToDomain(entity)).Entity);
-        public virtual async Task<TDALEntity> Remove(TKey id) => 
+        public virtual async Task<TDALEntity> RemoveAsync(TKey id) => 
             Mapper.MapDomainToDAL(RepoDbSet.Remove(await RepoDbSet.FindAsync(id)).Entity);
     }
 }

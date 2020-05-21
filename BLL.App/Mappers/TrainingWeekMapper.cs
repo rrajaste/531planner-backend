@@ -27,7 +27,7 @@ namespace BLL.Mappers
                     null 
                     : BLLMapperContext.TrainingCycleMapper.MapDALToBLL(dalObject.TrainingCycle),
                 TrainingCycleId = dalObject.TrainingCycleId,
-                TrainingDays = dalObject.TrainingDays?.Select(BLLMapperContext.TrainingDayMapper.MapDALToBLL),
+                TrainingDays = dalObject.TrainingDays?.Select(BLLMapperContext.TrainingDayMapper.MapDALToUserTrainingDay),
             };
 
         public DAL.App.DTO.TrainingWeek MapBLLToDAL(TrainingWeek bllObject) =>

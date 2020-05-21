@@ -120,3 +120,19 @@ body {
 .border-thick {
   border-width: 3px;
 }
+
+.training-day-table {
+  position: relative;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+link::-moz-focus-inner {
+  border: 0;
+}
+
+.add-link-small {
+  font-size: 0.8rem;
+}

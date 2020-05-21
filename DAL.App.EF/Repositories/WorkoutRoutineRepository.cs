@@ -101,5 +101,17 @@ namespace DAL.App.EF.Repositories
             var parentRoutine = trainingWeek.TrainingCycle!.WorkoutRoutine;
             return Mapper.MapDomainToDAL(parentRoutine!);
         }
+
+        public async Task<DTO.WorkoutRoutine> FindWithTrainingDayIdAsync(Guid trainingDayId)
+        {
+            var trainingDay = await RepoDbContext.TrainingDays
+                .Include(d => d.TrainingWeek)
+                .ThenInclude(w => w!.TrainingCycle)
+                .ThenInclude(c => c!.WorkoutRoutine)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(d => d.Id == trainingDayId);
+            var parentRoutine = trainingDay.TrainingWeek!.TrainingCycle!.WorkoutRoutine;
+            return Mapper.MapDomainToDAL(parentRoutine!);
+        }
     }
 }

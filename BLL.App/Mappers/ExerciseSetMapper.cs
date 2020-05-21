@@ -18,6 +18,7 @@ namespace BLL.Mappers
                 Id = dalObject.Id,
                 ExerciseInTrainingDayId = dalObject.ExerciseInTrainingDayId,
                 Completed = dalObject.Completed,
+                Weight = dalObject.Weight,
                 Distance = dalObject.Distance,
                 Duration = dalObject.Duration,
                 NrOfReps = dalObject.NrOfReps,
@@ -32,6 +33,7 @@ namespace BLL.Mappers
             new DAL.App.DTO.ExerciseSet()
             {
                 Id = bllObject.Id,
+                ExerciseInTrainingDayId = bllObject.ExerciseInTrainingDayId,
                 Completed = bllObject.Completed,
                 Distance = bllObject.Distance,
                 Duration = bllObject.Duration,
@@ -56,9 +58,6 @@ namespace BLL.Mappers
                 Id = dalEntity.Id,
                 ExerciseInTrainingDayId = dalEntity.ExerciseInTrainingDayId,
                 SetNumber = dalEntity.SetNumber,
-                TrainingDay = dalEntity.TrainingDay == null 
-                    ? null 
-                    : BLLMapperContext.TrainingDayMapper.MapDALToBLL(dalEntity.TrainingDay),
                 SetTypeId = dalEntity.SetTypeId,
                 SetType = dalEntity.SetType == null 
                     ? null 

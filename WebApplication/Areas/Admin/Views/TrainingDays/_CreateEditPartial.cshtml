@@ -6,7 +6,7 @@
     <input type="hidden" asp-for="WorkoutRoutineId"/>
     <label asp-for="@Model.TrainingDay.DayOfWeek" class="control-label"></label>
     <select asp-for="@Model.TrainingDay.DayOfWeek" asp-items="@Model.DaysOfWeek" class="form-control">
-        <option value="" selected=""> ---------------- SELECT DAY ----------------- </option>
+        <option value="" selected="selected"> ---------------- SELECT DAY ----------------- </option>
     </select>
     <span asp-validation-for="@Model.TrainingDay.DayOfWeek" class="text-danger"></span>
 </div>
