@@ -20,5 +20,6 @@ namespace Domain.App
         [MaxLength(255)]
         [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.UnitType))]
         public string Description { get; set; } = default!;
+        public string TypeCode { get; set; } = default!;
     }
 }
