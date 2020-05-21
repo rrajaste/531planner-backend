@@ -70,11 +70,13 @@ namespace WebApplication.Areas.Admin.Controllers
             if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(id))
             {
                 var trainingDay = await _bll.TrainingDays.FindAsync(id);
+                var parentRoutine = await _bll.WorkoutRoutines.FindWithTrainingDayIdAsync(id);
                 var viewModel = new TrainingDayCreateEditViewModel()
                 {
                     TrainingDay = trainingDay,
+                    WorkoutRoutineId = parentRoutine.Id
                 };
-                return View(await AddSelectListsToViewModelAsync(viewModel, id));
+                return View(await AddSelectListsToViewModelAsync(viewModel, trainingDay.TrainingWeekId));
             }
             return NotFound();
         }
@@ -94,7 +96,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 {
                     _bll.TrainingDays.Update(viewModel.TrainingDay);
                     await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(View), new {id = viewModel.TrainingDay.Id});
+                    return RedirectToAction(nameof(Index), "TrainingWeeks", new {id = viewModel.WorkoutRoutineId});
                 }
                 return View(await AddSelectListsToViewModelAsync(viewModel, viewModel.TrainingDay.TrainingWeekId));   
             }

@@ -2,7 +2,7 @@
 @using WebApplication.Areas.Admin.ViewModels
 @model BLL.App.DTO.UserTrainingDay
 
-<a class="view-edit-delete-small" asp-action="Delete" asp-controller="TrainingDays"
+<a asp-action="Delete" asp-controller="TrainingDays"
    data-toggle="modal" title="Delete training day" data-target="#modal-delete-day-id-@Model.Id">
     <i class="fa fa-trash delete text-danger" aria-hidden="true"></i>
 </a>

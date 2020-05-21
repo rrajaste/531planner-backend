@@ -2,12 +2,17 @@
 @using Extensions
 @model BLL.App.DTO.UserTrainingDay
 
-<div class="m-1 p-0">
+<div class="m-1 p-0 training-day-table">
     <ul class="list-group p-1 border-thick">
         <li class="list-group-item">
             <h5 class="text-uppercase">@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(@Model.Date.DayOfWeek)</h5>
             <p class="m-0" title="@Model.TrainingDayType?.Description">@Model.TrainingDayType?.Name</p>
-            <partial name="_DeleteDayPartial" model="Model"/>
+            <span class="view-edit-delete-small text-decoration-none">
+                <a title="Edit training day" asp-controller="TrainingDays" asp-action="Edit" asp-route-id="@Model.Id">
+                    <i class="fa fa-pencil edit text-success ml-1" aria-hidden="true"></i>
+                </a>
+                <partial name="_DeleteDayPartial" model="Model"/>
+            </span>
         </li>
         @if (Model.MainLifts.IsEmptyOrNull() && Model.AccessoryLifts.IsEmptyOrNull() )
         {
@@ -54,7 +59,7 @@
         }
         <li class="training-day-table list-group-item">
             <a class="btn btn-outline-info btn-sm text-uppercase stretched-link" asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@Model.Id">
-                Edit
+                View
             </a>
         </li>
     </ul>

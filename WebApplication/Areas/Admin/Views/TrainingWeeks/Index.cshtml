@@ -45,9 +45,12 @@
                         <partial name="_TrainingDayPartial" model="day"/>
                     }
                 }
-                <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">
-                    <span class="text-success"><i class="fas fa-plus ml-2"></i> Add</span>
-                </a>
+                @if (item.TrainingDays != null && item.TrainingDays.Count() < 4)
+                {
+                    <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">
+                        <span class="text-success"><i class="fas fa-plus ml-2"></i> Add</span>
+                    </a>
+                }
                 </div>
                 <div class="move-items">
                     <partial name="_MoveWeekUpPartial" model="@GetWeekNumberEditViewModel(item)"/>
