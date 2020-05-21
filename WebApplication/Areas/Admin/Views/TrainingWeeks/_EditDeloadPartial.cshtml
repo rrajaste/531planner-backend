@@ -1,6 +1,6 @@
 @model WebApplication.Areas.Admin.ViewModels.TrainingWeekDeloadEditViewModel
 
-<a asp-action="Edit" data-toggle="modal" title="Edit" data-target="#modal-edit-id-@Model.TrainingWeekId">
+<a asp-action="Edit" data-toggle="modal" title="Edit week" data-target="#modal-edit-id-@Model.TrainingWeekId">
     <i class="fa fa-pencil edit text-success ml-1" aria-hidden="true"></i>
 </a>
 
@@ -9,7 +9,7 @@
     <form asp-action="Edit">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center" id="deleteModalLabel">Edit</h4>
+                <h4 class="modal-title text-center text-uppercase" id="deleteModalLabel">Edit training week</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,11 +18,11 @@
                 <label asp-for="@Model.IsDeload"></label>
                 <input type="hidden" asp-for="@Model.TrainingWeekId"/>
                 <input type="hidden" asp-for="@Model.WorkoutRoutineId"/>
-                <input asp-for="@Model.IsDeload"/>
+                <input asp-for="@Model.IsDeload" title="Set/unset training week as deload week"/>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-secondary text-uppercase" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
             </div>
         </div>
     </form>

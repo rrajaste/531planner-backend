@@ -11,13 +11,24 @@
         else
         {
             <div class="text-left ml-3 text-secondary">
+                @if (! Model.WarmUpSets.IsEmptyOrNull())
+                {
+                    <p class="text-left m-0"><em>Warmup</em></p>
+                    @foreach (var set in Model.WorkSets!)
+                    {
+                        <span>- @set.NrOfReps x @set.Weight%</span><br/>
+                    }   
+                }
+            </div>
+            <div class="text-left ml-3 text-secondary">
             @if (Model.WorkSets.IsEmptyOrNull())
             {
-                <p>No work sets added yet!</p>
+                <p>No sets added yet!</p>
             }
             else
             {
-                @foreach (var set in Model.WorkSets)
+                <p class="text-left m-0"><em>Work sets</em></p>
+                @foreach (var set in Model.WorkSets!)
                 {
                     <span>- @set.NrOfReps x @set.Weight%</span><br/>
                 }   

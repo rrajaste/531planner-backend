@@ -26,7 +26,7 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(id))
             {
-                var viewModel = await GetViewModelAsync(id);
+                var viewModel = await GetIndexViewModelAsync(id);
                 return View(viewModel);
             }
             return NotFound();
@@ -144,7 +144,7 @@ namespace WebApplication.Areas.Admin.Controllers
             return returnViewModel;
         }
 
-        private async Task<TrainingDayViewModel> GetViewModelAsync(Guid trainingDayId)
+        private async Task<TrainingDayViewModel> GetIndexViewModelAsync(Guid trainingDayId)
         {
             var parentRoutine = await _bll.WorkoutRoutines.FindWithTrainingDayIdAsync(trainingDayId);
             var trainingDay = await _bll.TrainingDays.FindAsync(trainingDayId);

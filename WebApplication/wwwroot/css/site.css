@@ -140,3 +140,7 @@ link::-moz-focus-inner {
 a:hover {
   text-decoration: none;
 }
+
+.nav {
+  background-color:#002d60;
+}

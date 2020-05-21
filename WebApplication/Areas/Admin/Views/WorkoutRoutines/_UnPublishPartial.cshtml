@@ -2,5 +2,6 @@
 
 <form asp-action="UnPublish">
     <input type="hidden" asp-for="@Model.WorkoutRoutineId"/>
-    <button type="submit" class="btn btn-outline-danger">UNPUBLISH</button>
+    <button type="submit" class="btn btn-outline-danger" 
+            title="Remove routine from published routines list, users can no longer see or use this">UNPUBLISH</button>
 </form>

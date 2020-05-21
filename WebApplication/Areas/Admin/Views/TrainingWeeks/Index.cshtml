@@ -6,9 +6,14 @@
     ViewData["Title"] = "Training weeks";
 }
 <div class="jumbotron shadow rounded">
-    <h1 class="text-uppercase">@Model.WorkoutRoutineName</h1>
+    <h1 class="text-uppercase display-4">@Model.WorkoutRoutineName</h1>
+    <p class="text-muted">
+        Use this page to create, edit or remove training weeks that make up the workout routine template. <br/>
+        These training weeks are all part of a single workout cycle.
+    </p>
     <p>
-        <a class="text-uppercase" asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index">Back</a>
+        <a class="text-uppercase" asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index" 
+           title="Back to workout routine's list">Back</a>
     </p>
 <hr/>
 <div>
@@ -29,9 +34,9 @@
             <div class="card-body">
                 @if (item.IsDeload)
                 {
-                    <h5 class="text-uppercase text-dark">Deload week</h5>
+                    <h5 class="text-uppercase text-muted" title="Set/unset training week as deload week">Deload week</h5>
                 }
-                <h4 class="card-title">Training week @item.WeekNumber</h4>
+                <h2 class="card-title text-uppercase">Training week @item.WeekNumber</h2>
                 <hr/>
                 <div class="row d-flex justify-content-center">
                 @if (item.TrainingDays == null || !item.TrainingDays.Any())
