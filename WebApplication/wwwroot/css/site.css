@@ -83,7 +83,7 @@ body {
 
 .jumbotron {
   background-color: white;
-  margin-top: 90px;
+  margin-top: 90px; 
 }
 
 .view-edit-delete {
@@ -122,7 +122,7 @@ body {
 }
 
 .training-day-table {
-  min-width: 24%;
+  min-width: 220px;
 }
 
 button::-moz-focus-inner {
@@ -139,8 +139,4 @@ link::-moz-focus-inner {
 
 a:hover {
   text-decoration: none;
-}
-
-.nav {
-  background-color:#002d60;
 }
