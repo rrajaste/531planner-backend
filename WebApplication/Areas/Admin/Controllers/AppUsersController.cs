@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain.App.Enums;
 using Domain.App.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Domain.Identity;
+using Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,13 +14,14 @@ using WebApplication.Areas.Admin.ViewModels;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "admin")]
+    [Area(nameof(Admin))]
+    [Route("Admin/AppUsers/{action=index}/{username?}")]
+    [Authorize(Roles = AppRoles.Administrator)]
     public class AppUsersController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<AppUserRole> _roleManager;
-
+        
         public AppUsersController(UserManager<AppUser> userManager, RoleManager<AppUserRole> roleManager)
         {
             _userManager = userManager;
@@ -84,25 +86,24 @@ namespace WebApplication.Areas.Admin.Controllers
         // GET: Admin/Users/Create
         public async Task<IActionResult> Create()
         {
-            var appRoles = await _roleManager.Roles.ToListAsync();
-            var viewModel = new AppUserCreateEditViewModel()
+            var viewModel = new AppUserCreateManageViewModel()
             {
                 UserName = "",
                 Password = "",
-                Roles = new MultiSelectList(appRoles, nameof(AppUserRole.Name), nameof(AppUserRole.DisplayName))
+                Roles = await GetRolesSelectListAsync()
             };
             return View(viewModel);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AppUserCreateEditViewModel viewModel)
+        public async Task<IActionResult> Create(AppUserCreateManageViewModel createViewModel)
         {
-            if (! await IsUserNameValidAsync(viewModel.UserName))
+            if (! await IsUserNameValidAsync(createViewModel.UserName))
             {
                 ModelState.AddModelError("", "This username is already in use!");
             }
-            if (! await IsEmailValidAsync(viewModel.Email))
+            if (! await IsEmailValidAsync(createViewModel.Email))
             {
                 ModelState.AddModelError("", "This email is already in use!");
             }
@@ -111,14 +112,14 @@ namespace WebApplication.Areas.Admin.Controllers
             {
                 var user = new AppUser()
                 {
-                    UserName = viewModel.UserName,
-                    Email = viewModel.Email
+                    UserName = createViewModel.UserName,
+                    Email = createViewModel.Email
                 };
-                var userAddResult = await _userManager.CreateAsync(user, viewModel.Password);
+                var userAddResult = await _userManager.CreateAsync(user, createViewModel.Password);
                 if (userAddResult == IdentityResult.Success)
                 {
                     var userInUserManager = await _userManager.FindByEmailAsync(user.Email);
-                    var rolesAddResult = await _userManager.AddToRolesAsync(userInUserManager, viewModel.SelectedRoles);
+                    var rolesAddResult = await _userManager.AddToRolesAsync(userInUserManager, createViewModel.SelectedRoles);
                     if (rolesAddResult.Succeeded && userAddResult.Succeeded)
                     {
                         return RedirectToAction(nameof(Index));
@@ -129,9 +130,8 @@ namespace WebApplication.Areas.Admin.Controllers
                     ModelState.AddModelError("", "User creation failed");
                 }
             }
-            var roles = _roleManager.Roles.Select(r => r.DisplayName);
-            viewModel.Roles = new SelectList(roles);
-            return View(viewModel);
+            createViewModel.Roles = await GetRolesSelectListAsync();
+            return View(createViewModel);
         }
 
         public async Task<IActionResult> ManageUser(string? userName)
@@ -148,31 +148,43 @@ namespace WebApplication.Areas.Admin.Controllers
                 return NotFound();
             }
             
-            var viewModel = new AppUserCreateEditViewModel()
+            var viewModel = new AppUserCreateManageViewModel()
             {
                 Email = appUser.Email,
                 UserName = appUser.UserName,
-                SelectedRoles = await _userManager.GetRolesAsync(appUser)
+                SelectedRoles = await _userManager.GetRolesAsync(appUser),
+                Roles = await GetRolesSelectListAsync()
             };
             return View(viewModel);
         }
         
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public async Task<IActionResult> ChangeEmail(string userName, string email)
-        // {
-        //     var user = await _userManager.FindByNameAsync(userName);
-        //     if (user == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     if (! await IsEmailValid(email))
-        //     {
-        //         return BadRequest();
-        //     }
-        //
-        //     _userManager.ChangeEmailAsync();
-        // }
+        [HttpPost]
+        public async Task<IActionResult> ManageUser(AppUserCreateManageViewModel viewModel)
+        {
+            if (viewModel.UserName == null)
+            {
+                return NotFound();
+            }
+            var appUser = await _userManager.FindByNameAsync(viewModel.UserName);
+            
+            if (appUser == null)
+            {
+                return NotFound();
+            }
+
+            await _userManager.RemoveFromRolesAsync(appUser, AppRoles.AllRoles);
+
+            if (! viewModel.SelectedRoles.IsEmptyOrNull())
+            {
+                var rolesAddResult = await _userManager.AddToRolesAsync(appUser, viewModel.SelectedRoles);
+                if (rolesAddResult.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        
         [HttpPost]
         public async Task<IActionResult> LockUser(string userName, string returnUrl)
         {
@@ -246,6 +258,14 @@ namespace WebApplication.Areas.Admin.Controllers
             var userWithUsername =
                 await _userManager.Users.FirstOrDefaultAsync(user => user.NormalizedUserName.Equals(username.ToUpper()));
             return userWithUsername == null;
+        }
+
+        private async Task<MultiSelectList> GetRolesSelectListAsync()
+        {
+            var appRoles = await _roleManager.Roles.ToListAsync();
+
+            return new MultiSelectList(
+                appRoles, nameof(AppUserRole.Name), nameof(AppUserRole.DisplayName));
         }
     }
 }

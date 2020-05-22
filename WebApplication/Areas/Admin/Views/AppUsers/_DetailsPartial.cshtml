@@ -1,0 +1,47 @@
+@model WebApplication.Areas.Admin.ViewModels.AppUserDetailsViewModel
+
+
+<ul class="list-group list-group col-sm-6 col-m-5 col-lg-4">
+    <ul class="list-group-item list-group-item-dark text-uppercase">
+        @Html.DisplayNameFor(model => model.UserName)
+    </ul>
+    <ul class = "list-group-item">
+        @Html.DisplayFor(model => model.UserName)
+    </ul>
+    <ul class = "list-group-item list-group-item-dark text-uppercase">
+        @Html.DisplayNameFor(model => model.Email)
+    </ul>
+    <ul class = "list-group-item">
+        @Html.DisplayFor(model => model.Email)
+    </ul>
+    <ul class = "list-group-item list-group-item-dark text-uppercase">
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </ul>
+    <ul class = "list-group-item">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </ul>
+    <ul class = "list-group-item list-group-item-dark text-uppercase">
+        @Html.DisplayNameFor(model => model.EmailConfirmed)
+    </ul>
+    <ul class = "list-group-item">
+        @Html.DisplayFor(model => model.EmailConfirmed)
+    </ul>
+    <ul class = "list-group-item list-group-item-dark text-uppercase">
+        @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+    </ul>
+    <ul class = "list-group-item">
+        @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+    </ul>
+    <ul class = "list-group-item list-group-item-dark text-uppercase">
+        @Html.DisplayNameFor(model => model.LockoutEnabled)
+    </ul>
+    <ul class = "list-group-item">
+        @Html.DisplayFor(model => model.LockoutEnabled)
+    </ul>
+    <ul class = "list-group-item list-group-item-dark text-uppercase">
+        @Html.DisplayNameFor(model => model.CreatedAt)
+    </ul>
+    <ul class = "list-group-item">
+        @Html.DisplayFor(model => model.CreatedAt)
+    </ul>
+</ul>
