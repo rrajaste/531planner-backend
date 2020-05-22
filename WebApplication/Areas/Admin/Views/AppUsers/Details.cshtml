@@ -1,66 +1,13 @@
 @model WebApplication.Areas.Admin.ViewModels.AppUserDetailsViewModel
 
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-<div>
-    <h4>AppUser</h4>
+<div class="jumbotron pb-3 shadow rounded">
+    <h1 class="text-uppercase mb-4">AppUser information</h1>
     <hr />
-    <dl class="row">
+        <partial name="_DetailsLockPartial"/>
+    <hr/>
+    <div class="text-uppercase mt-3 mb-1">
+        <a asp-action="ManageUser" asp-route-id="@Model.UserName">Manage user</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmailConfirmed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LockoutEnabled)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-    </dl>
 </div>
-<div>
-    <a asp-action="ManageUser" asp-route-id="@Model.UserName">Manage user</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-</body>
-</html>

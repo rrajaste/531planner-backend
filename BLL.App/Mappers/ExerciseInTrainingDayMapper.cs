@@ -55,14 +55,14 @@ namespace BLL.Mappers
                     {
                         case ExerciseSetTypeCodes.WorkSet:
                         {
-                            var mappedExercise = BLLMapperContext.ExerciseSetMapper.MapDALToBLL(set);
-                            workSets.Add(mappedExercise);
+                            var mappedSet = BLLMapperContext.ExerciseSetMapper.MapDALToBLL(set);
+                            workSets.Add(mappedSet);
                             break;
                         }
                         case ExerciseSetTypeCodes.WarmUp:
                         {
-                            var mappedExercise = BLLMapperContext.ExerciseSetMapper.MapDALToBLL(set);
-                            warmUpSets.Add(mappedExercise);
+                            var mappedSet = BLLMapperContext.ExerciseSetMapper.MapDALToBLL(set);
+                            warmUpSets.Add(mappedSet);
                             break;
                         }
                     }

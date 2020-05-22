@@ -1,35 +1,67 @@
-@model WebApplication.Areas.Admin.ViewModels.AppUserSearchViewModel
+@using WebApplication.Areas.Admin.ViewModels
+@using Extensions
+@model AppUsersIndexViewModel
 
 <div class="jumbotron shadow rounded">
-    <h1 class="display-4 text-uppercase">
-        App users
-    </h1>
-    <a href="#"><h3 class="text-uppercase">Add new user</h3></a>
-    <hr/>
-    <h3 class="text-uppercase">
-        Find user
-    </h3>
-    <div class="row justify-content-center">
-        <form class="col-sm-8 col-md-6 col-lg-4" asp-action="Search">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="SearchString" class="control-label">Search for a username or email</label>
-                <input asp-for="SearchString" placeholder="Search..." class="form-control"/>
-                <span asp-validation-for="SearchString" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedRoles" class="control-label"></label>
-                <select asp-for="SelectedRoles" asp-items="@Model.Roles" class="form-control">
-                </select>
-                <span asp-validation-for="SelectedRoles" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="SUBMIT" title="Search for a user" class="btn btn-success" />
-            </div>
-        </form>
+    <div class="mb-3">
+        <h1 class="display-4 text-uppercase">AppUsers</h1>
+        <h4 class="text-uppercase"><a asp-action="Create">ADD A NEW USER</a></h4>
     </div>
+    <partial name="_SearchBoxPartial" model="@Model.SearchViewModel"/>
+    <div class="text-left px-3 pt-3">
+        <h5>Included below are the first 25 accounts.</h5>
+        <p class="text-muted">If the account you're looking for is not listed, try narrowing the search</p>
+    </div>
+    <table class="table table-responsive-sm table-hover">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AppUsers.First().UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppUsers.First().UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppUsers.First().IsLocked)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.AppUsers) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsLocked)
+                </td>
+                <td>
+                    <a asp-action="ManageUser" title="Manage user" asp-route-userName="@item.UserName">
+                        <i class="fa fa-cog mx-1 text-secondary" aria-hidden="true"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-userName="@item.UserName">
+                        <i class="fa fa-eye mx-1 text-primary" title="Details" aria-hidden="true"></i>
+                    </a>
+                    @if (item.IsLocked)
+                    {
+                        <partial name="_UnlockUserPartial" model="item"/>
+                    }
+                    else
+                    {
+                        <partial name="_LockUserPartial" model="item"/>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <h1 class="text-muted">...</h1>
+    @if (Model.AppUsers.IsEmptyOrNull())
+    {
+        <h3 class="text-muted">No results match search query!</h3>
+    }
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

@@ -1,0 +1,48 @@
+@model WebApplication.Areas.Admin.ViewModels.AppUserDetailsViewModel
+
+
+<dl class="row text-left">
+    <dt class = "col-sm-3">
+        @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+    <dd class = "col-sm-9">
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+            
+    <dt class = "col-sm-3">
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+    <dd class = "col-sm-9">
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+    <dt class = "col-sm-3">
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </dt>
+    <dd class = "col-sm-9">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </dd>
+    <dt class = "col-sm-3">
+        @Html.DisplayNameFor(model => model.EmailConfirmed)
+    </dt>
+    <dd class = "col-sm-9">
+        @Html.DisplayFor(model => model.EmailConfirmed)
+    </dd>
+    <dt class = "col-sm-3">
+        @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+    </dt>
+    <dd class = "col-sm-9">
+        @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+    </dd>
+    <dt class = "col-sm-3">
+        @Html.DisplayNameFor(model => model.LockoutEnabled)
+    </dt>
+    <dd class = "col-sm-9">
+        @Html.DisplayFor(model => model.LockoutEnabled)
+    </dd>
+    <dt class = "col-sm-3">
+        @Html.DisplayNameFor(model => model.CreatedAt)
+    </dt>
+    <dd class = "col-sm-9">
+        @Html.DisplayFor(model => model.CreatedAt)
+    </dd>
+</dl>

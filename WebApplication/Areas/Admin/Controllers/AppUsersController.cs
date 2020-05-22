@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,14 +26,32 @@ namespace WebApplication.Areas.Admin.Controllers
             _roleManager = roleManager;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search, bool? includeDeactivated)
         {
-            var roles = await _roleManager.Roles.ToListAsync();
-            var rolesSelectList = new MultiSelectList(roles, nameof(AppUserRole.Id) ,nameof(AppUserRole.Name));
-            var viewModel = new AppUserSearchViewModel()
+            search = search?.ToUpper();
+            var query = _userManager.Users.Where(user => 
+                    (search == null || (user.NormalizedUserName.Contains(search) || user.NormalizedEmail.Contains(search))) 
+                    && (includeDeactivated == true || !user.AccountLocked));
+           
+            var foundUsers = await query.OrderBy(user => user.CreatedAt).Take(25).ToListAsync();
+            
+            var searchViewModel = new AppUserSearchViewModel()
             {
-                Roles = rolesSelectList
+                search = search ?? "",
+                includeDeactivated = includeDeactivated ?? false
             };
+            var userViewModels = foundUsers.Select(user => new AppUsersViewModel()
+            {
+                Email = user.Email,
+                UserName = user.UserName,
+                IsLocked = user.AccountLocked,
+            });
+            var viewModel = new AppUsersIndexViewModel()
+            {
+                AppUsers = userViewModels,
+                SearchViewModel = searchViewModel
+            };
+            
             return View(viewModel);
         }
 
@@ -63,12 +82,14 @@ namespace WebApplication.Areas.Admin.Controllers
         }
 
         // GET: Admin/Users/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var appRoles = _roleManager.Roles.Select(r => r.Name);
+            var appRoles = await _roleManager.Roles.ToListAsync();
             var viewModel = new AppUserCreateEditViewModel()
             {
-                Roles = new MultiSelectList(appRoles)
+                UserName = "",
+                Password = "",
+                Roles = new MultiSelectList(appRoles, nameof(AppUserRole.Name), nameof(AppUserRole.DisplayName))
             };
             return View(viewModel);
         }
@@ -77,7 +98,16 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AppUserCreateEditViewModel viewModel)
         {
-            if (ModelState.IsValid && IsEmailValid(viewModel.Email))
+            if (! await IsUserNameValidAsync(viewModel.UserName))
+            {
+                ModelState.AddModelError("", "This username is already in use!");
+            }
+            if (! await IsEmailValidAsync(viewModel.Email))
+            {
+                ModelState.AddModelError("", "This email is already in use!");
+            }
+            
+            if (ModelState.IsValid)
             {
                 var user = new AppUser()
                 {
@@ -85,43 +115,25 @@ namespace WebApplication.Areas.Admin.Controllers
                     Email = viewModel.Email
                 };
                 var userAddResult = await _userManager.CreateAsync(user, viewModel.Password);
-                var userInUserManager = await _userManager.FindByEmailAsync(user.Email);
-                var rolesAddResult = await _userManager.AddToRolesAsync(userInUserManager, viewModel.SelectedRoles);
-                if (rolesAddResult.Succeeded && userAddResult.Succeeded)
+                if (userAddResult == IdentityResult.Success)
                 {
-                    return RedirectToAction(nameof(Index));
+                    var userInUserManager = await _userManager.FindByEmailAsync(user.Email);
+                    var rolesAddResult = await _userManager.AddToRolesAsync(userInUserManager, viewModel.SelectedRoles);
+                    if (rolesAddResult.Succeeded && userAddResult.Succeeded)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }   
+                }
+                else
+                {
+                    ModelState.AddModelError("", "User creation failed");
                 }
             }
-            var roles = _roleManager.Roles.Select(r => r.Name);
+            var roles = _roleManager.Roles.Select(r => r.DisplayName);
             viewModel.Roles = new SelectList(roles);
             return View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Search(AppUserSearchViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var searchString = viewModel.SearchString.ToUpper();
-                var users = await _userManager
-                    .Users
-                    .Where(u => 
-                        u.NormalizedUserName.Contains(searchString) || 
-                        u.NormalizedEmail.Contains(searchString)
-                    ).ToListAsync();
-            
-                var viewModels = users.Select(u => new AppUsersViewModel()
-                {
-                    UserName = u.UserName,
-                    Email = u.Email,
-                    Roles = string.Join(", ", _userManager.GetRolesAsync(u).Result),
-                    IsLocked = u.LockoutEnd
-                });
-                return View("SearchResults" ,viewModels);
-            }
-            return RedirectToAction(nameof(Index));
-        }
-        
         public async Task<IActionResult> ManageUser(string? userName)
         {
             if (userName == null)
@@ -154,58 +166,72 @@ namespace WebApplication.Areas.Admin.Controllers
         //     {
         //         return NotFound();
         //     }
-        //     if (! IsEmailValid(email))
+        //     if (! await IsEmailValid(email))
         //     {
         //         return BadRequest();
         //     }
         //
         //     _userManager.ChangeEmailAsync();
         // }
+        [HttpPost]
+        public async Task<IActionResult> LockUser(string userName, string returnUrl)
+        {
+            
+            if (string.IsNullOrEmpty(userName))
+            {
+                return BadRequest();
+            }
+            var appUser = await _userManager.FindByNameAsync(userName);
+            if (appUser == null)
+            {
+                return BadRequest();
+            }
+            await _userManager.SetLockoutEnabledAsync(appUser, true);
+            
+            await _userManager.SetLockoutEndDateAsync(appUser, DateTime.Today.AddYears(500));
+            appUser.AccountLocked = true;
+            await _userManager.UpdateAsync(appUser);
+            return LocalRedirect(returnUrl);
+        }
         
         [HttpPost]
-        public async Task<IActionResult> LockUser(string userName)
+        public async Task<IActionResult> UnLockUser(string userName, string returnUrl)
         {
-            if (userName == null)
+            if (string.IsNullOrEmpty(userName))
             {
-                return NotFound();
+                return BadRequest();
             }
 
             var appUser = await _userManager.FindByNameAsync(userName);
             if (appUser == null)
             {
-                return NotFound();
+                return BadRequest();
             }
-            var result = await _userManager.SetLockoutEnabledAsync(appUser, true);
-            if (!result.Succeeded)
+            await _userManager.SetLockoutEnabledAsync(appUser, false);
+            appUser.AccountLocked = false;
+            await _userManager.UpdateAsync(appUser);
+            return LocalRedirect(returnUrl);
+        }
+
+        [HttpPost]
+        public IActionResult Search(AppUserSearchViewModel viewModel)
+        {
+            if (ModelState.IsValid)
             {
-                return StatusCode(403);
+                return RedirectToAction(nameof(Index),
+                    new {Search = viewModel.search, IncludeDeactivated = viewModel.includeDeactivated});
             }
             return RedirectToAction(nameof(Index));
         }
         
-        [HttpPost]
-        public async Task<IActionResult> UnLockUser(string userName)
+        private async Task<bool> IsEmailValidAsync(string email)
         {
-            if (userName == null)
+            var userWithEmail =
+                await _userManager.Users.FirstOrDefaultAsync(user => user.NormalizedEmail.Equals(email.ToUpper()));
+            if (userWithEmail != null)
             {
-                return NotFound();
+                return false;
             }
-
-            var appUser = await _userManager.FindByNameAsync(userName);
-            if (appUser == null)
-            {
-                return NotFound();
-            }
-            var result = await _userManager.SetLockoutEnabledAsync(appUser, false);
-            if (!result.Succeeded)
-            {
-                return StatusCode(403);
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool IsEmailValid(string email)
-        {
             try {
                 var addr = new System.Net.Mail.MailAddress(email);
                 return addr.Address == email;
@@ -213,6 +239,13 @@ namespace WebApplication.Areas.Admin.Controllers
             catch {
                 return false;
             }
+        }
+        
+        private async Task<bool> IsUserNameValidAsync(string username)
+        {
+            var userWithUsername =
+                await _userManager.Users.FirstOrDefaultAsync(user => user.NormalizedUserName.Equals(username.ToUpper()));
+            return userWithUsername == null;
         }
     }
 }

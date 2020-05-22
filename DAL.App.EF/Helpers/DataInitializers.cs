@@ -79,7 +79,7 @@ namespace DAL.App.EF.Helpers
                 var role = roleManager.FindByNameAsync(roleToSeed.Name).Result;
                 if (role == null)
                 {
-                    role = new AppUserRole {Name = roleToSeed.Name};
+                    role = new AppUserRole {Name = roleToSeed.Name, DisplayName = roleToSeed.DisplayName};
                     var result = roleManager.CreateAsync(role).Result;
                     if (!result.Succeeded)
                     {
@@ -109,25 +109,12 @@ namespace DAL.App.EF.Helpers
             public string Password { get; set; }
             public string AppRole { get; set; }
             public bool IsEmailConfirmed { get; set; }
-            
-            public User(string name, string email, string password, string appRole, bool isEmailConfirmed)
-            {
-                Name = name;
-                Email = email;
-                Password = password;
-                AppRole = appRole;
-                IsEmailConfirmed = isEmailConfirmed;
-            }
         }
         
         private struct Role
         {
             public string Name { get; set; }
-
-            public Role(string name)
-            {
-                Name = name;
-            }
+            public string DisplayName { get; set; }
         }
     }
 }

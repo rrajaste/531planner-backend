@@ -1,8 +1,10 @@
 [
   {
-    "name": "admin"
+    "name": "admin",
+    "displayName": "Administrator"
   },
   {
-    "name": "user"
+    "name": "user",
+    "displayName": "user"
   }
 ]

@@ -5,5 +5,6 @@ namespace WebApplication.Areas.Admin.ViewModels
     public class AppUsersIndexViewModel
     {
         public IEnumerable<AppUsersViewModel> AppUsers { get; set; }
+        public AppUserSearchViewModel SearchViewModel { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace WebApplication.Areas.Admin.ViewModels
         public string Email { get; set; }
         
         public string Roles { get; set; }
-        public DateTimeOffset? IsLocked { get; set; }
+        public bool IsLocked { get; set; }
     }
 }
