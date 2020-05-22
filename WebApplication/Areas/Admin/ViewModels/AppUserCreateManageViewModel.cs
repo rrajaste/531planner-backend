@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApplication.Areas.Admin.ViewModels
 {
-    public class AppUserCreateEditViewModel
+    public class AppUserCreateManageViewModel
     {
         [MinLength(4)]
         [MaxLength(256)]

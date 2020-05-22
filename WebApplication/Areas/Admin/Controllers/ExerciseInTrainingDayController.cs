@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using BLL.App.DTO;
 using Contracts.BLL.App;
+using Domain.App.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,8 +10,8 @@ using WebApplication.Areas.Admin.ViewModels;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "admin")]
+    [Area(nameof(Admin))]
+    [Authorize(Roles = AppRoles.Administrator)]
     public class ExerciseInTrainingDayController : Controller
     {
         private readonly IAppBLL _bll;
