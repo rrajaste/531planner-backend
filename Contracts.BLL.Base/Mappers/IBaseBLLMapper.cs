@@ -4,8 +4,8 @@ namespace Contracts.BLL.Base.Mappers
         where TOutObject : class, new()
         where TInObject : class, new() 
     {
-        TOutObject Map<TInObject, TOutObject>(TInObject inObject)
-            where TOutObject : class, new()
-            where TInObject : class, new();
+        TRightObject Map<TLeftObject, TRightObject>(TLeftObject inObject)
+            where TRightObject : class, new()
+            where TLeftObject : class, new();
     }
 }

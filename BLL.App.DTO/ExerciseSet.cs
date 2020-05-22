@@ -24,6 +24,6 @@ namespace BLL.App.DTO
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public UnitType? UnitType { get; set; }
         public SetType? SetType { get; set; }
-        public TKey SetTypeId { get; set; }
+        public TKey SetTypeId { get; set; } = default!;
     }
 }
