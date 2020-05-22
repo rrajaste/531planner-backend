@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.App.Identity;
@@ -26,15 +27,13 @@ namespace WebApplication.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var users = await _userManager.Users.ToListAsync();
-            var viewModels = users.Select(u => new AppUserIndexViewModel()
+            var roles = await _roleManager.Roles.ToListAsync();
+            var rolesSelectList = new MultiSelectList(roles, nameof(AppUserRole.Id) ,nameof(AppUserRole.Name));
+            var viewModel = new AppUserSearchViewModel()
             {
-                UserName = u.UserName,
-                Email = u.Email,
-                Roles = string.Join(", ", _userManager.GetRolesAsync(u).Result),
-                IsLocked = u.LockoutEnd
-            });
-            return View(viewModels);
+                Roles = rolesSelectList
+            };
+            return View(viewModel);
         }
 
         // GET: Admin/Users/Details/5
@@ -96,6 +95,31 @@ namespace WebApplication.Areas.Admin.Controllers
             var roles = _roleManager.Roles.Select(r => r.Name);
             viewModel.Roles = new SelectList(roles);
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(AppUserSearchViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var searchString = viewModel.SearchString.ToUpper();
+                var users = await _userManager
+                    .Users
+                    .Where(u => 
+                        u.NormalizedUserName.Contains(searchString) || 
+                        u.NormalizedEmail.Contains(searchString)
+                    ).ToListAsync();
+            
+                var viewModels = users.Select(u => new AppUsersViewModel()
+                {
+                    UserName = u.UserName,
+                    Email = u.Email,
+                    Roles = string.Join(", ", _userManager.GetRolesAsync(u).Result),
+                    IsLocked = u.LockoutEnd
+                });
+                return View("SearchResults" ,viewModels);
+            }
+            return RedirectToAction(nameof(Index));
         }
         
         public async Task<IActionResult> ManageUser(string? userName)

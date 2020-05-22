@@ -1,10 +1,35 @@
-@model IEnumerable<WebApplication.Areas.Admin.ViewModels.AppUserIndexViewModel>
+@model WebApplication.Areas.Admin.ViewModels.AppUserSearchViewModel
 
-<h1>
-    App Users
-</h1>
-<hr/>
-<h3>
-    Find user
-</h3>
-<partial name="_SearchFormPartial"/>
+<div class="jumbotron shadow rounded">
+    <h1 class="display-4 text-uppercase">
+        App users
+    </h1>
+    <a href="#"><h3 class="text-uppercase">Add new user</h3></a>
+    <hr/>
+    <h3 class="text-uppercase">
+        Find user
+    </h3>
+    <div class="row justify-content-center">
+        <form class="col-sm-8 col-md-6 col-lg-4" asp-action="Search">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SearchString" class="control-label">Search for a username or email</label>
+                <input asp-for="SearchString" placeholder="Search..." class="form-control"/>
+                <span asp-validation-for="SearchString" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedRoles" class="control-label"></label>
+                <select asp-for="SelectedRoles" asp-items="@Model.Roles" class="form-control">
+                </select>
+                <span asp-validation-for="SelectedRoles" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="SUBMIT" title="Search for a user" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

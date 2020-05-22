@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication.Areas.Admin.ViewModels
 {
-    public class AppUserIndexViewModel
+    public class AppUsersViewModel
     {
         [MinLength(4)]
         [MaxLength(64)]
