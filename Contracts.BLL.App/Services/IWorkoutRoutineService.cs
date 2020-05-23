@@ -9,5 +9,6 @@ namespace Contracts.BLL.App.Services
     public interface IWorkoutRoutineService : IBaseEntityService<WorkoutRoutine>, 
         IWorkoutRoutineRepository<Guid, WorkoutRoutine>
     {
+        WorkoutRoutine GenerateNewFiveThreeOneRoutine(NewFiveThreeOneRoutineInfo info);
     }
 }

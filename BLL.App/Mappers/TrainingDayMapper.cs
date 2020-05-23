@@ -91,13 +91,13 @@ namespace BLL.Mappers
                 {
                     switch (exercise.ExerciseType?.TypeCode)
                     {
-                        case ExerciseTypeCodes.MainLift:
+                        case ExerciseTypeTypeCodes.MainLift:
                         {
                             var mappedExercise = BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL(exercise);
                             mainLifts.Add(mappedExercise);
                             break;
                         }
-                        case ExerciseTypeCodes.Accessory:
+                        case ExerciseTypeTypeCodes.Accessory:
                         {
                             var mappedExercise = BLLMapperContext.ExerciseInTrainingDayMapper.MapDALToBLL(exercise);
                             accessoryLifts.Add(mappedExercise);

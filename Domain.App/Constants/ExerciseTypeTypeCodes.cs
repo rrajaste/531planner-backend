@@ -1,6 +1,6 @@
 namespace Domain.App.Enums
 {
-    public static class ExerciseTypeCodes
+    public static class ExerciseTypeTypeCodes
     {
         public const string MainLift = "mainlift";
         public const string Accessory = "accessory";

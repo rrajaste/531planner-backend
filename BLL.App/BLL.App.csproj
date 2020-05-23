@@ -13,9 +13,4 @@
       <ProjectReference Include="..\Extensions\Extensions.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Remove="BaseRoutineGenerator.cs" />
-      <Compile Remove="FiveThreeOneRoutineGenerator.cs" />
-    </ItemGroup>
-
 </Project>

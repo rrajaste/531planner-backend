@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.App.DTO;
 using BLL.Base.Services;
+using BLL.RoutineGenerators;
 using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
@@ -13,7 +15,7 @@ namespace BLL.Services
 {
     public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork, 
         DAL.App.DTO.WorkoutRoutine, WorkoutRoutine, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine>>,
-        IWorkoutRoutineService 
+        IWorkoutRoutineService
     {
         public WorkoutRoutineService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine> mapper) 
             : base(unitOfWork, mapper, unitOfWork.WorkoutRoutines)
@@ -58,5 +60,12 @@ namespace BLL.Services
 
         public async Task<WorkoutRoutine> FindWithTrainingDayIdAsync(Guid trainingDayId) =>
             Mapper.MapDALToBLL(await ServiceRepository.FindWithTrainingDayIdAsync(trainingDayId));
+
+        public WorkoutRoutine GenerateNewFiveThreeOneRoutine(NewFiveThreeOneRoutineInfo info)
+        {
+            var generator = new FiveThreeOneRoutineGenerator(info);
+            var generatedRoutine = generator.GenerateNewRoutine();
+            return generatedRoutine;
+        }
     }
 }
