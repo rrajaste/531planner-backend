@@ -39,6 +39,9 @@ namespace BLL.Mappers
                 EndingDate = bllObject.EndingDate,
                 IsDeload = bllObject.IsDeload,
                 TrainingCycleId = bllObject.TrainingCycleId,
+                TrainingDays = bllObject.TrainingDays?
+                    .Select(BLLMapperContext.TrainingDayMapper.MapUserTrainingDayToDALEntity)
+                    .ToList()
             };
     }
 }

@@ -17,6 +17,7 @@ namespace BLL.Mappers
             {
                 Id = dalObject.Id,
                 ExerciseInTrainingDayId = dalObject.ExerciseInTrainingDayId,
+                WorkoutRoutineId = dalObject.WorkoutRoutineId,
                 Completed = dalObject.Completed,
                 Weight = dalObject.Weight,
                 Distance = dalObject.Distance,
@@ -34,6 +35,7 @@ namespace BLL.Mappers
             {
                 Id = bllObject.Id,
                 ExerciseInTrainingDayId = bllObject.ExerciseInTrainingDayId,
+                WorkoutRoutineId = bllObject.WorkoutRoutineId,
                 Completed = bllObject.Completed,
                 Distance = bllObject.Distance,
                 Duration = bllObject.Duration,

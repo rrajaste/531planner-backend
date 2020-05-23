@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
@@ -36,7 +37,11 @@ namespace BLL.Mappers
                 Id = bllObject.Id,
                 Date = GetDateFromDayOfWeek(bllObject.DayOfWeek),
                 TrainingWeekId = bllObject.TrainingWeekId,
-                TrainingDayTypeId = bllObject.TrainingDayTypeId
+                TrainingDayTypeId = bllObject.TrainingDayTypeId,
+                ExercisesInTrainingDay = bllObject.AccessoryLifts?
+                    .Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapBLLToDAL)
+                    .Concat(bllObject.MainLifts?
+                        .Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapBLLToDAL))
             };
 
         public UserTrainingDay MapDALToUserTrainingDay(DAL.App.DTO.TrainingDay dalEntity)
@@ -60,12 +65,15 @@ namespace BLL.Mappers
                 Id = userTrainingDay.Id,
                 Date = userTrainingDay.Date,
                 TrainingWeekId = userTrainingDay.TrainingWeekId,
-                TrainingDayTypeId = userTrainingDay.TrainingDayTypeId
+                TrainingDayTypeId = userTrainingDay.TrainingDayTypeId,
+                ExercisesInTrainingDay = userTrainingDay.AccessoryLifts?
+                    .Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapBLLToDAL)
+                    .Concat(userTrainingDay.MainLifts?
+                        .Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapBLLToDAL))
             };
 
         private static DateTime GetDateFromDayOfWeek(DayOfWeek dayOfWeek)
         {
-            var cultureInfo = CultureInfo.GetCultureInfo("ee-EE");
             var baseDates = new DateTime[]
             {
                 DateTime.ParseExact("10/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),

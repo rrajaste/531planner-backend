@@ -32,7 +32,11 @@ namespace DAL.App.EF.Mappers
                 Id = dalObject.Id,
                 Date = dalObject.Date,
                 TrainingWeekId = dalObject.TrainingWeekId,
-                TrainingDayTypeId = dalObject.TrainingDayTypeId
+                TrainingDayTypeId = dalObject.TrainingDayTypeId,
+                ExercisesInTrainingDay = dalObject
+                    .ExercisesInTrainingDay?
+                    .Select(DALMapperContext.ExerciseInTrainingDayMapper.MapDALToDomain)
+                    .ToList()
             };
     }
 }

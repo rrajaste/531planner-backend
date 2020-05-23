@@ -1,5 +1,6 @@
 ﻿[
   {
+    "id": "6352CD73-F6E4-47F3-14B3-08D7FE54C738",
     "name": "Barbell squat",
     "description": "Squats are considered a vital exercise for increasing the strength and size of the lower body muscles as well as developing core strength"
   },
@@ -12,6 +13,7 @@
     "description": "Lunges are a good exercise for strengthening, sculpting and building several muscles/muscle groups, including the quadriceps (or thighs), the gluteus maximus (or buttocks) as well as the hamstrings."
   },
   {
+    "id": "1D7F8AE7-0464-4AAB-14B6-08D7FE54C738",
     "name": "Deadlift",
     "description": "The deadlift is a weight training exercise in which a loaded barbell or bar is lifted off the ground to the level of the hips, torso perpendicular to the floor, before being placed back on the ground"
   },
@@ -24,6 +26,7 @@
     "description": "Calf raises are a method of exercising the gastrocnemius, tibialis posterior and soleus muscles of the lower leg. The movement performed is plantar flexion, a.k.a. ankle extension."
   },
   {
+    "id": "37489C81-0F70-49F2-14B9-08D7FE54C738",
     "name": "Bench press",
     "description": "The bench press is an upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench."
   },
@@ -52,6 +55,7 @@
     "description": "Later raise works the deltoid muscle of the shoulder. The movement starts with the arms straight, and the hands holding weights at the sides or in front of the body. Body is in a slight forward-leaning position with hips and knees bent a little. Arms are kept straight or slightly bent, and raised through an arc of movement in the coronal plane that terminates when the hands are at approximately shoulder height."
   },
   {
+    "id": "AFE9A016-F9FF-4190-14C0-08D7FE54C738",
     "name": "Overhead press",
     "description": "The press, overhead press (abbreviated OHP) or shoulder press is a weight training exercise with many variations, typically performed while standing, in which a weight is pressed straight upwards from racking position until the arms are locked out overhead, while the legs, lower back and abs maintain balance. The exercise helps build muscular shoulders with bigger arms, and is one of the most difficult compound upper-body exercises."
   },

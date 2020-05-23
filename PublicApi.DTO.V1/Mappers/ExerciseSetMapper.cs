@@ -11,10 +11,10 @@ namespace PublicApi.DTO.V1.Mappers
                 throw new ArgumentException("Mapping failed: NrOfReps on BLL entity was null!");
             }
             
-            if (bllEntity.UnitType == null)
-            {
-                throw new ArgumentException("Mapping failed: UnitType on BLL entity was null!");
-            }
+            // if (bllEntity.UnitType == null)
+            // {
+            //     throw new ArgumentException("Mapping failed: UnitType on BLL entity was null!");
+            // }
             
             if (bllEntity.SetType == null)
             {
@@ -25,7 +25,7 @@ namespace PublicApi.DTO.V1.Mappers
             {
                 Id = bllEntity.Id,
                 NrOfReps = (int) bllEntity.NrOfReps,
-                UnitType = bllEntity.UnitType.Name,
+                // UnitType = bllEntity.UnitType.Name,
                 SetType = SetTypeMapper.MapBLLEntityToPublicDTO(bllEntity.SetType)
             };
         }

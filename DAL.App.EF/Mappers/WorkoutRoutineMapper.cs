@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
@@ -37,6 +38,8 @@ namespace DAL.App.EF.Mappers
                 Name = dalObject.Name,
                 Description = dalObject.Description,
                 RoutineTypeId = dalObject.RoutineTypeId,
+                TrainingCycles = dalObject.TrainingCycles?.Select(DALMapperContext.TrainingCycleMapper.MapDALToDomain)
+                    .ToList()
             };
     }
 }

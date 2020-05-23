@@ -12,10 +12,12 @@ namespace BLL.RoutineGenerators
     {
 
         protected readonly TNewRoutineInfo NewRoutineInfo;
+        protected readonly Guid NewRoutineId;
         
         protected BaseRoutineGenerator(TNewRoutineInfo newRoutineInfo)
         {
             NewRoutineInfo = newRoutineInfo;
+            NewRoutineId = Guid.NewGuid();
             CheckBaseRoutine();
             CheckStartingDate();
         }
@@ -23,7 +25,8 @@ namespace BLL.RoutineGenerators
         public virtual WorkoutRoutine GenerateNewRoutine()
         {
             var routine = new WorkoutRoutine() {
-                Id = new Guid(),
+                Id = NewRoutineId,
+                RoutineTypeId = NewRoutineInfo.BaseRoutine.RoutineTypeId,
                 Name = NewRoutineInfo.BaseRoutine.Name,
                 Description = NewRoutineInfo.BaseRoutine.Description,
             };
@@ -35,7 +38,7 @@ namespace BLL.RoutineGenerators
         {
             var trainingCycle =  new TrainingCycle()
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 WorkoutRoutineId = parentId,
                 CycleNumber = cycleNumber,
                 StartingDate = NewRoutineInfo.StartingDate.Date,
@@ -102,7 +105,7 @@ namespace BLL.RoutineGenerators
             var newDates = startingDate.StartingFromGetDatesWithSameDayOfWeek(baseDates);
             var generatedTrainingWeek = new TrainingWeek()
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 StartingDate = startingDate,
                 EndingDate = startingDate.AddDays(7),
                 IsDeload = baseTrainingWeek.IsDeload,
@@ -129,9 +132,9 @@ namespace BLL.RoutineGenerators
 
         protected virtual UserTrainingDay GenerateTrainingDay(UserTrainingDay baseTrainingDay, DateTime date, int trainingWeekNumber)
         {
-            var trainingDay =  new UserTrainingDay()
+            var trainingDay = new UserTrainingDay()
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Date = date,
                 TrainingDayTypeId = baseTrainingDay.TrainingDayTypeId,
             };
@@ -153,11 +156,10 @@ namespace BLL.RoutineGenerators
         protected virtual IEnumerable<ExerciseInTrainingDay> GenerateExercises(IEnumerable<ExerciseInTrainingDay> baseExercises,
             int trainingWeekNumber, Guid parentId)
         {
-            return baseExercises.Select(baseExercise => GenerateExercise(baseExercise, trainingWeekNumber, parentId));
+            return baseExercises.Select(exercise => GenerateExercise(exercise, trainingWeekNumber, parentId));
         }
 
-        protected abstract ExerciseInTrainingDay GenerateExercise(ExerciseInTrainingDay baseExercise,
-            int trainingWeekNumber, Guid parentId);
+        protected abstract ExerciseInTrainingDay GenerateExercise(ExerciseInTrainingDay baseExercise, int trainingWeekNumber, Guid parentId);
         
         public void CheckBaseRoutine()
         {

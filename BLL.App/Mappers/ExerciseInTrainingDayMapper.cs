@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
@@ -39,7 +40,11 @@ namespace BLL.Mappers
                 Id = bllObject.Id,
                 ExerciseId = bllObject.ExerciseId,
                 ExerciseTypeId = bllObject.ExerciseTypeId,
-                TrainingDayId = bllObject.TrainingDayId
+                TrainingDayId = bllObject.TrainingDayId,
+                ExerciseSets =  bllObject.WarmUpSets?
+                    .Select(BLLMapperContext.ExerciseSetMapper.MapBLLToDAL)
+                    .Concat(bllObject.WorkSets?
+                        .Select(BLLMapperContext.ExerciseSetMapper.MapBLLToDAL))
             };
 
         private ExerciseInTrainingDay AddExerciseSets(ExerciseInTrainingDay returnDto,

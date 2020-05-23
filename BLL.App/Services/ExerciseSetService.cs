@@ -41,7 +41,8 @@ namespace BLL.Services
         public async Task<BaseLiftSet> UpdateAsync(BaseLiftSet baseLiftSet)
         {
             var entityToAdd = await GetDALEntityWithRoutineId(baseLiftSet);
-            entityToAdd.SetNumber = await GetSetNumber(baseLiftSet);
+            var setNumber = (await UnitOfWork.ExerciseSets.FindAsync(entityToAdd.Id)).SetNumber;
+            entityToAdd.SetNumber = setNumber;
             entityToAdd.WorkoutRoutineId = await GetRoutineIdForExerciseSetAsync(baseLiftSet.ExerciseInTrainingDayId);
             ServiceRepository.Update(entityToAdd);
             return Mapper.MapDALToBaseLiftSet(entityToAdd);

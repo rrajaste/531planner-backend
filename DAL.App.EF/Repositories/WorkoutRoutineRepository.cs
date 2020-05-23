@@ -41,6 +41,17 @@ namespace DAL.App.EF.Repositories
             ).ToListAsync()
                 ).Select(Mapper.MapDomainToDAL);
 
+        
+        public async Task<IEnumerable<DTO.WorkoutRoutine>> AllPublishedBaseRoutinesAsync() => (
+            await RepoDbSet
+                .Where(w => 
+                    w.AppUserId == null && 
+                    w.ClosedAt > DateTime.Now &&
+                    w.CreatedAt <= DateTime.Now
+                ).ToListAsync()
+            ).Select(Mapper.MapDomainToDAL);
+
+        
         public async Task<IEnumerable<DTO.WorkoutRoutine>> AllInactiveBaseRoutinesAsync() => (
             await RepoDbSet.Where(
                 w => w.AppUserId == null
@@ -112,6 +123,33 @@ namespace DAL.App.EF.Repositories
                 .FirstOrDefaultAsync(d => d.Id == trainingDayId);
             var parentRoutine = trainingDay.TrainingWeek!.TrainingCycle!.WorkoutRoutine;
             return Mapper.MapDomainToDAL(parentRoutine!);
+        }
+
+        public async Task<DTO.WorkoutRoutine> FindFullRoutineWithIdAsync(Guid routineId)
+        {
+            var workoutRoutine = await RepoDbSet.Include(routine => routine.TrainingCycles)
+                .ThenInclude(cycle => cycle.TrainingWeeks)
+                .ThenInclude(week => week.TrainingDays)
+                .ThenInclude(day => day.TrainingDayType)
+                .Include(routine => routine.TrainingCycles)
+                .ThenInclude(cycle => cycle.TrainingWeeks)
+                .ThenInclude(trainingWeek => trainingWeek.TrainingDays)
+                .ThenInclude(exercise => exercise.ExercisesInTrainingDay)
+                .ThenInclude(exercise => exercise.ExerciseType)
+                .Include(routine => routine.TrainingCycles)
+                .ThenInclude(cycle => cycle.TrainingWeeks)
+                .ThenInclude(week => week.TrainingDays)
+                .ThenInclude(day => day.ExercisesInTrainingDay)
+                .ThenInclude(exercise => exercise.Exercise)
+                .Include(routine => routine.TrainingCycles)
+                .ThenInclude(cycle => cycle.TrainingWeeks)
+                .ThenInclude(week => week.TrainingDays)
+                .ThenInclude(day => day.ExercisesInTrainingDay)
+                .ThenInclude(exercise => exercise.ExerciseSets)
+                .ThenInclude(set => set.SetType)
+                .FirstOrDefaultAsync(routine => routine.Id == routineId);
+            var mappedRoutine = Mapper.MapDomainToDAL(workoutRoutine);
+            return mappedRoutine;
         }
     }
 }

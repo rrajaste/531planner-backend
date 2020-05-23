@@ -33,7 +33,11 @@ namespace DAL.App.EF.Mappers
                 CycleNumber = dalObject.CycleNumber,
                 StartingDate = dalObject.StartingDate,
                 EndingDate = dalObject.EndingDate,
-                WorkoutRoutineId = dalObject.WorkoutRoutineId
+                WorkoutRoutineId = dalObject.WorkoutRoutineId,
+                TrainingWeeks = dalObject?
+                    .TrainingWeeks?
+                    .Select(DALMapperContext.TrainingWeekMapper.MapDALToDomain)
+                    .ToList()
             };
     }
 }

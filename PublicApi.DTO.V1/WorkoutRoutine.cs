@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PublicApi.DTO.V1.Mappers
+namespace PublicApi.DTO.V1
 {
     public class WorkoutRoutine
     {

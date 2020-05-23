@@ -36,6 +36,10 @@ namespace DAL.App.EF.Mappers
                 EndingDate = dalObject.EndingDate,
                 IsDeload = dalObject.IsDeload,
                 TrainingCycleId = dalObject.TrainingCycleId,
+                TrainingDays = dalObject
+                    .TrainingDays?
+                    .Select(DALMapperContext.TrainingDayMapper.MapDALToDomain)
+                    .ToList()
             };
     }
 }

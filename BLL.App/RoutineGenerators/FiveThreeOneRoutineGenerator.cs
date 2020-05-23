@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BLL.App.DTO;
 using Contracts.BLL.App.RoutineGenerators;
+using Domain.App.Enums;
 
 namespace BLL.RoutineGenerators
 {
@@ -15,9 +16,10 @@ namespace BLL.RoutineGenerators
         {
             var exercise = new ExerciseInTrainingDay()
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 TrainingDayId = parentId,
-                ExerciseTypeId = baseExercise.ExerciseTypeId
+                ExerciseTypeId = baseExercise.ExerciseTypeId,
+                ExerciseId = baseExercise.ExerciseId,
             };
             if (baseExercise.WarmUpSets == null)
             {
@@ -33,7 +35,7 @@ namespace BLL.RoutineGenerators
                     $"Routine generation failed: base ExerciseInTrainingDay with ID ${baseExercise.Id} work sets are null.");
             }
             
-            exercise.WorkSets = GenerateExerciseSets(baseExercise.WarmUpSets, exercise.Id, baseExercise.ExerciseId);
+            exercise.WorkSets = GenerateExerciseSets(baseExercise.WorkSets, exercise.Id, baseExercise.ExerciseId);
 
             return exercise;
         }
@@ -43,9 +45,14 @@ namespace BLL.RoutineGenerators
             var exerciseSets = new List<ExerciseSet>();
             foreach (var set in baseSets)
             {
-                var weight = GetUserExerciseSetWeight(exerciseId);
+                if (set.Weight == null)
+                {
+                    throw new ApplicationException(
+                        $"Routine generation failed: base set ID ${set.Id} set weight is null.");
+                }
+                var weight = GetUserExerciseSetWeight(exerciseId, (float) set.Weight);
                 var generatedSet = GenerateExerciseSet(set, weight);
-                generatedSet.Id = parentId;
+                generatedSet.ExerciseInTrainingDayId = parentId;
                 exerciseSets.Add(generatedSet);
             }
             return exerciseSets;
@@ -55,34 +62,36 @@ namespace BLL.RoutineGenerators
         {
             return new ExerciseSet()
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 Completed = false,
                 Distance = exerciseSet.Distance,
                 Duration = exerciseSet.Duration,
                 NrOfReps = exerciseSet.NrOfReps,
                 SetNumber = exerciseSet.SetNumber,
                 Weight = weight,
-                UnitTypeId = NewRoutineInfo.UnitTypeId,
+                UnitTypeId = NewRoutineInfo.CycleInfo.UnitTypeId,
+                SetTypeId = exerciseSet.SetTypeId,
+                WorkoutRoutineId = NewRoutineId
             };
         }
 
-        protected virtual float GetUserExerciseSetWeight(Guid exerciseInTrainingDayId)
+        protected virtual float GetUserExerciseSetWeight(Guid exerciseInTrainingDayId, float baseWeight)
         {
             var setWeight = 0F;
-            var wendlerMaxes = NewRoutineInfo.CycleInfo.WendlerMaxes;
-            if (exerciseInTrainingDayId == NewRoutineInfo.DeadliftExerciseId)
+            var wendlerMaxes = NewRoutineInfo.CycleInfo;
+            if (exerciseInTrainingDayId == MainLiftExerciseIDs.DeadLift)
             {
-                setWeight = wendlerMaxes.DeadliftMax;
-            } else if (exerciseInTrainingDayId == NewRoutineInfo.BenchPressExerciseId)
+                setWeight = wendlerMaxes.DeadliftMax * (baseWeight / 100);
+            } else if (exerciseInTrainingDayId == MainLiftExerciseIDs.BenchPress)
             {
-                setWeight = wendlerMaxes.BenchPressMax;
-            } else if (exerciseInTrainingDayId == NewRoutineInfo.SquatExerciseId)
+                setWeight = wendlerMaxes.BenchPressMax * (baseWeight / 100);
+            } else if (exerciseInTrainingDayId == MainLiftExerciseIDs.Squat)
             {
-                setWeight = wendlerMaxes.SquatMax;
+                setWeight = wendlerMaxes.SquatMax * (baseWeight / 100);
             }
-            else if (exerciseInTrainingDayId == NewRoutineInfo.OverheadPressExerciseId)
+            else if (exerciseInTrainingDayId == MainLiftExerciseIDs.OverHeadPress)
             {
-                setWeight = wendlerMaxes.OverHeadPressMax;
+                setWeight = wendlerMaxes.OverHeadPressMax * (baseWeight / 100);
             }
             return setWeight;
         }

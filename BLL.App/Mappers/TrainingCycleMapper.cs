@@ -36,7 +36,8 @@ namespace BLL.Mappers
                 CycleNumber = bllObject.CycleNumber,
                 StartingDate = bllObject.StartingDate,
                 EndingDate = bllObject.EndingDate,
-                WorkoutRoutineId = bllObject.WorkoutRoutineId
+                WorkoutRoutineId = bllObject.WorkoutRoutineId,
+                TrainingWeeks = bllObject.TrainingWeeks?.Select(BLLMapperContext.TrainingWeekMapper.MapBLLToDAL),
             };
     }
 }

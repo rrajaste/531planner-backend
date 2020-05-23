@@ -13,11 +13,12 @@ using WorkoutRoutine = BLL.App.DTO.WorkoutRoutine;
 
 namespace BLL.Services
 {
-    public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork, 
-        DAL.App.DTO.WorkoutRoutine, WorkoutRoutine, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine>>,
+    public class WorkoutRoutineService : BaseEntityService<IWorkoutRoutineRepository, IAppUnitOfWork,
+            DAL.App.DTO.WorkoutRoutine, WorkoutRoutine, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine>>,
         IWorkoutRoutineService
     {
-        public WorkoutRoutineService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine> mapper) 
+        public WorkoutRoutineService(IAppUnitOfWork unitOfWork,
+            IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine> mapper)
             : base(unitOfWork, mapper, unitOfWork.WorkoutRoutines)
         {
         }
@@ -26,20 +27,26 @@ namespace BLL.Services
             Mapper.MapDALToBLL(
                 await ServiceRepository.ActiveRoutineForUserWithIdAsync(userId)
             );
+
         public async Task<IEnumerable<WorkoutRoutine>> AllInactiveRoutinesForUserWithIdAsync(Guid userId) => (
-                await ServiceRepository.AllInactiveBaseRoutinesAsync()
-            ).Select(Mapper.MapDALToBLL);
+            await ServiceRepository.AllInactiveBaseRoutinesAsync()
+        ).Select(Mapper.MapDALToBLL);
+
         public async Task<IEnumerable<WorkoutRoutine>> AllActiveBaseRoutinesAsync() => (
-                await ServiceRepository.AllActiveBaseRoutinesAsync()
-            ).Select(Mapper.MapDALToBLL);
-        
+            await ServiceRepository.AllActiveBaseRoutinesAsync()
+        ).Select(Mapper.MapDALToBLL);
+
         public async Task<IEnumerable<WorkoutRoutine>> AllInactiveBaseRoutinesAsync() => (
-                await ServiceRepository.AllInactiveBaseRoutinesAsync()
-            ).Select(Mapper.MapDALToBLL);
+            await ServiceRepository.AllInactiveBaseRoutinesAsync()
+        ).Select(Mapper.MapDALToBLL);
 
         public async Task<IEnumerable<WorkoutRoutine>> AllUnPublishedBaseRoutinesAsync() => (
-                await ServiceRepository.AllUnPublishedBaseRoutinesAsync()
-            ).Select(Mapper.MapDALToBLL);
+            await ServiceRepository.AllUnPublishedBaseRoutinesAsync()
+        ).Select(Mapper.MapDALToBLL);
+
+        public async Task<IEnumerable<WorkoutRoutine>> AllPublishedBaseRoutinesAsync() => (
+            await ServiceRepository.AllPublishedBaseRoutinesAsync()
+        ).Select(Mapper.MapDALToBLL);
 
         public async Task<WorkoutRoutine> FindBaseRoutineAsync(Guid id) =>
             Mapper.MapDALToBLL(
@@ -52,7 +59,7 @@ namespace BLL.Services
         public async Task<WorkoutRoutine> AddWithBaseCycleAsync(WorkoutRoutine dto) =>
             Mapper.MapDALToBLL(await ServiceRepository.AddWithBaseCycleAsync(Mapper.MapBLLToDAL(dto)));
 
-        public async Task<WorkoutRoutine> ChangeRoutinePublishStatus(Guid routineId, bool isPublished) => 
+        public async Task<WorkoutRoutine> ChangeRoutinePublishStatus(Guid routineId, bool isPublished) =>
             Mapper.MapDALToBLL(await ServiceRepository.ChangeRoutinePublishStatus(routineId, isPublished));
 
         public async Task<WorkoutRoutine> FindWithWeekIdAsync(Guid weekId) =>
@@ -60,6 +67,9 @@ namespace BLL.Services
 
         public async Task<WorkoutRoutine> FindWithTrainingDayIdAsync(Guid trainingDayId) =>
             Mapper.MapDALToBLL(await ServiceRepository.FindWithTrainingDayIdAsync(trainingDayId));
+
+        public async Task<WorkoutRoutine> FindFullRoutineWithIdAsync(Guid routineId) =>
+            Mapper.MapDALToBLL(await ServiceRepository.FindFullRoutineWithIdAsync(routineId));
 
         public WorkoutRoutine GenerateNewFiveThreeOneRoutine(NewFiveThreeOneRoutineInfo info)
         {

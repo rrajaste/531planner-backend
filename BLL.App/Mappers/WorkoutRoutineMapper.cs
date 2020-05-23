@@ -23,7 +23,7 @@ namespace BLL.Mappers
                 Name = dalObject.Name,
                 Description = dalObject.Description,
                 IsPublished = dalObject.IsPublished,
-                IsBaseRoutine = dalObject.AppUserId == null,
+                IsBaseRoutine = dalObject.IsBaseRoutine,
                 RoutineType = dalObject.RoutineType == null 
                     ? null 
                     : BLLMapperContext.RoutineTypeMapper.MapDALToBLL(dalObject.RoutineType),
@@ -41,6 +41,7 @@ namespace BLL.Mappers
                 IsBaseRoutine = bllObject.IsBaseRoutine,
                 IsPublished = bllObject.IsPublished,
                 RoutineTypeId = bllObject.RoutineTypeId,
+                TrainingCycles = bllObject.TrainingCycles?.Select(BLLMapperContext.TrainingCycleMapper.MapBLLToDAL)
             };
     }
 }
