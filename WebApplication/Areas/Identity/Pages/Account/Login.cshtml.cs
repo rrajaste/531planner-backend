@@ -32,16 +32,13 @@ namespace WebApp.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; } = default!;
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public IList<AuthenticationScheme> ExternalLogins { get; set; } = default!;
 
         public string? ReturnUrl { get; set; }
 
-        [TempData]
-        public string ErrorMessage { get; set; }
-
+        [TempData] public string ErrorMessage { get; set; } = "";
         public class InputModel
         {
             [Required]

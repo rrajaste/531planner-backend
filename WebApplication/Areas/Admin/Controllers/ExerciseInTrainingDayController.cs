@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BLL.App.DTO;
 using Contracts.BLL.App;
@@ -103,23 +104,12 @@ namespace WebApplication.Areas.Admin.Controllers
             }
             return BadRequest();
         }
-        private async Task<ExerciseSetCreateEditViewModel> AddSelectListsToViewModelAsync(ExerciseSetCreateEditViewModel viewModel)
-        {
-            var returnViewModel = new ExerciseSetCreateEditViewModel();
-            var unitTypes = await _bll.UnitTypes.AllAsync();
-            var setTypes = await _bll.SetTypes.AllAsync();
-            var exercises = await _bll.Exercises.AllAsync();
-            returnViewModel.SetTypes = new SelectList(setTypes, nameof(SetType.Id), nameof(SetType.Name));
-            returnViewModel.Exercises = new SelectList(exercises, nameof(Exercise.Id), nameof(Exercise.Name));
-            returnViewModel.ExerciseSet = viewModel.ExerciseSet;
-            return returnViewModel;
-        }
         private async Task<ExerciseInTrainingDayCreateEditViewModel> AddSelectListsToViewModelAsync(ExerciseInTrainingDayCreateEditViewModel viewModel)
         {
             var returnViewModel = new ExerciseInTrainingDayCreateEditViewModel();
             var exercises = await _bll.Exercises.AllAsync();
             var exerciseTypes = await _bll.ExerciseTypes.AllAsync();
-            returnViewModel.Exercises = new SelectList(exercises, nameof(Exercise.Id), nameof(Exercise.Name));
+            returnViewModel.Exercises = new SelectList(exercises.OrderBy(e => e.Name), nameof(Exercise.Id), nameof(Exercise.Name));
             returnViewModel.ExerciseTypes = new SelectList(exerciseTypes, nameof(ExerciseType.Id), nameof(ExerciseType.Name));
             returnViewModel.ExerciseInTrainingDay = viewModel.ExerciseInTrainingDay;
             return returnViewModel;
