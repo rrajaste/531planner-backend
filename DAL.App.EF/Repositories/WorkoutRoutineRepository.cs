@@ -26,6 +26,9 @@ namespace DAL.App.EF.Repositories
                          && w.ClosedAt > DateTime.Now)
                 );
 
+        public async Task<bool> ActiveRoutineWithIdExistsForUserAsync(Guid routineId, Guid userId) =>
+            await RepoDbSet.AnyAsync(routine => routine.Id == routineId && routine.AppUserId == userId);
+
         public async Task<IEnumerable<DTO.WorkoutRoutine>> AllInactiveRoutinesForUserWithIdAsync(Guid userId) => (
             await RepoDbSet.Where(
                 w => w.AppUserId == userId

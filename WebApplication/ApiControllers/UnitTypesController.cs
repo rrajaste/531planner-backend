@@ -27,7 +27,6 @@ namespace WebApplication.ApiControllers
         /// Constructor for Unit Types controller.
         /// </summary>
         /// <param name="bll">App business logic layer.</param>
-        /// <param name="mapper">Mapper for mapping BLL UnitType object to Public UnitType DTO</param>
         public UnitTypesController(IAppBLL bll)
         {
             _bll = bll;

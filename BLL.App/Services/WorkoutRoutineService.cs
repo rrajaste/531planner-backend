@@ -28,6 +28,9 @@ namespace BLL.Services
                 await ServiceRepository.ActiveRoutineForUserWithIdAsync(userId)
             );
 
+        public Task<bool> ActiveRoutineWithIdExistsForUserAsync(Guid routineId, Guid userId) =>
+            ServiceRepository.ActiveRoutineWithIdExistsForUserAsync(routineId, userId);
+
         public async Task<IEnumerable<WorkoutRoutine>> AllInactiveRoutinesForUserWithIdAsync(Guid userId) => (
             await ServiceRepository.AllInactiveBaseRoutinesAsync()
         ).Select(Mapper.MapDALToBLL);
@@ -71,11 +74,37 @@ namespace BLL.Services
         public async Task<WorkoutRoutine> FindFullRoutineWithIdAsync(Guid routineId) =>
             Mapper.MapDALToBLL(await ServiceRepository.FindFullRoutineWithIdAsync(routineId));
 
-        public WorkoutRoutine GenerateNewFiveThreeOneRoutine(NewFiveThreeOneRoutineInfo info)
+        public WorkoutRoutine GenerateNewFiveThreeOneRoutine(NewFiveThreeOneRoutineInfo routineInfo)
         {
-            var generator = new FiveThreeOneRoutineGenerator(info);
+            var generator = new FiveThreeOneRoutineGenerator(routineInfo);
             var generatedRoutine = generator.GenerateNewRoutine();
             return generatedRoutine;
+        }
+
+        public async Task<TrainingCycle> GenerateNewCycleForFiveThreeOneRoutine(WorkoutRoutine baseRoutine, NewFiveThreeOneCycleInfo cycleInfo)
+        {
+            var oldRoutineMaxCycleNumber = baseRoutine.TrainingCycles.Max(cycle => cycle.CycleNumber);
+            var oldCycle = baseRoutine.TrainingCycles.FirstOrDefault(cycle => cycle.CycleNumber == oldRoutineMaxCycleNumber);
+            var oldCycleEndingDate = oldCycle.EndingDate;
+            if (oldCycleEndingDate == null)
+            {
+                throw new ApplicationException("Cannot generate a new training cycle: old cycle's ending date is null");
+            }
+
+            var newCycleStartingDate = ((DateTime) oldCycleEndingDate).AddDays(1);
+
+            var routineInfo = new NewFiveThreeOneRoutineInfo()
+            {
+                BaseRoutine = baseRoutine,
+                CycleInfo = cycleInfo,
+                StartingDate = newCycleStartingDate
+            };
+
+            var generator = new FiveThreeOneRoutineGenerator(routineInfo);
+            var generatedRoutine = generator.GenerateNewRoutine();
+            var generatedCycle = generatedRoutine.TrainingCycles.FirstOrDefault();
+            generatedCycle.CycleNumber = oldCycle.CycleNumber++;
+            return generatedCycle;
         }
     }
 }

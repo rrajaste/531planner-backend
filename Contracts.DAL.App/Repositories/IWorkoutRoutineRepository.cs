@@ -17,6 +17,7 @@ namespace Contracts.DAL.App.Repositories
         where TKey : IEquatable<TKey>
     {
         Task<TEntity> ActiveRoutineForUserWithIdAsync(TKey userId);
+        Task<bool> ActiveRoutineWithIdExistsForUserAsync(Guid routineId, Guid userId);
         Task<IEnumerable<TEntity>> AllInactiveRoutinesForUserWithIdAsync(TKey userId);
         Task<IEnumerable<TEntity>> AllActiveBaseRoutinesAsync();
         Task<IEnumerable<TEntity>> AllInactiveBaseRoutinesAsync();

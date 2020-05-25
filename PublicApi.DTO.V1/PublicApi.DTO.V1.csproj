@@ -11,6 +11,7 @@
     <ItemGroup>
       <ProjectReference Include="..\BLL.App.DTO\BLL.App.DTO.csproj" />
       <ProjectReference Include="..\Domain.App\Domain.App.csproj" />
+      <ProjectReference Include="..\Extensions\Extensions.csproj" />
     </ItemGroup>
 
 </Project>

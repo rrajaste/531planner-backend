@@ -10,7 +10,7 @@ namespace Extensions
         public static DateTime[] StartingFromGetDatesWithSameDayOfWeek(this DateTime dateTime, ICollection<DateTime> baseDates)
         {
             var startOfWeek = dateTime.StartOfWeek(DayOfWeek.Monday);
-            if (startOfWeek.AreAnyDaysOfWeekBeforeThis(baseDates))
+            if (dateTime.AreAnyDaysOfWeekBeforeThis(baseDates))
             {
                 startOfWeek = startOfWeek.AddDays(7);
             }

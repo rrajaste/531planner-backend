@@ -41,20 +41,12 @@ namespace BLL.RoutineGenerators
                 Id = Guid.NewGuid(),
                 WorkoutRoutineId = parentId,
                 CycleNumber = cycleNumber,
-                StartingDate = NewRoutineInfo.StartingDate.Date,
-                EndingDate = GetTrainingCycleEndDate()
+                StartingDate = NewRoutineInfo.StartingDate.StartOfWeek(DayOfWeek.Monday).AddDays(7),
             };
-            trainingCycle.TrainingWeeks = GenerateTrainingWeeks(trainingCycle.Id);
+            var generatedTrainingWeeks = GenerateTrainingWeeks(trainingCycle.Id, trainingCycle.StartingDate).ToList();
+            trainingCycle.TrainingWeeks = generatedTrainingWeeks;
+            trainingCycle.EndingDate = trainingCycle.StartingDate.AddDays((generatedTrainingWeeks.Count * 7) - 1);
             return trainingCycle;
-        }
-
-        protected virtual DateTime GetTrainingCycleEndDate()
-        {
-            var nrOfWeeksInBaseRoutineCycle =
-                GetFirstTrainingCycleFromBaseRoutine(NewRoutineInfo.BaseRoutine).TrainingWeeks.Count();
-
-            return NewRoutineInfo.StartingDate
-                .AddDays(7 * nrOfWeeksInBaseRoutineCycle).Date;
         }
         
         protected virtual TrainingCycle GetFirstTrainingCycleFromBaseRoutine(WorkoutRoutine baseRoutine)
@@ -68,7 +60,7 @@ namespace BLL.RoutineGenerators
             return baseRoutine.TrainingCycles!.First();
         }
 
-        protected virtual IEnumerable<TrainingWeek> GenerateTrainingWeeks(Guid parentId)
+        protected virtual IEnumerable<TrainingWeek> GenerateTrainingWeeks(Guid parentId, DateTime startingDate)
         {
             var baseTrainingWeeks =
                 GetFirstTrainingCycleFromBaseRoutine(NewRoutineInfo.BaseRoutine).TrainingWeeks.ToArray();
@@ -85,7 +77,7 @@ namespace BLL.RoutineGenerators
             
             for (var i = 0; i < nrOfTrainingWeeks; i++)
             {
-                weekStartingDates[i] = NewRoutineInfo.StartingDate.AddDays(i * 7);
+                weekStartingDates[i] = startingDate.AddDays(i * 7);
             }
             var newTrainingWeeks = new List<TrainingWeek>();
             
@@ -101,13 +93,16 @@ namespace BLL.RoutineGenerators
 
         protected virtual TrainingWeek GenerateTrainingWeek(TrainingWeek baseTrainingWeek, DateTime startingDate)
         {
-            var baseDates = baseTrainingWeek.TrainingDays.Select(d => d.Date).ToArray();
-            var newDates = startingDate.StartingFromGetDatesWithSameDayOfWeek(baseDates);
+            var baseDates = baseTrainingWeek.TrainingDays.Select(d => d.Date)
+                .OrderBy(d => d.Date)
+                .ToArray();
+            
+            var newDates = startingDate.AddDays(1).StartingFromGetDatesWithSameDayOfWeek(baseDates);
             var generatedTrainingWeek = new TrainingWeek()
             {
                 Id = Guid.NewGuid(),
                 StartingDate = startingDate,
-                EndingDate = startingDate.AddDays(7),
+                EndingDate = startingDate.AddDays(6),
                 IsDeload = baseTrainingWeek.IsDeload,
                 WeekNumber = baseTrainingWeek.WeekNumber
             };
