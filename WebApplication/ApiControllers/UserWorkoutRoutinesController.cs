@@ -121,9 +121,6 @@ namespace WebApplication.ApiControllers
             if (await _bll.WorkoutRoutines.UserWithIdHasActiveRoutineAsync(User.UserId()))
             {
                 var workoutRoutine = await _bll.WorkoutRoutines.ActiveRoutineForUserWithIdAsync(User.UserId());
-                _bll.WorkoutRoutines.Remove(workoutRoutine);
-                await _bll.SaveChangesAsync();
-                
                 return Ok(RoutineMapper.MapBLLEntityToBaseWorkoutRoutine(workoutRoutine));
             }
             return NotFound(new { message = "User does not have an active routine!" });

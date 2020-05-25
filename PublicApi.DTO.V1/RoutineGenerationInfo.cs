@@ -6,7 +6,6 @@ namespace PublicApi.DTO.V1
     {
         public Guid BaseRoutineId { get; set; } = default!;
         public DateTime StartingDate { get; set; }
-        public Guid UnitTypeId { get; set; }
         public bool AddDeloadWeek { get; set; }
         public float SquatMax { get; set; }
         public float DeadliftMax { get; set; }
