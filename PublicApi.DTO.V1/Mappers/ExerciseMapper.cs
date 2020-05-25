@@ -18,9 +18,11 @@ namespace PublicApi.DTO.V1.Mappers
             
             return new Exercise()
             {
+                Id = bllEntity.Id,
                 Name = bllEntity.Exercise.Name,
                 Description = bllEntity.Exercise.Description,
-                ExerciseType = ExerciseTypeMapper.MapBLLEntityToPublicDTO(bllEntity.ExerciseType),
+                TypeName = bllEntity.ExerciseType.Name,
+                TypeDescription = bllEntity.ExerciseType.Description,
                 WarmUpSets = bllEntity.WarmUpSets.Select(ExerciseSetMapper.MapBLLEntityToPublicDTO),
                 WorkSets = bllEntity.WorkSets.Select(ExerciseSetMapper.MapBLLEntityToPublicDTO)
             };

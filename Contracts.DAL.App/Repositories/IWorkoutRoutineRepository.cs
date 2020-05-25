@@ -30,5 +30,6 @@ namespace Contracts.DAL.App.Repositories
         Task<TEntity> FindWithWeekIdAsync(TKey weekId);
         Task<TEntity> FindWithTrainingDayIdAsync(Guid trainingDayId);
         Task<TEntity> FindFullRoutineWithIdAsync(Guid routineId);
+        Task<bool> UserWithIdHasActiveRoutineAsync(Guid userId);
     }
 }

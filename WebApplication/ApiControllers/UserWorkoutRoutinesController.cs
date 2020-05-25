@@ -47,6 +47,11 @@ namespace WebApplication.ApiControllers
         [ProducesResponseType(typeof(FullWorkoutRoutine), 200)]
         public async Task<ActionResult<FullWorkoutRoutine>> GenerateRoutine(RoutineGenerationInfo dto)
         {
+            if (await _bll.WorkoutRoutines.UserWithIdHasActiveRoutineAsync(User.UserId()))
+            {
+                return BadRequest(new {Message = "User already has an active workout routine"});
+            }
+            
             if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(dto.BaseRoutineId))
             {
                 var workoutRoutine = await _bll.WorkoutRoutines.FindFullRoutineWithIdAsync(dto.BaseRoutineId);
@@ -81,18 +86,17 @@ namespace WebApplication.ApiControllers
         }
 
         /// <summary>
-        /// Remove logged-in user's workout routine from data source. 
+        /// Remove logged-in user's active workout routine from data source. 
         /// </summary>
-        /// <param name="routineId">Id of routine to remove.</param>
         /// <returns>Workout routine that was removed from data source</returns>
-        /// <response code="200">Workout routine was successfully removed from data source.</response>
-        /// <response code="404">Workout routine with provided ID was not found for logged-in user.</response>
+        /// <response code="200">Logged-in user's active workout routine was successfully removed from data source.</response>
+        /// <response code="404">Logged-in user does not have an active workout routine.</response>
         [HttpPost]
         [ActionName("Delete")]
-        [ProducesResponseType(typeof(PublicApi.DTO.V1.BaseWorkoutRoutine), 200)]
-        public async Task<ActionResult<IEnumerable<PublicApi.DTO.V1.FullWorkoutRoutine>>> DeleteRoutine(Guid routineId)
+        [ProducesResponseType(typeof(BaseWorkoutRoutine), 200)]
+        public async Task<ActionResult<IEnumerable<BaseWorkoutRoutine>>> DeleteRoutine()
         {
-            if (await _bll.WorkoutRoutines.ActiveRoutineWithIdExistsForUserAsync(routineId, User.UserId()))
+            if (await _bll.WorkoutRoutines.UserWithIdHasActiveRoutineAsync(User.UserId()))
             {
                 var workoutRoutine = await _bll.WorkoutRoutines.ActiveRoutineForUserWithIdAsync(User.UserId());
                 _bll.WorkoutRoutines.Remove(workoutRoutine);
@@ -100,7 +104,29 @@ namespace WebApplication.ApiControllers
                 
                 return Ok(RoutineMapper.MapBLLEntityToBaseWorkoutRoutine(workoutRoutine));
             }
-            return NotFound();
+            return NotFound(new { message = "User does not have an active routine!" });
+        }
+        
+        /// <summary>
+        /// Get active workout routine for logged-in user. 
+        /// </summary>
+        /// <returns>Active workout routine belonging to logged-in user</returns>
+        /// <response code="200">Active workout routine for logged-in user was successfully retrieved from data source.</response>
+        /// <response code="404">Logged-in user does not have an active routine.</response>
+        [HttpGet]
+        [ActionName("Active")]
+        [ProducesResponseType(typeof(BaseWorkoutRoutine), 200)]
+        public async Task<ActionResult<IEnumerable<BaseWorkoutRoutine>>> GetActiveRoutine()
+        {
+            if (await _bll.WorkoutRoutines.UserWithIdHasActiveRoutineAsync(User.UserId()))
+            {
+                var workoutRoutine = await _bll.WorkoutRoutines.ActiveRoutineForUserWithIdAsync(User.UserId());
+                _bll.WorkoutRoutines.Remove(workoutRoutine);
+                await _bll.SaveChangesAsync();
+                
+                return Ok(RoutineMapper.MapBLLEntityToBaseWorkoutRoutine(workoutRoutine));
+            }
+            return NotFound(new { message = "User does not have an active routine!" });
         }
         
         /// <summary>

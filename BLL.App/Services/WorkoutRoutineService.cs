@@ -74,6 +74,9 @@ namespace BLL.Services
         public async Task<WorkoutRoutine> FindFullRoutineWithIdAsync(Guid routineId) =>
             Mapper.MapDALToBLL(await ServiceRepository.FindFullRoutineWithIdAsync(routineId));
 
+        public async Task<bool> UserWithIdHasActiveRoutineAsync(Guid userId) => 
+            await ServiceRepository.UserWithIdHasActiveRoutineAsync(userId);
+
         public WorkoutRoutine GenerateNewFiveThreeOneRoutine(NewFiveThreeOneRoutineInfo routineInfo)
         {
             var generator = new FiveThreeOneRoutineGenerator(routineInfo);

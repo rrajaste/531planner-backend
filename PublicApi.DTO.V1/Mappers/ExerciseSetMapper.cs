@@ -1,4 +1,5 @@
 using System;
+using Domain.App.Enums;
 
 namespace PublicApi.DTO.V1.Mappers
 {
@@ -10,12 +11,7 @@ namespace PublicApi.DTO.V1.Mappers
             {
                 throw new ArgumentException("Mapping failed: NrOfReps on BLL entity was null!");
             }
-            
-            // if (bllEntity.UnitType == null)
-            // {
-            //     throw new ArgumentException("Mapping failed: UnitType on BLL entity was null!");
-            // }
-            
+
             if (bllEntity.SetType == null)
             {
                 throw new ArgumentException("Mapping failed: SetType on BLL entity was null!");
@@ -25,8 +21,10 @@ namespace PublicApi.DTO.V1.Mappers
             {
                 Id = bllEntity.Id,
                 NrOfReps = (int) bllEntity.NrOfReps,
-                // UnitType = bllEntity.UnitType.Name,
-                SetType = SetTypeMapper.MapBLLEntityToPublicDTO(bllEntity.SetType)
+                Weight = bllEntity.Weight < 0.1 ? null : bllEntity.Weight,
+                UnitType = UnitTypes.Metric,
+                TypeName = bllEntity.SetType.Name,
+                TypeDescription = bllEntity.SetType.Description
             };
         }
     }

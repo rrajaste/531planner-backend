@@ -17,9 +17,10 @@ namespace Contracts.DAL.App.Repositories
         where TEntity : class, IDALBaseDTO<TKey>, new() 
         where TKey : IEquatable<TKey>
     {
-        Task<IEnumerable<TEntity>> AllWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId);
-        Task<TEntity> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId);
-        Task<TEntity> FindWithBaseRoutineIdAsync(Guid id);
-        Task<bool> IsPartOfBaseRoutineAsync(Guid cycleId);
+        Task<IEnumerable<TEntity>> AllWithRoutineIdForUserWithIdAsync(TKey id, Guid? userId);
+        Task<TEntity> FindWithRoutineIdForUserWithIdAsync(TKey id, TKey userId);
+        Task<TEntity> FindWithBaseRoutineIdAsync(TKey id);
+        Task<bool> IsPartOfBaseRoutineAsync(TKey cycleId);
+        Task<TEntity> GetFullActiveCycleForUserWithIdAsync(TKey userId);
     }
 }

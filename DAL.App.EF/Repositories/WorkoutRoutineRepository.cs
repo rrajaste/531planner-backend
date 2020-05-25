@@ -20,8 +20,10 @@ namespace DAL.App.EF.Repositories
 
         public async Task<DTO.WorkoutRoutine> ActiveRoutineForUserWithIdAsync(Guid userId) =>
             Mapper.MapDomainToDAL(
-                await RepoDbSet.SingleOrDefaultAsync(
-                    w => w.AppUserId == userId 
+                await RepoDbSet
+                    .AsNoTracking()
+                    .SingleOrDefaultAsync(
+                    w => w.AppUserId.Equals(userId) 
                          && w.CreatedAt <= DateTime.Now 
                          && w.ClosedAt > DateTime.Now)
                 );
@@ -153,6 +155,12 @@ namespace DAL.App.EF.Repositories
                 .FirstOrDefaultAsync(routine => routine.Id == routineId);
             var mappedRoutine = Mapper.MapDomainToDAL(workoutRoutine);
             return mappedRoutine;
+        }
+
+        public async Task<bool> UserWithIdHasActiveRoutineAsync(Guid userId)
+        {
+            var doesUserHaveActiveRoutine = await RepoDbSet.AnyAsync(routine => routine.AppUserId.Equals(userId));
+            return doesUserHaveActiveRoutine;
         }
     }
 }

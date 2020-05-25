@@ -30,7 +30,7 @@ namespace DAL.App.EF.Repositories
             return cyclesList.Select(Mapper.MapDomainToDAL);
         }
 
-        public async Task<TrainingCycle> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId)
+        public async Task<TrainingCycle> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid userId)
         {
             var cycle = await RepoDbSet
                 .Include(c => c.WorkoutRoutine)
@@ -51,5 +51,30 @@ namespace DAL.App.EF.Repositories
         public Task<bool> IsPartOfBaseRoutineAsync(Guid cycleId) =>
             RepoDbSet.Include(c => c.WorkoutRoutine)
                 .AnyAsync(c => c.Id == cycleId && c.WorkoutRoutine!.AppUserId == null);
+        
+        public async Task<TrainingCycle> GetFullActiveCycleForUserWithIdAsync(Guid userId)
+        {
+            var fullTrainingCycle = await RepoDbSet
+                    .Include(cycle => cycle.WorkoutRoutine)
+                    .Include(cycle => cycle.TrainingWeeks)
+                    .ThenInclude(week => week.TrainingDays)
+                    .ThenInclude(day => day.TrainingDayType)
+                    .Include(cycle => cycle.TrainingWeeks)
+                    .ThenInclude(week => week.TrainingDays)
+                    .ThenInclude(day => day.ExercisesInTrainingDay)
+                    .ThenInclude(exerciseInTrainingDay => exerciseInTrainingDay.ExerciseType)
+                    .Include(cycle => cycle.TrainingWeeks)
+                    .ThenInclude(week => week.TrainingDays)
+                    .ThenInclude(day => day.ExercisesInTrainingDay)
+                    .ThenInclude(exerciseInTrainingDay => exerciseInTrainingDay.Exercise)
+                    .Include(cycle => cycle.TrainingWeeks)
+                    .ThenInclude(week => week.TrainingDays).ThenInclude(day => day.ExercisesInTrainingDay)
+                    .ThenInclude(exerciseInTrainingDay => exerciseInTrainingDay.ExerciseSets)
+                    .ThenInclude(set => set.SetType)
+                    .OrderBy(cycle => cycle.StartingDate)
+                    .FirstOrDefaultAsync(cycle => cycle.WorkoutRoutine!.AppUserId == userId);
+            var mappedCycle = Mapper.MapDomainToDAL(fullTrainingCycle);
+            return mappedCycle;
+        }
     }
 }

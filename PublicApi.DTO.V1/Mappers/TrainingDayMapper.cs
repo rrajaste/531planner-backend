@@ -15,7 +15,8 @@ namespace PublicApi.DTO.V1.Mappers
             {
                 Id = bllEntity.Id,
                 Date = bllEntity.Date,
-                TrainingDayType = TrainingDayTypeMapper.MapBLLEntityToPublicDTO(bllEntity.TrainingDayType),
+                Name = bllEntity.TrainingDayType.Name,
+                Description = bllEntity.TrainingDayType.Description,
                 MainLifts = bllEntity.MainLifts.Select(ExerciseMapper.MapBLLEntityToPublicDTO),
                 AccessoryLifts = bllEntity.AccessoryLifts.Select(ExerciseMapper.MapBLLEntityToPublicDTO)
             };

@@ -24,7 +24,7 @@ namespace BLL.Services
                 await UnitOfWork.TrainingCycles.AllWithRoutineIdForUserWithIdAsync(id, userId)
             ).Select(Mapper.MapDALToBLL);
         
-        public async Task<TrainingCycle> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid? userId) =>
+        public async Task<TrainingCycle> FindWithRoutineIdForUserWithIdAsync(Guid id, Guid userId) =>
             Mapper.MapDALToBLL(
                 await UnitOfWork.TrainingCycles.FindWithRoutineIdForUserWithIdAsync(id, userId)
                 );
@@ -36,6 +36,9 @@ namespace BLL.Services
 
         public Task<bool> IsPartOfBaseRoutineAsync(Guid cycleId) =>
             ServiceRepository.IsPartOfBaseRoutineAsync(cycleId);
+
+        public async Task<TrainingCycle> GetFullActiveCycleForUserWithIdAsync(Guid userId) =>
+            Mapper.MapDALToBLL(await ServiceRepository.GetFullActiveCycleForUserWithIdAsync(userId));
 
         public TrainingCycle GenerateBaseCycle(Guid workoutRoutineId) =>
             new TrainingCycle()
