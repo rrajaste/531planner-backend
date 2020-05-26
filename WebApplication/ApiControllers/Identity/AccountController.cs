@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Contracts.BLL.App;
 using Domain.App.Identity;
 using Domain.Identity;
 using Extensions;
@@ -24,6 +25,7 @@ namespace WebApplication.ApiControllers.Identity
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
+        private readonly IAppBLL _bll;
 
         /// <summary>
         /// Constructor for AccountController
@@ -31,11 +33,13 @@ namespace WebApplication.ApiControllers.Identity
         /// <param name="configuration">WebApplication configuration.</param>
         /// <param name="userManager">WebApplication User Manager</param>
         /// <param name="signInManager">WebApplication Sign-in Manager</param>
+        /// <param name="bll">Application business logic layer</param>
         /// <param name="logger">WebApplication logger</param>
         public AccountController(
             IConfiguration configuration,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
+            IAppBLL bll,
             ILogger<AccountController> logger)
         
         {
@@ -43,6 +47,7 @@ namespace WebApplication.ApiControllers.Identity
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _bll = bll;
         }
 
 
@@ -80,7 +85,12 @@ namespace WebApplication.ApiControllers.Identity
                     _configuration.GetSection("JWT").GetValue<int>("ExpireInDays")
                     );
                 _logger.LogInformation($@"Token generated for user {dto.UserName}");
-                return Ok(new {token = jwt, status = "Logged in"});
+                return Ok(new LoginResponse()
+                {
+                    Token = jwt, 
+                    Status = "Logged in",
+                    HasActiveRoutine = await _bll.WorkoutRoutines.UserWithIdHasActiveRoutineAsync(appUser.Id)
+                });
             } 
             _logger.LogInformation($"Web-api login. Login attempt with incorrect password.");
             return StatusCode(403);
