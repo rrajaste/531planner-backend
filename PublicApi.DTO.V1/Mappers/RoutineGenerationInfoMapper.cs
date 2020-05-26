@@ -17,7 +17,6 @@ namespace PublicApi.DTO.V1.Mappers
                     DeadliftMax = dto.DeadliftMax,
                     OverHeadPressMax = dto.OverHeadPressMax,
                     SquatMax = dto.SquatMax,
-                    UnitTypeId = dto.UnitTypeId
                 },
             };
         }

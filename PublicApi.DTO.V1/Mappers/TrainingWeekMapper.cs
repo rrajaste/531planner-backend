@@ -18,7 +18,9 @@ namespace PublicApi.DTO.V1.Mappers
                 StartingDate = bllEntity.StartingDate,
                 EndingDate = (DateTime) bllEntity.EndingDate,
                 IsDeload = bllEntity.IsDeload,
-                TrainingDays = bllEntity.TrainingDays.Select(TrainingDayMapper.MapBLLEntityToPublicDTO)
+                TrainingDays = bllEntity.TrainingDays
+                    .OrderBy(day => day.Date)
+                    .Select(TrainingDayMapper.MapBLLEntityToPublicDTO)
             };
         }
     }

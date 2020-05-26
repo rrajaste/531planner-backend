@@ -17,7 +17,9 @@ namespace PublicApi.DTO.V1.Mappers
                 Id = bllEntity.Id,
                 Name = bllEntity.Name,
                 Description = bllEntity.Description,
-                TrainingCycles = bllEntity.TrainingCycles.Select(TrainingCycleMapper.MapBLLEntityToPublicDTO)
+                TrainingCycles = bllEntity.TrainingCycles
+                    .OrderBy(cycle => cycle.CycleNumber)
+                    .Select(TrainingCycleMapper.MapBLLEntityToPublicDTO)
             };
         }
         

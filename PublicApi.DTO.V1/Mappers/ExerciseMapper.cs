@@ -23,8 +23,12 @@ namespace PublicApi.DTO.V1.Mappers
                 Description = bllEntity.Exercise.Description,
                 TypeName = bllEntity.ExerciseType.Name,
                 TypeDescription = bllEntity.ExerciseType.Description,
-                WarmUpSets = bllEntity.WarmUpSets.Select(ExerciseSetMapper.MapBLLEntityToPublicDTO),
-                WorkSets = bllEntity.WorkSets.Select(ExerciseSetMapper.MapBLLEntityToPublicDTO)
+                WarmUpSets = bllEntity.WarmUpSets
+                    .OrderBy(set => set.SetNumber)
+                    .Select(ExerciseSetMapper.MapBLLEntityToPublicDTO),
+                WorkSets = bllEntity.WorkSets
+                    .OrderBy(set => set.SetNumber)
+                    .Select(ExerciseSetMapper.MapBLLEntityToPublicDTO)
             };
         }
     }

@@ -17,7 +17,9 @@ namespace PublicApi.DTO.V1.Mappers
                 CycleNumber = bllEntity.CycleNumber,
                 StartingDate = bllEntity.StartingDate,
                 EndingDate = (DateTime) bllEntity.EndingDate,
-                TrainingWeeks = bllEntity.TrainingWeeks.Select(TrainingWeekMapper.MapBLLEntityToPublicDTO)
+                TrainingWeeks = bllEntity.TrainingWeeks
+                    .OrderBy(week => week.WeekNumber)
+                    .Select(TrainingWeekMapper.MapBLLEntityToPublicDTO)
             };
         }
     }
