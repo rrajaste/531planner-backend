@@ -127,9 +127,8 @@ namespace WebApplication.ApiControllers
         }
         
         /// <summary>
-        /// Generate and save into data source a new training cycle for logged-in user 
+        /// Generate and save into data source a new training cycle for logged-in user's active routine.
         /// </summary>
-        /// <param name="routineId">ID of routine to which the cycle will be added to.</param>
         /// <param name="cycleInfo">New training cycle generation information.</param>
         /// <returns>Full training cycle that was generated and saved into data source.</returns>
         /// <response code="200">Training cycle was successfully generated and saved into data source.</response>
@@ -137,19 +136,21 @@ namespace WebApplication.ApiControllers
         [HttpPost]
         [ActionName("GenerateCycle")]
         [ProducesResponseType(typeof(PublicApi.DTO.V1.TrainingCycle), 200)]
-        public async Task<ActionResult<IEnumerable<PublicApi.DTO.V1.TrainingCycle>>> AddNewCycleToRoutine(Guid routineId, NewFiveThreeOneCycleInfo cycleInfo)
+        public async Task<ActionResult<IEnumerable<PublicApi.DTO.V1.TrainingCycle>>> AddNewCycleActiveRoutine(NewFiveThreeOneCycleInfo cycleInfo)
         {
-            if (await _bll.WorkoutRoutines.ActiveRoutineWithIdExistsForUserAsync(routineId, User.UserId()))
+            if (await _bll.WorkoutRoutines.UserWithIdHasActiveRoutineAsync(User.UserId()))
             {
-                var baseRoutine = await _bll.WorkoutRoutines.FindFullRoutineWithIdAsync(routineId);
+                var baseRoutineId = (await _bll.WorkoutRoutines.ActiveRoutineForUserWithIdAsync(User.UserId())).Id;
+                var baseRoutine = await _bll.WorkoutRoutines.FindFullRoutineWithIdAsync(baseRoutineId);
                 var newCycle = await _bll.WorkoutRoutines.GenerateNewCycleForFiveThreeOneRoutine(baseRoutine, cycleInfo);
                 
                 _bll.TrainingCycles.Add(newCycle);
                 await _bll.SaveChangesAsync();
                 
-                return Ok(TrainingCycleMapper.MapBLLEntityToPublicDTO(newCycle));
+                var cycle = await _bll.TrainingCycles.GetFullActiveCycleForUserWithIdAsync(User.UserId());
+                return Ok(TrainingCycleMapper.MapBLLEntityToPublicDTO(cycle));
             }
-            return NotFound();
+            return NotFound(new { message = "User does not have an active workout routine"});
         }
     }
 }

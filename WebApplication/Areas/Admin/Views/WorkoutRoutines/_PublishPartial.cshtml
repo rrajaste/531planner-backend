@@ -2,5 +2,7 @@
 
 <form asp-action="Publish">
     <input type="hidden" asp-for="@Model.WorkoutRoutineId"/>
-    <button type="submit" class="btn btn-outline-success" title="Publish routine for users to see and use">PUBLISH</button>
+    <button type="submit" class="btn btn-outline-success text-uppercase" title="@Resources.Views.WorkoutRoutine._UnpublishPartial.HoverText">
+        @Resources.Views.WorkoutRoutine._UnpublishPartial.UnPublish
+    </button>
 </form>

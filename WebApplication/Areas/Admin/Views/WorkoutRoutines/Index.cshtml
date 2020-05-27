@@ -6,22 +6,27 @@
 }
 
 <div class="jumbotron shadow rounded">
-    <p class="display-4">WORKOUT ROUTINES</p>
+    <p class="display-4 text-uppercase">@Resources.Views.WorkoutRoutine.Index.Title</p>
     <div>
-        <p class="text-secondary">Use this page to create, 
-                edit, remove or publish workout routines templates <br/>
-                These templates are the basis from which users can generate their own routines from
+        <p class="text-secondary">
+            @Resources.Views.WorkoutRoutine.Index.SubTitle
         </p>
     </div>
 </div>
 <hr/>
 <div>
-    <h3 class="text-left mt-1 mx-1 text-uppercase">UNPUBLISHED</h3>
-    <p class="text-muted text-left">These routines are not published yet and are not visible to users</p>
+    <h3 class="text-left mt-1 mx-1 text-uppercase">
+        @Resources.Views.WorkoutRoutine.Index.Unpublished
+    </h3>
+    <p class="text-muted text-left">
+        @Resources.Views.WorkoutRoutine.Index.UnpublishedSubtext
+    </p>
     <div class="row text-left mx-1">
     <a asp-action="Create">
             <i class="far fa-plus-square text-success add-new-main" data-toggle="tooltip" title="Add new"></i>
-        <span class="mx-1 text-success" title="Create a brand new routine template">ADD NEW</span>
+        <span class="mx-1 text-success" title="Create a brand new routine template">
+            @Resources.Views.WorkoutRoutine.Index.AddNew
+        </span>
     </a>
 </div>
 </div>
@@ -29,7 +34,7 @@
 <div class="row d-flex justify-content-center">
     @if (! Model.UnPublishedRoutines.Any())
     {
-        <p class="text-secondary">No unpublished routines</p>
+        <p class="text-secondary">@Resources.Views.WorkoutRoutine.Index.NoUnPublishedRoutines</p>
     }
     else
     {
@@ -54,14 +59,14 @@
 </div>
 <hr/>
 <div>
-    <h3 class="text-left my-1 mx-1">PUBLISHED</h3>
-    <p class="text-muted text-left">These routines are published and are visible to users</p>
+    <h3 class="text-left text-uppercase my-1 mx-1">@Resources.Views.WorkoutRoutine.Index.Published</h3>
+    <p class="text-muted text-left">@Resources.Views.WorkoutRoutine.Index.PublishedSubText</p>
 </div>
 <hr/>
 <div class="row d-flex justify-content-center">
     @if (!Model.PublishedRoutines.Any())
     {
-        <p class="text-secondary">No published routines</p>
+        <p class="text-secondary">@Resources.Views.WorkoutRoutine.Index.NoPublishedRoutines</p>
     }
     else
     {
