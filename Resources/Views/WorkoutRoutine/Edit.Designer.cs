@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Views.Shared {
+namespace Resources.Views.WorkoutRoutine {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class _ControllerSelectionPartial {
+    public class Edit {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _ControllerSelectionPartial() {
+        internal Edit() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static System.Resources.ResourceManager ResourceManager {
+        internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.Shared._ControllerSelectionPartial", typeof(_ControllerSelectionPartial).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.WorkoutRoutine.Edit", typeof(Edit).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -36,7 +36,7 @@ namespace Resources.Views.Shared {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static System.Globalization.CultureInfo Culture {
+        internal static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -45,21 +45,21 @@ namespace Resources.Views.Shared {
             }
         }
         
-        public static string AdminArea {
+        public static string Title {
             get {
-                return ResourceManager.GetString("AdminArea", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
-        public static string Routines {
+        public static string SubText {
             get {
-                return ResourceManager.GetString("Routines", resourceCulture);
+                return ResourceManager.GetString("SubText", resourceCulture);
             }
         }
         
-        public static string Users {
+        public static string BackToList {
             get {
-                return ResourceManager.GetString("Users", resourceCulture);
+                return ResourceManager.GetString("BackToList", resourceCulture);
             }
         }
     }

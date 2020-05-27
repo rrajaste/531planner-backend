@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="WelcomeTo" xml:space="preserve">
+    <value>
+        Tere tulemast
+    </value>
+    </data>
+    <data name="AreaGreeting" xml:space="preserve">
+    <value>
+        5/3/1 planeerija administraatori alale!
+    </value>
+    </data>
+    <data name="WhatIsThisHeading" xml:space="preserve">
+    <value>
+        Mis see on?
+    </value>
+    </data>
+    <data name="WhatIsThisBody" xml:space="preserve">
+    <value>
+        See on administraatori ala 5/3/1 planeerija veebirakendusele.
+        Siin saate luua, muuta ja vaadata erinevaid treeningrutiine ja hallata kasutajaid.
+        Alustamiseks kasutage linke navigatsiooni ribal!
+    </value>
+    </data>
+    <data name="WhatIs531Heading" xml:space="preserve">
+    <value>
+        Mis on 5/3/1?
+    </value>
+    </data>
+    <data name="WhatIs531Body" xml:space="preserve">
+    <value>
+        5/3/1 on üks populaarsemaid mittelineaarseid jõutreeningu rutiine Jim Wendlerilt.
+        Antud rakenduse eesmärk on aidata kasutajatel mugavalt luua ja kohandada 5/3/1 rutiine 
+        ning jälgida oma teekonda maksimaalse jõu ja lihassuuruseni.
+    </value>
+    </data>
+    <data name="NeedHelpHeading" xml:space="preserve">
+    <value>
+        Vajate abi?
+    </value>
+    </data>
+    <data name="ApiDocLinkText" xml:space="preserve">
+    <value>
+        RESTful klient API dokumentatsioon
+    </value>
+    </data>
+    <data name="GitLinkText" xml:space="preserve">
+    <value>
+        Projekti GIT varamu
+    </value>
+    </data>
+</root>

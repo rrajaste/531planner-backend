@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="WelcomeTo" xml:space="preserve">
+    <value>
+        Welcome to
+    </value>
+    </data>
+    <data name="AreaGreeting" xml:space="preserve">
+    <value>
+        5/3/1 planner admin area!
+    </value>
+    </data>
+    <data name="WhatIsThisHeading" xml:space="preserve">
+    <value>
+        What is this?
+    </value>
+    </data>
+    <data name="WhatIsThisBody" xml:space="preserve">
+    <value>
+        This is the admin area for the 5/3/1 planner web application
+        Here you can create, edit and view different workout routines as well as manage user accounts.
+        Use the links in the navigation bar to get you started!
+    </value>
+    </data>
+    <data name="WhatIs531Heading" xml:space="preserve">
+    <value>
+        What is 5/3/1?
+    </value>
+    </data>
+    <data name="WhatIs531Body" xml:space="preserve">
+    <value>
+        5/3/1 is one of the most popular non-linear strength training routine templates developed by Jim Wendler.
+        This application aims help users to generate and customise 5/3/1 routines comfortably,
+        as well as track their path to maximum strength and size. 
+    </value>
+    </data>
+    <data name="NeedHelpHeading" xml:space="preserve">
+    <value>
+        Need help?
+    </value>
+    </data>
+    <data name="ApiDocLinkText" xml:space="preserve">
+    <value>
+        RESTful client API documentation
+    </value>
+    </data>
+    <data name="GitLinkText" xml:space="preserve">
+    <value>
+        Project GIT repository
+    </value>
+    </data>
+</root>
