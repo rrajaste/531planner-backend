@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Views.WorkoutRoutine {
+namespace Resources.Views.TrainingWeeks {
     using System;
     
     
@@ -28,7 +28,7 @@ namespace Resources.Views.WorkoutRoutine {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.WorkoutRoutine.Index", typeof(Index).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.TrainingWeeks.Index", typeof(Index).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -36,7 +36,7 @@ namespace Resources.Views.WorkoutRoutine {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -45,75 +45,51 @@ namespace Resources.Views.WorkoutRoutine {
             }
         }
         
-        public static string Title {
+        public static string SubText {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("SubText", resourceCulture);
             }
         }
         
-        public static string SubTitle {
+        public static string Back {
             get {
-                return ResourceManager.GetString("SubTitle", resourceCulture);
+                return ResourceManager.GetString("Back", resourceCulture);
             }
         }
         
-        public static string Unpublished {
+        public static string TrainingWeeks {
             get {
-                return ResourceManager.GetString("Unpublished", resourceCulture);
+                return ResourceManager.GetString("TrainingWeeks", resourceCulture);
             }
         }
         
-        public static string Published {
+        public static string NoTrainingWeeks {
             get {
-                return ResourceManager.GetString("Published", resourceCulture);
+                return ResourceManager.GetString("NoTrainingWeeks", resourceCulture);
             }
         }
         
-        public static string UnpublishedSubtext {
+        public static string DeloadWeek {
             get {
-                return ResourceManager.GetString("UnpublishedSubtext", resourceCulture);
+                return ResourceManager.GetString("DeloadWeek", resourceCulture);
             }
         }
         
-        public static string AddNew {
+        public static string TrainingWeek {
             get {
-                return ResourceManager.GetString("AddNew", resourceCulture);
+                return ResourceManager.GetString("TrainingWeek", resourceCulture);
             }
         }
         
-        public static string NoPublishedRoutines {
+        public static string NoTrainingDays {
             get {
-                return ResourceManager.GetString("NoPublishedRoutines", resourceCulture);
+                return ResourceManager.GetString("NoTrainingDays", resourceCulture);
             }
         }
         
-        public static string NoUnPublishedRoutines {
+        public static string BackHoverText {
             get {
-                return ResourceManager.GetString("NoUnPublishedRoutines", resourceCulture);
-            }
-        }
-        
-        public static string PublishedSubText {
-            get {
-                return ResourceManager.GetString("PublishedSubText", resourceCulture);
-            }
-        }
-        
-        public static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
-            }
-        }
-        
-        public static string View {
-            get {
-                return ResourceManager.GetString("View", resourceCulture);
-            }
-        }
-        
-        public static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
+                return ResourceManager.GetString("BackHoverText", resourceCulture);
             }
         }
         

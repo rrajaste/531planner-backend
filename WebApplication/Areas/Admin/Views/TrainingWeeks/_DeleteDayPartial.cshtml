@@ -3,7 +3,7 @@
 @model BLL.App.DTO.UserTrainingDay
 
 <a asp-action="Delete" asp-controller="TrainingDays"
-   data-toggle="modal" title="Delete training day" data-target="#modal-delete-day-id-@Model.Id">
+   data-toggle="modal" title="@Resources.Views.TrainingWeeks._DeleteDayPartial.DeleteHoverText" data-target="#modal-delete-day-id-@Model.Id">
     <i class="fa fa-trash delete text-danger" aria-hidden="true"></i>
 </a>
 
@@ -12,7 +12,9 @@
         <form asp-controller="TrainingDays" asp-action="Delete">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-center text-danger" id="deleteModalLabel">Are you sure you wish to delete this?</h4>
+                    <h4 class="modal-title text-center text-danger" id="deleteModalLabel">
+                        @Resources.Views.TrainingWeeks._DeleteDayPartial.ConfirmationText
+                    </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -25,15 +27,19 @@
                         @Model.TrainingDayType?.Name
                     </h5>
                     <h5 class="text-muted">
-                        Number of main lifts: @Model.MainLifts?.Count()
+                        @Resources.Views.TrainingWeeks._DeleteDayPartial.NrOfMainLifts: @Model.MainLifts?.Count()
                     </h5>
                     <h5 class="text-muted">
-                        Number of accessory lifts: @Model.AccessoryLifts?.Count()
+                        @Resources.Views.TrainingWeeks._DeleteDayPartial.NrOfAccessoryLifts: @Model.AccessoryLifts?.Count()
                     </h5>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary text-uppercase" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger text-uppercase">Delete</button>
+                    <button type="button" class="btn btn-primary text-uppercase" data-dismiss="modal">
+                        @Resources.Views.TrainingWeeks._DeleteDayPartial.Close
+                    </button>
+                    <button type="submit" class="btn btn-danger text-uppercase">
+                        @Resources.Views.TrainingWeeks._DeleteDayPartial.Delete
+                    </button>
                     <input type="hidden" value="@Model.Id" name="@nameof(TrainingDayDeleteViewModel.TrainingDayId)"/>
                     <input type="hidden" asp-for="@Model.TrainingWeekId"/>
                 </div>

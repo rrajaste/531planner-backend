@@ -8,16 +8,19 @@
 <div class="jumbotron shadow rounded">
     <h1 class="text-uppercase display-4">@Model.WorkoutRoutineName</h1>
     <p class="text-muted">
-        Use this page to create, edit or remove training weeks that make up the workout routine template. <br/>
-        These training weeks are all part of a single workout cycle.
+        @Resources.Views.TrainingWeeks.Index.SubText
     </p>
     <p>
-        <a class="text-uppercase" asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index" 
-           title="Back to workout routine's list">Back</a>
+        <a class="text-uppercase" asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index"
+           title="@Resources.Views.TrainingWeeks.Index.BackHoverText">
+            @Resources.Views.TrainingWeeks.Index.Back
+        </a>
     </p>
 <hr/>
 <div>
-    <h3 class="text-left my-1 mx-1 text-uppercase">TRAINING WEEKS</h3>
+    <h3 class="text-left my-1 mx-1 text-uppercase">
+        @Resources.Views.TrainingWeeks.Index.TrainingWeeks
+    </h3>
     <div class="row text-left mx-1">
         <partial name="_CreateWeekPartial" model="GetCreateViewModel()"/>
     </div>
@@ -25,7 +28,7 @@
 <hr/>
 @if (!Model.TrainingWeeks.Any())
 {
-    <p>No training weeks added yet!</p>
+    <p>@Resources.Views.TrainingWeeks.Index.NoTrainingWeeks</p>
 }
 <div class="row d-flex justify-content-center">
     @foreach (var item in Model.TrainingWeeks)
@@ -34,14 +37,14 @@
             <div class="card-body">
                 @if (item.IsDeload)
                 {
-                    <h5 class="text-uppercase text-muted" title="Set/unset training week as deload week">Deload week</h5>
+                    <h5 class="text-uppercase text-muted" title="@Resources.Views.TrainingWeeks._EditDeloadPartial.HoverText">@Resources.Views.TrainingWeeks.Index.DeloadWeek</h5>
                 }
-                <h2 class="card-title text-uppercase">Training week @item.WeekNumber</h2>
+                <h2 class="card-title text-uppercase">@Resources.Views.TrainingWeeks.Index.TrainingWeek @item.WeekNumber</h2>
                 <hr/>
                 <div class="row d-flex justify-content-center">
                 @if (item.TrainingDays == null || !item.TrainingDays.Any())
                 {
-                    <p class="text-secondary">No training days added yet!</p>
+                    <p class="text-secondary">@Resources.Views.TrainingWeeks.Index.NoTrainingDays</p>
                 }
                 else
                 {
@@ -53,7 +56,7 @@
                 @if (item.TrainingDays != null && item.TrainingDays.Count() < 4)
                 {
                     <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">
-                        <span class="text-success"><i class="fas fa-plus ml-2"></i> Add</span>
+                        <span class="text-success"><i class="fas fa-plus ml-2"></i>@Resources.Views.TrainingWeeks.Index.Add</span>
                     </a>
                 }
                 </div>

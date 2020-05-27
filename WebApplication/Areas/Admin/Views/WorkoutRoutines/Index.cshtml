@@ -77,8 +77,10 @@
                     <h5 class="card-title text-uppercase">@item.Name</h5>
                     <p class="card-text">@item.Description</p>
                     <div class="view-edit-delete">
-                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
-                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
+                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" 
+                           title="@Resources.Views.WorkoutRoutine.Index.View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" 
+                           title="@Resources.Views.WorkoutRoutine.Index.Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
                         <partial name="_DeletePartial" model="@item"/>
                     </div>
                 </div>

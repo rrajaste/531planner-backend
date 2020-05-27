@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Views.WorkoutRoutine {
+namespace Resources.Views.TrainingWeeks {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Index {
+    public class _DeleteWeekPartial {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Index() {
+        internal _DeleteWeekPartial() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.WorkoutRoutine.Index", typeof(Index).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.TrainingWeeks._DeleteWeekPartial", typeof(_DeleteWeekPartial).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,69 +45,39 @@ namespace Resources.Views.WorkoutRoutine {
             }
         }
         
-        public static string Title {
+        public static string DeleteConfirm {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("DeleteConfirm", resourceCulture);
             }
         }
         
-        public static string SubTitle {
+        public static string WeekNumber {
             get {
-                return ResourceManager.GetString("SubTitle", resourceCulture);
+                return ResourceManager.GetString("WeekNumber", resourceCulture);
             }
         }
         
-        public static string Unpublished {
+        public static string TrainingDays {
             get {
-                return ResourceManager.GetString("Unpublished", resourceCulture);
+                return ResourceManager.GetString("TrainingDays", resourceCulture);
             }
         }
         
-        public static string Published {
+        public static string IsDeload {
             get {
-                return ResourceManager.GetString("Published", resourceCulture);
+                return ResourceManager.GetString("IsDeload", resourceCulture);
             }
         }
         
-        public static string UnpublishedSubtext {
+        public static string Yes {
             get {
-                return ResourceManager.GetString("UnpublishedSubtext", resourceCulture);
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         
-        public static string AddNew {
+        public static string No {
             get {
-                return ResourceManager.GetString("AddNew", resourceCulture);
-            }
-        }
-        
-        public static string NoPublishedRoutines {
-            get {
-                return ResourceManager.GetString("NoPublishedRoutines", resourceCulture);
-            }
-        }
-        
-        public static string NoUnPublishedRoutines {
-            get {
-                return ResourceManager.GetString("NoUnPublishedRoutines", resourceCulture);
-            }
-        }
-        
-        public static string PublishedSubText {
-            get {
-                return ResourceManager.GetString("PublishedSubText", resourceCulture);
-            }
-        }
-        
-        public static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
-            }
-        }
-        
-        public static string View {
-            get {
-                return ResourceManager.GetString("View", resourceCulture);
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -117,9 +87,9 @@ namespace Resources.Views.WorkoutRoutine {
             }
         }
         
-        public static string Add {
+        public static string Close {
             get {
-                return ResourceManager.GetString("Add", resourceCulture);
+                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
     }

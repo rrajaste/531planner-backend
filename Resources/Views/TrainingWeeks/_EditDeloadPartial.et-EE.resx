@@ -18,10 +18,19 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="UnPublish">
-        <value>UnPublish</value>
+    <data name="EditTrainingWeek">
+        <value>Muuda treeningnädalat</value>
+    </data>
+    <data name="Close">
+        <value>Sulge</value>
+    </data>
+    <data name="Submit">
+        <value>Sisesta</value>
     </data>
     <data name="HoverText">
-        <value>Remove routine from published routines list, users can no longer see or use this</value>
+        <value>Muuda, kas treeningnädal on mahalaadimisnädal või mitte</value>
+    </data>
+    <data name="EditHoverText">
+        <value>Muuda nädalat</value>
     </data>
 </root>

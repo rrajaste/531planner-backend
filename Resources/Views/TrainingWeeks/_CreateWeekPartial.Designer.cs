@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Views.WorkoutRoutine {
+namespace Resources.Views.TrainingWeeks {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class _UnpublishPartial {
+    public class _CreateWeekPartial {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _UnpublishPartial() {
+        internal _CreateWeekPartial() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static System.Resources.ResourceManager ResourceManager {
+        internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.WorkoutRoutine._UnpublishPartial", typeof(_UnpublishPartial).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.TrainingWeeks._CreateWeekPartial", typeof(_CreateWeekPartial).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -36,7 +36,7 @@ namespace Resources.Views.WorkoutRoutine {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static System.Globalization.CultureInfo Culture {
+        internal static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -45,15 +45,27 @@ namespace Resources.Views.WorkoutRoutine {
             }
         }
         
-        public static string UnPublish {
+        public static string IsDeload {
             get {
-                return ResourceManager.GetString("UnPublish", resourceCulture);
+                return ResourceManager.GetString("IsDeload", resourceCulture);
             }
         }
         
-        public static string HoverText {
+        public static string DeloadHoverText {
             get {
-                return ResourceManager.GetString("HoverText", resourceCulture);
+                return ResourceManager.GetString("DeloadHoverText", resourceCulture);
+            }
+        }
+        
+        public static string AddHoverText {
+            get {
+                return ResourceManager.GetString("AddHoverText", resourceCulture);
+            }
+        }
+        
+        public static string AddNew {
+            get {
+                return ResourceManager.GetString("AddNew", resourceCulture);
             }
         }
     }

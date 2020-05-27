@@ -62,4 +62,16 @@
             These routines are published and are visible to users
         </value>
     </data>
+    <data name="Edit">
+        <value>Edit workout routine</value>
+    </data>
+    <data name="View">
+        <value>View workout routine</value>
+    </data>
+    <data name="Delete">
+        <value>Delete workout routine</value>
+    </data>
+    <data name="Add">
+        <value>Create a brand new routine template</value>
+    </data>
 </root>

@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Views.WorkoutRoutine {
+namespace Resources.Views.TrainingWeeks {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class _UnpublishPartial {
+    public class _EditDeloadPartial {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _UnpublishPartial() {
+        internal _EditDeloadPartial() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static System.Resources.ResourceManager ResourceManager {
+        internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.WorkoutRoutine._UnpublishPartial", typeof(_UnpublishPartial).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.TrainingWeeks._EditDeloadPartial", typeof(_EditDeloadPartial).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,15 +45,33 @@ namespace Resources.Views.WorkoutRoutine {
             }
         }
         
-        public static string UnPublish {
+        public static string EditTrainingWeek {
             get {
-                return ResourceManager.GetString("UnPublish", resourceCulture);
+                return ResourceManager.GetString("EditTrainingWeek", resourceCulture);
+            }
+        }
+        
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        public static string Submit {
+            get {
+                return ResourceManager.GetString("Submit", resourceCulture);
             }
         }
         
         public static string HoverText {
             get {
                 return ResourceManager.GetString("HoverText", resourceCulture);
+            }
+        }
+        
+        public static string EditHoverText {
+            get {
+                return ResourceManager.GetString("EditHoverText", resourceCulture);
             }
         }
     }

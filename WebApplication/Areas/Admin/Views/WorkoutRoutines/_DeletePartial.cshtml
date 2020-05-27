@@ -1,6 +1,7 @@
 @model BLL.App.DTO.WorkoutRoutine
 
-<a data-toggle="modal" title="Delete" data-target="#modalId-@Model.Id" asp-action="Delete" asp-route-id="@Model.Id">
+<a data-toggle="modal" 
+   title="@Resources.Views.WorkoutRoutine.Index.Delete" data-target="#modalId-@Model.Id" asp-action="Delete" asp-route-id="@Model.Id">
     <i class="fas fa-trash delete text-danger"></i>
 </a>
 

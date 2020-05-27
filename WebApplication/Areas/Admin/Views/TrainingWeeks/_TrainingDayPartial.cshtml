@@ -8,7 +8,7 @@
             <h5 class="text-uppercase">@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(@Model.Date.DayOfWeek)</h5>
             <p class="m-0" title="@Model.TrainingDayType?.Description">@Model.TrainingDayType?.Name</p>
             <span class="view-edit-delete-small text-decoration-none">
-                <a title="Edit training day" asp-controller="TrainingDays" asp-action="Edit" asp-route-id="@Model.Id">
+                <a title="@Resources.Views.TrainingWeeks._TrainingDayPartial.EditHoverText" asp-controller="TrainingDays" asp-action="Edit" asp-route-id="@Model.Id">
                     <i class="fa fa-pencil edit text-success ml-1" aria-hidden="true"></i>
                 </a>
                 <partial name="_DeleteDayPartial" model="Model"/>
@@ -17,20 +17,20 @@
         @if (Model.MainLifts.IsEmptyOrNull() && Model.AccessoryLifts.IsEmptyOrNull() )
         {
             <li class="list-group-item">
-                <p class="text-secondary">No exercises added yet!</p>
+                <p class="text-secondary">@Resources.Views.TrainingWeeks._TrainingDayPartial.NoExercises</p>
             </li>
         }
         else
         {
             <li class="list-group-item p-0">
                 <p class="text-uppercase m-1">
-                    <b>Main lifts</b>
+                    <b>@Resources.Views.TrainingWeeks._TrainingDayPartial.MainLifts</b>
                 </p>
             </li>
             if (Model.MainLifts.IsEmptyOrNull())
             {
                 <li class="text-secondary list-group-item">
-                    No main lifts added yet!
+                    @Resources.Views.TrainingWeeks._TrainingDayPartial.NoMainLifts
                 </li>
             }
             else
@@ -46,7 +46,7 @@
             {
                 <li class="list-group-item p-0">
                     <p class="text-uppercase m-1">
-                        <b>Accessories</b>
+                        <b>@Resources.Views.TrainingWeeks._TrainingDayPartial.Accessories</b>
                     </p>
                 </li>
                 <li class="list-group-item">
@@ -58,8 +58,9 @@
             }
         }
         <li class="training-day-table list-group-item">
-            <a class="btn btn-outline-info btn-sm text-uppercase stretched-link" asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@Model.Id">
-                View
+            <a class="btn btn-outline-info btn-sm text-uppercase stretched-link" 
+               asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@Model.Id">
+                @Resources.Views.TrainingWeeks._TrainingDayPartial.View
             </a>
         </li>
     </ul>

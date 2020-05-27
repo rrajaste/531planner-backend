@@ -62,4 +62,16 @@
             Need rutiinid on avalikustatud ning kasutajatele nähtavad
         </value>
     </data>
+    <data name="Edit">
+        <value>Muuda treeningnädalat</value>
+    </data>
+    <data name="View">
+        <value>Vaata treeningnädalat</value>
+    </data>
+    <data name="Delete">
+        <value>Kustuta treeningnädal</value>
+    </data>
+    <data name="Add">
+        <value>Lisa uus treeningrutiini mall</value>
+    </data>
 </root>

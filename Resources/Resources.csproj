@@ -75,6 +75,78 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>_UnpublishPartial.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\Index.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\Index.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_TrainingDayPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_TrainingDayPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_TrainingDayPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_TrainingDayPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_ExercisePartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExercisePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_ExercisePartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExercisePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_EditDeloadPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_EditDeloadPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_EditDeloadPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_EditDeloadPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_DeleteWeekPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_DeleteWeekPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_DeleteWeekPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_DeleteWeekPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_DeleteDayPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_DeleteDayPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_DeleteDayPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_DeleteDayPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_CreateWeekPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_CreateWeekPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_CreateWeekPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_CreateWeekPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_MoveWeekUpPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_MoveWeekUpPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_MoveWeekUpPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_MoveWeekUpPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_MoveWeekDownPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_MoveWeekDownPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingWeeks\_MoveWeekDownPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_MoveWeekDownPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -296,6 +368,51 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>_UnpublishPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\Index.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_TrainingDayPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_TrainingDayPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_ExercisePartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_ExercisePartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_EditDeloadPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_EditDeloadPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_DeleteWeekPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_DeleteWeekPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_DeleteDayPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_DeleteDayPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_CreateWeekPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_CreateWeekPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_MoveWeekUpPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_MoveWeekUpPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingWeeks\_MoveWeekDownPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_MoveWeekDownPartial.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 

@@ -7,28 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources.Views.WorkoutRoutine {
+namespace Resources.Views.TrainingWeeks {
     using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class _UnpublishPartial {
+    public class _DeleteDayPartial {
         
         private static System.Resources.ResourceManager resourceMan;
         
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal _UnpublishPartial() {
+        internal _DeleteDayPartial() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static System.Resources.ResourceManager ResourceManager {
+        internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.WorkoutRoutine._UnpublishPartial", typeof(_UnpublishPartial).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Resources.Views.TrainingWeeks._DeleteDayPartial", typeof(_DeleteDayPartial).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -45,15 +45,39 @@ namespace Resources.Views.WorkoutRoutine {
             }
         }
         
-        public static string UnPublish {
+        public static string ConfirmationText {
             get {
-                return ResourceManager.GetString("UnPublish", resourceCulture);
+                return ResourceManager.GetString("ConfirmationText", resourceCulture);
             }
         }
         
-        public static string HoverText {
+        public static string NrOfMainLifts {
             get {
-                return ResourceManager.GetString("HoverText", resourceCulture);
+                return ResourceManager.GetString("NrOfMainLifts", resourceCulture);
+            }
+        }
+        
+        public static string NrOfAccessoryLifts {
+            get {
+                return ResourceManager.GetString("NrOfAccessoryLifts", resourceCulture);
+            }
+        }
+        
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        public static string DeleteHoverText {
+            get {
+                return ResourceManager.GetString("DeleteHoverText", resourceCulture);
             }
         }
     }

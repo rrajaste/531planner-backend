@@ -18,10 +18,30 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="UnPublish">
-        <value>UnPublish</value>
+    <data name="DeleteConfirm">
+        <value>
+            Are you sure you wish to premanently delete this?
+        </value>
     </data>
-    <data name="HoverText">
-        <value>Remove routine from published routines list, users can no longer see or use this</value>
+    <data name="WeekNumber">
+        <value>Week number</value>
+    </data>
+    <data name="TrainingDays">
+        <value>Training days</value>
+    </data>
+    <data name="IsDeload">
+        <value>Is deload</value>
+    </data>
+    <data name="Yes">
+        Yes
+    </data>
+    <data name="No">
+        No
+    </data>
+    <data name="Delete">
+        Delete
+    </data>
+    <data name="Close">
+        Close
     </data>
 </root>

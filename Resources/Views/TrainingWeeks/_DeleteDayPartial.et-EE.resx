@@ -18,10 +18,22 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="UnPublish">
-        <value>UnPublish</value>
+    <data name="ConfirmationText">
+        <value>Olete kindel, et soovite selle jäädavalt kustutada?</value>
     </data>
-    <data name="HoverText">
-        <value>Remove routine from published routines list, users can no longer see or use this</value>
+    <data name="NrOfMainLifts">
+        <value>Põhitõsteid</value>
+    </data>
+    <data name="NrOfAccessoryLifts">
+        <value>Lisaharjutusi</value>
+    </data>
+    <data name="Close">
+        <value>Sulge</value>
+    </data>
+    <data name="Delete">
+        <value>Kustuta</value>
+    </data>
+    <data name="DeleteHoverText">
+        <value>Kustuta treeningupäev</value>
     </data>
 </root>

@@ -18,12 +18,34 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
-    <data name="UnPublish">
-        <value>Ära avalikusta</value>
-    </data>
-    <data name="HoverText">
+    <data name="SubText">
         <value>
-            Eemalda rutiin avalikustatud rutiinide nimekirjast, kasutajad ei näe enam seda rutiini
+            Use this page to create, edit or remove training weeks that make up the workout routine template.
+            These training weeks are all part of a single workout cycle.
         </value>
+    </data>
+    <data name="Back">
+        <value>Back</value>
+    </data>
+    <data name="TrainingWeeks">
+        <value>TRAINING WEEKS</value>
+    </data>
+    <data name="NoTrainingWeeks">
+        <value>No training weeks added yet!</value>
+    </data>
+    <data name="DeloadWeek">
+        <value>Deload week</value>
+    </data>
+    <data name="TrainingWeek">
+        <value>Training week</value>
+    </data>
+    <data name="NoTrainingDays">
+        <value>No training days added yet!</value>
+    </data>
+    <data name="BackHoverText">
+        <value>Back to workout routine's list</value>
+    </data>
+    <data name="Add">
+        <value>Add</value>
     </data>
 </root>

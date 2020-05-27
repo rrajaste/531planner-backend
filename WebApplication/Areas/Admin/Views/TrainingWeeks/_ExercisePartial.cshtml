@@ -5,14 +5,14 @@
 <p title="@Model.Exercise?.Description" class="font-weight-bold text-left m-0 border-bottom">@Model.Exercise?.Name</p>
 @if (Model.WorkSets.IsEmptyOrNull() && Model.WarmUpSets.IsEmptyOrNull())
 {
-    <p class="text-muted mr-2 mt-2">No sets added yet!</p>
+    <p class="text-muted mr-2 mt-2">@Resources.Views.TrainingWeeks._ExercisePartial.NoSets</p>
 }
 else
 {
     <div class="text-left ml-3 text-secondary">
         @if (! Model.WarmUpSets.IsEmptyOrNull())
         {
-            <p class="text-left m-0"><em>Warmup</em></p>
+            <p class="text-left m-0"><em>@Resources.Views.TrainingWeeks._ExercisePartial.WarmUp</em></p>
             @foreach (var set in Model.WarmUpSets!.OrderBy(set => set.SetNumber))
             {
                 <span>- @set.NrOfReps x @set.Weight%</span><br/>
@@ -22,11 +22,11 @@ else
     <div class="text-left ml-3 text-secondary">
     @if (Model.WorkSets.IsEmptyOrNull())
     {
-        <p>No sets added yet!</p>
+        <p>@Resources.Views.TrainingWeeks._ExercisePartial.NoSets</p>
     }
     else
     {
-        <p class="text-left m-0"><em>Work sets</em></p>
+        <p class="text-left m-0"><em>@Resources.Views.TrainingWeeks._ExercisePartial.WorkSet</em></p>
         @foreach (var set in Model.WorkSets!.OrderBy(set => set.SetNumber))
         {
             <span>- @set.NrOfReps x @set.Weight%</span><br/>
