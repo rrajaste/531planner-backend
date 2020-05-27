@@ -4,18 +4,24 @@
     ViewData["Title"] = "Create";
 }
 <div class="jumbotron rounded shadow">
-    <h3 class="text-uppercase">Add exercise to training day</h3>
+    <h3 class="text-uppercase">@Resources.Views.ExerciseInTrainingDay.Create.Title</h3>
     <hr />
     <div class="row justify-content-center">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <partial name="_CreateEditPartial"/>
-        </form>
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <partial name="_CreateEditPartial"/>
+            </form>
+        </div>
     </div>
+    <hr/>
+    <div>
+        <a class="text-uppercase" asp-area="Admin" asp-controller="TrainingDays" asp-action="View"
+           asp-route-id="@Model.ExerciseInTrainingDay.TrainingDayId">
+            @Resources.Views.ExerciseInTrainingDay.Edit.BackToList
+        </a>
     </div>
 </div>
 <div>
-    <a asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@Model.ExerciseInTrainingDay.TrainingDayId">Back to List</a>
 </div>
 
 @section Scripts {
