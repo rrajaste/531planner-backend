@@ -6,7 +6,8 @@
     <div class="text-center row justify-content-center">
         <h4 title="@Model.Exercise?.Description">
             @Model.Exercise?.Name
-            <a asp-controller="ExerciseInTrainingDay" asp-action="Edit" asp-route-id="@Model.Id" title="Edit exercise">
+            <a asp-controller="ExerciseInTrainingDay" asp-action="Edit" asp-route-id="@Model.Id" 
+               title="@Resources.Views.TrainingDay._ExercisePartial.EditHoverText">
                 <i class="fa fa-pencil edit text-success small ml-1" aria-hidden="true"></i>
             </a>
             <partial name="_ExerciseDeletePartial"/>
@@ -17,22 +18,24 @@
 <li class="list-group-item">
     @if (Model.WorkSets.IsEmptyOrNull() && Model.WarmUpSets.IsEmptyOrNull())
     {
-        <p class="text-secondary">No sets added yet!</p>
+        <p class="text-secondary">
+            @Resources.Views.TrainingDay._ExercisePartial.NoSets
+        </p>
     }
     else
     {
         @if (!Model.WarmUpSets.IsEmptyOrNull())
         {
-            <h5 class="">Warmup</h5>
+            <h5 class="">@Resources.Views.TrainingDay._ExercisePartial.WarmUp</h5>
             @foreach (var set in Model.WarmUpSets!.OrderBy(set => set.SetNumber))
             {
                 <partial name="_ExerciseSetPartial" model="set"/>
             }
         }
-        <h5 class="">Work sets</h5>
+        <h5 class="">@Resources.Views.TrainingDay._ExercisePartial.WorkSets</h5>
         @if (Model.WorkSets.IsEmptyOrNull())
         {
-            <p class="text-secondary">No sets added yet!</p>
+            <p class="text-secondary">@Resources.Views.TrainingDay._ExercisePartial.NoSets</p>
         }
         else
         {

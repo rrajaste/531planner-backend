@@ -147,6 +147,86 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>_MoveWeekDownPartial.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\View.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\View.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\Edit.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Edit.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\Edit.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Edit.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\Create.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\Create.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseSetDeletePartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseSetDeletePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseSetDeletePartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseSetDeletePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseSetCreatePartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseSetCreatePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseSetCreatePartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseSetCreatePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExercisePartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExercisePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExercisePartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExercisePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseCreatePartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseCreatePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseCreatePartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseCreatePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_CreateEditPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_CreateEditPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_CreateEditPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_CreateEditPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseDeletePartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseDeletePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseDeletePartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseDeletePartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseSetPartial.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseSetPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\TrainingDay\_ExerciseSetPartial.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ExerciseSetPartial.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -413,6 +493,56 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>_MoveWeekDownPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\View.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>View.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\Edit.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Edit.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\Create.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Create.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\_ExerciseSetDeletePartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_ExerciseSetDeletePartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\_ExerciseSetCreatePartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_ExerciseSetCreatePartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\_ExercisePartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_ExercisePartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\_ExerciseCreatePartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_ExerciseCreatePartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\_CreateEditPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_CreateEditPartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\_ExerciseDeletePartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_ExerciseDeletePartial.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TrainingDay\_ExerciseSetPartial.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_ExerciseSetPartial.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 

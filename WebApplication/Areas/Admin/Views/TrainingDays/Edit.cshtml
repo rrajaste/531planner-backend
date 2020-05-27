@@ -5,8 +5,8 @@
 }
 
 <div class="jumbotron shadow rounded">
-    <h1 class="text-uppercase">Edit training day</h1>
-    <p class="text-muted">Use this page to edit the day of week and type of a training day.</p>
+    <h1 class="text-uppercase">@Resources.Views.TrainingDay.Edit.Title</h1>
+    <p class="text-muted">@Resources.Views.TrainingDay.Edit.SubText</p>
     <hr />
 <div class="row justify-content-center">
 <div class="col-md-4">
@@ -19,7 +19,10 @@
 </div>
     <hr/>
     <div class="text-uppercase">
-        <a title="Back to training weeks list" asp-controller="TrainingWeeks" asp-action="Index" asp-route-id="@Model.WorkoutRoutineId">Back to list</a>
+        <a title="@Resources.Views.TrainingDay.Edit.BackToListHoverText" 
+            asp-controller="TrainingWeeks" asp-action="Index" asp-route-id="@Model.WorkoutRoutineId">
+            @Resources.Views.TrainingDay.Edit.BackToList
+        </a>
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 @model BLL.App.DTO.ExerciseSet
 
-<a data-toggle="modal" title="Delete exercise" data-target="#modal-delete-id-@Model.Id" asp-action="Delete" asp-route-id="@Model.Id">
+<a data-toggle="modal" title="@Resources.Views.TrainingDay._ExerciseSetDeletePartial.HoverText" data-target="#modal-delete-id-@Model.Id" asp-action="Delete" asp-route-id="@Model.Id">
     <i class="fas fa-trash small delete text-danger ml-1 small"></i>
 </a>
 
@@ -8,7 +8,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center text-danger" id="deleteModalLabel">Are you sure you wish to remove this exercise set?</h4>
+                <h4 class="modal-title text-center text-danger" id="deleteModalLabel">
+                    @Resources.Views.TrainingDay._ExerciseSetDeletePartial.ConfirmText
+                </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,10 +19,14 @@
                 <h4>@Model.NrOfReps x @Model.Weight%</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    @Resources.Views.TrainingDay._ExerciseSetDeletePartial.Close
+                </button>
                 <form asp-controller="ExerciseSets" asp-action="Delete">
                     <input type="hidden" value="@Model.Id" name="Id"/>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger">
+                        @Resources.Views.TrainingDay._ExerciseSetDeletePartial.Delete
+                    </button>
                 </form>
             </div>
         </div>

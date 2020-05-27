@@ -5,7 +5,7 @@
 }
 <div class="jumbotron shadow rounded text-center">
     
-    <h3 class="text-uppercase">Create a new training day</h3>
+    <h3 class="text-uppercase">@Resources.Views.TrainingDay.Edit.Title</h3>
     <hr />
     <div class="row justify-content-center">
         <div class="col-md-4 d-flex">
@@ -16,7 +16,11 @@
     </div>
     <hr/>
     <div>
-        <a class="text-uppercase" asp-controller="TrainingWeeks" asp-action="Index" asp-route-id="@Model.WorkoutRoutineId">Back to List</a>
+        <a class="text-uppercase" 
+           title="@Resources.Views.TrainingDay.Edit.BackToListHoverText"
+           asp-controller="TrainingWeeks" asp-action="Index" asp-route-id="@Model.WorkoutRoutineId">
+            @Resources.Views.TrainingDay.Edit.BackToList
+        </a>
     </div>
 
 </div>

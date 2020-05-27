@@ -3,7 +3,8 @@
 <div class="row justify-content-center text-center">
     <p>
         - @Model.NrOfReps x @Model.Weight%
-        <a asp-controller="ExerciseSets" asp-action="Edit" title="Edit set" asp-route-id="@Model.Id">
+        <a asp-controller="ExerciseSets" asp-action="Edit" 
+           title="@Resources.Views.TrainingDay._ExerciseSetPartial.HoverText" asp-route-id="@Model.Id">
             <i class="fa fa-pencil small edit text-success ml-1" aria-hidden="true"></i>
         </a>
         <partial name="_ExerciseSetDeletePartial"/>
