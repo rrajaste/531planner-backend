@@ -11,6 +11,5 @@ namespace BLL.App.DTO
         public float BenchPressMax { get; set; }
         public float OverHeadPressMax { get; set; }
         public bool AddDeloadWeek { get; set; }
-        public Guid UnitTypeId { get; set; }
     }
 }

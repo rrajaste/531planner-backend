@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using BLL.App.DTO;
 using Contracts.BLL.App.RoutineGenerators;
 using Domain.App.Enums;
@@ -69,7 +70,6 @@ namespace BLL.RoutineGenerators
                 NrOfReps = exerciseSet.NrOfReps,
                 SetNumber = exerciseSet.SetNumber,
                 Weight = weight,
-                UnitTypeId = NewRoutineInfo.CycleInfo.UnitTypeId,
                 SetTypeId = exerciseSet.SetTypeId,
                 WorkoutRoutineId = NewRoutineId
             };
@@ -94,6 +94,13 @@ namespace BLL.RoutineGenerators
                 setWeight = wendlerMaxes.OverHeadPressMax * (baseWeight / 100);
             }
             return setWeight;
+        }
+
+        public virtual TrainingCycle GenerateNewTrainingCycle(WorkoutRoutine parentRoutine)
+        {
+            NewRoutineId = parentRoutine.Id;
+            var newCycleNumber = parentRoutine.TrainingCycles.Max(cycle => cycle.CycleNumber) + 1;
+            return base.GenerateNewTrainingCycle(parentRoutine.Id, newCycleNumber);
         }
     }
 }

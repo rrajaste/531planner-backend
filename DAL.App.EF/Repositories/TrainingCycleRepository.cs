@@ -72,7 +72,8 @@ namespace DAL.App.EF.Repositories
                     .ThenInclude(exerciseInTrainingDay => exerciseInTrainingDay.ExerciseSets)
                     .ThenInclude(set => set.SetType)
                     .OrderBy(cycle => cycle.StartingDate)
-                    .FirstOrDefaultAsync(cycle => cycle.WorkoutRoutine!.AppUserId == userId);
+                    .FirstOrDefaultAsync(cycle => cycle.WorkoutRoutine!.AppUserId == userId && 
+                                                  cycle.CycleNumber == RepoDbSet.Max(c => c.CycleNumber));
             var mappedCycle = Mapper.MapDomainToDAL(fullTrainingCycle);
             return mappedCycle;
         }

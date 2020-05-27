@@ -86,6 +86,8 @@ namespace BLL.Services
 
         public async Task<TrainingCycle> GenerateNewCycleForFiveThreeOneRoutine(WorkoutRoutine baseRoutine, NewFiveThreeOneCycleInfo cycleInfo)
         {
+            // TODO: Fix this entire ugly workaround of a method
+            
             var oldRoutineMaxCycleNumber = baseRoutine.TrainingCycles.Max(cycle => cycle.CycleNumber);
             var oldCycle = baseRoutine.TrainingCycles.FirstOrDefault(cycle => cycle.CycleNumber == oldRoutineMaxCycleNumber);
             var oldCycleEndingDate = oldCycle.EndingDate;
@@ -104,9 +106,7 @@ namespace BLL.Services
             };
 
             var generator = new FiveThreeOneRoutineGenerator(routineInfo);
-            var generatedRoutine = generator.GenerateNewRoutine();
-            var generatedCycle = generatedRoutine.TrainingCycles.FirstOrDefault();
-            generatedCycle.CycleNumber = oldCycle.CycleNumber++;
+            var generatedCycle = generator.GenerateNewTrainingCycle(baseRoutine);
             return generatedCycle;
         }
     }

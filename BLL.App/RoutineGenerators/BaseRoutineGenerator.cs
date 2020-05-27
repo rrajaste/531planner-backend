@@ -12,14 +12,14 @@ namespace BLL.RoutineGenerators
     {
 
         protected readonly TNewRoutineInfo NewRoutineInfo;
-        protected readonly Guid NewRoutineId;
+        protected Guid NewRoutineId;
         
         protected BaseRoutineGenerator(TNewRoutineInfo newRoutineInfo)
         {
             NewRoutineInfo = newRoutineInfo;
             NewRoutineId = Guid.NewGuid();
-            CheckBaseRoutine();
-            CheckStartingDate();
+            // CheckBaseRoutine();
+            // CheckStartingDate();
         }
         
         public virtual WorkoutRoutine GenerateNewRoutine()

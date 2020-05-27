@@ -4,5 +4,6 @@ namespace Contracts.BLL.App.RoutineGenerators
 {
     public interface IFiveThreeOneRoutineGenerator : IBaseRoutineGenerator
     {
+        TrainingCycle GenerateNewTrainingCycle(WorkoutRoutine parentRoutine);
     }
 }
