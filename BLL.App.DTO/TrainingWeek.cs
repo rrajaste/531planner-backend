@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Contracts.BLL.Base;
 
 namespace BLL.App.DTO
@@ -13,6 +14,7 @@ namespace BLL.App.DTO
     {
         public TKey Id { get; set; } = default!;
         public int WeekNumber { get; set; }
+        [Display(Name = nameof(IsDeload), ResourceType = typeof(Resources.BLL.TrainingWeek))]
         public bool IsDeload { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime? EndingDate { get; set; }

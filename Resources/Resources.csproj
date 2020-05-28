@@ -307,6 +307,46 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppUsersViewModel.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="BLL\WorkoutRoutine.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WorkoutRoutine.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\WorkoutRoutine.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WorkoutRoutine.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\TrainingWeek.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingWeek.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\TrainingWeek.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingWeek.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\TrainingDay.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingDay.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\TrainingDay.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TrainingDay.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\ExerciseInTrainingDay.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExerciseInTrainingDay.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\ExerciseInTrainingDay.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExerciseInTrainingDay.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\BaseLiftSet.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseLiftSet.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="BLL\BaseLiftSet.et-EE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseLiftSet.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
@@ -698,6 +738,36 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppUsersViewModel.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BLL\WorkoutRoutine.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WorkoutRoutine.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BLL\TrainingWeek.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TrainingWeek.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BLL\TrainingDay.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TrainingDay.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BLL\TrainingDay.et-EE.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TrainingDay.et-EEresx.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BLL\ExerciseInTrainingDay.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExerciseInTrainingDay.resx</DependentUpon>
+    </Compile>
+    <Compile Update="BLL\BaseLiftSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BaseLiftSet.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 

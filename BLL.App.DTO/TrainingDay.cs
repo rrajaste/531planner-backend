@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Contracts.BLL.Base;
 
 namespace BLL.App.DTO
@@ -15,6 +16,7 @@ namespace BLL.App.DTO
         public TKey TrainingWeekId { get; set; } = default!;
         public TKey TrainingDayTypeId { get; set; } = default!;
         public TrainingWeek? TrainingWeek { get; set; }
+        [Display(Name = nameof(TrainingDayType), ResourceType = typeof(Resources.BLL.TrainingDay))]
         public TrainingDayType? TrainingDayType { get; set; }
         public IEnumerable<ExerciseInTrainingDay>? MainLifts { get; set; }
         public IEnumerable<ExerciseInTrainingDay>? AccessoryLifts { get; set; }
