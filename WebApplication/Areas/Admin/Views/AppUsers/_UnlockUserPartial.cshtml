@@ -1,6 +1,7 @@
 @model WebApplication.Areas.Admin.ViewModels.AppUsersViewModel
 
-<a data-toggle="modal" title="Unlock user's account" data-target="#modal-unlock-@Model.UserName" asp-action="LockUser">
+<a data-toggle="modal" 
+   title="@Resources.Views.Accounts._UnlockUserPartial.HoverText" data-target="#modal-unlock-@Model.UserName" asp-action="LockUser">
     <i class="fa fa-unlock text-success mx-1" aria-hidden="true"></i>
 </a>
 
@@ -8,21 +9,27 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center" id="deleteModalLabel">Are you sure you wish to unlock this user's account?</h4>
+                <h4 class="modal-title text-center" id="deleteModalLabel">
+                    @Resources.Views.Accounts._UnlockUserPartial.ConfirmationText
+                </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <h5>Username: @Model.UserName</h5>
-                <h5>Email: @Model.Email</h5>
+                <h5>@Resources.Views.Accounts._UnlockUserPartial.Username: @Model.UserName</h5>
+                <h5>@Resources.Views.Accounts._UnlockUserPartial.Email: @Model.Email</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    @Resources.Views.Accounts._UnlockUserPartial.Close
+                </button>
                 <form asp-action="UnLockUser">
                     <input type="hidden" asp-for="@Model.UserName"/>
                     <input type="hidden" name="returnUrl" value="@Context.Request.Path@Context.Request.QueryString"/>
-                    <button type="submit" class="text-uppercase btn btn-primary">Unlock user</button>
+                    <button type="submit" class="text-uppercase btn btn-primary">
+                        @Resources.Views.Accounts._UnlockUserPartial.Lock
+                    </button>
                 </form>
             </div>
         </div>

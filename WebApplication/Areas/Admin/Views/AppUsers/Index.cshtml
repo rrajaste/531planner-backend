@@ -4,13 +4,13 @@
 
 <div class="jumbotron shadow rounded">
     <div class="mb-3">
-        <h1 class="display-4 text-uppercase">AppUsers</h1>
-        <h4 class="text-uppercase"><a asp-action="Create">ADD A NEW USER</a></h4>
+        <h1 class="display-4 text-uppercase">@Resources.Views.Accounts.Index.Title</h1>
+        <h4 class="text-uppercase"><a asp-action="Create">@Resources.Views.Accounts.Index.Add</a></h4>
     </div>
     <partial name="_SearchBoxPartial" model="@Model.SearchViewModel"/>
     <div class="text-left px-3 pt-3">
-        <h5>Included below are the first 25 accounts.</h5>
-        <p class="text-muted">If the account you're looking for is not listed, try narrowing the search</p>
+        <h5>@Resources.Views.Accounts.Index.IncludedBelow</h5>
+        <p class="text-muted">@Resources.Views.Accounts.Index.IfNotListed</p>
     </div>
     <table class="table table-responsive-sm table-hover">
         <thead>
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.AppUsers.First().UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AppUsers.First().UserName)
+                @Html.DisplayNameFor(model => model.AppUsers.First().Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AppUsers.First().IsLocked)
@@ -40,11 +40,11 @@
                     @Html.DisplayFor(modelItem => item.IsLocked)
                 </td>
                 <td>
-                    <a asp-action="ManageUser" title="Manage user" asp-route-userName="@item.UserName">
+                    <a asp-action="ManageUser" title="@Resources.Views.Accounts.Index.Manage" asp-route-userName="@item.UserName">
                         <i class="fa fa-cog mx-1 text-secondary" aria-hidden="true"></i>
                     </a>
                     <a asp-action="Details" asp-route-userName="@item.UserName">
-                        <i class="fa fa-eye mx-1 text-primary" title="Details" aria-hidden="true"></i>
+                        <i class="fa fa-eye mx-1 text-primary" title="@Resources.Views.Accounts.Index.Details" aria-hidden="true"></i>
                     </a>
                     @if (item.IsLocked)
                     {
@@ -62,6 +62,6 @@
     <h1 class="text-muted">...</h1>
     @if (Model.AppUsers.IsEmptyOrNull())
     {
-        <h3 class="text-muted">No results match search query!</h3>
+        <h3 class="text-muted">@Resources.Views.Accounts.Index.No_results</h3>
     }
 </div>

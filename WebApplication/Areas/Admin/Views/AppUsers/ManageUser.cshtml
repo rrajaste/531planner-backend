@@ -1,7 +1,7 @@
 @model WebApplication.Areas.Admin.ViewModels.AppUserCreateManageViewModel
 
 <div class="jumbotron shadow rounded pb-3">
-    <h1 class="text-uppercase pb-3">Manage user account</h1>
+    <h1 class="text-uppercase pb-3">@Resources.Views.Accounts.Manage.Title</h1>
         <hr />
         <div class="row justify-content-center">
             <ul class="list-group col-sm-6 col-m-5 col-lg-4">
@@ -28,11 +28,12 @@
                     </div>
                 </li>
                 <li class="list-group-item list-group-item-dark text-uppercase font-weight-bold">
-                    <input type="submit" value="SUBMIT" title="Save and submit changes" class="btn btn-success btn-sm"/>
+                    <input type="submit" value="@Resources.Views.Accounts.Manage.Submit" 
+                           title="" class="btn btn-success btn-sm text-uppercase"/>
                 </li>
                 </form>
             </ul>
         </div>
         <hr/>
-        <a class="text-uppercase" asp-controller="AppUsers" asp-action="Index">BACK TO LIST</a>
+        <a class="text-uppercase" asp-controller="AppUsers" asp-action="Index">@Resources.Views.Accounts.Manage.BackToList</a>
 </div>

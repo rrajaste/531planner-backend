@@ -1,7 +1,7 @@
 @model WebApplication.Areas.Admin.ViewModels.AppUserCreateManageViewModel
 
 <div class="jumbotron shadow rounded">
-    <h3 class="text-uppercase">create a new user</h3>
+    <h3 class="text-uppercase">@Resources.Views.Accounts.Create.Title</h3>
     <hr />
     <div class="row justify-content-center">
         <div class="col-md-4">
@@ -40,7 +40,7 @@
                 </div>
                 <hr/>
                 <div>
-                    <a asp-action="Index">Back to List</a>
+                    <a asp-action="Index">@Resources.Views.Accounts.Create.BackToList</a>
                 </div>
             </form>
         </div>
