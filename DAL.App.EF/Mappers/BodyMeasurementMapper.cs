@@ -22,10 +22,6 @@ namespace DAL.App.EF.Mappers
                 Weight = domainObject.Weight,
                 Id = domainObject.Id,
                 LoggedAt = domainObject.LoggedAt,
-                UnitType = domainObject.UnitType == null 
-                    ? null 
-                    : DALMapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType),
-                UnitTypeId = domainObject.UnitTypeId,
                 Waist = domainObject.Waist
             };
 
@@ -40,7 +36,6 @@ namespace DAL.App.EF.Mappers
                 Height = dalObject.Height,
                 Hip = dalObject.Hip,
                 Id = dalObject.Id,
-                UnitTypeId = dalObject.UnitTypeId,
                 Waist = dalObject.Waist,
                 Weight = dalObject.Weight,
             };

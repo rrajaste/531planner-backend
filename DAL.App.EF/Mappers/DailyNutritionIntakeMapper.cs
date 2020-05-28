@@ -21,10 +21,6 @@ namespace DAL.App.EF.Mappers
                 LoggedAt = domainObject.LoggedAt,
                 Fats = domainObject.Fats,
                 Protein = domainObject.Protein,
-                UnitTypeId = domainObject.UnitTypeId,
-                UnitType = domainObject.UnitType == null 
-                    ? null 
-                    : DALMapperContext.UnitTypeMapper.MapDomainToDAL(domainObject.UnitType)
             };
 
         public Domain.App.DailyNutritionIntake MapDALToDomain(DailyNutritionIntake dalObject) =>
@@ -36,7 +32,6 @@ namespace DAL.App.EF.Mappers
                 Carbohydrates = dalObject.Carbohydrates,
                 Fats = dalObject.Fats,
                 Protein = dalObject.Protein,
-                UnitTypeId = dalObject.UnitTypeId,
             };
     }
 }

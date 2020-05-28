@@ -20,7 +20,6 @@ namespace DAL.App.EF.Repositories
         public async Task<IEnumerable<DAL.App.DTO.BodyMeasurement>> AllWithAppUserIdAsync(Guid id)
         {
             var items = await RepoDbSet
-                .Include(b => b.UnitType)
                 .Where(b => b.AppUserId.Equals(id))
                 .ToListAsync();
             var mappedItems = items.Select(Mapper.MapDomainToDAL);
@@ -31,13 +30,11 @@ namespace DAL.App.EF.Repositories
             Mapper.MapDomainToDAL(
                 await RepoDbSet
                     .AsNoTracking()
-                    .Include(b => b.UnitType)
                     .FirstOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId)
             );
 
         public override async Task<IEnumerable<DAL.App.DTO.BodyMeasurement>> AllAsync() => (
             await RepoDbSet
-                .Include(b => b.UnitType)
                 .ToListAsync()
             ).Select(domainEntity => Mapper.MapDomainToDAL(domainEntity));
 
@@ -45,7 +42,6 @@ namespace DAL.App.EF.Repositories
             Mapper.MapDomainToDAL(
                 await RepoDbSet
                     .AsNoTracking()
-                    .Include(b => b.UnitType)
                     .FirstOrDefaultAsync(d => d.Id == id)
             );
     }

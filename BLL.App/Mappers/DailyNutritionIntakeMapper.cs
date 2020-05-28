@@ -22,10 +22,6 @@ namespace BLL.Mappers
                 LoggedAt = dalObject.LoggedAt,
                 Fats = dalObject.Fats,
                 Protein = dalObject.Protein,
-                UnitTypeId = dalObject.UnitTypeId,
-                UnitType = dalObject.UnitType == null 
-                    ? null 
-                    : BLLMapperContext.UnitTypeMapper.MapDALToBLL(dalObject.UnitType)
             };
 
         public DAL.App.DTO.DailyNutritionIntake MapBLLToDAL(DailyNutritionIntake bllObject) =>
@@ -37,7 +33,6 @@ namespace BLL.Mappers
                 Carbohydrates = bllObject.Carbohydrates,
                 Fats = bllObject.Fats,
                 Protein = bllObject.Protein,
-                UnitTypeId = bllObject.UnitTypeId,
             };
     }
 }

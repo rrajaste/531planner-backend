@@ -19,8 +19,6 @@ namespace BLL.App.DTO
         public int? Hip { get; set; }
         public int? Arm { get; set; }
         public int? BodyFatPercentage { get; set; }
-        public TKey UnitTypeId { get; set; } = default!;
-        public DateTime LoggedAt { get; set; } = default!;
-        public UnitType? UnitType { get; set; }
+        public DateTime LoggedAt { get; set; }
     }
 }

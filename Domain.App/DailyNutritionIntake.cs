@@ -34,12 +34,6 @@ namespace Domain.App
         
         public TKey AppUserId { get; set; }
 
-        public TKey UnitTypeId { get; set; }
-        
         public AppUser? User { get; set; }
-        
-        
-        [Display(Name = nameof(UnitType), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
-        public UnitType? UnitType { get; set; }
     }
 }

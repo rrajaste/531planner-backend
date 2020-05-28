@@ -17,7 +17,5 @@ namespace DAL.App.DTO
         public int? Carbohydrates { get; set; }
         public DateTime LoggedAt { get; set; }
         public TKey AppUserId { get; set; } = default!;
-        public TKey UnitTypeId { get; set; } = default!;
-        public UnitType? UnitType { get; set; }
     }
 }

@@ -22,10 +22,6 @@ namespace BLL.Mappers
                 Hip = dalObject.Hip,
                 Id = dalObject.Id,
                 LoggedAt = dalObject.LoggedAt,
-                UnitType = dalObject.UnitType == null
-                    ? null
-                    : BLLMapperContext.UnitTypeMapper.MapDALToBLL(dalObject.UnitType),
-                UnitTypeId = dalObject.UnitTypeId,
                 Weight = dalObject.Weight,
                 Waist = dalObject.Waist
             };
@@ -42,7 +38,6 @@ namespace BLL.Mappers
                 Height = bllObject.Height,
                 Hip = bllObject.Hip,
                 Id = bllObject.Id,
-                UnitTypeId = bllObject.UnitTypeId,
                 Waist = bllObject.Waist
             };
         }

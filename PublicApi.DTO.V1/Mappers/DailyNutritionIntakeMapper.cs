@@ -11,12 +11,10 @@ namespace PublicApi.DTO.V1.Mappers
             {
                 Id = bllEntity.Id.ToString(),
                 Calories = bllEntity.Calories,
-                Carbohydrates = bllEntity.Carbohydrates,
-                Fats = bllEntity.Fats,
-                Protein = bllEntity.Protein,
+                Carbohydrates = bllEntity.Carbohydrates ?? 0,
+                Fats =  bllEntity.Fats ?? 0,
+                Protein = bllEntity.Protein ?? 0,
                 LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
-                UnitType = bllEntity.UnitType == null ? null : bllEntity.UnitType.Name,
-                UnitTypeId = bllEntity.UnitTypeId.ToString()
             };
         }
 
@@ -31,7 +29,6 @@ namespace PublicApi.DTO.V1.Mappers
             bllEntity.Carbohydrates = dto.Carbohydrates;
             bllEntity.Fats = dto.Fats;
             bllEntity.Protein = dto.Protein;
-            bllEntity.UnitTypeId = Guid.Parse(dto.UnitTypeId);
             return bllEntity;
         }
     }

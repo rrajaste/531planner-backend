@@ -50,13 +50,10 @@ namespace Domain.App
         public int? BodyFatPercentage { get; set; }
 
         public TKey AppUserId { get; set; } = default!;
-        public TKey UnitTypeId { get; set; } = default!;
-    
+
         [Display(Name = nameof(LoggedAt), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
         public DateTime LoggedAt => CreatedAt.Date;
         
-        [Display(Name = nameof(UnitType), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public UnitType? UnitType { get; set; }
         public AppUser? User { get; set; }
     }
 }
