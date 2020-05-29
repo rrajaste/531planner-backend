@@ -15,19 +15,19 @@ namespace Domain.App
         where TKey : struct, IEquatable<TKey>
     {
         [Display(Name = nameof(Calories), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
-        public int Calories { get; set; }
+        public float Calories { get; set; }
         
         
         [Display(Name = nameof(Protein), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
-        public int? Protein { get; set; }
+        public float Protein { get; set; }
         
         
         [Display(Name = nameof(Fats), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
-        public int? Fats { get; set; }
+        public float Fats { get; set; }
         
 
         [Display(Name = nameof(Carbohydrates), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
-        public int? Carbohydrates { get; set; }
+        public float Carbohydrates { get; set; }
 
         [Display(Name = nameof(LoggedAt), ResourceType = typeof(Resources.Domain.DailyNutritionIntake))]
         public DateTime LoggedAt => CreatedAt.Date;

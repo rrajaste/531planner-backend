@@ -16,8 +16,22 @@ namespace PublicApi.DTO.V1.Mappers
                 Waist = bllEntity.Waist ?? 0,
                 Hip = bllEntity.Hip ?? 0,
                 Arm = bllEntity.Arm ?? 0,
-                BodyFatPercentage = bllEntity.BodyFatPercentage ?? 0,
+                BodyFatPercentage = bllEntity.BodyFatPercentage,
                 LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
+            };
+        }
+        
+        public static BodyMeasurementStatistics MapBLLEntityToPublicDTO(BLL.App.DTO.BodyMeasurementStatistics bllEntity)
+        {
+            return new BodyMeasurementStatistics()
+            {
+                FirstLogAt = bllEntity.FirstLogAt,
+                BMIChange = bllEntity.BMIChange,
+                BodyFatPercentageChange = bllEntity.BodyFatPercentageChange,
+                CurrentBMI = bllEntity.CurrentBMI,
+                CurrentBodyFatPercentage = bllEntity.CurrentBodyFatPercentage,
+                CurrentWeight = bllEntity.CurrentWeight,
+                WeightChange = bllEntity.WeightChange
             };
         }
         

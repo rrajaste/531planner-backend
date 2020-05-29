@@ -17,7 +17,7 @@ namespace WebApplication.ApiControllers
     /// Controller with full CRUD functionality for managing BodyMeasurement objects belonging to logged-in user.
     /// </summary>
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]/")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "user")]
     [ApiController]
     public class BodyMeasurementsController : ControllerBase
@@ -45,7 +45,9 @@ namespace WebApplication.ApiControllers
         public async Task<ActionResult<IEnumerable<BodyMeasurement>>> GetBodyMeasurements()
         {
             var bodyMeasurements = await _bll.BodyMeasurements.AllWithAppUserIdAsync(User.UserId());
-            return Ok(bodyMeasurements.Select(Mapper.MapBLLEntityToPublicDTO));
+            var orderedMeasurements = bodyMeasurements.OrderBy(
+                measurement => measurement.LoggedAt);
+            return Ok(orderedMeasurements.Select(Mapper.MapBLLEntityToPublicDTO));
         }
         
         /// <summary>

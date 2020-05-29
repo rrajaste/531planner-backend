@@ -11,9 +11,9 @@ namespace PublicApi.DTO.V1.Mappers
             {
                 Id = bllEntity.Id.ToString(),
                 Calories = bllEntity.Calories,
-                Carbohydrates = bllEntity.Carbohydrates ?? 0,
-                Fats =  bllEntity.Fats ?? 0,
-                Protein = bllEntity.Protein ?? 0,
+                Carbohydrates = bllEntity.Carbohydrates,
+                Fats =  bllEntity.Fats,
+                Protein = bllEntity.Protein,
                 LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
             };
         }

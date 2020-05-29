@@ -17,37 +17,37 @@ namespace Domain.App
         
         [Range(1, int.MaxValue)]
         [Display(Name = nameof(Weight), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public int Weight { get; set; }
+        public float Weight { get; set; }
         
         
         [Range(1, int.MaxValue)]
         [Display(Name = nameof(Height), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public int Height { get; set; }
+        public float Height { get; set; }
         
         
         [Range(1, int.MaxValue)]
         [Display(Name = nameof(Chest), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public int? Chest { get; set; }
+        public float? Chest { get; set; }
         
         
         [Range(1, int.MaxValue)]
         [Display(Name = nameof(Waist), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public int? Waist { get; set; }
+        public float? Waist { get; set; }
         
         
         [Range(1, int.MaxValue)]
         [Display(Name = nameof(Hip), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public int? Hip { get; set; }
+        public float? Hip { get; set; }
         
         
         [Range(1, int.MaxValue)]
         [Display(Name = nameof(Arm), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public int? Arm { get; set; }
+        public float? Arm { get; set; }
         
         
         [Range(1, 99, ErrorMessage = "Body fat percentage must be between 1-99%")]
         [Display(Name = nameof(BodyFatPercentage), ResourceType = typeof(Resources.Domain.BodyMeasurement))]
-        public int? BodyFatPercentage { get; set; }
+        public float BodyFatPercentage { get; set; }
 
         public TKey AppUserId { get; set; } = default!;
 

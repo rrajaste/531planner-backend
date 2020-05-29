@@ -11,26 +11,26 @@ namespace PublicApi.DTO.V1
     public class BodyMeasurementCreate
     {
         [Range(1, 1000)]
-        public int Weight { get; set; }
+        public float Weight { get; set; }
 
         [Range(1, 1000)]
-        public int Height { get; set; }
+        public float Height { get; set; }
 
         [Range(1, 1000)]
-        public int Chest { get; set; }
+        public float Chest { get; set; }
 
         [Range(1, 1000)]
-        public int Waist { get; set; }
+        public float Waist { get; set; }
 
         [Range(1, 1000)]
-        public int Hip { get; set; }
+        public float Hip { get; set; }
 
         [Range(1, 1000)]
-        public int Arm { get; set; }
+        public float Arm { get; set; }
         
         [Range(1, 99)]
         
-        public int BodyFatPercentage { get; set; }
+        public float BodyFatPercentage { get; set; }
     }
 
     public class BodyMeasurementEdit : BodyMeasurementCreate

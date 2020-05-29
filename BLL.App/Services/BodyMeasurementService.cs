@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.App.DTO;
-using BLL.Base.Mappers;
 using BLL.Base.Services;
 using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
@@ -28,5 +27,54 @@ namespace BLL.Services
         public async Task<BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId) =>
             Mapper.MapDALToBLL(
                 await UnitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, appUserId));
+
+        public async Task<BodyMeasurementStatistics> GetUserStatisticsAsync(Guid userId)
+        {
+            var measurements = await ServiceRepository.AllWithAppUserIdAsync(userId);
+            var sortedMeasurements = measurements
+                .OrderBy(measurement => measurement.LoggedAt).ToList();
+            var currentMeasurement = sortedMeasurements.Last();
+            var firstMeasurement = sortedMeasurements.First();
+            var statistics = new BodyMeasurementStatistics()
+            {
+                CurrentBMI = CalculateBMI(currentMeasurement),
+                BMIChange = CalculateBMIChange(firstMeasurement, currentMeasurement),
+                BodyFatPercentageChange = CalculateBodyFatPercentageChange(firstMeasurement, currentMeasurement),
+                CurrentBodyFatPercentage = currentMeasurement.BodyFatPercentage,
+                FirstLogAt = firstMeasurement.LoggedAt,
+                WeightChange = CalculateWeightChange(firstMeasurement, currentMeasurement),
+                CurrentWeight = currentMeasurement.Weight
+            };
+            return statistics;
+        }
+
+        private static float CalculateBMI(DAL.App.DTO.BodyMeasurement currentMeasurement)
+        {
+            return currentMeasurement.Weight / (currentMeasurement.Weight * currentMeasurement.Weight);
+        }
+        
+        private static float CalculateBMIChange(DAL.App.DTO.BodyMeasurement startingMeasurement, 
+            DAL.App.DTO.BodyMeasurement currentMeasurement)
+        {
+            var startingBmi = CalculateBMI(startingMeasurement);
+            var currentBmi = CalculateBMI(currentMeasurement);
+            return currentBmi - startingBmi;
+        }
+        
+        private static float CalculateWeightChange(DAL.App.DTO.BodyMeasurement startingMeasurement, 
+            DAL.App.DTO.BodyMeasurement currentMeasurement)
+        {
+            var startingWeight = startingMeasurement.Weight;
+            var currentWeight = currentMeasurement.Weight;
+            return currentWeight - startingWeight;
+        }
+        
+        private static float CalculateBodyFatPercentageChange(DAL.App.DTO.BodyMeasurement startingMeasurement, 
+            DAL.App.DTO.BodyMeasurement currentMeasurement)
+        {
+            var startingBodyFatPercentage = startingMeasurement.BodyFatPercentage;
+            var currentBodyFatPercentage = currentMeasurement.BodyFatPercentage;
+            return currentBodyFatPercentage - startingBodyFatPercentage;
+        }
     }
 }
