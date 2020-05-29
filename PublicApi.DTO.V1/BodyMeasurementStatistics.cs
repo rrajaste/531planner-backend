@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PublicApi.DTO.V1
 {
     public class BodyMeasurementStatistics
     {
+        [DataType(DataType.Date)]
         public DateTime FirstLogAt { get; set; }
         public float WeightChange { get; set; }
         public float CurrentWeight { get; set; }

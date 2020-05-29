@@ -26,12 +26,12 @@ namespace PublicApi.DTO.V1.Mappers
             return new BodyMeasurementStatistics()
             {
                 FirstLogAt = bllEntity.FirstLogAt,
-                BMIChange = bllEntity.BMIChange,
-                BodyFatPercentageChange = bllEntity.BodyFatPercentageChange,
-                CurrentBMI = bllEntity.CurrentBMI,
-                CurrentBodyFatPercentage = bllEntity.CurrentBodyFatPercentage,
-                CurrentWeight = bllEntity.CurrentWeight,
-                WeightChange = bllEntity.WeightChange
+                BMIChange = (float) Math.Round(bllEntity.BMIChange, 2),
+                BodyFatPercentageChange = (float) Math.Round(bllEntity.BodyFatPercentageChange, 2),
+                CurrentBMI = (float) Math.Round(bllEntity.CurrentBMI, 2),
+                CurrentBodyFatPercentage = (float) Math.Round(bllEntity.CurrentBodyFatPercentage, 2),
+                CurrentWeight = (float) Math.Round(bllEntity.CurrentWeight, 2),
+                WeightChange = (float) Math.Round(bllEntity.WeightChange, 2)
             };
         }
         

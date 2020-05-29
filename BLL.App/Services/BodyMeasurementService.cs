@@ -50,7 +50,7 @@ namespace BLL.Services
 
         private static float CalculateBMI(DAL.App.DTO.BodyMeasurement currentMeasurement)
         {
-            return currentMeasurement.Weight / (currentMeasurement.Weight * currentMeasurement.Weight);
+            return currentMeasurement.Weight / ((currentMeasurement.Height / 100) * (currentMeasurement.Height / 100));
         }
         
         private static float CalculateBMIChange(DAL.App.DTO.BodyMeasurement startingMeasurement, 
