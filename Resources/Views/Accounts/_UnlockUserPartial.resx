@@ -22,7 +22,7 @@
         <value>Are you sure you wish to lock this user's account?</value>
     </data>
     <data name="HoverText">
-        <value>Lock user's account</value>
+        <value>Unlock user's account</value>
     </data>
     <data name="Username">
         <value>Username</value>
@@ -31,7 +31,7 @@
         <value>Email</value>
     </data>
     <data name="Lock">
-        <value>Lock</value>
+        <value>unlock</value>
     </data>
     <data name="Close">
         <value>Close</value>

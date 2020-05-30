@@ -22,7 +22,7 @@
         <value>Olete kindel, et soovite selle kasutaja konto lukustada?</value>
     </data>
     <data name="HoverText">
-        <value>Lukusta kastuaja konto</value>
+        <value>Ava kastuaja konto</value>
     </data>
     <data name="Username">
         <value>Kasutajanimi</value>
@@ -31,7 +31,7 @@
         <value>Email</value>
     </data>
     <data name="Lock">
-        <value>Lukusta</value>
+        <value>Ava konto</value>
     </data>
     <data name="Close">
         <value>Sulge</value>
