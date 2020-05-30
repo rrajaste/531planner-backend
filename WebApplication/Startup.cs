@@ -39,8 +39,9 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("MsSqlConnection")));
+                options
+                    .UseSqlServer(Configuration.GetConnectionString("MsSqlConnection"))
+            );
             
             services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
             services.AddScoped<IAppDALMapperContext, AppDALMapperContext>();
@@ -179,6 +180,7 @@ namespace WebApplication
                 .GetRequiredService<IServiceScopeFactory>()
                 .CreateScope();
             using var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+            
             using var userManager = serviceScope.ServiceProvider.GetService<UserManager<AppUser>>();
             using var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<AppUserRole>>();
 

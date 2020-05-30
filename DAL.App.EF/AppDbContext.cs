@@ -49,6 +49,7 @@ namespace DAL.App.EF
                 .HasMany(type => type.SubTypes)
                 .WithOne()
                 .HasForeignKey(routine => routine.ParentTypeId);
+            
         }
     }
 }
