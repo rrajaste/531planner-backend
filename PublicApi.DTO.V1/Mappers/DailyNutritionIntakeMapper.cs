@@ -17,6 +17,19 @@ namespace PublicApi.DTO.V1.Mappers
                 LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
             };
         }
+        
+        public static NutritionStatistics MapBLLEntityToPublicDTO(BLL.App.DTO.NutritionStatistics bllEntity)
+        {
+            return new NutritionStatistics()
+            {
+                AverageCalories = (float) Math.Round(bllEntity.AverageCalories),
+                AverageProtein = (float) Math.Round(bllEntity.AverageProtein, 2),
+                TDEE = (float) Math.Round(bllEntity.TDEE),
+                PredictedProteinNeed = (float) Math.Round(bllEntity.PredictedProteinNeed, 1),
+                PredictedWeightChange = (float) Math.Round(bllEntity.PredictedWeightChange, 3),
+                AverageCaloriesTdeeDelta = (float) Math.Round(bllEntity.AverageCaloriesTdeeDelta),
+            };
+        }
 
         public static BLL.App.DTO.DailyNutritionIntake MapPublicDTOToBLLEntity<TDto>(TDto dto)
             where TDto : DailyNutritionIntakeCreate => 

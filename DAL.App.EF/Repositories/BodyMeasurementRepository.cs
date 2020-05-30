@@ -33,6 +33,24 @@ namespace DAL.App.EF.Repositories
                     .FirstOrDefaultAsync(d => d.Id == id && d.AppUserId == appUserId)
             );
 
+        public async Task<DTO.BodyMeasurement> FirstForUserWithIdAsync(Guid userId)
+        {
+            var measurements = await RepoDbSet
+                .Where(measurement => measurement.AppUserId == userId)
+                .ToListAsync();
+            var first = measurements.OrderBy(measurement => measurement.LoggedAt).FirstOrDefault();
+            return Mapper.MapDomainToDAL(first);
+        }
+        
+        public async Task<DTO.BodyMeasurement> LatestForUserWithIdAsync(Guid userId)
+        {
+            var measurements = await RepoDbSet
+                .Where(measurement => measurement.AppUserId == userId)
+                .ToListAsync();
+            var last = measurements.OrderBy(measurement => measurement.LoggedAt).LastOrDefault();
+            return Mapper.MapDomainToDAL(last);
+        }
+
         public override async Task<IEnumerable<DAL.App.DTO.BodyMeasurement>> AllAsync() => (
             await RepoDbSet
                 .ToListAsync()

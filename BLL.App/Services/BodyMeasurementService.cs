@@ -28,6 +28,12 @@ namespace BLL.Services
             Mapper.MapDALToBLL(
                 await UnitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, appUserId));
 
+        public async Task<BodyMeasurement> FirstForUserWithIdAsync(Guid userId) =>
+            Mapper.MapDALToBLL(await ServiceRepository.FirstForUserWithIdAsync(userId));
+
+        public async Task<BodyMeasurement> LatestForUserWithIdAsync(Guid userId) =>
+            Mapper.MapDALToBLL(await ServiceRepository.LatestForUserWithIdAsync(userId));
+
         public async Task<BodyMeasurementStatistics> GetUserStatisticsAsync(Guid userId)
         {
             var measurements = await ServiceRepository.AllWithAppUserIdAsync(userId);

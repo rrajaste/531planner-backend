@@ -18,5 +18,7 @@ namespace Contracts.DAL.App.Repositories
     {
         Task<IEnumerable<TEntity>> AllWithAppUserIdAsync (TKey id);
         Task<TEntity> FindWithAppUserIdAsync(TKey id, TKey appUserId);
+        Task<TEntity> FirstForUserWithIdAsync(TKey userId);
+        Task<TEntity> LatestForUserWithIdAsync(TKey userId);
     }
 }
