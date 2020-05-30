@@ -22,6 +22,7 @@ namespace PublicApi.DTO.V1.Mappers
         {
             return new NutritionStatistics()
             {
+                FirstLogAt = bllEntity.FirstLogAt,
                 AverageCalories = (float) Math.Round(bllEntity.AverageCalories),
                 AverageProtein = (float) Math.Round(bllEntity.AverageProtein, 2),
                 TDEE = (float) Math.Round(bllEntity.TDEE),

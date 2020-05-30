@@ -42,9 +42,14 @@ namespace BLL.Services
                 measurement => measurement.Protein);
             var predictedProteinNeed = CalculatePredictedProteinNeed(lastBodyMeasurement);
             var predictedWeightChange = CalculatePredictedWeightChange(userMeasurements, tdee);
+            var firstLogAt = userMeasurements
+                .OrderBy(measurement => measurement.LoggedAt)
+                .FirstOrDefault()
+                .LoggedAt;
+            
             var statistics = new NutritionStatistics()
             {
-                
+                FirstLogAt = firstLogAt,
                 TDEE = tdee,
                 AverageCaloriesTdeeDelta = averageCaloriesTdeeDelta,
                 AverageCalories = averageCalories,
