@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Text;
 using BLL;
 using Contracts.BLL.App;
@@ -79,13 +81,14 @@ namespace WebApplication
                         ClockSkew = TimeSpan.Zero // remove delay of token when expire
                     };
                 });
-            
+
+            var supportedCultures = Configuration
+                .GetSection("SupportedCultures")
+                .GetChildren()
+                .Select(x => new CultureInfo(x.Value))
+                .ToArray();
+
             services.Configure<RequestLocalizationOptions>(options =>{
-                var supportedCultures = new[]{
-                    new CultureInfo(name: "en-GB"),
-                    new CultureInfo(name: "et-EE"),
-                };
-                options.DefaultRequestCulture = new RequestCulture(culture: "en-GB", uiCulture: "en-GB");
                 options.DefaultRequestCulture = new RequestCulture(culture: "en-GB", uiCulture: "en-GB");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
