@@ -754,11 +754,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>TrainingDay.resx</DependentUpon>
     </Compile>
-    <Compile Update="BLL\TrainingDay.et-EE.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>TrainingDay.et-EEresx.resx</DependentUpon>
-    </Compile>
     <Compile Update="BLL\ExerciseInTrainingDay.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

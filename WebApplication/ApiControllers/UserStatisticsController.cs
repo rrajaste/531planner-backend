@@ -65,7 +65,7 @@ namespace WebApplication.ApiControllers
         /// <response code="401">User is not in correct role or not logged in.</response>
         /// <response code="400">User does not have at least 2 nutrition intake records needed to calculate statistics.</response>
         [HttpGet]
-        [ActionName("Nutrition")]
+        [ActionName("DailyNutritionIntakes")]
         public async Task<ActionResult<PublicApi.DTO.V1.NutritionStatistics>> GetNutritionStatistics()
         {
             var userMeasurements = (await _bll.DailyNutritionIntakes.AllWithAppUserIdAsync(User.UserId())).ToList();
