@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using PublicApi.DTO.V1;
 
@@ -29,6 +28,7 @@ namespace WebApplication.ApiControllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Culture>), 200)]
         public ActionResult<IEnumerable<Culture>> GetCultures()
         {
             var cultureItems = _localizationOptions.Value.SupportedUICultures
