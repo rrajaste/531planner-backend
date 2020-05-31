@@ -1,14 +1,20 @@
 [
   {
-    "name": "Pull day",
-    "description": "Pull days are training days where training focus is on pulling exercises, such as rows and lat pull-downs."
+    "name_eng": "Pull day",
+    "name_et": "Tõmmete päev",
+    "description_eng": "Pull days are training days where training focus is on pulling exercises, such as rows and lat pull-downs.",
+    "description_et": "Tõmmete päevad on treeningpäevad, kus fookuses on tõmbamislihastega seotud harjutused."
   },
   {
-    "name": "Push day",
-    "description": "Push days are training days where training focus is on pushing exercises, such as bench press and overhead press."
+    "name_eng": "Push day",
+    "name_et": "Tõukepäev",
+    "description_eng": "Push days are training days where training focus is on pushing exercises, such as bench press and overhead press.",
+    "description_et": "Tõukepäevad on treeningpäevad, kus fookuses on tõukelihased, nagu rinna- ja õlalihased"
   },
   {
-  "name": "Leg day",
-  "description": "Leg days are training days where training focus is on leg exercises, such as squats and lunges."
+  "name_eng": "Leg day",
+  "name_et": "Jalgade päev",
+  "description_eng": "Leg days are training days where training focus is on leg exercises, such as squats and lunges.",
+  "description_et": "Jalgade päevad on treeningpäevad, kus fookuses on jalgadega seotud harjutused, nagu näiteks kükid ja etteasted."
 }
 ]

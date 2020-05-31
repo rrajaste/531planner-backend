@@ -14,12 +14,17 @@ namespace Domain.App
         where TKey : struct, IEquatable<TKey>
     {
         [MaxLength(255)]
-        [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.ExerciseType))]
+        public string Name_eng { get; set; } = default!;
         
-        public string Name { get; set; } = default!;
-        [MaxLength(10240)]
-        [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.ExerciseType))]
-        public string Description { get; set; } = default!;
+        [MaxLength(1024)]
+        public string Description_eng { get; set; } = default!;
+        
+        [MaxLength(255)]
+        public string Name_et { get; set; } = default!;
+        
+        
+        [MaxLength(1024)]
+        public string Description_et { get; set; } = default!;
         
         [Display(Name = nameof(TypeCode), ResourceType = typeof(Resources.Domain.ExerciseType))]
         public string TypeCode { get; set; } = default!;

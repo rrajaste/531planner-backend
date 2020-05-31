@@ -1,12 +1,16 @@
 [
   {
-    "name": "Warm up",
-    "description": "Warm up sets used to increase blood flow in muscles to reduce the risk of injury and mentally as well as physically prepare the muscle for heavier main lift sets",
+    "name_eng": "Warm up",
+    "name_et": "Soojendus",
+    "description_eng": "Warm up sets used to increase blood flow in muscles to reduce the risk of injury and mentally as well as physically prepare the muscle for heavier main lift sets",
+    "description_et": "Soojendusharjutuste eesmärk on suurendada verevarustust lihases, vältimaks vigastuste ohtu.",
     "typecode": "warmup"
   },
   {
-    "name": "Main set",
-    "description": "Main lift sets meant for actual muscle training.",
+    "name_eng": "Main set",
+    "name_et": "Põhiseeriad",
+    "description_eng": "Main lift sets meant for actual muscle training.",
+    "description_et": "Põhitreeningseeriad, mille eesmärk on lihase maksimaalne koormamine.",
     "typecode": "workset"
   }
 ]

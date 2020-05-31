@@ -1,12 +1,16 @@
 [
   {
-    "name": "Main lift",
-    "description": "Main compound lift",
+    "name_eng": "Main lift",
+    "name_et": "Põhitõste",
+    "description_eng": "Main compound lift",
+    "description_et": "Põhitõste liitharjutused",
     "typecode": "mainlift"
   },
   {
-    "name": "Accessory lift",
-    "description": "Accessory exercise to compliment main lifts",
+    "name_eng": "Accessory lift",
+    "name_et": "Lisaharjutused",
+    "description_eng": "Accessory exercise to compliment main lifts",
+    "description_et": "Lisaharjutused toetamaks põhitõsteid",
     "typecode": "accessory"
   }
 ]

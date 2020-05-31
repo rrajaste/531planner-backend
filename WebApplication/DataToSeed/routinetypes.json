@@ -1,15 +1,21 @@
 [
   {
-    "name": "Cyclic progression",
-    "description": "Routines with cyclic non linear progression, typically meant for intermediate to advanced lifters",
+    "name_eng": "Cyclic progression",
+    "name_et": "Cyclic progression",
+    "description_eng": "Routines with cyclic non linear progression, typically meant for intermediate to advanced lifters",
+    "description_et": "Routines with cyclic non linear progression, typically meant for intermediate to advanced lifters",
     "subtypes": [
       {
-        "name": "5/3/1",
-        "description": "Classic 5/3/1 routine by Jim Wendler."
+        "name_eng": "5/3/1",
+        "name_et": "5/3/1",
+        "description_eng": "Classic 5/3/1 routine by Jim Wendler.",
+        "description_et": "Klassikaline 5/3/1 rutiin Jim Wendlerilt."
       },
       {
-        "name": "Beyond 5/3/1",
-        "description": "5/3/1 revisited"
+        "name_eng": "Beyond 5/3/1",
+        "name_et": "Edasi 5/3/1-st",
+        "description_eng": "5/3/1 revisited",
+        "description_et": "5/3/1 edasiarendus"
       }
     ]
   }

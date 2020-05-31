@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Threading;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -7,6 +9,7 @@ namespace WebApplication
     {
         public static void Main(string[] args)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("et-EE");
             CreateHostBuilder(args).Build().Run();
         }
 
