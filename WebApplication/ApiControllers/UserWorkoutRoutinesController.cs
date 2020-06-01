@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BLL.App.DTO;
 using Contracts.BLL.App;
+using DAL.App.DTO;
 using Domain.App.Enums;
 using Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -71,12 +73,12 @@ namespace WebApplication.ApiControllers
                 }
 
                 var newRoutineInfo = RoutineInfoMapper.MapPublicDTOToBLLEntity(dto, workoutRoutine);
-                
                 var generatedRoutine = _bll.WorkoutRoutines.GenerateNewFiveThreeOneRoutine(newRoutineInfo);
-                
                 generatedRoutine.AppUserId = User.UserId();
-                
                 _bll.WorkoutRoutines.Add(generatedRoutine);
+                var translations = await
+                    _bll.WorkoutRoutines.AllTranslationsForWorkoutRoutineWithIdAsync(newRoutineInfo.BaseRoutine.Id);
+                AddTranslationsToRoutine(generatedRoutine.Id, translations); 
                 await _bll.SaveChangesAsync();
                 
                 var routineFromDatabase = await _bll.WorkoutRoutines.FindFullRoutineWithIdAsync(generatedRoutine.Id);
@@ -151,6 +153,20 @@ namespace WebApplication.ApiControllers
                 return Ok(TrainingCycleMapper.MapBLLEntityToPublicDTO(cycle));
             }
             return NotFound(new { message = "User does not have an active workout routine"});
+        }
+        
+        private void AddTranslationsToRoutine(Guid generatedRoutineId, IEnumerable<WorkoutRoutineTranslation> translations)
+        {
+            var newTranslations = translations.Select(oldTranslation => new WorkoutRoutineTranslation()
+            {
+                CultureCode = oldTranslation.CultureCode,
+                Name = oldTranslation.Name,
+                Description = oldTranslation.Description
+            }).ToList();
+            foreach (var translation in newTranslations)
+            {
+                _bll.WorkoutRoutines.AddTranslationToWorkoutRoutine(translation, generatedRoutineId);
+            }
         }
     }
 }

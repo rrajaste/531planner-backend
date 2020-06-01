@@ -1,10 +1,12 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace PublicApi.DTO.V1
 {
     public class DailyNutritionIntake : DailyNutritionIntakeEdit
     {
-        public string LoggedAt { get; set; } = default!;
+        [DataType(DataType.Date)]
+        public DateTime LoggedAt { get; set; } = default!;
     }
 
     public class DailyNutritionIntakeCreate

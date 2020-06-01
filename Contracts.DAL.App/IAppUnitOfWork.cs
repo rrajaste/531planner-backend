@@ -22,5 +22,6 @@ namespace Contracts.DAL.App
         IUnitTypesRepository UnitTypes { get; }
         IWorkoutRoutineRepository WorkoutRoutines { get; }
         ISetTypeRepository SetTypes { get; }
+        IWorkoutRoutineInfoRepository WorkoutRoutineInfos { get; }
     }
 }

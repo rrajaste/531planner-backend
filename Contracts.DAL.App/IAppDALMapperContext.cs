@@ -22,5 +22,6 @@ namespace Contracts.DAL.App
         IDALMapper<global::Domain.App.TargetMuscleGroup, TargetMuscleGroup> TargetMuscleGroupMapper { get; }
         IDALMapper<global::Domain.App.TrainingDayType, TrainingDayType> TrainingDayTypeMapper { get; }
         IDALMapper<global::Domain.App.SetType, SetType> SetTypeMapper { get; }
+        IDALMapper<global::Domain.App.WorkoutRoutineInfo, WorkoutRoutineInfo> WorkoutRoutineInfoMapper { get; }
     }
 }

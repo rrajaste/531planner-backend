@@ -9,6 +9,8 @@ using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
+using DAL.App.DTO;
+using TrainingCycle = BLL.App.DTO.TrainingCycle;
 using WorkoutRoutine = BLL.App.DTO.WorkoutRoutine;
 
 namespace BLL.Services
@@ -59,8 +61,8 @@ namespace BLL.Services
         public Task<bool> BaseRoutineWithIdExistsAsync(Guid id) =>
             ServiceRepository.BaseRoutineWithIdExistsAsync(id);
 
-        public async Task<WorkoutRoutine> AddWithBaseCycleAsync(WorkoutRoutine dto) =>
-            Mapper.MapDALToBLL(await ServiceRepository.AddWithBaseCycleAsync(Mapper.MapBLLToDAL(dto)));
+        public async Task AddWithBaseCycleAsync(WorkoutRoutine dto) =>
+            await ServiceRepository.AddWithBaseCycleAsync(Mapper.MapBLLToDAL(dto));
 
         public async Task<WorkoutRoutine> ChangeRoutinePublishStatus(Guid routineId, bool isPublished) =>
             Mapper.MapDALToBLL(await ServiceRepository.ChangeRoutinePublishStatus(routineId, isPublished));
@@ -109,5 +111,56 @@ namespace BLL.Services
             var generatedCycle = generator.GenerateNewTrainingCycle(baseRoutine);
             return generatedCycle;
         }
+
+        public void AddTranslationToWorkoutRoutine(WorkoutRoutineTranslation dto, Guid workoutRoutineId)
+        {
+            var routineInfo = new WorkoutRoutineInfo()
+            {
+                CultureCode = dto.CultureCode,
+                Description = dto.Description,
+                Name = dto.Name,
+                WorkoutRoutineId = workoutRoutineId
+            };
+            UnitOfWork.WorkoutRoutineInfos.Add(routineInfo);
+        }
+
+        public void UpdateTranslation(WorkoutRoutineTranslation translation, Guid routineId)
+        {
+            UnitOfWork.WorkoutRoutineInfos.Update(MapTranslationToRoutineInfo(translation, routineId));
+        }
+        
+        public async Task<IEnumerable<WorkoutRoutineTranslation>> AllTranslationsForWorkoutRoutineWithIdAsync(Guid routineId)
+        {
+            var routineInfos = await UnitOfWork
+                .WorkoutRoutineInfos
+                .AllForWorkoutRoutineWithIdAsync(routineId);
+            return routineInfos.Select(MapRoutineInfoToTranslation);
+        }
+
+        private static WorkoutRoutineInfo MapTranslationToRoutineInfo(WorkoutRoutineTranslation translation, Guid routineId)
+        {
+            return new WorkoutRoutineInfo()
+            {
+                CultureCode = translation.CultureCode,
+                Description = translation.Description,
+                Name = translation.Name,
+                Id = translation.Id,
+                WorkoutRoutineId = routineId
+            };
+        }
+        
+        private WorkoutRoutineTranslation MapRoutineInfoToTranslation(WorkoutRoutineInfo routineInfo)
+        {
+            return new WorkoutRoutineTranslation()
+            {
+                CultureCode = routineInfo.CultureCode,
+                Description = routineInfo.Description,
+                Name = routineInfo.Name,
+                Id = routineInfo.Id
+            };
+        }
+
+        public void UpdateBaseRoutine(WorkoutRoutine routine) =>
+            ServiceRepository.UpdateBaseRoutine(Mapper.MapBLLToDAL(routine));
     }
 }

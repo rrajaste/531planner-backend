@@ -14,20 +14,8 @@ namespace Domain.App
 
     public class WorkoutRoutine<TKey> : DomainEntityIdMetadata<TKey> 
         where TKey : struct, IEquatable<TKey>
-    { 
-        
-        // TODO: Fix translations
-        
-        [MaxLength(255)]
-        [Display(Name = nameof(Name), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
-        public string Name { get; set; } = default!;
-        
-        
-        [MaxLength(1024)]
-        [Display(Name = nameof(Description), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
-        public string Description { get; set; } = default!;
-        
-        
+    {
+
         public bool IsBaseRoutine { get; set; } = false;
         public TKey RoutineTypeId { get; set; } = default!;
         public TKey? AppUserId { get; set; }
@@ -40,5 +28,7 @@ namespace Domain.App
 
         [Display(Name = nameof(TrainingCycles), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public ICollection<TrainingCycle>? TrainingCycles { get; set; }
+        
+        public ICollection<WorkoutRoutineInfo> WorkoutRoutineInfos { get; set; }
     }
 }

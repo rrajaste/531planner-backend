@@ -59,5 +59,8 @@ namespace DAL.App.EF
         
         public IDALMapper<SetType, DTO.SetType> SetTypeMapper =>
             GetMapper(() => new SetTypeMapper(this));
+        public IDALMapper<WorkoutRoutineInfo, DTO.WorkoutRoutineInfo> WorkoutRoutineInfoMapper =>
+            GetMapper(() => new WorkoutRoutineInfoMapper(this));
+        
     }
 }

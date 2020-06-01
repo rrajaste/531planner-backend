@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -5,7 +6,8 @@ namespace PublicApi.DTO.V1
 {
     public class BodyMeasurement : BodyMeasurementEdit
     {
-        public string LoggedAt { get; set; } = default!;
+        [DataType(DataType.Date)]
+        public DateTime LoggedAt { get; set; } = default!;
     }
      
     public class BodyMeasurementCreate

@@ -14,7 +14,7 @@ namespace PublicApi.DTO.V1.Mappers
                 Carbohydrates = bllEntity.Carbohydrates,
                 Fats =  bllEntity.Fats,
                 Protein = bllEntity.Protein,
-                LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
+                LoggedAt = bllEntity.LoggedAt,
             };
         }
         

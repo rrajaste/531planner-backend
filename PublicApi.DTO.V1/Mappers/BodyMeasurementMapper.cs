@@ -17,7 +17,7 @@ namespace PublicApi.DTO.V1.Mappers
                 Hip = bllEntity.Hip ?? 0,
                 Arm = bllEntity.Arm ?? 0,
                 BodyFatPercentage = bllEntity.BodyFatPercentage,
-                LoggedAt = bllEntity.LoggedAt.ToString(CultureInfo.CurrentCulture),
+                LoggedAt = bllEntity.LoggedAt,
             };
         }
         

@@ -27,6 +27,8 @@ namespace DAL.App.EF
         public DbSet<UnitType> UnitTypes { get; set; } = default!;
         public DbSet<AppUser> AppUsers { get; set; } = default!;
         public DbSet<WorkoutRoutine> WorkoutRoutines { get; set; } = default!;
+
+        public DbSet<WorkoutRoutineInfo> WorkoutRoutineInfos { get; set; } = default!;
         
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)

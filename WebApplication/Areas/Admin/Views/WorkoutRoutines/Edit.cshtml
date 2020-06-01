@@ -12,6 +12,8 @@
         <div class="col-md-4">
             <form asp-action="Edit">
                 <input type="hidden" asp-for="WorkoutRoutine.Id"/>
+                <input type="hidden" asp-for="EstonianTranslation.Id"/>
+                <input type="hidden" asp-for="EnglishTranslation.Id"/>
                 <partial name="_CreateEditPartial"/>
             </form>
         </div>
