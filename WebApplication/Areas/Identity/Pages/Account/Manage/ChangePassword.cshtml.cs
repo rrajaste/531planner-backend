@@ -27,8 +27,7 @@ namespace WebApp.Areas.Identity.Pages.Account.Manage
             _logger = logger;
         }
 
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; } = default!;
 
         [TempData]
         public string StatusMessage { get; set; } = default!;

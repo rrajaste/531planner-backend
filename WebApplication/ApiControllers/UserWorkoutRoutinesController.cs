@@ -144,7 +144,7 @@ namespace WebApplication.ApiControllers
             {
                 var baseRoutineId = (await _bll.WorkoutRoutines.ActiveRoutineForUserWithIdAsync(User.UserId())).Id;
                 var baseRoutine = await _bll.WorkoutRoutines.FindFullRoutineWithIdAsync(baseRoutineId);
-                var newCycle = await _bll.WorkoutRoutines.GenerateNewCycleForFiveThreeOneRoutine(baseRoutine, cycleInfo);
+                var newCycle = _bll.WorkoutRoutines.GenerateNewCycleForFiveThreeOneRoutine(baseRoutine, cycleInfo);
                 
                 _bll.TrainingCycles.Add(newCycle);
                 await _bll.SaveChangesAsync();

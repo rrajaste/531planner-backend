@@ -86,7 +86,7 @@ namespace BLL.Services
             return generatedRoutine;
         }
 
-        public async Task<TrainingCycle> GenerateNewCycleForFiveThreeOneRoutine(WorkoutRoutine baseRoutine, NewFiveThreeOneCycleInfo cycleInfo)
+        public TrainingCycle GenerateNewCycleForFiveThreeOneRoutine(WorkoutRoutine baseRoutine, NewFiveThreeOneCycleInfo cycleInfo)
         {
             // TODO: Fix this entire ugly workaround of a method
             

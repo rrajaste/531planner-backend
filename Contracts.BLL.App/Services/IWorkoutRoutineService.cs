@@ -14,7 +14,7 @@ namespace Contracts.BLL.App.Services
         IWorkoutRoutineRepository<Guid, WorkoutRoutine>
     {
         WorkoutRoutine GenerateNewFiveThreeOneRoutine(NewFiveThreeOneRoutineInfo routineInfo);
-        Task<TrainingCycle> GenerateNewCycleForFiveThreeOneRoutine(WorkoutRoutine baseRoutine, NewFiveThreeOneCycleInfo cycleInfo);
+        TrainingCycle GenerateNewCycleForFiveThreeOneRoutine(WorkoutRoutine baseRoutine, NewFiveThreeOneCycleInfo cycleInfo);
         void AddTranslationToWorkoutRoutine(WorkoutRoutineTranslation dto, Guid workoutRoutineId);
         void UpdateTranslation(WorkoutRoutineTranslation translation, Guid routineId);
         Task<IEnumerable<WorkoutRoutineTranslation>> AllTranslationsForWorkoutRoutineWithIdAsync(Guid routineId);

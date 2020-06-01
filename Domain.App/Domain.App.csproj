@@ -12,7 +12,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Contracts.DAL.Base\Contracts.DAL.Base.csproj" />
-      <ProjectReference Include="..\Contracts.Domain\Contracts.Domain.csproj" />
       <ProjectReference Include="..\DAL.Base\DAL.Base.csproj" />
       <ProjectReference Include="..\Domain.Base\Domain.Base.csproj" />
       <ProjectReference Include="..\Resources\Resources.csproj" />
