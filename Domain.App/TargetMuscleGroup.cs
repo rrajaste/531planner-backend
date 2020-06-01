@@ -1,7 +1,8 @@
 ﻿using System;
 using Domain.App.Constants;
 using ee.itcollege.raraja.Contracts.Domain;
-using Domain.Base;
+using ee.itcollege.raraja.Domain;
+
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.App

@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Domain.Base;
+using ee.itcollege.raraja.Domain;
 
 namespace Domain.App
 {

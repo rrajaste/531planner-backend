@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ee.itcollege.raraja.Contracts.Domain;
 using Domain.App.Identity;
-using Domain.Base;
+using ee.itcollege.raraja.Domain;
 
 namespace Domain.App
 {
