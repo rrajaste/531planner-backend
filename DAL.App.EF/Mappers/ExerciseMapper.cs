@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
+using System.Threading;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
 using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App.Enums;
 
 namespace DAL.App.EF.Mappers
 {
@@ -17,8 +19,8 @@ namespace DAL.App.EF.Mappers
             new Exercise()
             {
                 Id = domainObject.Id,
-                Name = domainObject.Name,
-                Description = domainObject.Description,
+                Name = ConvertNameToCurrentLanguage(domainObject),
+                Description = ConvertDescriptionToCurrentLanguage(domainObject),
                 TargetMuscleGroups = domainObject.TargetMuscleGroups?
                     .Select(
                         t => t.MuscleGroup != null 
@@ -31,8 +33,39 @@ namespace DAL.App.EF.Mappers
             new Domain.App.Exercise()
             {
                 Id = dalObject.Id,
-                Name = dalObject.Name,
-                Description = dalObject.Description,
+                NameET = dalObject.Name,
+                NameENG = dalObject.Name,
+                DescriptionET = dalObject.Description,
+                DescriptionENG = dalObject.Description,
             };
+        
+        private string GetCurrentCulture()
+        {
+            if (Thread.CurrentThread.CurrentUICulture.Name == Culture.Estonian)
+            {
+                return Culture.Estonian;
+            }
+            else
+            {
+                return Culture.English;
+            }
+        }
+        private string ConvertNameToCurrentLanguage(Domain.App.Exercise domainEntity)
+        {
+            if (GetCurrentCulture() == Culture.Estonian)
+            {
+                return domainEntity.NameET;
+            }
+            return domainEntity.NameENG;
+        }
+        
+        private string ConvertDescriptionToCurrentLanguage(Domain.App.Exercise domainEntity)
+        {
+            if (GetCurrentCulture() == Culture.Estonian)
+            {
+                return domainEntity.DescriptionET;
+            }
+            return domainEntity.DescriptionENG;
+        }
     }
 }

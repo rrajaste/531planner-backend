@@ -10,15 +10,18 @@ namespace Extensions
         public static DateTime[] StartingFromGetDatesWithSameDayOfWeek(this DateTime dateTime, ICollection<DateTime> baseDates)
         {
             var startOfWeek = dateTime.StartOfWeek(DayOfWeek.Monday);
-            if (dateTime.AreAnyDaysOfWeekBeforeThis(baseDates))
-            {
-                startOfWeek = startOfWeek.AddDays(7);
-            }
             var newDates = new DateTime[baseDates.Count];
             var oldDates = baseDates.ToList();
             for (var i = 0; i < baseDates.Count; i++)
             {
-                newDates[i] = startOfWeek.AddDays(oldDates[i].DayOfWeek - startOfWeek.DayOfWeek);
+                if (oldDates[i].DayOfWeek == 0)
+                {
+                    newDates[i] = startOfWeek.AddDays(6);
+                }
+                else
+                {
+                    newDates[i] = startOfWeek.AddDays(oldDates[i].DayOfWeek - startOfWeek.DayOfWeek);
+                }
             }
 
             return newDates;

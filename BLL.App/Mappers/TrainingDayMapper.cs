@@ -76,7 +76,7 @@ namespace BLL.Mappers
         {
             var baseDates = new DateTime[]
             {
-                DateTime.ParseExact("10/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                DateTime.ParseExact("17/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("11/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("12/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("13/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),

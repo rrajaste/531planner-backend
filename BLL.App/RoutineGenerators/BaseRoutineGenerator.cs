@@ -97,7 +97,7 @@ namespace BLL.RoutineGenerators
                 .OrderBy(d => d.Date)
                 .ToArray();
             
-            var newDates = startingDate.AddDays(1).StartingFromGetDatesWithSameDayOfWeek(baseDates);
+            var newDates = startingDate.StartingFromGetDatesWithSameDayOfWeek(baseDates);
             var generatedTrainingWeek = new TrainingWeek()
             {
                 Id = Guid.NewGuid(),

@@ -24,4 +24,10 @@
     <data name="submit">
         <value>SISESTA</value>
     </data>
+    <data name="EnglishTranslation">
+        <value>Inglisekeelne tõlge</value>
+    </data>
+    <data name="EstonianTranslation">
+        <value>Eestikeelne tõlge</value>
+    </data>
 </root>

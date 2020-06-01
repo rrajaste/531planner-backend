@@ -24,4 +24,10 @@
     <data name="submit">
         <value>Submit</value>
     </data>
+    <data name="EnglishTranslation">
+        <value>English translation</value>
+    </data>
+    <data name="EstonianTranslation">
+        <value>Estonian translation</value>
+    </data>
 </root>

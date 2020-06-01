@@ -56,5 +56,17 @@ namespace Resources.Views.WorkoutRoutine {
                 return ResourceManager.GetString("submit", resourceCulture);
             }
         }
+        
+        public static string EnglishTranslation {
+            get {
+                return ResourceManager.GetString("EnglishTranslation", resourceCulture);
+            }
+        }
+        
+        public static string EstonianTranslation {
+            get {
+                return ResourceManager.GetString("EstonianTranslation", resourceCulture);
+            }
+        }
     }
 }
