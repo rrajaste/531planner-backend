@@ -1,13 +1,14 @@
+@using Resources.Views.Muscle
 @model WebApplication.Areas.Admin.ViewModels.MuscleCreateEditViewModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>@Resources.Views.Muscle.Edit.Title</h1>
+<h1>@Edit.Title</h1>
 
-<h4>@Resources.Views.Muscle.Details.Muscle</h4>
-<hr />
+<h4>@Details.Muscle</h4>
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -19,9 +20,9 @@
 </div>
 
 <div>
-    <a asp-action="Index">@Resources.Views.Muscle.Edit.BackToList</a>
+    <a asp-action="Index">@Edit.BackToList</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

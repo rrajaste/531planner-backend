@@ -7,13 +7,12 @@ using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-
     public interface ITrainingDayRepository : ITrainingDayRepository<Guid, TrainingDay>, IBaseRepository<TrainingDay>
     {
     }
-    
-    public interface ITrainingDayRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
-        where TEntity : class, IDALBaseDTO<TKey>, new() 
+
+    public interface ITrainingDayRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity>
+        where TEntity : class, IDALBaseDTO<TKey>, new()
         where TKey : IEquatable<TKey>
     {
         Task<IEnumerable<TEntity>> AllWithTrainingWeekIdAsync(TKey trainingWeekId);

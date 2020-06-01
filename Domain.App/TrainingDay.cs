@@ -10,11 +10,12 @@ namespace Domain.App
     {
     }
 
-    public class TrainingDay<TKey> : DomainEntityIdMetadata<TKey> 
+    public class TrainingDay<TKey> : DomainEntityIdMetadata<TKey>
         where TKey : struct, IEquatable<TKey>
     {
         [Display(Name = nameof(Date), ResourceType = typeof(Resources.Domain.TrainingDay))]
         public DateTime Date { get; set; } = default!;
+
         public TKey TrainingWeekId { get; set; } = default!;
         public TKey TrainingDayTypeId { get; set; } = default!;
         public TrainingWeek? TrainingWeek { get; set; }

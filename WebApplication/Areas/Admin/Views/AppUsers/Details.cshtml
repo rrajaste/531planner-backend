@@ -1,18 +1,19 @@
+@using Resources.Views.Accounts
 @model WebApplication.Areas.Admin.ViewModels.AppUserDetailsViewModel
 
 <div class="jumbotron pb-3 shadow rounded">
-    <h1 class="text-uppercase mb-4">@Resources.Views.Accounts.Details.Title</h1>
+    <h1 class="text-uppercase mb-4">@Details.Title</h1>
     <a asp-action="ManageUser" class="text-uppercase" asp-route-id="@Model.UserName">
-        @Resources.Views.Accounts.Details.Manage
+        @Details.Manage
     </a>
-    <hr />
+    <hr/>
     <div class="row justify-content-center">
         <partial name="_DetailsPartial"/>
     </div>
     <hr/>
     <div class="text-uppercase mt-3 mb-1">
         <a asp-action="Index">
-            @Resources.Views.Accounts.Details.BackToList
+            @Details.BackToList
         </a>
     </div>
 

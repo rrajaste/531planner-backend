@@ -1,35 +1,36 @@
 using System.Linq;
-using Contracts.DAL.App;
-using Contracts.DAL.App.Mappers;
-using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
-using DAL.Base.EF;
+using DAL.App.DTO;
 
 namespace BLL.Mappers
 {
-    public class MuscleGroupMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.MuscleGroup, MuscleGroup>
+    public class MuscleGroupMapper : BLLBaseMapper, IBLLMapper<MuscleGroup, App.DTO.MuscleGroup>
     {
         public MuscleGroupMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
-        public MuscleGroup MapDALToBLL(DAL.App.DTO.MuscleGroup dalObject) =>
-            new MuscleGroup()
+        public App.DTO.MuscleGroup MapDALToBLL(MuscleGroup dalObject)
+        {
+            return new App.DTO.MuscleGroup
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,
                 Description = dalObject.Description,
                 Muscles = dalObject.Muscles?.Select(BLLMapperContext.MuscleMapper.MapDALToBLL)
             };
+        }
 
-        public DAL.App.DTO.MuscleGroup MapBLLToDAL(MuscleGroup bllObject) =>
-            new DAL.App.DTO.MuscleGroup()
+        public MuscleGroup MapBLLToDAL(App.DTO.MuscleGroup bllObject)
+        {
+            return new MuscleGroup
             {
                 Id = bllObject.Id,
                 Name = bllObject.Name,
-                Description = bllObject.Description,
+                Description = bllObject.Description
             };
+        }
     }
 }

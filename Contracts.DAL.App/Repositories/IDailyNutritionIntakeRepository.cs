@@ -11,12 +11,12 @@ namespace Contracts.DAL.App.Repositories
         IBaseRepository<DailyNutritionIntake>
     {
     }
-    
-    public interface IDailyNutritionIntakeRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
+
+    public interface IDailyNutritionIntakeRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity>
         where TEntity : class, IDALBaseDTO<TKey>, new()
         where TKey : IEquatable<TKey>
     {
-        Task<IEnumerable<TEntity>> AllWithAppUserIdAsync (TKey id);
+        Task<IEnumerable<TEntity>> AllWithAppUserIdAsync(TKey id);
         Task<TEntity> FindWithAppUserIdAsync(TKey id, TKey appUserId);
     }
 }

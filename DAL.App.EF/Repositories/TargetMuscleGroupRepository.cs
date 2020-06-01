@@ -5,10 +5,11 @@ using Domain.App;
 
 namespace DAL.App.EF.Repositories
 {
-    public class TargetMuscleGroupRepository : EFBaseRepository<AppDbContext, TargetMuscleGroup, DAL.App.DTO.TargetMuscleGroup>,
+    public class TargetMuscleGroupRepository : EFBaseRepository<AppDbContext, TargetMuscleGroup, DTO.TargetMuscleGroup>,
         ITargetMuscleGroupRepository
     {
-        public TargetMuscleGroupRepository(AppDbContext repoDbContext, IDALMapper<TargetMuscleGroup, DAL.App.DTO.TargetMuscleGroup> mapper) 
+        public TargetMuscleGroupRepository(AppDbContext repoDbContext,
+            IDALMapper<TargetMuscleGroup, DTO.TargetMuscleGroup> mapper)
             : base(repoDbContext, mapper)
         {
         }

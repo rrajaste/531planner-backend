@@ -1,33 +1,36 @@
 using System.Linq;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
-using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App;
 
 namespace DAL.App.EF.Mappers
 {
-    public class TrainingDayMapper : EFBaseMapper, IDALMapper<Domain.App.TrainingDay, TrainingDay>
+    public class TrainingDayMapper : EFBaseMapper, IDALMapper<TrainingDay, DTO.TrainingDay>
     {
         public TrainingDayMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public TrainingDay MapDomainToDAL(Domain.App.TrainingDay domainObject) =>
-            new TrainingDay()
+        public DTO.TrainingDay MapDomainToDAL(TrainingDay domainObject)
+        {
+            return new DTO.TrainingDay
             {
                 Id = domainObject.Id,
                 Date = domainObject.Date,
                 ExercisesInTrainingDay = domainObject.ExercisesInTrainingDay?
                     .Select(DALMapperContext.ExerciseInTrainingDayMapper.MapDomainToDAL),
                 TrainingWeekId = domainObject.TrainingWeekId,
-                TrainingDayType = domainObject.TrainingDayType == null 
-                    ? null 
+                TrainingDayType = domainObject.TrainingDayType == null
+                    ? null
                     : DALMapperContext.TrainingDayTypeMapper.MapDomainToDAL(domainObject.TrainingDayType),
                 TrainingDayTypeId = domainObject.TrainingDayTypeId
             };
+        }
 
-        public Domain.App.TrainingDay MapDALToDomain(TrainingDay dalObject) =>
-            new Domain.App.TrainingDay()
+        public TrainingDay MapDALToDomain(DTO.TrainingDay dalObject)
+        {
+            return new TrainingDay
             {
                 Id = dalObject.Id,
                 Date = dalObject.Date,
@@ -38,5 +41,6 @@ namespace DAL.App.EF.Mappers
                     .Select(DALMapperContext.ExerciseInTrainingDayMapper.MapDALToDomain)
                     .ToList()
             };
+        }
     }
 }

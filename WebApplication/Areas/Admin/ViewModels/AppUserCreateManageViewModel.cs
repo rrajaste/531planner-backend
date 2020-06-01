@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApplication.Areas.Admin.ViewModels
@@ -20,17 +17,21 @@ namespace WebApplication.Areas.Admin.ViewModels
         [Display(Name = nameof(Resources.ViewModels.AppUserCreateManageViewModel.Email),
             ResourceType = typeof(Resources.ViewModels.AppUserCreateManageViewModel))]
         public string Email { get; set; } = default!;
+
         [DataType("password")]
         [MinLength(8)]
         [MaxLength(256)]
-        [Display(Name = nameof(Resources.ViewModels.AppUserCreateManageViewModel.Password), 
+        [Display(Name = nameof(Resources.ViewModels.AppUserCreateManageViewModel.Password),
             ResourceType = typeof(Resources.ViewModels.AppUserCreateManageViewModel))]
         public string Password { get; set; } = default!;
-        [Display(Name = nameof(Resources.ViewModels.AppUserCreateManageViewModel.IsEmailConfirmed), 
+
+        [Display(Name = nameof(Resources.ViewModels.AppUserCreateManageViewModel.IsEmailConfirmed),
             ResourceType = typeof(Resources.ViewModels.AppUserCreateManageViewModel))]
         public bool IsEmailConfirmed { get; set; }
+
         public IEnumerable<string> SelectedRoles { get; set; } = default!;
-        [Display(Name = nameof(Resources.ViewModels.AppUserCreateManageViewModel.Roles), 
+
+        [Display(Name = nameof(Resources.ViewModels.AppUserCreateManageViewModel.Roles),
             ResourceType = typeof(Resources.ViewModels.AppUserCreateManageViewModel))]
         public MultiSelectList? Roles { get; set; }
     }

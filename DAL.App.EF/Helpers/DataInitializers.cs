@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Contracts.DAL.Base;
-using ee.itcollege.raraja.Contracts.Domain;
-using DAL.Base;
-using Domain;
 using Domain.App.Identity;
+using ee.itcollege.raraja.Contracts.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace DAL.App.EF.Helpers
 {
@@ -53,18 +49,16 @@ namespace DAL.App.EF.Helpers
                 var userInUserManager = userManager.FindByNameAsync(userToSeed.Name).Result;
                 if (userInUserManager == null)
                 {
-                    userInUserManager = new AppUser()
+                    userInUserManager = new AppUser
                     {
                         UserName = userToSeed.Name,
                         Email = userToSeed.Email,
                         EmailConfirmed = userToSeed.IsEmailConfirmed
                     };
                     var result = userManager.CreateAsync(userInUserManager, userToSeed.Password).Result;
-                    if (!result.Succeeded)
-                    {
-                        throw new ApplicationException("Failed to create seeded user");
-                    }
+                    if (!result.Succeeded) throw new ApplicationException("Failed to create seeded user");
                 }
+
                 var roleAddResult = userManager.AddToRoleAsync(userInUserManager, userToSeed.AppRole).Result;
             }
         }
@@ -80,10 +74,7 @@ namespace DAL.App.EF.Helpers
                 {
                     role = new AppUserRole {Name = roleToSeed.Name, DisplayName = roleToSeed.DisplayName};
                     var result = roleManager.CreateAsync(role).Result;
-                    if (!result.Succeeded)
-                    {
-                        throw new ApplicationException("Role creation failed!");
-                    }
+                    if (!result.Succeeded) throw new ApplicationException("Role creation failed!");
                 }
             }
         }
@@ -100,7 +91,7 @@ namespace DAL.App.EF.Helpers
             var json = reader.ReadToEnd();
             return JsonConvert.DeserializeObject<List<TObject>>(json);
         }
-        
+
         private struct User
         {
             public string Name { get; set; }
@@ -109,7 +100,7 @@ namespace DAL.App.EF.Helpers
             public string AppRole { get; set; }
             public bool IsEmailConfirmed { get; set; }
         }
-        
+
         private struct Role
         {
             public string Name { get; set; }

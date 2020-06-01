@@ -11,7 +11,6 @@ namespace DAL.App.DTO
     public class WorkoutRoutine<TKey> : IDALBaseDTO<TKey>
         where TKey : struct, IEquatable<TKey>
     {
-        public TKey Id { get; set; }
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
         public bool IsBaseRoutine { get; set; }
@@ -20,5 +19,6 @@ namespace DAL.App.DTO
         public TKey? AppUserId { get; set; }
         public RoutineType? RoutineType { get; set; }
         public IEnumerable<TrainingCycle>? TrainingCycles { get; set; }
+        public TKey Id { get; set; }
     }
 }

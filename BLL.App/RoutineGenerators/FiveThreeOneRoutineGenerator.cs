@@ -7,61 +7,66 @@ using Domain.App.Constants;
 
 namespace BLL.RoutineGenerators
 {
-    public class FiveThreeOneRoutineGenerator : BaseRoutineGenerator<NewFiveThreeOneRoutineInfo>, IFiveThreeOneRoutineGenerator
+    public class FiveThreeOneRoutineGenerator : BaseRoutineGenerator<NewFiveThreeOneRoutineInfo>,
+        IFiveThreeOneRoutineGenerator
     {
         public FiveThreeOneRoutineGenerator(NewFiveThreeOneRoutineInfo newRoutineInfo) : base(newRoutineInfo)
         {
         }
 
-        protected override ExerciseInTrainingDay GenerateExercise(ExerciseInTrainingDay baseExercise, int trainingWeekNumber, Guid parentId)
+        public virtual TrainingCycle GenerateNewTrainingCycle(WorkoutRoutine parentRoutine)
         {
-            var exercise = new ExerciseInTrainingDay()
+            NewRoutineId = parentRoutine.Id;
+            var newCycleNumber = parentRoutine.TrainingCycles.Max(cycle => cycle.CycleNumber) + 1;
+            return base.GenerateNewTrainingCycle(parentRoutine.Id, newCycleNumber);
+        }
+
+        protected override ExerciseInTrainingDay GenerateExercise(ExerciseInTrainingDay baseExercise,
+            int trainingWeekNumber, Guid parentId)
+        {
+            var exercise = new ExerciseInTrainingDay
             {
                 Id = Guid.NewGuid(),
                 TrainingDayId = parentId,
                 ExerciseTypeId = baseExercise.ExerciseTypeId,
-                ExerciseId = baseExercise.ExerciseId,
+                ExerciseId = baseExercise.ExerciseId
             };
             if (baseExercise.WarmUpSets == null)
-            {
                 throw new ApplicationException(
                     $"Routine generation failed: base ExerciseInTrainingDay with ID ${baseExercise.Id} warm-up sets are null.");
-            }
-            
+
             exercise.WarmUpSets = GenerateExerciseSets(baseExercise.WarmUpSets, exercise.Id, baseExercise.ExerciseId);
-            
+
             if (baseExercise.WorkSets == null)
-            {
                 throw new ApplicationException(
                     $"Routine generation failed: base ExerciseInTrainingDay with ID ${baseExercise.Id} work sets are null.");
-            }
-            
+
             exercise.WorkSets = GenerateExerciseSets(baseExercise.WorkSets, exercise.Id, baseExercise.ExerciseId);
 
             return exercise;
         }
-        
-        protected virtual IEnumerable<ExerciseSet> GenerateExerciseSets(IEnumerable<ExerciseSet> baseSets, Guid parentId, Guid exerciseId)
+
+        protected virtual IEnumerable<ExerciseSet> GenerateExerciseSets(IEnumerable<ExerciseSet> baseSets,
+            Guid parentId, Guid exerciseId)
         {
             var exerciseSets = new List<ExerciseSet>();
             foreach (var set in baseSets)
             {
                 if (set.Weight == null)
-                {
                     throw new ApplicationException(
                         $"Routine generation failed: base set ID ${set.Id} set weight is null.");
-                }
                 var weight = GetUserExerciseSetWeight(exerciseId, (float) set.Weight);
                 var generatedSet = GenerateExerciseSet(set, weight);
                 generatedSet.ExerciseInTrainingDayId = parentId;
                 exerciseSets.Add(generatedSet);
             }
+
             return exerciseSets;
         }
 
         protected virtual ExerciseSet GenerateExerciseSet(ExerciseSet exerciseSet, float weight)
         {
-            return new ExerciseSet()
+            return new ExerciseSet
             {
                 Id = Guid.NewGuid(),
                 Completed = false,
@@ -80,27 +85,14 @@ namespace BLL.RoutineGenerators
             var setWeight = 0F;
             var wendlerMaxes = NewRoutineInfo.CycleInfo;
             if (exerciseInTrainingDayId == MainLiftExerciseIDs.DeadLift)
-            {
                 setWeight = wendlerMaxes.DeadliftMax * (baseWeight / 100);
-            } else if (exerciseInTrainingDayId == MainLiftExerciseIDs.BenchPress)
-            {
+            else if (exerciseInTrainingDayId == MainLiftExerciseIDs.BenchPress)
                 setWeight = wendlerMaxes.BenchPressMax * (baseWeight / 100);
-            } else if (exerciseInTrainingDayId == MainLiftExerciseIDs.Squat)
-            {
+            else if (exerciseInTrainingDayId == MainLiftExerciseIDs.Squat)
                 setWeight = wendlerMaxes.SquatMax * (baseWeight / 100);
-            }
             else if (exerciseInTrainingDayId == MainLiftExerciseIDs.OverHeadPress)
-            {
                 setWeight = wendlerMaxes.OverHeadPressMax * (baseWeight / 100);
-            }
             return setWeight;
-        }
-
-        public virtual TrainingCycle GenerateNewTrainingCycle(WorkoutRoutine parentRoutine)
-        {
-            NewRoutineId = parentRoutine.Id;
-            var newCycleNumber = parentRoutine.TrainingCycles.Max(cycle => cycle.CycleNumber) + 1;
-            return base.GenerateNewTrainingCycle(parentRoutine.Id, newCycleNumber);
         }
     }
 }

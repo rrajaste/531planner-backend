@@ -7,7 +7,7 @@ using Contracts.DAL.App.Repositories;
 
 namespace Contracts.BLL.App.Services
 {
-    public interface IDailyNutritionIntakeService : IBaseEntityService<DailyNutritionIntake>, 
+    public interface IDailyNutritionIntakeService : IBaseEntityService<DailyNutritionIntake>,
         IDailyNutritionIntakeRepository<Guid, DailyNutritionIntake>
     {
         Task<NutritionStatistics> GetNutritionStatisticsAsync(Guid userId, List<DailyNutritionIntake> userMeasurements);

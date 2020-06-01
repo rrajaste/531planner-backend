@@ -1,39 +1,40 @@
+@using Resources.Views.Accounts
 @model WebApplication.Areas.Admin.ViewModels.AppUserCreateManageViewModel
 
 <div class="jumbotron shadow rounded pb-3">
-    <h1 class="text-uppercase pb-3">@Resources.Views.Accounts.Manage.Title</h1>
-        <hr />
-        <div class="row justify-content-center">
-            <ul class="list-group col-sm-6 col-m-5 col-lg-4">
-                <li class="list-group-item list-group-item-dark text-uppercase">
-                    @Html.DisplayNameFor(item => item.UserName)
-                </li>
-                <li class="list-group-item">
-                    @Html.DisplayFor(item => item.UserName)
-                </li>
-                
-                <li class="list-group-item list-group-item-dark text-uppercase">
-                    @Html.DisplayNameFor(item => item.Email)
-                </li>
-                <li class="list-group-item">
-                    @Html.DisplayFor(item => item.Email)
-                </li>
-                <li class="list-group-item list-group-item-dark text-uppercase font-weight-bold">
-                    @Html.DisplayNameFor(item => item.Roles)
-                </li>
-                <form asp-action="ManageUser">
+    <h1 class="text-uppercase pb-3">@Manage.Title</h1>
+    <hr/>
+    <div class="row justify-content-center">
+        <ul class="list-group col-sm-6 col-m-5 col-lg-4">
+            <li class="list-group-item list-group-item-dark text-uppercase">
+                @Html.DisplayNameFor(item => item.UserName)
+            </li>
+            <li class="list-group-item">
+                @Html.DisplayFor(item => item.UserName)
+            </li>
+
+            <li class="list-group-item list-group-item-dark text-uppercase">
+                @Html.DisplayNameFor(item => item.Email)
+            </li>
+            <li class="list-group-item">
+                @Html.DisplayFor(item => item.Email)
+            </li>
+            <li class="list-group-item list-group-item-dark text-uppercase font-weight-bold">
+                @Html.DisplayNameFor(item => item.Roles)
+            </li>
+            <form asp-action="ManageUser">
                 <li class="list-group-item">
                     <div class="row justify-content-center">
                         <select class="col-8 input-group" asp-for="@Model.SelectedRoles" asp-items="@Model.Roles"></select>
                     </div>
                 </li>
                 <li class="list-group-item list-group-item-dark text-uppercase font-weight-bold">
-                    <input type="submit" value="@Resources.Views.Accounts.Manage.Submit" 
+                    <input type="submit" value="@Manage.Submit"
                            title="" class="btn btn-success btn-sm text-uppercase"/>
                 </li>
-                </form>
-            </ul>
-        </div>
-        <hr/>
-        <a class="text-uppercase" asp-controller="AppUsers" asp-action="Index">@Resources.Views.Accounts.Manage.BackToList</a>
+            </form>
+        </ul>
+    </div>
+    <hr/>
+    <a class="text-uppercase" asp-controller="AppUsers" asp-action="Index">@Manage.BackToList</a>
 </div>

@@ -1,9 +1,12 @@
+@using Resources.Views.TrainingWeeks
 @model WebApplication.Areas.Admin.ViewModels.TrainingWeekNumberEditViewModel
 
 <form asp-action="IncrementWeekNumber">
     <input type="hidden" asp-for="@Model.TrainingWeekId"/>
     <input type="hidden" asp-for="@Model.WorkoutRoutineId"/>
-    <button type="submit" 
-            title="@Resources.Views.TrainingWeeks._MoveWeekDownPartial.HoverText" 
-            class="btn btn-link py-0 px-1 move-arrow"><i class="fas fa-arrow-down"></i></button>
+    <button type="submit"
+            title="@_MoveWeekDownPartial.HoverText"
+            class="btn btn-link py-0 px-1 move-arrow">
+        <i class="fas fa-arrow-down"></i>
+    </button>
 </form>

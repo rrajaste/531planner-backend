@@ -1,5 +1,4 @@
 using System;
-using BLL.App.DTO;
 
 namespace WebApplication.Areas.Admin.ViewModels
 {

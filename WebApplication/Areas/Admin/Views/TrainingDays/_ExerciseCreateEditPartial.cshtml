@@ -1,10 +1,10 @@
+@using Resources.Views.TrainingDay
 @model BLL.App.DTO.BaseTrainingDay
 
 <div class="text-left">
-    <a asp-area="Admin"  asp-controller="ExerciseInTrainingDay" asp-action="Create" asp-route-id="@Model.Id">
+    <a asp-area="Admin" asp-controller="ExerciseInTrainingDay" asp-action="Create" asp-route-id="@Model.Id">
         <i class="far fa-plus-square text-success add-new-main" title="Add new" aria-hidden="true">
         </i>
-        <span class="mx-1 text-success">@Resources.Views.TrainingDay._ExerciseCreatePartial.Add</span>
-    </a>    
+        <span class="mx-1 text-success">@_ExerciseCreatePartial.Add</span>
+    </a>
 </div>
-

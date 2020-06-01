@@ -1,7 +1,9 @@
+@using Index = Resources.Views.WorkoutRoutine.Index
+@using Resources.Views.WorkoutRoutine
 @model BLL.App.DTO.WorkoutRoutine
 
-<a data-toggle="modal" 
-   title="@Resources.Views.WorkoutRoutine.Index.Delete" data-target="#modalId-@Model.Id" asp-action="Delete" asp-route-id="@Model.Id">
+<a data-toggle="modal"
+   title="@Index.Delete" data-target="#modalId-@Model.Id" asp-action="Delete" asp-route-id="@Model.Id">
     <i class="fas fa-trash delete text-danger"></i>
 </a>
 
@@ -10,7 +12,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center text-danger" id="deleteModalLabel">
-                    @Resources.Views.WorkoutRoutine._DeletePartial.ConfirmationText
+                    @_DeletePartial.ConfirmationText
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -22,12 +24,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    @Resources.Views.WorkoutRoutine._DeletePartial.Close
+                    @_DeletePartial.Close
                 </button>
                 <form asp-action="Delete">
                     <input type="hidden" asp-for="@Model.Id"/>
                     <button type="submit" class="btn btn-danger">
-                        @Resources.Views.WorkoutRoutine._DeletePartial.Delete
+                        @_DeletePartial.Delete
                     </button>
                 </form>
             </div>

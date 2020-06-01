@@ -11,7 +11,6 @@ namespace DAL.App.DTO
     public class TrainingWeek<TKey> : IDALBaseDTO<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public int WeekNumber { get; set; }
         public bool IsDeload { get; set; }
         public DateTime StartingDate { get; set; }
@@ -20,5 +19,6 @@ namespace DAL.App.DTO
         public TKey TrainingCycleId { get; set; } = default!;
         public TrainingCycle? TrainingCycle { get; set; }
         public IEnumerable<TrainingDay>? TrainingDays { get; set; }
+        public TKey Id { get; set; } = default!;
     }
 }

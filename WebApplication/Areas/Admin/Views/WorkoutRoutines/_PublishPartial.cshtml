@@ -1,8 +1,9 @@
+@using Resources.Views.WorkoutRoutine
 @model WebApplication.Areas.Admin.ViewModels.WorkoutRoutinePublishViewModel
 
 <form asp-action="Publish">
     <input type="hidden" asp-for="@Model.WorkoutRoutineId"/>
-    <button type="submit" class="btn btn-outline-success text-uppercase" title="@Resources.Views.WorkoutRoutine._PublishPartial.HoverText">
-        @Resources.Views.WorkoutRoutine._PublishPartial.Publish
+    <button type="submit" class="btn btn-outline-success text-uppercase" title="@_PublishPartial.HoverText">
+        @_PublishPartial.Publish
     </button>
 </form>

@@ -10,13 +10,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class ExerciseInTrainingDayRepository : EFBaseRepository<AppDbContext, ExerciseInTrainingDay, DTO.ExerciseInTrainingDay>,
+    public class ExerciseInTrainingDayRepository :
+        EFBaseRepository<AppDbContext, ExerciseInTrainingDay, DTO.ExerciseInTrainingDay>,
         IExerciseInTrainingDayRepository
     {
-        public ExerciseInTrainingDayRepository(AppDbContext dbContext, IDALMapper<ExerciseInTrainingDay, DTO.ExerciseInTrainingDay> mapper) 
+        public ExerciseInTrainingDayRepository(AppDbContext dbContext,
+            IDALMapper<ExerciseInTrainingDay, DTO.ExerciseInTrainingDay> mapper)
             : base(dbContext, mapper)
         {
-            
         }
 
         public async Task<IEnumerable<DTO.ExerciseInTrainingDay>> AllWithBaseTrainingDayIdAsync(Guid trainingDayId)
@@ -38,7 +39,7 @@ namespace DAL.App.EF.Repositories
                 .ThenInclude(d => d!.TrainingWeek)
                 .ThenInclude(w => w!.TrainingCycle)
                 .ThenInclude(c => c!.WorkoutRoutine);
-            var isPartOfBaseRoutine = await 
+            var isPartOfBaseRoutine = await
                 query.AnyAsync(e => e.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null);
             return isPartOfBaseRoutine;
         }

@@ -1,11 +1,12 @@
+@using Resources.Views.ExerciseInTrainingDay
 @model WebApplication.Areas.Admin.ViewModels.ExerciseInTrainingDayCreateEditViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 <div class="jumbotron rounded shadow">
-    <h3 class="text-uppercase">@Resources.Views.ExerciseInTrainingDay.Create.Title</h3>
-    <hr />
+    <h3 class="text-uppercase">@Create.Title</h3>
+    <hr/>
     <div class="row justify-content-center">
         <div class="col-md-4">
             <form asp-action="Create">
@@ -17,7 +18,7 @@
     <div>
         <a class="text-uppercase" asp-area="Admin" asp-controller="TrainingDays" asp-action="View"
            asp-route-id="@Model.ExerciseInTrainingDay.TrainingDayId">
-            @Resources.Views.ExerciseInTrainingDay.Edit.BackToList
+            @Edit.BackToList
         </a>
     </div>
 </div>
@@ -25,5 +26,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

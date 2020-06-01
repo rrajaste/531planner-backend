@@ -1,22 +1,19 @@
 using System;
 using System.Linq;
+using BLL.App.DTO;
 
 namespace PublicApi.DTO.V1.Mappers
 {
     public class ExerciseMapper
     {
-        public static Exercise MapBLLEntityToPublicDTO(BLL.App.DTO.ExerciseInTrainingDay bllEntity)
+        public static Exercise MapBLLEntityToPublicDTO(ExerciseInTrainingDay bllEntity)
         {
             if (bllEntity.Exercise == null)
-            {
                 throw new ArgumentException("Mapping failed: Exercise on BLL entity was null!");
-            }
             if (bllEntity.ExerciseType == null)
-            {
                 throw new ArgumentException("Mapping failed: ExerciseType on BLL entity was null!");
-            }
-            
-            return new Exercise()
+
+            return new Exercise
             {
                 Id = bllEntity.Id,
                 Name = bllEntity.Exercise.Name,

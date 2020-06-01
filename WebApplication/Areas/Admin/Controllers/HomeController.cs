@@ -10,7 +10,6 @@ using WebApplication.ViewModels;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
-    
     [Area(nameof(Admin))]
     [Authorize(Roles = AppRoles.Administrator)]
     public class HomeController : Controller
@@ -26,19 +25,19 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             return View();
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
-        
+
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions()
+                new CookieOptions
                 {
                     Expires = DateTimeOffset.UtcNow.AddYears(1)
                 }

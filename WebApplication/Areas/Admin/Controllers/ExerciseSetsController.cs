@@ -20,15 +20,15 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             _bll = bll;
         }
-        
+
         public async Task<IActionResult> Create(Guid id)
         {
             if (await _bll.ExercisesInTrainingDays.IsPartOfBaseRoutineAsync(id))
             {
                 var parentTrainingDay = await _bll.TrainingDays.FindWithExerciseInTrainingDayIdAsync(id);
-                var viewModel = new ExerciseSetCreateEditViewModel()
+                var viewModel = new ExerciseSetCreateEditViewModel
                 {
-                    ExerciseSet = new BaseLiftSet()
+                    ExerciseSet = new BaseLiftSet
                     {
                         ExerciseInTrainingDayId = id
                     },
@@ -36,6 +36,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 };
                 return View(await AddSelectListsToViewModelAsync(viewModel));
             }
+
             return NotFound();
         }
 
@@ -43,18 +44,21 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ExerciseSetCreateEditViewModel viewModel)
         {
-            if (await _bll.ExercisesInTrainingDays.IsPartOfBaseRoutineAsync(viewModel.ExerciseSet.ExerciseInTrainingDayId))
+            if (await _bll.ExercisesInTrainingDays.IsPartOfBaseRoutineAsync(viewModel.ExerciseSet
+                .ExerciseInTrainingDayId))
             {
                 if (ModelState.IsValid)
                 {
                     viewModel.ExerciseSet.Id = Guid.NewGuid();
                     await _bll.ExerciseSets.AddBaseLiftSetAsync(viewModel.ExerciseSet);
                     await _bll.SaveChangesAsync();
-                    return RedirectToAction(nameof(View), "TrainingDays", 
+                    return RedirectToAction(nameof(View), "TrainingDays",
                         new {id = viewModel.TrainingDayId});
                 }
+
                 return View(await AddSelectListsToViewModelAsync(viewModel));
             }
+
             return BadRequest();
         }
 
@@ -64,24 +68,22 @@ namespace WebApplication.Areas.Admin.Controllers
             {
                 var exerciseSet = await _bll.ExerciseSets.FindBaseLiftSetAsync(id);
                 var parentTrainingDay = await _bll.TrainingDays.FindWithExerciseSetIdAsync(id);
-                var viewModel = new ExerciseSetCreateEditViewModel()
+                var viewModel = new ExerciseSetCreateEditViewModel
                 {
                     ExerciseSet = exerciseSet,
                     TrainingDayId = parentTrainingDay.Id
                 };
                 return View(await AddSelectListsToViewModelAsync(viewModel));
             }
+
             return NotFound();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ExerciseSetCreateEditViewModel viewModel)
         {
-            if (id != viewModel.ExerciseSet.Id)
-            {
-                return NotFound();
-            }
+            if (id != viewModel.ExerciseSet.Id) return NotFound();
 
             if (await _bll.ExerciseSets.IsPartOfBaseRoutineAsync(viewModel.ExerciseSet.Id))
             {
@@ -91,11 +93,13 @@ namespace WebApplication.Areas.Admin.Controllers
                     await _bll.SaveChangesAsync();
                     return RedirectToAction(nameof(View), "TrainingDays", new {id = viewModel.TrainingDayId});
                 }
-                return View(await AddSelectListsToViewModelAsync(viewModel));   
+
+                return View(await AddSelectListsToViewModelAsync(viewModel));
             }
+
             return BadRequest();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id)
@@ -108,9 +112,12 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.ExerciseSets.NormalizeSetNumbersAsync(removedEntity.ExerciseInTrainingDayId);
                 return RedirectToAction(nameof(View), "TrainingDays", new {id = parentTrainingDay.Id});
             }
+
             return BadRequest();
         }
-        private async Task<ExerciseSetCreateEditViewModel> AddSelectListsToViewModelAsync(ExerciseSetCreateEditViewModel viewModel)
+
+        private async Task<ExerciseSetCreateEditViewModel> AddSelectListsToViewModelAsync(
+            ExerciseSetCreateEditViewModel viewModel)
         {
             var returnViewModel = new ExerciseSetCreateEditViewModel();
             var setTypes = await _bll.SetTypes.AllAsync();

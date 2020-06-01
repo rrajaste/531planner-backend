@@ -1,3 +1,4 @@
+@using Resources.Views.TrainingWeeks
 @model WebApplication.Areas.Admin.ViewModels.TrainingWeekCreateViewModel
 
 <form asp-action="Create">
@@ -5,15 +6,15 @@
     <input type="hidden" asp-for="WorkoutRoutineId" value="@Model.WorkoutRoutineId"/>
     <div class="row">
         <div class="form-group mx-2">
-            <input type="submit" class="btn btn-outline-success text-uppercase" 
-                   title="@Resources.Views.TrainingWeeks._CreateWeekPartial.AddHoverText" 
-                   value="@Resources.Views.TrainingWeeks._CreateWeekPartial.AddNew">
+            <input type="submit" class="btn btn-outline-success text-uppercase"
+                   title="@_CreateWeekPartial.AddHoverText"
+                   value="@_CreateWeekPartial.AddNew">
         </div>
         <div class="form-check my-2">
             <input class="form-check-input" asp-for="@Model.IsDeload">
-            <label class="form-check-label text-secondary" 
-                   title="@Resources.Views.TrainingWeeks._CreateWeekPartial.DeloadHoverText" asp-for="@Model.IsDeload">
-            @Resources.Views.TrainingWeeks._CreateWeekPartial.IsDeload
+            <label class="form-check-label text-secondary"
+                   title="@_CreateWeekPartial.DeloadHoverText" asp-for="@Model.IsDeload">
+                @_CreateWeekPartial.IsDeload
             </label>
         </div>
     </div>

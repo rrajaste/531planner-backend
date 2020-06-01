@@ -16,5 +16,4 @@ namespace Domain.App.Identity
         public DateTime ClosedAt { get; set; } = DateTime.MaxValue;
         public string? Comment { get; set; }
     }
-
 }

@@ -11,7 +11,7 @@ namespace PublicApi.DTO.V1
         public float AverageCalories { get; set; }
         public float AverageProtein { get; set; }
         public float AverageCaloriesTdeeDelta { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime FirstLogAt { get; set; }
+
+        [DataType(DataType.Date)] public DateTime FirstLogAt { get; set; }
     }
 }

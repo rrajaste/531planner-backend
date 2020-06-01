@@ -10,7 +10,7 @@ namespace Domain.App
     {
     }
 
-    public class TrainingCycle<TKey> : DomainEntityIdMetadata<TKey> 
+    public class TrainingCycle<TKey> : DomainEntityIdMetadata<TKey>
         where TKey : struct, IEquatable<TKey>
     {
         [Display(Name = nameof(CycleNumber), ResourceType = typeof(Resources.Domain.TrainingCycle))]

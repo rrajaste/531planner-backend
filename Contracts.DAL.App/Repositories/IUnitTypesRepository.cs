@@ -8,9 +8,9 @@ namespace Contracts.DAL.App.Repositories
     public interface IUnitTypesRepository : IUnitTypesRepository<Guid, UnitType>, IBaseRepository<UnitType>
     {
     }
-    
-    public interface IUnitTypesRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
-        where TEntity : class, IDALBaseDTO<TKey>, new() 
+
+    public interface IUnitTypesRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity>
+        where TEntity : class, IDALBaseDTO<TKey>, new()
         where TKey : IEquatable<TKey>
     {
     }

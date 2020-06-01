@@ -10,15 +10,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class ExerciseSetRepository : EFBaseRepository<AppDbContext, ExerciseSet, DAL.App.DTO.ExerciseSet>, 
+    public class ExerciseSetRepository : EFBaseRepository<AppDbContext, ExerciseSet, DTO.ExerciseSet>,
         IExerciseSetRepository
     {
-        public ExerciseSetRepository(AppDbContext dbContext, IDALMapper<ExerciseSet, DAL.App.DTO.ExerciseSet> mapper) 
+        public ExerciseSetRepository(AppDbContext dbContext, IDALMapper<ExerciseSet, DTO.ExerciseSet> mapper)
             : base(dbContext, mapper)
         {
         }
 
-        public async Task<IEnumerable<DAL.App.DTO.ExerciseSet>> AllWithExerciseInTrainingDayIdAsync(Guid exerciseInTrainingDayId)
+        public async Task<IEnumerable<DTO.ExerciseSet>> AllWithExerciseInTrainingDayIdAsync(
+            Guid exerciseInTrainingDayId)
         {
             var domainObjects = await RepoDbSet
                 .AsNoTracking()
@@ -30,8 +31,9 @@ namespace DAL.App.EF.Repositories
             return dalObjects;
         }
 
-        public async Task<bool> IsPartOfBaseRoutineAsync(Guid exerciseSetId) =>
-            await RepoDbSet
+        public async Task<bool> IsPartOfBaseRoutineAsync(Guid exerciseSetId)
+        {
+            return await RepoDbSet
                 .Include(s => s.ExerciseInTrainingDay)
                 .ThenInclude(e => e.TrainingDay)
                 .ThenInclude(d => d!.TrainingWeek)
@@ -41,6 +43,7 @@ namespace DAL.App.EF.Repositories
                     s.Id == exerciseSetId &&
                     s.ExerciseInTrainingDay.TrainingDay!.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
+        }
 
         public async Task<Guid> GetRoutineIdForExerciseSetAsync(Guid exerciseInTrainingDayId)
         {

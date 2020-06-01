@@ -1,6 +1,7 @@
+@using Resources.Views.TrainingWeeks
 @model WebApplication.Areas.Admin.ViewModels.TrainingWeekViewModel
 
-<a data-toggle="modal" title="@Resources.Views.TrainingWeeks._DeleteDayPartial.Delete" data-target="#modal-delete-id-@Model.TrainingWeek.Id" asp-action="Delete" asp-route-id="@Model.TrainingWeek.Id">
+<a data-toggle="modal" title="@_DeleteDayPartial.Delete" data-target="#modal-delete-id-@Model.TrainingWeek.Id" asp-action="Delete" asp-route-id="@Model.TrainingWeek.Id">
     <i class="fas fa-trash delete text-danger ml-1"></i>
 </a>
 
@@ -9,31 +10,36 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title text-center text-danger" id="deleteModalLabel">
-                    @Resources.Views.TrainingWeeks._DeleteWeekPartial.DeleteConfirm
+                    @_DeleteWeekPartial.DeleteConfirm
                 </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>@Resources.Views.TrainingWeeks._DeleteWeekPartial.WeekNumber: @Model.TrainingWeek.WeekNumber</p>
-                <p>@Resources.Views.TrainingWeeks._DeleteWeekPartial.TrainingDays: @Model.TrainingWeek.TrainingDays?.Count()</p>
-                <p>@Resources.Views.TrainingWeeks._DeleteWeekPartial.IsDeload: @if (Model.TrainingWeek.IsDeload)
-                              {
-                                  <span>@Resources.Views.TrainingWeeks._DeleteWeekPartial.Yes</span>
-                              }else{
-                                  <span>@Resources.Views.TrainingWeeks._DeleteWeekPartial.No</span>
-                              }</p>
+                <p>@_DeleteWeekPartial.WeekNumber: @Model.TrainingWeek.WeekNumber</p>
+                <p>@_DeleteWeekPartial.TrainingDays: @Model.TrainingWeek.TrainingDays?.Count()</p>
+                <p>
+                    @_DeleteWeekPartial.IsDeload:
+                    @if (Model.TrainingWeek.IsDeload)
+                    {
+                        <span>@_DeleteWeekPartial.Yes</span>
+                    }
+                    else
+                    {
+                        <span>@_DeleteWeekPartial.No</span>
+                    }
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">
-                    @Resources.Views.TrainingWeeks._DeleteWeekPartial.Close
+                    @_DeleteWeekPartial.Close
                 </button>
                 <form asp-action="Delete">
                     <input type="hidden" asp-for="@Model.TrainingWeek.Id"/>
                     <input type="hidden" asp-for="@Model.WorkoutRoutineId"/>
                     <button type="submit" class="btn btn-danger">
-                        @Resources.Views.TrainingWeeks._DeleteWeekPartial.Delete
+                        @_DeleteWeekPartial.Delete
                     </button>
                 </form>
             </div>

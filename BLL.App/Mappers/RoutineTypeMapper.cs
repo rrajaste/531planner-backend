@@ -1,20 +1,20 @@
 using System.Linq;
-using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
+using DAL.App.DTO;
 
 namespace BLL.Mappers
 {
-    public class RoutineTypeMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.RoutineType, RoutineType>
+    public class RoutineTypeMapper : BLLBaseMapper, IBLLMapper<RoutineType, App.DTO.RoutineType>
     {
         public RoutineTypeMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
-        public RoutineType MapDALToBLL(DAL.App.DTO.RoutineType dalObject)
+        public App.DTO.RoutineType MapDALToBLL(RoutineType dalObject)
         {
-            return new RoutineType()
+            return new App.DTO.RoutineType
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,
@@ -24,13 +24,15 @@ namespace BLL.Mappers
             };
         }
 
-        public DAL.App.DTO.RoutineType MapBLLToDAL(RoutineType bllObject) =>
-            new DAL.App.DTO.RoutineType()
+        public RoutineType MapBLLToDAL(App.DTO.RoutineType bllObject)
+        {
+            return new RoutineType
             {
                 Id = bllObject.Id,
                 Name = bllObject.Name,
                 Description = bllObject.Description,
                 ParentTypeId = bllObject.ParentTypeId
             };
+        }
     }
 }

@@ -10,25 +10,30 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class MuscleRepository : EFBaseRepository<AppDbContext, Muscle, DAL.App.DTO.Muscle>, IMuscleRepository
+    public class MuscleRepository : EFBaseRepository<AppDbContext, Muscle, DTO.Muscle>, IMuscleRepository
     {
-        public MuscleRepository(AppDbContext repoDbContext, IDALMapper<Muscle, DAL.App.DTO.Muscle> mapper) 
+        public MuscleRepository(AppDbContext repoDbContext, IDALMapper<Muscle, DTO.Muscle> mapper)
             : base(repoDbContext, mapper)
         {
         }
 
-        public override async Task<IEnumerable<DAL.App.DTO.Muscle>> AllAsync() => (
-            await RepoDbSet
-                .Include(m => m.MuscleGroup)
-                .ToListAsync())
-            .Select(domainEntity => Mapper.MapDomainToDAL(domainEntity)
-        );
+        public override async Task<IEnumerable<DTO.Muscle>> AllAsync()
+        {
+            return (
+                    await RepoDbSet
+                        .Include(m => m.MuscleGroup)
+                        .ToListAsync())
+                .Select(domainEntity => Mapper.MapDomainToDAL(domainEntity)
+                );
+        }
 
-        public override async Task<DAL.App.DTO.Muscle> FindAsync(Guid id) => 
-            Mapper.MapDomainToDAL(
+        public override async Task<DTO.Muscle> FindAsync(Guid id)
+        {
+            return Mapper.MapDomainToDAL(
                 await RepoDbSet
-                .Include(m => m.MuscleGroup)
-                .SingleOrDefaultAsync(m => m.Id == id)
+                    .Include(m => m.MuscleGroup)
+                    .SingleOrDefaultAsync(m => m.Id == id)
             );
+        }
     }
 }

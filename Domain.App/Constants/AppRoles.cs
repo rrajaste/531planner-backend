@@ -4,6 +4,6 @@ namespace Domain.App.Constants
     {
         public const string User = "user";
         public const string Administrator = "admin";
-        public static readonly string[] AllRoles = new []{User, Administrator};
+        public static readonly string[] AllRoles = {User, Administrator};
     }
 }

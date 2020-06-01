@@ -1,35 +1,39 @@
 using System.Linq;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
-using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App;
 
 namespace DAL.App.EF.Mappers
 {
-    public class ExerciseInTrainingDayMapper : EFBaseMapper, IDALMapper<Domain.App.ExerciseInTrainingDay, ExerciseInTrainingDay>
+    public class ExerciseInTrainingDayMapper : EFBaseMapper,
+        IDALMapper<ExerciseInTrainingDay, DTO.ExerciseInTrainingDay>
     {
         public ExerciseInTrainingDayMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public ExerciseInTrainingDay MapDomainToDAL(Domain.App.ExerciseInTrainingDay domainObject) =>
-            new ExerciseInTrainingDay()
+        public DTO.ExerciseInTrainingDay MapDomainToDAL(ExerciseInTrainingDay domainObject)
+        {
+            return new DTO.ExerciseInTrainingDay
             {
                 Id = domainObject.Id,
                 TrainingDayId = domainObject.TrainingDayId,
                 ExerciseTypeId = domainObject.ExerciseTypeId,
-                ExerciseType = domainObject.ExerciseType == null 
-                    ? null 
+                ExerciseType = domainObject.ExerciseType == null
+                    ? null
                     : DALMapperContext.ExerciseTypeMapper.MapDomainToDAL(domainObject.ExerciseType),
                 ExerciseId = domainObject.ExerciseId,
-                Exercise = domainObject.Exercise == null 
-                    ? null 
+                Exercise = domainObject.Exercise == null
+                    ? null
                     : DALMapperContext.ExerciseMapper.MapDomainToDAL(domainObject.Exercise),
                 ExerciseSets = domainObject.ExerciseSets?.Select(DALMapperContext.ExerciseSetMapper.MapDomainToDAL)
             };
+        }
 
-        public Domain.App.ExerciseInTrainingDay MapDALToDomain(ExerciseInTrainingDay dalObject) =>
-            new Domain.App.ExerciseInTrainingDay()
+        public ExerciseInTrainingDay MapDALToDomain(DTO.ExerciseInTrainingDay dalObject)
+        {
+            return new ExerciseInTrainingDay
             {
                 Id = dalObject.Id,
                 ExerciseId = dalObject.ExerciseId,
@@ -40,5 +44,6 @@ namespace DAL.App.EF.Mappers
                     .Select(DALMapperContext.ExerciseSetMapper.MapDALToDomain)
                     .ToList()
             };
+        }
     }
 }

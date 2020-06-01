@@ -16,7 +16,6 @@ using WorkoutRoutine = BLL.App.DTO.WorkoutRoutine;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
-
     [Area(nameof(Admin))]
     [Authorize(Roles = AppRoles.Administrator)]
     public class WorkoutRoutinesController : Controller
@@ -34,17 +33,11 @@ namespace WebApplication.Areas.Admin.Controllers
             var publishedRoutines = new Collection<WorkoutRoutine>();
             var unpublishedRoutines = new Collection<WorkoutRoutine>();
             foreach (var routine in routines)
-            {
                 if (routine.IsPublished)
-                {
                     publishedRoutines.Add(routine);
-                }
                 else
-                {
                     unpublishedRoutines.Add(routine);
-                }
-            }
-            var viewModel = new WorkoutRoutineViewModel()
+            var viewModel = new WorkoutRoutineViewModel
             {
                 PublishedRoutines = publishedRoutines,
                 UnPublishedRoutines = unpublishedRoutines
@@ -56,11 +49,11 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             var viewModel = new WorkoutRoutineCreateEditViewModel
             {
-                RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(), 
+                RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(),
                     nameof(RoutineType.Id), nameof(RoutineType.Name)),
-                EstonianTranslation = new WorkoutRoutineTranslation() {CultureCode = Culture.Estonian},
-                EnglishTranslation = new WorkoutRoutineTranslation() {CultureCode = Culture.English},
-                WorkoutRoutine = new WorkoutRoutine(){ Name = "Placeholder", Description = "Placeholder"}
+                EstonianTranslation = new WorkoutRoutineTranslation {CultureCode = Culture.Estonian},
+                EnglishTranslation = new WorkoutRoutineTranslation {CultureCode = Culture.English},
+                WorkoutRoutine = new WorkoutRoutine {Name = "Placeholder", Description = "Placeholder"}
             };
             return View(viewModel);
         }
@@ -71,7 +64,8 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var workoutRoutineId = Guid.NewGuid();;
+                var workoutRoutineId = Guid.NewGuid();
+                ;
                 viewModel.WorkoutRoutine.Id = workoutRoutineId;
                 await _bll.WorkoutRoutines.AddWithBaseCycleAsync(viewModel.WorkoutRoutine);
                 _bll.WorkoutRoutines.AddTranslationToWorkoutRoutine(viewModel.EnglishTranslation, workoutRoutineId);
@@ -82,6 +76,7 @@ namespace WebApplication.Areas.Admin.Controllers
                     area = "Admin", id = workoutRoutineId
                 });
             }
+
             viewModel.RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(),
                 nameof(RoutineType.Id), nameof(RoutineType.Name));
             return View(viewModel);
@@ -92,18 +87,19 @@ namespace WebApplication.Areas.Admin.Controllers
             if (await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id))
             {
                 var workoutRoutine = await _bll.WorkoutRoutines.FindBaseRoutineAsync(id);
-                var translations = 
+                var translations =
                     (await _bll.WorkoutRoutines.AllTranslationsForWorkoutRoutineWithIdAsync(id)).ToList();
                 var viewModel = new WorkoutRoutineCreateEditViewModel
                 {
                     EstonianTranslation = GetTranslation(translations, Culture.Estonian),
                     EnglishTranslation = GetTranslation(translations, Culture.English),
                     WorkoutRoutine = workoutRoutine,
-                    RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(), 
+                    RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(),
                         nameof(RoutineType.Id), nameof(RoutineType.Name))
                 };
                 return View(viewModel);
             }
+
             return NotFound();
         }
 
@@ -111,10 +107,7 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, WorkoutRoutineCreateEditViewModel viewModel)
         {
-            if (! await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id))
-            {
-                return BadRequest();
-            }
+            if (!await _bll.WorkoutRoutines.BaseRoutineWithIdExistsAsync(id)) return BadRequest();
             if (ModelState.IsValid)
             {
                 _bll.WorkoutRoutines.UpdateBaseRoutine(viewModel.WorkoutRoutine);
@@ -126,11 +119,12 @@ namespace WebApplication.Areas.Admin.Controllers
 
             viewModel.RoutineTypeSelectList = new SelectList(await _bll.RoutineTypes.GetTypeTreeLeafsAsync(),
                 nameof(RoutineType.Id), nameof(RoutineType.Name));
-            
+
             return View(viewModel);
         }
 
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
@@ -141,9 +135,10 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return BadRequest();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Publish(WorkoutRoutinePublishViewModel viewModel)
@@ -154,9 +149,10 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return BadRequest();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UnPublish(WorkoutRoutinePublishViewModel viewModel)
@@ -167,16 +163,16 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return BadRequest();
         }
-        
-        private static WorkoutRoutineTranslation GetTranslation(IEnumerable<WorkoutRoutineTranslation> translations, string cultureCode)
+
+        private static WorkoutRoutineTranslation GetTranslation(IEnumerable<WorkoutRoutineTranslation> translations,
+            string cultureCode)
         {
             var translation = translations.FirstOrDefault(item => item.CultureCode == cultureCode);
             if (translation == null)
-            {
                 throw new ApplicationException("Missing workout routine translation for culture code " + cultureCode);
-            }
 
             return translation;
         }

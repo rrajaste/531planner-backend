@@ -1,63 +1,63 @@
 using BLL.Base;
 using BLL.Mappers;
-using Contracts.BLL.App.Mappers;
-using BLL.App.DTO;
 using Contracts.BLL.App;
+using Contracts.BLL.App.Mappers;
+using DAL.App.DTO;
 
 namespace BLL
 {
     public class AppBLLMapperContext : BaseMapperContext, IAppBLLMapperContext
     {
-        public IBLLMapper<DAL.App.DTO.UnitType, UnitType> UnitTypeMapper =>
+        public IBLLMapper<UnitType, App.DTO.UnitType> UnitTypeMapper =>
             GetMapper(() => new UnitTypeMapper(this));
 
-        public IBLLMapper<DAL.App.DTO.BodyMeasurement, BodyMeasurement> BodyMeasurementMapper =>
+        public IBLLMapper<BodyMeasurement, App.DTO.BodyMeasurement> BodyMeasurementMapper =>
             GetMapper(() => new BodyMeasurementMapper(this));
 
-        public IBLLMapper<DAL.App.DTO.DailyNutritionIntake, DailyNutritionIntake> DailyNutritionIntakeMapper =>
+        public IBLLMapper<DailyNutritionIntake, App.DTO.DailyNutritionIntake> DailyNutritionIntakeMapper =>
             GetMapper(() => new DailyNutritionIntakeMapper(this));
 
-        public IBLLMapper<DAL.App.DTO.Exercise, Exercise> ExerciseMapper =>
+        public IBLLMapper<Exercise, App.DTO.Exercise> ExerciseMapper =>
             GetMapper(() => new ExerciseMapper(this));
-        
-        
+
+
         public IExerciseSetMapper ExerciseSetMapper =>
             GetMapper(() => new ExerciseSetMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.ExerciseType, ExerciseType> ExerciseTypeMapper =>
+
+        public IBLLMapper<ExerciseType, App.DTO.ExerciseType> ExerciseTypeMapper =>
             GetMapper(() => new ExerciseTypeMapper(this));
 
-        public IBLLMapper<DAL.App.DTO.MuscleGroup, MuscleGroup> MuscleGroupMapper =>
+        public IBLLMapper<MuscleGroup, App.DTO.MuscleGroup> MuscleGroupMapper =>
             GetMapper(() => new MuscleGroupMapper(this));
-            
-        public IBLLMapper<DAL.App.DTO.Muscle, Muscle> MuscleMapper =>
+
+        public IBLLMapper<Muscle, App.DTO.Muscle> MuscleMapper =>
             GetMapper(() => new MuscleMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.ExerciseInTrainingDay, ExerciseInTrainingDay> ExerciseInTrainingDayMapper =>
+
+        public IBLLMapper<ExerciseInTrainingDay, App.DTO.ExerciseInTrainingDay> ExerciseInTrainingDayMapper =>
             GetMapper(() => new ExerciseInTrainingDayMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.RoutineType, RoutineType> RoutineTypeMapper =>
+
+        public IBLLMapper<RoutineType, App.DTO.RoutineType> RoutineTypeMapper =>
             GetMapper(() => new RoutineTypeMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.TrainingCycle, TrainingCycle> TrainingCycleMapper =>
+
+        public IBLLMapper<TrainingCycle, App.DTO.TrainingCycle> TrainingCycleMapper =>
             GetMapper(() => new TrainingCycleMapper(this));
-        
+
         public ITrainingDayMapper TrainingDayMapper =>
             GetMapper(() => new TrainingDayMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.TrainingWeek, TrainingWeek> TrainingWeekMapper =>
+
+        public IBLLMapper<TrainingWeek, App.DTO.TrainingWeek> TrainingWeekMapper =>
             GetMapper(() => new TrainingWeekMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine> WorkoutRoutineMapper =>
+
+        public IBLLMapper<WorkoutRoutine, App.DTO.WorkoutRoutine> WorkoutRoutineMapper =>
             GetMapper(() => new WorkoutRoutineMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.TargetMuscleGroup, TargetMuscleGroup> TargetMuscleGroupMapper =>
+
+        public IBLLMapper<TargetMuscleGroup, App.DTO.TargetMuscleGroup> TargetMuscleGroupMapper =>
             GetMapper(() => new TargetMuscleGroupMapper(this));
 
-        public IBLLMapper<DAL.App.DTO.TrainingDayType, TrainingDayType> TrainingDayTypeMapper =>
+        public IBLLMapper<TrainingDayType, App.DTO.TrainingDayType> TrainingDayTypeMapper =>
             GetMapper(() => new TrainingDayTypeMapper(this));
-        
-        public IBLLMapper<DAL.App.DTO.SetType, SetType> SetTypeMapper =>
+
+        public IBLLMapper<SetType, App.DTO.SetType> SetTypeMapper =>
             GetMapper(() => new SetTypeMapper(this));
     }
 }

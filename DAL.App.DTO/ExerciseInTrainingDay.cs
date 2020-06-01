@@ -7,11 +7,10 @@ namespace DAL.App.DTO
     public class ExerciseInTrainingDay : ExerciseInTrainingDay<Guid>, IDALBaseDTO
     {
     }
-    
-    public class ExerciseInTrainingDay<TKey> : IDALBaseDTO<TKey> 
+
+    public class ExerciseInTrainingDay<TKey> : IDALBaseDTO<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public TKey ExerciseId { get; set; } = default!;
         public Exercise? Exercise { get; set; }
         public TKey TrainingDayId { get; set; } = default!;
@@ -19,5 +18,6 @@ namespace DAL.App.DTO
         public TKey ExerciseTypeId { get; set; } = default!;
         public ExerciseType? ExerciseType { get; set; }
         public IEnumerable<ExerciseSet>? ExerciseSets { get; set; }
+        public TKey Id { get; set; } = default!;
     }
 }

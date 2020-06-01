@@ -1,18 +1,19 @@
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
-using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App;
 
 namespace DAL.App.EF.Mappers
 {
-    public class ExerciseSetMapper : EFBaseMapper, IDALMapper<Domain.App.ExerciseSet, ExerciseSet>
+    public class ExerciseSetMapper : EFBaseMapper, IDALMapper<ExerciseSet, DTO.ExerciseSet>
     {
         public ExerciseSetMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public ExerciseSet MapDomainToDAL(Domain.App.ExerciseSet domainObject) =>
-            new ExerciseSet()
+        public DTO.ExerciseSet MapDomainToDAL(ExerciseSet domainObject)
+        {
+            return new DTO.ExerciseSet
             {
                 Id = domainObject.Id,
                 Completed = domainObject.Completed,
@@ -23,14 +24,16 @@ namespace DAL.App.EF.Mappers
                 NrOfReps = domainObject.NrOfReps,
                 SetNumber = domainObject.SetNumber,
                 SetTypeId = domainObject.SetTypeId,
-                SetType = domainObject.SetType == null 
-                    ? null 
+                SetType = domainObject.SetType == null
+                    ? null
                     : DALMapperContext.SetTypeMapper.MapDomainToDAL(domainObject.SetType),
                 Weight = domainObject.Weight
             };
+        }
 
-        public Domain.App.ExerciseSet MapDALToDomain(ExerciseSet dalObject) =>
-            new Domain.App.ExerciseSet()
+        public ExerciseSet MapDALToDomain(DTO.ExerciseSet dalObject)
+        {
+            return new ExerciseSet
             {
                 Id = dalObject.Id,
                 ExerciseInTrainingDayId = dalObject.ExerciseInTrainingDayId,
@@ -43,5 +46,6 @@ namespace DAL.App.EF.Mappers
                 Weight = dalObject.Weight,
                 WorkoutRoutineId = dalObject.WorkoutRoutineId
             };
+        }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 
 namespace PublicApi.DTO.V1.Mappers
 {
@@ -7,20 +6,20 @@ namespace PublicApi.DTO.V1.Mappers
     {
         public static DailyNutritionIntake MapBLLEntityToPublicDTO(BLL.App.DTO.DailyNutritionIntake bllEntity)
         {
-            return new DailyNutritionIntake()
+            return new DailyNutritionIntake
             {
                 Id = bllEntity.Id.ToString(),
                 Calories = bllEntity.Calories,
                 Carbohydrates = bllEntity.Carbohydrates,
-                Fats =  bllEntity.Fats,
+                Fats = bllEntity.Fats,
                 Protein = bllEntity.Protein,
-                LoggedAt = bllEntity.LoggedAt,
+                LoggedAt = bllEntity.LoggedAt
             };
         }
-        
+
         public static NutritionStatistics MapBLLEntityToPublicDTO(BLL.App.DTO.NutritionStatistics bllEntity)
         {
-            return new NutritionStatistics()
+            return new NutritionStatistics
             {
                 FirstLogAt = bllEntity.FirstLogAt,
                 AverageCalories = (float) Math.Round(bllEntity.AverageCalories),
@@ -28,15 +27,18 @@ namespace PublicApi.DTO.V1.Mappers
                 TDEE = (float) Math.Round(bllEntity.TDEE),
                 PredictedProteinNeed = (float) Math.Round(bllEntity.PredictedProteinNeed, 1),
                 PredictedWeightChange = (float) Math.Round(bllEntity.PredictedWeightChange, 3),
-                AverageCaloriesTdeeDelta = (float) Math.Round(bllEntity.AverageCaloriesTdeeDelta),
+                AverageCaloriesTdeeDelta = (float) Math.Round(bllEntity.AverageCaloriesTdeeDelta)
             };
         }
 
         public static BLL.App.DTO.DailyNutritionIntake MapPublicDTOToBLLEntity<TDto>(TDto dto)
-            where TDto : DailyNutritionIntakeCreate => 
-            MapPublicDTOFieldsToBLLEntity(dto, new BLL.App.DTO.DailyNutritionIntake());
+            where TDto : DailyNutritionIntakeCreate
+        {
+            return MapPublicDTOFieldsToBLLEntity(dto, new BLL.App.DTO.DailyNutritionIntake());
+        }
 
-        public static BLL.App.DTO.DailyNutritionIntake MapPublicDTOFieldsToBLLEntity<TDto>(TDto dto, BLL.App.DTO.DailyNutritionIntake bllEntity)
+        public static BLL.App.DTO.DailyNutritionIntake MapPublicDTOFieldsToBLLEntity<TDto>(TDto dto,
+            BLL.App.DTO.DailyNutritionIntake bllEntity)
             where TDto : DailyNutritionIntakeCreate
         {
             bllEntity.Calories = dto.Calories;

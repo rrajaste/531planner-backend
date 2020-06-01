@@ -1,30 +1,34 @@
-using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
+using DAL.App.DTO;
 
 namespace BLL.Mappers
 {
-    public class TargetMuscleGroupMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.TargetMuscleGroup, TargetMuscleGroup>
+    public class TargetMuscleGroupMapper : BLLBaseMapper, IBLLMapper<TargetMuscleGroup, App.DTO.TargetMuscleGroup>
     {
         public TargetMuscleGroupMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
-        public TargetMuscleGroup MapDALToBLL(DAL.App.DTO.TargetMuscleGroup dalObject) =>
-            new TargetMuscleGroup()
+        public App.DTO.TargetMuscleGroup MapDALToBLL(TargetMuscleGroup dalObject)
+        {
+            return new App.DTO.TargetMuscleGroup
             {
                 Id = dalObject.Id,
                 ExerciseId = dalObject.ExerciseId,
                 MuscleGroupId = dalObject.MuscleGroupId
             };
+        }
 
-        public DAL.App.DTO.TargetMuscleGroup MapBLLToDAL(TargetMuscleGroup bllObject) =>
-            new DAL.App.DTO.TargetMuscleGroup()
+        public TargetMuscleGroup MapBLLToDAL(App.DTO.TargetMuscleGroup bllObject)
+        {
+            return new TargetMuscleGroup
             {
                 Id = bllObject.Id,
                 ExerciseId = bllObject.ExerciseId,
                 MuscleGroupId = bllObject.MuscleGroupId
             };
+        }
     }
 }

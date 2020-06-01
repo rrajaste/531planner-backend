@@ -1,33 +1,34 @@
-using Contracts.DAL.App;
-using Contracts.DAL.App.Mappers;
-using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
-using DAL.Base.EF;
+using DAL.App.DTO;
 
 namespace BLL.Mappers
 {
-    public class TrainingDayTypeMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.TrainingDayType, TrainingDayType>
+    public class TrainingDayTypeMapper : BLLBaseMapper, IBLLMapper<TrainingDayType, App.DTO.TrainingDayType>
     {
         public TrainingDayTypeMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
-        public TrainingDayType MapDALToBLL(DAL.App.DTO.TrainingDayType dalObject) =>
-            new TrainingDayType()
+        public App.DTO.TrainingDayType MapDALToBLL(TrainingDayType dalObject)
+        {
+            return new App.DTO.TrainingDayType
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,
                 Description = dalObject.Description
             };
+        }
 
-        public DAL.App.DTO.TrainingDayType MapBLLToDAL(TrainingDayType bllObject) =>
-            new DAL.App.DTO.TrainingDayType()
+        public TrainingDayType MapBLLToDAL(App.DTO.TrainingDayType bllObject)
+        {
+            return new TrainingDayType
             {
                 Id = bllObject.Id,
                 Name = bllObject.Name,
                 Description = bllObject.Description
             };
+        }
     }
 }

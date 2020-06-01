@@ -7,16 +7,12 @@ namespace PublicApi.DTO.V1.Mappers
         public static ExerciseSet MapBLLEntityToPublicDTO(BLL.App.DTO.ExerciseSet bllEntity)
         {
             if (bllEntity.NrOfReps == null)
-            {
                 throw new ArgumentException("Mapping failed: NrOfReps on BLL entity was null!");
-            }
 
             if (bllEntity.SetType == null)
-            {
                 throw new ArgumentException("Mapping failed: SetType on BLL entity was null!");
-            }
-            
-            return new ExerciseSet()
+
+            return new ExerciseSet
             {
                 Id = bllEntity.Id,
                 NrOfReps = (int) bllEntity.NrOfReps,

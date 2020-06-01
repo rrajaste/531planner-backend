@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.App.EF.Repositories
 {
-    public class TrainingDayRepository : EFBaseRepository<AppDbContext, TrainingDay, DAL.App.DTO.TrainingDay>,
+    public class TrainingDayRepository : EFBaseRepository<AppDbContext, TrainingDay, DTO.TrainingDay>,
         ITrainingDayRepository
     {
         public TrainingDayRepository(AppDbContext repoDbContext,
-            IDALMapper<TrainingDay, DAL.App.DTO.TrainingDay> mapper)
+            IDALMapper<TrainingDay, DTO.TrainingDay> mapper)
             : base(repoDbContext, mapper)
         {
         }
@@ -34,13 +34,15 @@ namespace DAL.App.EF.Repositories
             return dalItemsList;
         }
 
-        public async Task<bool> IsPartOfBaseRoutineAsync(Guid trainingDayId) =>
-            await RepoDbSet
+        public async Task<bool> IsPartOfBaseRoutineAsync(Guid trainingDayId)
+        {
+            return await RepoDbSet
                 .Include(d => d.TrainingWeek)
                 .ThenInclude(w => w!.TrainingCycle)
                 .ThenInclude(c => c!.WorkoutRoutine)
                 .AnyAsync(d => d.Id == trainingDayId && d.TrainingWeek!.TrainingCycle!.WorkoutRoutine!.AppUserId == null
                 );
+        }
 
         public async Task<DTO.TrainingDay> FindWithExerciseSetIdAsync(Guid id)
         {
@@ -51,9 +53,7 @@ namespace DAL.App.EF.Repositories
                 .FirstOrDefaultAsync(s => s.Id == id);
             var parentTrainingDay = exerciseSet.ExerciseInTrainingDay!.TrainingDay;
             if (parentTrainingDay == null)
-            {
                 throw new ApplicationException("Cannot find TrainingDay with ExerciseSetId: " + id);
-            }
             return Mapper.MapDomainToDAL(parentTrainingDay);
         }
 
@@ -65,9 +65,7 @@ namespace DAL.App.EF.Repositories
                 .FirstOrDefaultAsync(e => e.Id == id);
             var parentTrainingDay = exerciseInTrainingDay.TrainingDay;
             if (parentTrainingDay == null)
-            {
                 throw new ApplicationException("Cannot find TrainingDay with ExerciseInTrainingDayId: " + id);
-            }
             return Mapper.MapDomainToDAL(parentTrainingDay);
         }
 

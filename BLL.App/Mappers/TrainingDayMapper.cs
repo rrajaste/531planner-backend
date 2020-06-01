@@ -7,6 +7,7 @@ using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
 using Domain.App.Constants;
+using TrainingDay = DAL.App.DTO.TrainingDay;
 
 namespace BLL.Mappers
 {
@@ -16,9 +17,9 @@ namespace BLL.Mappers
         {
         }
 
-        public BaseTrainingDay MapDALToBLL(DAL.App.DTO.TrainingDay dalObject)
+        public BaseTrainingDay MapDALToBLL(TrainingDay dalObject)
         {
-            var trainingDay = new BaseTrainingDay()
+            var trainingDay = new BaseTrainingDay
             {
                 Id = dalObject.Id,
                 DayOfWeek = dalObject.Date.DayOfWeek,
@@ -30,9 +31,10 @@ namespace BLL.Mappers
             };
             return AddExercisesToTrainingDay(trainingDay, dalObject);
         }
-        
-        public DAL.App.DTO.TrainingDay MapBLLToDAL(BaseTrainingDay bllObject) =>
-            new DAL.App.DTO.TrainingDay()
+
+        public TrainingDay MapBLLToDAL(BaseTrainingDay bllObject)
+        {
+            return new TrainingDay
             {
                 Id = bllObject.Id,
                 Date = GetDateFromDayOfWeek(bllObject.DayOfWeek),
@@ -43,10 +45,11 @@ namespace BLL.Mappers
                     .Concat(bllObject.MainLifts?
                         .Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapBLLToDAL))
             };
+        }
 
-        public UserTrainingDay MapDALToUserTrainingDay(DAL.App.DTO.TrainingDay dalEntity)
+        public UserTrainingDay MapDALToUserTrainingDay(TrainingDay dalEntity)
         {
-            var userTrainingDay = new UserTrainingDay()
+            var userTrainingDay = new UserTrainingDay
             {
                 Id = dalEntity.Id,
                 Date = dalEntity.Date,
@@ -59,8 +62,9 @@ namespace BLL.Mappers
             return AddExercisesToTrainingDay(userTrainingDay, dalEntity);
         }
 
-        public DAL.App.DTO.TrainingDay MapUserTrainingDayToDALEntity(UserTrainingDay userTrainingDay) =>
-            new DAL.App.DTO.TrainingDay()
+        public TrainingDay MapUserTrainingDayToDALEntity(UserTrainingDay userTrainingDay)
+        {
+            return new TrainingDay
             {
                 Id = userTrainingDay.Id,
                 Date = userTrainingDay.Date,
@@ -71,10 +75,11 @@ namespace BLL.Mappers
                     .Concat(userTrainingDay.MainLifts?
                         .Select(BLLMapperContext.ExerciseInTrainingDayMapper.MapBLLToDAL))
             };
+        }
 
         private static DateTime GetDateFromDayOfWeek(DayOfWeek dayOfWeek)
         {
-            var baseDates = new DateTime[]
+            var baseDates = new[]
             {
                 DateTime.ParseExact("17/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("11/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
@@ -82,21 +87,20 @@ namespace BLL.Mappers
                 DateTime.ParseExact("13/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("14/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
                 DateTime.ParseExact("15/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                DateTime.ParseExact("16/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                DateTime.ParseExact("16/05/2020", "dd/MM/yyyy", CultureInfo.InvariantCulture)
             };
             var dayNumber = (int) dayOfWeek;
             return baseDates[dayNumber];
         }
-        
-        private TDay AddExercisesToTrainingDay<TDay>(TDay returnDto, DAL.App.DTO.TrainingDay sourceDto)
+
+        private TDay AddExercisesToTrainingDay<TDay>(TDay returnDto, TrainingDay sourceDto)
             where TDay : TrainingDay<Guid>
         {
             var mainLifts = new List<ExerciseInTrainingDay>();
             var accessoryLifts = new List<ExerciseInTrainingDay>();
-            
+
             if (sourceDto.ExercisesInTrainingDay != null)
                 foreach (var exercise in sourceDto.ExercisesInTrainingDay)
-                {
                     switch (exercise.ExerciseType?.TypeCode)
                     {
                         case ExerciseTypeTypeCodes.MainLift:
@@ -112,7 +116,7 @@ namespace BLL.Mappers
                             break;
                         }
                     }
-                }
+
             returnDto.MainLifts = mainLifts;
             returnDto.AccessoryLifts = accessoryLifts;
             return returnDto;

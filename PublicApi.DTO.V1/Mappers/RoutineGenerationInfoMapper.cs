@@ -4,20 +4,21 @@ namespace PublicApi.DTO.V1.Mappers
 {
     public class RoutineGenerationInfoMapper
     {
-        public static NewFiveThreeOneRoutineInfo MapPublicDTOToBLLEntity(RoutineGenerationInfo dto, BLL.App.DTO.WorkoutRoutine baseRoutine)
+        public static NewFiveThreeOneRoutineInfo MapPublicDTOToBLLEntity(RoutineGenerationInfo dto,
+            BLL.App.DTO.WorkoutRoutine baseRoutine)
         {
-            return new NewFiveThreeOneRoutineInfo()
+            return new NewFiveThreeOneRoutineInfo
             {
                 BaseRoutine = baseRoutine,
                 StartingDate = dto.StartingDate,
-                CycleInfo = new NewFiveThreeOneCycleInfo()
+                CycleInfo = new NewFiveThreeOneCycleInfo
                 {
                     AddDeloadWeek = dto.AddDeloadWeek,
                     BenchPressMax = dto.BenchPressMax,
                     DeadliftMax = dto.DeadliftMax,
                     OverHeadPressMax = dto.OverHeadPressMax,
-                    SquatMax = dto.SquatMax,
-                },
+                    SquatMax = dto.SquatMax
+                }
             };
         }
     }

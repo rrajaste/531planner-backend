@@ -8,7 +8,7 @@ namespace DAL.Base.EF
         where TDbContext : DbContext
     {
         protected TDbContext UnitOfWorkDbContext;
-        
+
         public EFBaseUnitOfWork(TDbContext unitOfWorkDbContext)
         {
             UnitOfWorkDbContext = unitOfWorkDbContext;

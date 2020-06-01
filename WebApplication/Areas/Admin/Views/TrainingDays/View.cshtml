@@ -1,5 +1,6 @@
-@using Extensions
 @using System.Globalization
+@using Extensions
+@using Resources.Views.TrainingDay
 @model WebApplication.Areas.Admin.ViewModels.TrainingDayViewModel
 
 @{
@@ -8,51 +9,53 @@
 <div class="jumbotron">
     <h1 class="text-uppercase">@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(Model.TrainingDay.DayOfWeek)</h1>
     <h3 title="@Model.TrainingDay.TrainingDayType?.Description" class="text-uppercase text-secondary">@Model.TrainingDay.TrainingDayType?.Name</h3>
-    <a class="text-uppercase" asp-area="Admin" asp-controller="TrainingWeeks" asp-action="Index" 
-       asp-route-id="@Model.WorkoutRoutineId">@Resources.Views.TrainingDay.View.Back</a>
+    <a class="text-uppercase" asp-area="Admin" asp-controller="TrainingWeeks" asp-action="Index"
+       asp-route-id="@Model.WorkoutRoutineId">
+        @View.Back
+    </a>
     <hr/>
     <h3 class="text-left">
-        @Resources.Views.TrainingDay.View.Exercises
+        @View.Exercises
     </h3>
-        <partial name="_ExerciseCreateEditPartial" model="@Model.TrainingDay"/>
+    <partial name="_ExerciseCreateEditPartial" model="@Model.TrainingDay"/>
     <hr/>
     <div class="row d-flex justify-content-center">
-    <ul class="list-group p-2 col-sm-12 col-md-8 col-lg-7">    
-    @if (Model.TrainingDay.MainLifts.IsEmptyOrNull() && Model.TrainingDay.AccessoryLifts.IsEmptyOrNull())
-    {
-        <li class="list-group-item">
-            <p class="text-secondary">@Resources.Views.TrainingDay.View.NoExercises</p>
-        </li>
-    }
-    else
-    {
-        <li class="list-group-item">
-            <h3 class="text-uppercase">@Resources.Views.TrainingDay.View.MainLifts</h3>
-        </li>
-        if (! Model.TrainingDay.MainLifts.IsEmptyOrNull())
-        {
-            @foreach (var exercise in Model.TrainingDay!.MainLifts!)
+        <ul class="list-group p-2 col-sm-12 col-md-8 col-lg-7">
+            @if (Model.TrainingDay.MainLifts.IsEmptyOrNull() && Model.TrainingDay.AccessoryLifts.IsEmptyOrNull())
             {
-                <partial name="_ExercisePartial" model="exercise"/>
-            }    
-        }
-        else
-        {
-            <li class="list-group-item">
-                <p class="text-muted">@Resources.Views.TrainingDay.View.NoLifts</p>
-            </li>
-        }
-        if (!Model.TrainingDay.AccessoryLifts.IsEmptyOrNull())
-        {
-            <li class="list-group-item">
-                <h3 class="text-uppercase">@Resources.Views.TrainingDay.View.Accessories</h3>
-            </li>
-            @foreach (var exercise in Model.TrainingDay!.AccessoryLifts!)
-            {
-                <partial name="_ExercisePartial" model="exercise"/>
+                <li class="list-group-item">
+                    <p class="text-secondary">@View.NoExercises</p>
+                </li>
             }
-        }
-    }
-    </ul>
+            else
+            {
+                <li class="list-group-item">
+                    <h3 class="text-uppercase">@View.MainLifts</h3>
+                </li>
+                if (!Model.TrainingDay.MainLifts.IsEmptyOrNull())
+                {
+                    @foreach (var exercise in Model.TrainingDay!.MainLifts!)
+                    {
+                        <partial name="_ExercisePartial" model="exercise"/>
+                    }
+                }
+                else
+                {
+                    <li class="list-group-item">
+                        <p class="text-muted">@View.NoLifts</p>
+                    </li>
+                }
+                if (!Model.TrainingDay.AccessoryLifts.IsEmptyOrNull())
+                {
+                    <li class="list-group-item">
+                        <h3 class="text-uppercase">@View.Accessories</h3>
+                    </li>
+                    @foreach (var exercise in Model.TrainingDay!.AccessoryLifts!)
+                    {
+                        <partial name="_ExercisePartial" model="exercise"/>
+                    }
+                }
+            }
+        </ul>
     </div>
 </div>

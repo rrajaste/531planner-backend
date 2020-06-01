@@ -1,12 +1,13 @@
-﻿@model BLL.App.DTO.ExerciseInTrainingDay
+﻿@using Resources.Views.TrainingDay
+@model BLL.App.DTO.ExerciseInTrainingDay
 
 <div>
     <a asp-area="Admin" asp-controller="ExerciseSets" asp-action="Create" asp-route-id="@Model.Id">
         <i class="far fas fa-plus text-success add-new-main add-link-small ml-2" title="Add set" aria-hidden="true">
         </i>
-        <span class="mx-1 text-success text-sm add-link-small text-uppercase" 
-              title="@Resources.Views.TrainingDay._ExerciseSetCreatePartial.AddHoverText">
-            @Resources.Views.TrainingDay._ExerciseSetCreatePartial.Add
+        <span class="mx-1 text-success text-sm add-link-small text-uppercase"
+              title="@_ExerciseSetCreatePartial.AddHoverText">
+            @_ExerciseSetCreatePartial.Add
         </span>
-    </a>    
+    </a>
 </div>

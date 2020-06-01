@@ -1,22 +1,20 @@
 using System.Linq;
-using Contracts.DAL.App;
-using Contracts.DAL.App.Mappers;
-using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
-using DAL.Base.EF;
+using DAL.App.DTO;
 
 namespace BLL.Mappers
 {
-    public class WorkoutRoutineMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.WorkoutRoutine, WorkoutRoutine>
+    public class WorkoutRoutineMapper : BLLBaseMapper, IBLLMapper<WorkoutRoutine, App.DTO.WorkoutRoutine>
     {
         public WorkoutRoutineMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
-        public WorkoutRoutine MapDALToBLL(DAL.App.DTO.WorkoutRoutine dalObject) =>
-            new WorkoutRoutine()
+        public App.DTO.WorkoutRoutine MapDALToBLL(WorkoutRoutine dalObject)
+        {
+            return new App.DTO.WorkoutRoutine
             {
                 Id = dalObject.Id,
                 AppUserId = dalObject.Id,
@@ -24,15 +22,17 @@ namespace BLL.Mappers
                 Description = dalObject.Description,
                 IsPublished = dalObject.IsPublished,
                 IsBaseRoutine = dalObject.IsBaseRoutine,
-                RoutineType = dalObject.RoutineType == null 
-                    ? null 
+                RoutineType = dalObject.RoutineType == null
+                    ? null
                     : BLLMapperContext.RoutineTypeMapper.MapDALToBLL(dalObject.RoutineType),
                 RoutineTypeId = dalObject.RoutineTypeId,
                 TrainingCycles = dalObject.TrainingCycles?.Select(BLLMapperContext.TrainingCycleMapper.MapDALToBLL)
             };
+        }
 
-        public DAL.App.DTO.WorkoutRoutine MapBLLToDAL(WorkoutRoutine bllObject) =>
-            new DAL.App.DTO.WorkoutRoutine()
+        public WorkoutRoutine MapBLLToDAL(App.DTO.WorkoutRoutine bllObject)
+        {
+            return new WorkoutRoutine
             {
                 Id = bllObject.Id,
                 AppUserId = bllObject.AppUserId,
@@ -43,5 +43,6 @@ namespace BLL.Mappers
                 RoutineTypeId = bllObject.RoutineTypeId,
                 TrainingCycles = bllObject.TrainingCycles?.Select(BLLMapperContext.TrainingCycleMapper.MapBLLToDAL)
             };
+        }
     }
 }

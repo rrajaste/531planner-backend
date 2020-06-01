@@ -1,5 +1,4 @@
 using Contracts.BLL.App;
-using Contracts.DAL.App;
 
 namespace BLL.Base.Mappers
 {
@@ -11,6 +10,5 @@ namespace BLL.Base.Mappers
         {
             BLLMapperContext = bllMapperContext;
         }
-    
     }
 }

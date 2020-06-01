@@ -7,6 +7,5 @@ namespace WebApplication.Areas.Admin.ViewModels
     {
         public Guid WorkoutRoutineId { get; set; }
         public TrainingWeek TrainingWeek { get; set; } = default!;
-
     }
 }

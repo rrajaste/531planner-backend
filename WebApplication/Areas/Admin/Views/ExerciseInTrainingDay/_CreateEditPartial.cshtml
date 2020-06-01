@@ -1,3 +1,4 @@
+@using Resources.Views.ExerciseInTrainingDay
 @model WebApplication.Areas.Admin.ViewModels.ExerciseInTrainingDayCreateEditViewModel
 
 <div asp-validation-summary="All" class="text-danger"></div>
@@ -5,16 +6,16 @@
 <div class="form-group">
     <label asp-for="@Model.ExerciseInTrainingDay.ExerciseType" class="control-label"></label>
     <select asp-for="@Model.ExerciseInTrainingDay.ExerciseTypeId" class="form-control" asp-items="Model.ExerciseTypes">
-        <option value=""> @Resources.Views.ExerciseInTrainingDay.CreateEditPartial.SelectType </option>
+        <option value=""> @CreateEditPartial.SelectType </option>
     </select>
     <span asp-validation-for="@Model.ExerciseInTrainingDay.ExerciseType" class="text-danger"></span>
 </div>
 <div class="form-group">
     <label asp-for="@Model.ExerciseInTrainingDay.Exercise" class="control-label"></label>
     <select asp-for="@Model.ExerciseInTrainingDay.ExerciseId" class="form-control" asp-items="Model.Exercises">
-        <option value=""> @Resources.Views.ExerciseInTrainingDay.CreateEditPartial.SelectExercise </option>
+        <option value=""> @CreateEditPartial.SelectExercise </option>
     </select>
     <span asp-validation-for="@Model.ExerciseInTrainingDay.ExerciseId" class="text-danger"></span>
 </div>
 <hr/>
-<input type="submit" class="btn btn-success" value="@Resources.Views.ExerciseInTrainingDay.CreateEditPartial.AddBtnText"/>
+<input type="submit" class="btn btn-success" value="@CreateEditPartial.AddBtnText"/>

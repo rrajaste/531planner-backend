@@ -4,7 +4,7 @@ namespace PublicApi.DTO.V1.Mappers
     {
         public static Muscle MapBLLEntityToPublicDTO(BLL.App.DTO.Muscle bllEntity)
         {
-            return new Muscle()
+            return new Muscle
             {
                 Id = bllEntity.Id.ToString(),
                 MuscleGroupId = bllEntity.MuscleGroupId.ToString(),

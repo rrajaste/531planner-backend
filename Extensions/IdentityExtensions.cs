@@ -14,7 +14,7 @@ namespace Extensions
         {
             return new Guid(user.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
         }
-        
+
         public static string GenerateJWT(IEnumerable<Claim> claims, string signingKey, string issuer, int expiresInDays)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey));
@@ -30,6 +30,5 @@ namespace Extensions
             );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
     }
 }

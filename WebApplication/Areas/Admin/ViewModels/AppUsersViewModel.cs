@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication.Areas.Admin.ViewModels
@@ -8,17 +6,18 @@ namespace WebApplication.Areas.Admin.ViewModels
     {
         [MinLength(4)]
         [MaxLength(64)]
-        [Display(Name = nameof(Resources.ViewModels.AppUsersViewModel.UserName), 
+        [Display(Name = nameof(Resources.ViewModels.AppUsersViewModel.UserName),
             ResourceType = typeof(Resources.ViewModels.AppUsersViewModel))]
         public string UserName { get; set; } = default!;
+
         [EmailAddress]
-        [Display(Name = nameof(Resources.ViewModels.AppUsersViewModel.Email), 
+        [Display(Name = nameof(Resources.ViewModels.AppUsersViewModel.Email),
             ResourceType = typeof(Resources.ViewModels.AppUsersViewModel))]
         public string Email { get; set; } = default!;
-        
+
         public string Roles { get; set; } = default!;
-        
-        [Display(Name = nameof(Resources.ViewModels.AppUsersViewModel.IsLocked), 
+
+        [Display(Name = nameof(Resources.ViewModels.AppUsersViewModel.IsLocked),
             ResourceType = typeof(Resources.ViewModels.AppUsersViewModel))]
         public bool IsLocked { get; set; }
     }

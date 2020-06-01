@@ -21,14 +21,15 @@ namespace Domain.App
 
         [Display(Name = nameof(StartingDate), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public DateTime StartingDate { get; set; }
-        
+
         [Display(Name = nameof(EndingDate), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public DateTime? EndingDate { get; set; }
 
         public TKey TrainingCycleId { get; set; } = default!;
-        
+
         [Display(Name = nameof(TrainingCycle), ResourceType = typeof(Resources.Domain.TrainingWeek))]
         public TrainingCycle? TrainingCycle { get; set; }
+
         public ICollection<TrainingDay>? TrainingDays { get; set; }
     }
 }

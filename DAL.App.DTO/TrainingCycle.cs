@@ -8,15 +8,15 @@ namespace DAL.App.DTO
     {
     }
 
-    public class TrainingCycle<TKey> : IDALBaseDTO<TKey> 
+    public class TrainingCycle<TKey> : IDALBaseDTO<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public TKey WorkoutRoutineId { get; set; } = default!;
         public int CycleNumber { get; set; }
         public DateTime StartingDate { get; set; }
         public DateTime? EndingDate { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public IEnumerable<TrainingWeek>? TrainingWeeks { get; set; }
+        public TKey Id { get; set; } = default!;
     }
 }

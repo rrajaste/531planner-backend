@@ -1,18 +1,19 @@
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
-using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App;
 
 namespace DAL.App.EF.Mappers
 {
-    public class DailyNutritionIntakeMapper : EFBaseMapper, IDALMapper<Domain.App.DailyNutritionIntake, DailyNutritionIntake>
+    public class DailyNutritionIntakeMapper : EFBaseMapper, IDALMapper<DailyNutritionIntake, DTO.DailyNutritionIntake>
     {
         public DailyNutritionIntakeMapper(IAppDALMapperContext context) : base(context)
         {
         }
-        
-        public DailyNutritionIntake MapDomainToDAL(Domain.App.DailyNutritionIntake domainObject) => 
-            new DailyNutritionIntake()
+
+        public DTO.DailyNutritionIntake MapDomainToDAL(DailyNutritionIntake domainObject)
+        {
+            return new DTO.DailyNutritionIntake
             {
                 Id = domainObject.Id,
                 AppUserId = domainObject.AppUserId,
@@ -20,18 +21,21 @@ namespace DAL.App.EF.Mappers
                 Carbohydrates = domainObject.Carbohydrates,
                 LoggedAt = domainObject.LoggedAt,
                 Fats = domainObject.Fats,
-                Protein = domainObject.Protein,
+                Protein = domainObject.Protein
             };
+        }
 
-        public Domain.App.DailyNutritionIntake MapDALToDomain(DailyNutritionIntake dalObject) =>
-            new Domain.App.DailyNutritionIntake()
+        public DailyNutritionIntake MapDALToDomain(DTO.DailyNutritionIntake dalObject)
+        {
+            return new DailyNutritionIntake
             {
                 Id = dalObject.Id,
                 AppUserId = dalObject.AppUserId,
                 Calories = dalObject.Calories,
                 Carbohydrates = dalObject.Carbohydrates,
                 Fats = dalObject.Fats,
-                Protein = dalObject.Protein,
+                Protein = dalObject.Protein
             };
+        }
     }
 }

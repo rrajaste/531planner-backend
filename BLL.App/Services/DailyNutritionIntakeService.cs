@@ -9,28 +9,36 @@ using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
 using BodyMeasurement = DAL.App.DTO.BodyMeasurement;
+using DailyNutritionIntake = DAL.App.DTO.DailyNutritionIntake;
 
 namespace BLL.Services
 {
     public class DailyNutritionIntakeService :
-        BaseEntityService<IDailyNutritionIntakeRepository, IAppUnitOfWork, DAL.App.DTO.DailyNutritionIntake,
-            BLL.App.DTO.DailyNutritionIntake, IBLLMapper<DAL.App.DTO.DailyNutritionIntake, BLL.App.DTO.DailyNutritionIntake>>,
+        BaseEntityService<IDailyNutritionIntakeRepository, IAppUnitOfWork, DailyNutritionIntake,
+            App.DTO.DailyNutritionIntake, IBLLMapper<DailyNutritionIntake, App.DTO.DailyNutritionIntake>>,
         IDailyNutritionIntakeService
     {
-        public DailyNutritionIntakeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.DailyNutritionIntake, DailyNutritionIntake> mapper) 
+        public DailyNutritionIntakeService(IAppUnitOfWork unitOfWork,
+            IBLLMapper<DailyNutritionIntake, App.DTO.DailyNutritionIntake> mapper)
             : base(unitOfWork, mapper, unitOfWork.DailyNutritionIntakes)
         {
         }
 
-        public async Task<IEnumerable<DailyNutritionIntake>> AllWithAppUserIdAsync(Guid id) => (
-            await UnitOfWork.DailyNutritionIntakes.AllWithAppUserIdAsync(id)
-        ).Select(Mapper.MapDALToBLL);
+        public async Task<IEnumerable<App.DTO.DailyNutritionIntake>> AllWithAppUserIdAsync(Guid id)
+        {
+            return (
+                await UnitOfWork.DailyNutritionIntakes.AllWithAppUserIdAsync(id)
+            ).Select(Mapper.MapDALToBLL);
+        }
 
-        public async Task<DailyNutritionIntake> FindWithAppUserIdAsync(Guid id, Guid appUserId) =>
-            Mapper.MapDALToBLL(
+        public async Task<App.DTO.DailyNutritionIntake> FindWithAppUserIdAsync(Guid id, Guid appUserId)
+        {
+            return Mapper.MapDALToBLL(
                 await UnitOfWork.DailyNutritionIntakes.FindWithAppUserIdAsync(id, appUserId));
+        }
 
-        public async Task<NutritionStatistics> GetNutritionStatisticsAsync(Guid userId, List<DailyNutritionIntake> userMeasurements)
+        public async Task<NutritionStatistics> GetNutritionStatisticsAsync(Guid userId,
+            List<App.DTO.DailyNutritionIntake> userMeasurements)
         {
             var lastBodyMeasurement = await UnitOfWork.BodyMeasurements.LatestForUserWithIdAsync(userId);
             var lastNutrition = userMeasurements[^1];
@@ -46,8 +54,8 @@ namespace BLL.Services
                 .OrderBy(measurement => measurement.LoggedAt)
                 .FirstOrDefault()
                 .LoggedAt;
-            
-            var statistics = new NutritionStatistics()
+
+            var statistics = new NutritionStatistics
             {
                 FirstLogAt = firstLogAt,
                 TDEE = tdee,
@@ -60,7 +68,8 @@ namespace BLL.Services
             return statistics;
         }
 
-        private static float CalculatePredictedWeightChange(List<DailyNutritionIntake> userMeasurements, float tdee)
+        private static float CalculatePredictedWeightChange(List<App.DTO.DailyNutritionIntake> userMeasurements,
+            float tdee)
         {
             var totalCaloriesConsumed = userMeasurements.Sum(
                 measurement => measurement.Calories);
@@ -75,10 +84,10 @@ namespace BLL.Services
             return (float) (lastBodyMeasurement.Weight * 1.75);
         }
 
-        private static float calculateTDEE(DAL.App.DTO.BodyMeasurement userMeasurement)
+        private static float calculateTDEE(BodyMeasurement userMeasurement)
         {
-            var leanMass = userMeasurement.Weight * (1 - (userMeasurement.BodyFatPercentage / 100));
-            var baseTDEE = 370 + (21.6 * leanMass);
+            var leanMass = userMeasurement.Weight * (1 - userMeasurement.BodyFatPercentage / 100);
+            var baseTDEE = 370 + 21.6 * leanMass;
             const int additionalEnergyCost = 500;
             return (float) (baseTDEE + additionalEnergyCost);
         }

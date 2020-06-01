@@ -11,7 +11,7 @@ using Mapper = PublicApi.DTO.V1.Mappers.TrainingCycleMapper;
 namespace WebApplication.ApiControllers
 {
     /// <summary>
-    /// Controller with functionality related to user training cycles.
+    ///     Controller with functionality related to user training cycles.
     /// </summary>
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
@@ -20,18 +20,18 @@ namespace WebApplication.ApiControllers
     public class TrainingCyclesController : ControllerBase
     {
         private readonly IAppBLL _bll;
-        
+
         /// <summary>
-        /// Constructor for training cycle controller.
+        ///     Constructor for training cycle controller.
         /// </summary>
         /// <param name="bll">App business logic layer.</param>
         public TrainingCyclesController(IAppBLL bll)
         {
             _bll = bll;
         }
-        
+
         /// <summary>
-        /// Get currently active training cycle for logged-in user. 
+        ///     Get currently active training cycle for logged-in user.
         /// </summary>
         /// <returns>Full training cycle that is currently active for logged-in user.</returns>
         /// <response code="200">Training cycle belonging to logged-in user was successfully retrieved from data source.</response>
@@ -45,8 +45,9 @@ namespace WebApplication.ApiControllers
             {
                 var cycle = await _bll.TrainingCycles.GetFullActiveCycleForUserWithIdAsync(User.UserId());
                 var mappedCycle = Mapper.MapBLLEntityToPublicDTO(cycle);
-                return Ok(mappedCycle);   
+                return Ok(mappedCycle);
             }
+
             return NotFound();
         }
     }

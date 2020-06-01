@@ -2,21 +2,21 @@ using System.Linq;
 using System.Threading;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
-using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App;
 using Domain.App.Constants;
 
 namespace DAL.App.EF.Mappers
 {
-    public class RoutineTypeMapper : EFBaseMapper, IDALMapper<Domain.App.RoutineType, RoutineType>
+    public class RoutineTypeMapper : EFBaseMapper, IDALMapper<RoutineType, DTO.RoutineType>
     {
         public RoutineTypeMapper(IAppDALMapperContext dalMapperContext) : base(dalMapperContext)
         {
         }
 
-        public RoutineType MapDomainToDAL(Domain.App.RoutineType domainObject)
+        public DTO.RoutineType MapDomainToDAL(RoutineType domainObject)
         {
-            return new RoutineType()
+            return new DTO.RoutineType
             {
                 Id = domainObject.Id,
                 Name = ConvertNameToCurrentLanguage(domainObject),
@@ -26,8 +26,9 @@ namespace DAL.App.EF.Mappers
             };
         }
 
-        public Domain.App.RoutineType MapDALToDomain(RoutineType dalObject) =>
-            new Domain.App.RoutineType()
+        public RoutineType MapDALToDomain(DTO.RoutineType dalObject)
+        {
+            return new RoutineType
             {
                 Id = dalObject.Id,
                 Name_eng = dalObject.Name,
@@ -36,34 +37,24 @@ namespace DAL.App.EF.Mappers
                 Description_et = dalObject.Description,
                 ParentTypeId = dalObject.ParentTypeId
             };
-        
+        }
+
         private string GetCurrentCulture()
         {
             if (Thread.CurrentThread.CurrentUICulture.Name == Culture.Estonian)
-            {
                 return Culture.Estonian;
-            }
-            else
-            {
-                return Culture.English;
-            }
+            return Culture.English;
         }
 
-        private string ConvertNameToCurrentLanguage(Domain.App.RoutineType domainEntity)
+        private string ConvertNameToCurrentLanguage(RoutineType domainEntity)
         {
-            if (GetCurrentCulture() == Culture.Estonian)
-            {
-                return domainEntity.Name_et;
-            }
+            if (GetCurrentCulture() == Culture.Estonian) return domainEntity.Name_et;
             return domainEntity.Name_eng;
         }
-        
-        private string ConvertDescriptionToCurrentLanguage(Domain.App.RoutineType domainEntity)
+
+        private string ConvertDescriptionToCurrentLanguage(RoutineType domainEntity)
         {
-            if (GetCurrentCulture() == Culture.Estonian)
-            {
-                return domainEntity.Description_et;
-            }
+            if (GetCurrentCulture() == Culture.Estonian) return domainEntity.Description_et;
             return domainEntity.Description_eng;
         }
     }

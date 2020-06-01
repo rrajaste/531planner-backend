@@ -4,7 +4,7 @@ namespace PublicApi.DTO.V1.Mappers
     {
         public static UnitType MapBLLEntityToPublicDTO(BLL.App.DTO.UnitType bllEntity)
         {
-            return new UnitType()
+            return new UnitType
             {
                 Id = bllEntity.Id.ToString(),
                 Name = bllEntity.Name,

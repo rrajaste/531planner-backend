@@ -1,3 +1,4 @@
+@using Resources.Views.ExerciseSet
 @model WebApplication.Areas.Admin.ViewModels.ExerciseSetCreateEditViewModel
 
 <div asp-validation-summary="All" class="text-danger"></div>
@@ -6,7 +7,7 @@
 <div class="form-group">
     <label asp-for="@Model.ExerciseSet.SetType" class="control-label"></label>
     <select asp-for="@Model.ExerciseSet.SetTypeId" class="form-control" asp-items="Model.SetTypes">
-        <option value=""> @Resources.Views.ExerciseSet.CreateEdit.SelectType </option>
+        <option value=""> @CreateEdit.SelectType </option>
     </select>
     <span asp-validation-for="@Model.ExerciseSet.SetType" class="text-danger"></span>
 </div>
@@ -20,4 +21,4 @@
     <input asp-for="@Model.ExerciseSet.WeightPercentageOfOneRepMax" class="form-control"/>
     <span asp-validation-for="@Model.ExerciseSet.WeightPercentageOfOneRepMax" class="text-danger"></span>
 </div>
-<input type="submit" class="btn btn-success text-uppercase" value="@Resources.Views.ExerciseSet.CreateEdit.AddBtnText"/>
+<input type="submit" class="btn btn-success text-uppercase" value="@CreateEdit.AddBtnText"/>

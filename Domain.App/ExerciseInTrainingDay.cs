@@ -7,8 +7,8 @@ namespace Domain.App
     public class ExerciseInTrainingDay : ExerciseInTrainingDay<Guid>
     {
     }
-    
-    public class ExerciseInTrainingDay<TKey> : DomainEntityIdMetadata<TKey> 
+
+    public class ExerciseInTrainingDay<TKey> : DomainEntityIdMetadata<TKey>
         where TKey : IEquatable<TKey>
     {
         public TKey ExerciseId { get; set; } = default!;

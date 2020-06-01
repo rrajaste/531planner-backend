@@ -8,31 +8,42 @@ using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
+using BodyMeasurement = DAL.App.DTO.BodyMeasurement;
 
 namespace BLL.Services
 {
     public class BodyMeasurementService :
-        BaseEntityService<IBodyMeasurementRepository, IAppUnitOfWork, DAL.App.DTO.BodyMeasurement,
-            BLL.App.DTO.BodyMeasurement, IBLLMapper<DAL.App.DTO.BodyMeasurement, BLL.App.DTO.BodyMeasurement>>, IBodyMeasurementService
+        BaseEntityService<IBodyMeasurementRepository, IAppUnitOfWork, BodyMeasurement,
+            App.DTO.BodyMeasurement, IBLLMapper<BodyMeasurement, App.DTO.BodyMeasurement>>, IBodyMeasurementService
     {
-        public BodyMeasurementService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.BodyMeasurement, BodyMeasurement> mapper) 
+        public BodyMeasurementService(IAppUnitOfWork unitOfWork,
+            IBLLMapper<BodyMeasurement, App.DTO.BodyMeasurement> mapper)
             : base(unitOfWork, mapper, unitOfWork.BodyMeasurements)
         {
         }
 
-        public async Task<IEnumerable<BodyMeasurement>> AllWithAppUserIdAsync(Guid id) => (
+        public async Task<IEnumerable<App.DTO.BodyMeasurement>> AllWithAppUserIdAsync(Guid id)
+        {
+            return (
                 await UnitOfWork.BodyMeasurements.AllWithAppUserIdAsync(id)
             ).Select(Mapper.MapDALToBLL);
+        }
 
-        public async Task<BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId) =>
-            Mapper.MapDALToBLL(
+        public async Task<App.DTO.BodyMeasurement> FindWithAppUserIdAsync(Guid id, Guid appUserId)
+        {
+            return Mapper.MapDALToBLL(
                 await UnitOfWork.BodyMeasurements.FindWithAppUserIdAsync(id, appUserId));
+        }
 
-        public async Task<BodyMeasurement> FirstForUserWithIdAsync(Guid userId) =>
-            Mapper.MapDALToBLL(await ServiceRepository.FirstForUserWithIdAsync(userId));
+        public async Task<App.DTO.BodyMeasurement> FirstForUserWithIdAsync(Guid userId)
+        {
+            return Mapper.MapDALToBLL(await ServiceRepository.FirstForUserWithIdAsync(userId));
+        }
 
-        public async Task<BodyMeasurement> LatestForUserWithIdAsync(Guid userId) =>
-            Mapper.MapDALToBLL(await ServiceRepository.LatestForUserWithIdAsync(userId));
+        public async Task<App.DTO.BodyMeasurement> LatestForUserWithIdAsync(Guid userId)
+        {
+            return Mapper.MapDALToBLL(await ServiceRepository.LatestForUserWithIdAsync(userId));
+        }
 
         public async Task<BodyMeasurementStatistics> GetUserStatisticsAsync(Guid userId)
         {
@@ -41,7 +52,7 @@ namespace BLL.Services
                 .OrderBy(measurement => measurement.LoggedAt).ToList();
             var currentMeasurement = sortedMeasurements.Last();
             var firstMeasurement = sortedMeasurements.First();
-            var statistics = new BodyMeasurementStatistics()
+            var statistics = new BodyMeasurementStatistics
             {
                 CurrentBMI = CalculateBMI(currentMeasurement),
                 BMIChange = CalculateBMIChange(firstMeasurement, currentMeasurement),
@@ -54,29 +65,29 @@ namespace BLL.Services
             return statistics;
         }
 
-        private static float CalculateBMI(DAL.App.DTO.BodyMeasurement currentMeasurement)
+        private static float CalculateBMI(BodyMeasurement currentMeasurement)
         {
-            return currentMeasurement.Weight / ((currentMeasurement.Height / 100) * (currentMeasurement.Height / 100));
+            return currentMeasurement.Weight / (currentMeasurement.Height / 100 * (currentMeasurement.Height / 100));
         }
-        
-        private static float CalculateBMIChange(DAL.App.DTO.BodyMeasurement startingMeasurement, 
-            DAL.App.DTO.BodyMeasurement currentMeasurement)
+
+        private static float CalculateBMIChange(BodyMeasurement startingMeasurement,
+            BodyMeasurement currentMeasurement)
         {
             var startingBmi = CalculateBMI(startingMeasurement);
             var currentBmi = CalculateBMI(currentMeasurement);
             return currentBmi - startingBmi;
         }
-        
-        private static float CalculateWeightChange(DAL.App.DTO.BodyMeasurement startingMeasurement, 
-            DAL.App.DTO.BodyMeasurement currentMeasurement)
+
+        private static float CalculateWeightChange(BodyMeasurement startingMeasurement,
+            BodyMeasurement currentMeasurement)
         {
             var startingWeight = startingMeasurement.Weight;
             var currentWeight = currentMeasurement.Weight;
             return currentWeight - startingWeight;
         }
-        
-        private static float CalculateBodyFatPercentageChange(DAL.App.DTO.BodyMeasurement startingMeasurement, 
-            DAL.App.DTO.BodyMeasurement currentMeasurement)
+
+        private static float CalculateBodyFatPercentageChange(BodyMeasurement startingMeasurement,
+            BodyMeasurement currentMeasurement)
         {
             var startingBodyFatPercentage = startingMeasurement.BodyFatPercentage;
             var currentBodyFatPercentage = currentMeasurement.BodyFatPercentage;

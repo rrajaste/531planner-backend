@@ -1,6 +1,8 @@
 @using WebApplication.Areas.Admin.ViewModels
 @using BLL.App.DTO
-@model TrainingWeekIndexViewModel
+@using Resources.Views.TrainingWeeks
+@using Index = Resources.Views.TrainingWeeks.Index
+@model WebApplication.Areas.Admin.ViewModels.TrainingWeekIndexViewModel
 
 @{
     ViewData["Title"] = "Training weeks";
@@ -8,104 +10,107 @@
 <div class="jumbotron shadow rounded">
     <h1 class="text-uppercase display-4">@Model.WorkoutRoutineName</h1>
     <p class="text-muted">
-        @Resources.Views.TrainingWeeks.Index.SubText
+        @Index.SubText
     </p>
     <p>
         <a class="text-uppercase" asp-area="Admin" asp-controller="WorkoutRoutines" asp-action="Index"
-           title="@Resources.Views.TrainingWeeks.Index.BackHoverText">
-            @Resources.Views.TrainingWeeks.Index.Back
+           title="@Index.BackHoverText">
+            @Index.Back
         </a>
     </p>
-<hr/>
-<div>
-    <h3 class="text-left my-1 mx-1 text-uppercase">
-        @Resources.Views.TrainingWeeks.Index.TrainingWeeks
-    </h3>
-    <div class="row text-left mx-1">
-        <partial name="_CreateWeekPartial" model="GetCreateViewModel()"/>
+    <hr/>
+    <div>
+        <h3 class="text-left my-1 mx-1 text-uppercase">
+            @Index.TrainingWeeks
+        </h3>
+        <div class="row text-left mx-1">
+            <partial name="_CreateWeekPartial" model="GetCreateViewModel()"/>
+        </div>
     </div>
-</div>
-<hr/>
-@if (!Model.TrainingWeeks.Any())
-{
-    <p>@Resources.Views.TrainingWeeks.Index.NoTrainingWeeks</p>
-}
-<div class="row d-flex justify-content-center">
-    @foreach (var item in Model.TrainingWeeks)
+    <hr/>
+    @if (!Model.TrainingWeeks.Any())
     {
-        <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-11 col-xl-11">
-            <div class="card-body">
-                @if (item.IsDeload)
-                {
-                    <h5 class="text-uppercase text-muted" title="@Resources.Views.TrainingWeeks._EditDeloadPartial.HoverText">@Resources.Views.TrainingWeeks.Index.DeloadWeek</h5>
-                }
-                <h2 class="card-title text-uppercase">@Resources.Views.TrainingWeeks.Index.TrainingWeek @item.WeekNumber</h2>
-                <hr/>
-                <div class="row d-flex justify-content-center">
-                @if (item.TrainingDays == null || !item.TrainingDays.Any())
-                {
-                    <p class="text-secondary">@Resources.Views.TrainingWeeks.Index.NoTrainingDays</p>
-                }
-                else
-                {
-                    @foreach (var day in item.TrainingDays.OrderBy(day => day.Date))
+        <p>@Index.NoTrainingWeeks</p>
+    }
+    <div class="row d-flex justify-content-center">
+        @foreach (var item in Model.TrainingWeeks)
+        {
+            <div class="card shadow rounded mb-3 mx-1 col-sm-12 col-md-11 col-xl-11">
+                <div class="card-body">
+                    @if (item.IsDeload)
                     {
-                        <partial name="_TrainingDayPartial" model="day"/>
+                        <h5 class="text-uppercase text-muted" title="@_EditDeloadPartial.HoverText">@Index.DeloadWeek</h5>
                     }
-                }
-                @if (item.TrainingDays != null && item.TrainingDays.Count() < 4)
-                {
-                    <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">
-                        <span class="text-success"><i class="fas fa-plus ml-2"></i>@Resources.Views.TrainingWeeks.Index.Add</span>
-                    </a>
-                }
-                </div>
-                <div class="move-items">
-                    <partial name="_MoveWeekUpPartial" model="@GetWeekNumberEditViewModel(item)"/>
-                    <partial name="_MoveWeekDownPartial" model="@GetWeekNumberEditViewModel(item)"/>
-                </div>
-                <div class="view-edit-delete">
-                    <span>
-                        <partial name="_EditDeloadPartial" model="@GetIsDeloadEditViewModel(item)"/>
-                        <partial name="_DeleteWeekPartial" model="@GetDeleteViewModel(item)"/>
-                    </span>
+                    <h2 class="card-title text-uppercase">@Index.TrainingWeek @item.WeekNumber</h2>
+                    <hr/>
+                    <div class="row d-flex justify-content-center">
+                        @if (item.TrainingDays == null || !item.TrainingDays.Any())
+                        {
+                            <p class="text-secondary">@Index.NoTrainingDays</p>
+                        }
+                        else
+                        {
+                            @foreach (var day in item.TrainingDays.OrderBy(day => day.Date))
+                            {
+                                <partial name="_TrainingDayPartial" model="day"/>
+                            }
+                        }
+                        @if (item.TrainingDays != null && item.TrainingDays.Count() < 4)
+                        {
+                            <a asp-area="Admin" asp-controller="TrainingDays" asp-action="Create" asp-route-id="@item.Id">
+                                <span class="text-success">
+                                    <i class="fas fa-plus ml-2"></i>@Index.Add
+                                </span>
+                            </a>
+                        }
+                    </div>
+                    <div class="move-items">
+                        <partial name="_MoveWeekUpPartial" model="@GetWeekNumberEditViewModel(item)"/>
+                        <partial name="_MoveWeekDownPartial" model="@GetWeekNumberEditViewModel(item)"/>
+                    </div>
+                    <div class="view-edit-delete">
+                        <span>
+                            <partial name="_EditDeloadPartial" model="@GetIsDeloadEditViewModel(item)"/>
+                            <partial name="_DeleteWeekPartial" model="@GetDeleteViewModel(item)"/>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
+        }
     </div>
 </div>
+
 @functions
 {
     public TrainingWeekCreateViewModel GetCreateViewModel()
     {
-        return new TrainingWeekCreateViewModel()
+        return new TrainingWeekCreateViewModel
         {
             WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
         };
     }
-    
+
     public TrainingWeekViewModel GetDeleteViewModel(TrainingWeek trainingWeek)
     {
-        return new TrainingWeekViewModel()
+        return new TrainingWeekViewModel
         {
             TrainingWeek = trainingWeek,
             WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
         };
     }
-    
+
     public TrainingWeekNumberEditViewModel GetWeekNumberEditViewModel(TrainingWeek trainingWeek)
     {
-        return new TrainingWeekNumberEditViewModel()
+        return new TrainingWeekNumberEditViewModel
         {
             TrainingWeekId = trainingWeek.Id,
             WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!)
         };
     }
-    
+
     public TrainingWeekDeloadEditViewModel GetIsDeloadEditViewModel(TrainingWeek trainingWeek)
     {
-        return new TrainingWeekDeloadEditViewModel()
+        return new TrainingWeekDeloadEditViewModel
         {
             TrainingWeekId = trainingWeek.Id,
             WorkoutRoutineId = new Guid(ViewContext.RouteData.Values["id"].ToString()!),

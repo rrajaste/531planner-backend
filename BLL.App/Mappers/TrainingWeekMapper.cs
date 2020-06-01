@@ -1,37 +1,38 @@
 using System.Linq;
-using Contracts.DAL.App;
-using Contracts.DAL.App.Mappers;
-using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
-using DAL.Base.EF;
+using DAL.App.DTO;
 
 namespace BLL.Mappers
 {
-    public class TrainingWeekMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.TrainingWeek, TrainingWeek>
+    public class TrainingWeekMapper : BLLBaseMapper, IBLLMapper<TrainingWeek, App.DTO.TrainingWeek>
     {
         public TrainingWeekMapper(IAppBLLMapperContext bllMapperContext) : base(bllMapperContext)
         {
         }
 
-        public TrainingWeek MapDALToBLL(DAL.App.DTO.TrainingWeek dalObject) =>
-            new TrainingWeek()
+        public App.DTO.TrainingWeek MapDALToBLL(TrainingWeek dalObject)
+        {
+            return new App.DTO.TrainingWeek
             {
                 Id = dalObject.Id,
                 WeekNumber = dalObject.WeekNumber,
                 StartingDate = dalObject.StartingDate,
                 EndingDate = dalObject.EndingDate,
                 IsDeload = dalObject.IsDeload,
-                TrainingCycle = dalObject.TrainingCycle == null ? 
-                    null 
+                TrainingCycle = dalObject.TrainingCycle == null
+                    ? null
                     : BLLMapperContext.TrainingCycleMapper.MapDALToBLL(dalObject.TrainingCycle),
                 TrainingCycleId = dalObject.TrainingCycleId,
-                TrainingDays = dalObject.TrainingDays?.Select(BLLMapperContext.TrainingDayMapper.MapDALToUserTrainingDay),
+                TrainingDays =
+                    dalObject.TrainingDays?.Select(BLLMapperContext.TrainingDayMapper.MapDALToUserTrainingDay)
             };
+        }
 
-        public DAL.App.DTO.TrainingWeek MapBLLToDAL(TrainingWeek bllObject) =>
-            new DAL.App.DTO.TrainingWeek()
+        public TrainingWeek MapBLLToDAL(App.DTO.TrainingWeek bllObject)
+        {
+            return new TrainingWeek
             {
                 Id = bllObject.Id,
                 WeekNumber = bllObject.WeekNumber,
@@ -43,5 +44,6 @@ namespace BLL.Mappers
                     .Select(BLLMapperContext.TrainingDayMapper.MapUserTrainingDayToDALEntity)
                     .ToList()
             };
+        }
     }
 }

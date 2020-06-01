@@ -8,6 +8,11 @@ namespace DAL.App.EF
 {
     public class AppDbContext : IdentityDbContext<AppUser, AppUserRole, Guid>
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<BodyMeasurement> BodyMeasurements { get; set; } = default!;
         public DbSet<DailyNutritionIntake> DailyNutritionIntakes { get; set; } = default!;
         public DbSet<Exercise> Exercises { get; set; } = default!;
@@ -28,29 +33,23 @@ namespace DAL.App.EF
         public DbSet<WorkoutRoutine> WorkoutRoutines { get; set; } = default!;
 
         public DbSet<WorkoutRoutineInfo> WorkoutRoutineInfos { get; set; } = default!;
-        
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
-        {
-        }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             // Remove second cascade path to get around multiple cascade path issues
             modelBuilder.Entity<WorkoutRoutine>()
                 .HasMany(routine => routine.ExerciseSets)
                 .WithOne(nameof(ExerciseSet.WorkoutRoutine))
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
-            
+
             // Add recursive one-to-many relationship
             modelBuilder.Entity<RoutineType>()
                 .HasMany(type => type.SubTypes)
                 .WithOne()
                 .HasForeignKey(routine => routine.ParentTypeId);
-            
         }
     }
 }

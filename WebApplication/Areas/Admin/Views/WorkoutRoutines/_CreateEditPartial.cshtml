@@ -1,3 +1,4 @@
+@using Resources.Views.WorkoutRoutine
 @model WorkoutRoutineCreateEditViewModel
 
 
@@ -5,14 +6,14 @@
 <div class="form-group">
     <label asp-for="WorkoutRoutine.RoutineType" class="control-label"></label>
     <select asp-for="WorkoutRoutine.RoutineTypeId" class="form-control" asp-items="@Model.RoutineTypeSelectList">
-        <option value=""> @Resources.Views.WorkoutRoutine._CreateEditPartial.selectType </option>
+        <option value=""> @_CreateEditPartial.selectType </option>
     </select>
     <span asp-validation-for="WorkoutRoutine.RoutineTypeId" class="text-danger"></span>
 </div>
-<h3>@Resources.Views.WorkoutRoutine._CreateEditPartial.EnglishTranslation</h3>
+<h3>@_CreateEditPartial.EnglishTranslation</h3>
 <div class="form-group">
     <label asp-for="WorkoutRoutine.Name" class="control-label"></label>
-    <input asp-for="EnglishTranslation.Name" class="form-control" />
+    <input asp-for="EnglishTranslation.Name" class="form-control"/>
     <span asp-validation-for="WorkoutRoutine.Name" class="text-danger"></span>
 </div>
 <div class="form-group">
@@ -20,10 +21,10 @@
     <textarea asp-for="EnglishTranslation.Description" class="form-control"></textarea>
     <span asp-validation-for="WorkoutRoutine.Description" class="text-danger"></span>
 </div>
-<h3>@Resources.Views.WorkoutRoutine._CreateEditPartial.EstonianTranslation</h3>
+<h3>@_CreateEditPartial.EstonianTranslation</h3>
 <div class="form-group">
     <label asp-for="WorkoutRoutine.Name" class="control-label"></label>
-    <input asp-for="EstonianTranslation.Name" class="form-control" />
+    <input asp-for="EstonianTranslation.Name" class="form-control"/>
     <span asp-validation-for="WorkoutRoutine.Name" class="text-danger"></span>
 </div>
 <div class="form-group">
@@ -36,6 +37,6 @@
     <input type="hidden" asp-for="@Model.WorkoutRoutine.Description"/>
 </div>
 <div class="form-group">
-    <input type="submit" value="@Resources.Views.WorkoutRoutine._CreateEditPartial.submit" 
-        title="Create a new routine with selected name and type" class="btn btn-success text-uppercase" />
+    <input type="submit" value="@_CreateEditPartial.submit"
+           title="Create a new routine with selected name and type" class="btn btn-success text-uppercase"/>
 </div>

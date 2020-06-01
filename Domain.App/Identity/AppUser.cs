@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using ee.itcollege.raraja.Contracts.Domain;
 using Microsoft.AspNetCore.Identity;
 
@@ -9,7 +8,7 @@ namespace Domain.App.Identity
     {
     }
 
-    public class AppUser<TKey> : IdentityUser<TKey>, IDomainEntityIdMetadata<TKey> 
+    public class AppUser<TKey> : IdentityUser<TKey>, IDomainEntityIdMetadata<TKey>
         where TKey : struct, IEquatable<TKey>
     {
         public bool AccountLocked { get; set; }

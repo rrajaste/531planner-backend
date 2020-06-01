@@ -1,4 +1,5 @@
 @using WebApplication.Areas.Admin.ViewModels
+@using Index = Resources.Views.WorkoutRoutine.Index
 @model WebApplication.Areas.Admin.ViewModels.WorkoutRoutineViewModel
 
 @{
@@ -6,35 +7,35 @@
 }
 
 <div class="jumbotron shadow rounded">
-    <p class="display-4 text-uppercase">@Resources.Views.WorkoutRoutine.Index.Title</p>
+    <p class="display-4 text-uppercase">@Index.Title</p>
     <div>
         <p class="text-secondary">
-            @Resources.Views.WorkoutRoutine.Index.SubTitle
+            @Index.SubTitle
         </p>
     </div>
 </div>
 <hr/>
 <div>
     <h3 class="text-left mt-1 mx-1 text-uppercase">
-        @Resources.Views.WorkoutRoutine.Index.Unpublished
+        @Index.Unpublished
     </h3>
     <p class="text-muted text-left">
-        @Resources.Views.WorkoutRoutine.Index.UnpublishedSubtext
+        @Index.UnpublishedSubtext
     </p>
     <div class="row text-left mx-1">
-    <a asp-action="Create">
+        <a asp-action="Create">
             <i class="far fa-plus-square text-success add-new-main" data-toggle="tooltip" title="Add new"></i>
-        <span class="mx-1 text-success" title="Create a brand new routine template">
-            @Resources.Views.WorkoutRoutine.Index.AddNew
-        </span>
-    </a>
-</div>
+            <span class="mx-1 text-success" title="Create a brand new routine template">
+                @Index.AddNew
+            </span>
+        </a>
+    </div>
 </div>
 <hr/>
 <div class="row d-flex justify-content-center">
-    @if (! Model.UnPublishedRoutines.Any())
+    @if (!Model.UnPublishedRoutines.Any())
     {
-        <p class="text-secondary">@Resources.Views.WorkoutRoutine.Index.NoUnPublishedRoutines</p>
+        <p class="text-secondary">@Index.NoUnPublishedRoutines</p>
     }
     else
     {
@@ -45,13 +46,17 @@
                     <h5 class="card-title text-uppercase">@item.Name</h5>
                     <p class="card-text">@item.Description</p>
                     <div class="view-edit-delete">
-                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
-                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
+                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" title="View" asp-route-id="@item.Id">
+                            <i class="fa fa-eye view" aria-hidden="true"></i>
+                        </a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" title="Edit">
+                            <i class="fa fa-pencil edit text-success" aria-hidden="true"></i>
+                        </a> |
                         <partial name="_DeletePartial" model="@item"/>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <partial name="_PublishPartial" model="GetPublishViewModel(@item.Id)"/>
+                    <partial name="_PublishPartial" model="GetPublishViewModel(item.Id)"/>
                 </div>
             </div>
         }
@@ -59,14 +64,14 @@
 </div>
 <hr/>
 <div>
-    <h3 class="text-left text-uppercase my-1 mx-1">@Resources.Views.WorkoutRoutine.Index.Published</h3>
-    <p class="text-muted text-left">@Resources.Views.WorkoutRoutine.Index.PublishedSubText</p>
+    <h3 class="text-left text-uppercase my-1 mx-1">@Index.Published</h3>
+    <p class="text-muted text-left">@Index.PublishedSubText</p>
 </div>
 <hr/>
 <div class="row d-flex justify-content-center">
     @if (!Model.PublishedRoutines.Any())
     {
-        <p class="text-secondary">@Resources.Views.WorkoutRoutine.Index.NoPublishedRoutines</p>
+        <p class="text-secondary">@Index.NoPublishedRoutines</p>
     }
     else
     {
@@ -77,15 +82,19 @@
                     <h5 class="card-title text-uppercase">@item.Name</h5>
                     <p class="card-text">@item.Description</p>
                     <div class="view-edit-delete">
-                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip" 
-                           title="@Resources.Views.WorkoutRoutine.Index.View" asp-route-id="@item.Id"><i class="fa fa-eye view" aria-hidden="true"></i></a> |
-                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip" 
-                           title="@Resources.Views.WorkoutRoutine.Index.Edit"><i class="fa fa-pencil edit text-success" aria-hidden="true"></i></a> | 
+                        <a asp-controller="TrainingWeeks" asp-action="Index" data-toggle="tooltip"
+                           title="@Index.View" asp-route-id="@item.Id">
+                            <i class="fa fa-eye view" aria-hidden="true"></i>
+                        </a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="tooltip"
+                           title="@Index.Edit">
+                            <i class="fa fa-pencil edit text-success" aria-hidden="true"></i>
+                        </a> |
                         <partial name="_DeletePartial" model="@item"/>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <partial name="_UnPublishPartial" model="GetPublishViewModel(@item.Id)"/>
+                    <partial name="_UnPublishPartial" model="GetPublishViewModel(item.Id)"/>
                 </div>
             </div>
         }
@@ -97,7 +106,7 @@
 {
     public WorkoutRoutinePublishViewModel GetPublishViewModel(Guid id)
     {
-        return new WorkoutRoutinePublishViewModel()
+        return new WorkoutRoutinePublishViewModel
         {
             WorkoutRoutineId = id
         };

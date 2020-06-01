@@ -3,7 +3,7 @@ using Contracts.DAL.Base;
 
 namespace Contracts.BLL.App.Mappers
 {
-    public interface IBLLMapper<TInObject, TOutObject> 
+    public interface IBLLMapper<TInObject, TOutObject>
         where TInObject : IDALBaseDTO
         where TOutObject : IBLLBaseDTO
     {

@@ -1,5 +1,6 @@
 using BLL.App.DTO;
-using DALExerciseSet = global::DAL.App.DTO.ExerciseSet;
+using DALExerciseSet = DAL.App.DTO.ExerciseSet;
+
 namespace Contracts.BLL.App.Mappers
 {
     public interface IExerciseSetMapper : IBLLMapper<DALExerciseSet, ExerciseSet>

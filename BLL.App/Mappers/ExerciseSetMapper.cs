@@ -12,8 +12,9 @@ namespace BLL.Mappers
         {
         }
 
-        public ExerciseSet MapDALToBLL(DAL.App.DTO.ExerciseSet dalObject) =>
-            new ExerciseSet()
+        public ExerciseSet MapDALToBLL(DAL.App.DTO.ExerciseSet dalObject)
+        {
+            return new ExerciseSet
             {
                 Id = dalObject.Id,
                 ExerciseInTrainingDayId = dalObject.ExerciseInTrainingDayId,
@@ -25,13 +26,15 @@ namespace BLL.Mappers
                 NrOfReps = dalObject.NrOfReps,
                 SetNumber = dalObject.SetNumber,
                 SetTypeId = dalObject.SetTypeId,
-                SetType = dalObject.SetType == null 
-                    ? null 
-                    : BLLMapperContext.SetTypeMapper.MapDALToBLL(dalObject.SetType)  
+                SetType = dalObject.SetType == null
+                    ? null
+                    : BLLMapperContext.SetTypeMapper.MapDALToBLL(dalObject.SetType)
             };
-        
-        public DAL.App.DTO.ExerciseSet MapBLLToDAL(ExerciseSet bllObject) =>
-            new DAL.App.DTO.ExerciseSet()
+        }
+
+        public DAL.App.DTO.ExerciseSet MapBLLToDAL(ExerciseSet bllObject)
+        {
+            return new DAL.App.DTO.ExerciseSet
             {
                 Id = bllObject.Id,
                 ExerciseInTrainingDayId = bllObject.ExerciseInTrainingDayId,
@@ -44,34 +47,32 @@ namespace BLL.Mappers
                 SetTypeId = bllObject.SetTypeId,
                 Weight = bllObject.Weight
             };
+        }
 
         public BaseLiftSet MapDALToBaseLiftSet(DAL.App.DTO.ExerciseSet dalEntity)
         {
             if (dalEntity.NrOfReps == null)
-            {
                 throw new ApplicationException("Number of reps cannot be null on a base lift set");
-            }
             if (dalEntity.Weight == null)
-            {
                 throw new ApplicationException("Weight percentage cannot be null on a base lift set");
-            }
-            var baseLiftSet = new BaseLiftSet()
+            var baseLiftSet = new BaseLiftSet
             {
                 Id = dalEntity.Id,
                 ExerciseInTrainingDayId = dalEntity.ExerciseInTrainingDayId,
                 SetNumber = dalEntity.SetNumber,
                 SetTypeId = dalEntity.SetTypeId,
-                SetType = dalEntity.SetType == null 
-                    ? null 
+                SetType = dalEntity.SetType == null
+                    ? null
                     : BLLMapperContext.SetTypeMapper.MapDALToBLL(dalEntity.SetType),
                 NrOfReps = (int) dalEntity.NrOfReps,
                 WeightPercentageOfOneRepMax = (float) dalEntity.Weight
             };
             return baseLiftSet;
         }
-        
-        public DAL.App.DTO.ExerciseSet MapBaseLiftSetToDALEntity(BaseLiftSet baseLiftSet) => 
-            new DAL.App.DTO.ExerciseSet()
+
+        public DAL.App.DTO.ExerciseSet MapBaseLiftSetToDALEntity(BaseLiftSet baseLiftSet)
+        {
+            return new DAL.App.DTO.ExerciseSet
             {
                 Id = baseLiftSet.Id,
                 ExerciseInTrainingDayId = baseLiftSet.ExerciseInTrainingDayId,
@@ -80,27 +81,23 @@ namespace BLL.Mappers
                 SetTypeId = baseLiftSet.SetTypeId,
                 Weight = baseLiftSet.WeightPercentageOfOneRepMax
             };
+        }
 
         public UserLiftSet MapDALToUserLiftSet(DAL.App.DTO.ExerciseSet dalEntity)
         {
             if (dalEntity.NrOfReps == null)
-            {
                 throw new ApplicationException("Number of reps cannot be null on a lift set");
-            }
-            if (dalEntity.Weight == null)
-            {
-                throw new ApplicationException("Weight cannot be null on a lift set");
-            }
-            
-            var baseLiftSet = new UserLiftSet()
+            if (dalEntity.Weight == null) throw new ApplicationException("Weight cannot be null on a lift set");
+
+            var baseLiftSet = new UserLiftSet
             {
                 Id = dalEntity.Id,
-                
+
                 SetNumber = dalEntity.SetNumber,
                 ExerciseInTrainingDayId = dalEntity.ExerciseInTrainingDayId,
                 SetTypeId = dalEntity.SetTypeId,
-                SetType = dalEntity.SetType == null 
-                    ? null 
+                SetType = dalEntity.SetType == null
+                    ? null
                     : BLLMapperContext.SetTypeMapper.MapDALToBLL(dalEntity.SetType),
                 NrOfReps = (int) dalEntity.NrOfReps,
                 Weight = (float) dalEntity.Weight
@@ -108,8 +105,9 @@ namespace BLL.Mappers
             return baseLiftSet;
         }
 
-        public DAL.App.DTO.ExerciseSet MapUserLiftSetToDALEntity(UserLiftSet userLiftSet) =>
-            new DAL.App.DTO.ExerciseSet()
+        public DAL.App.DTO.ExerciseSet MapUserLiftSetToDALEntity(UserLiftSet userLiftSet)
+        {
+            return new DAL.App.DTO.ExerciseSet
             {
                 Id = userLiftSet.Id,
                 NrOfReps = userLiftSet.NrOfReps,
@@ -118,6 +116,6 @@ namespace BLL.Mappers
                 SetTypeId = userLiftSet.SetTypeId,
                 Weight = userLiftSet.Weight
             };
+        }
     }
 }
-

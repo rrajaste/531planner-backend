@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 
 namespace PublicApi.DTO.V1.Mappers
 {
@@ -7,7 +6,7 @@ namespace PublicApi.DTO.V1.Mappers
     {
         public static BodyMeasurement MapBLLEntityToPublicDTO(BLL.App.DTO.BodyMeasurement bllEntity)
         {
-            return new BodyMeasurement()
+            return new BodyMeasurement
             {
                 Id = bllEntity.Id.ToString(),
                 Height = bllEntity.Height,
@@ -17,13 +16,13 @@ namespace PublicApi.DTO.V1.Mappers
                 Hip = bllEntity.Hip ?? 0,
                 Arm = bllEntity.Arm ?? 0,
                 BodyFatPercentage = bllEntity.BodyFatPercentage,
-                LoggedAt = bllEntity.LoggedAt,
+                LoggedAt = bllEntity.LoggedAt
             };
         }
-        
+
         public static BodyMeasurementStatistics MapBLLEntityToPublicDTO(BLL.App.DTO.BodyMeasurementStatistics bllEntity)
         {
-            return new BodyMeasurementStatistics()
+            return new BodyMeasurementStatistics
             {
                 FirstLogAt = bllEntity.FirstLogAt,
                 BMIChange = (float) Math.Round(bllEntity.BMIChange, 2),
@@ -34,12 +33,15 @@ namespace PublicApi.DTO.V1.Mappers
                 WeightChange = (float) Math.Round(bllEntity.WeightChange, 2)
             };
         }
-        
-        public static BLL.App.DTO.BodyMeasurement MapPublicDTOToBLLEntity<TDto>(TDto dto)
-            where TDto : BodyMeasurementCreate => 
-            MapPublicDTOFieldsToBLLEntity(dto, new BLL.App.DTO.BodyMeasurement());
 
-        public static BLL.App.DTO.BodyMeasurement MapPublicDTOFieldsToBLLEntity<TDto>(TDto dto, BLL.App.DTO.BodyMeasurement bllEntity)
+        public static BLL.App.DTO.BodyMeasurement MapPublicDTOToBLLEntity<TDto>(TDto dto)
+            where TDto : BodyMeasurementCreate
+        {
+            return MapPublicDTOFieldsToBLLEntity(dto, new BLL.App.DTO.BodyMeasurement());
+        }
+
+        public static BLL.App.DTO.BodyMeasurement MapPublicDTOFieldsToBLLEntity<TDto>(TDto dto,
+            BLL.App.DTO.BodyMeasurement bllEntity)
             where TDto : BodyMeasurementCreate
         {
             bllEntity.Height = dto.Height;

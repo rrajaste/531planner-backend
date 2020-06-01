@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Contracts.BLL.App;
-using Domain;
 using Domain.App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -30,17 +29,11 @@ namespace WebApplication.Areas.Admin.Controllers
         // GET: Muscles/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var muscle = await _bll.Muscles.FindAsync((Guid) id);
-                
-            if (muscle == null)
-            {
-                return NotFound();
-            }
+
+            if (muscle == null) return NotFound();
 
             return View(muscle);
         }
@@ -78,23 +71,17 @@ namespace WebApplication.Areas.Admin.Controllers
         // GET: Muscles/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            
+            if (id == null) return NotFound();
+
             var viewModel = new MuscleCreateEditViewModel
             {
                 Muscle = await _bll.Muscles.FindAsync((Guid) id),
                 MuscleGroupSelectList = new SelectList(
-                    await _bll.MuscleGroups.AllAsync(), 
-                    nameof(MuscleGroup.Id), 
+                    await _bll.MuscleGroups.AllAsync(),
+                    nameof(MuscleGroup.Id),
                     nameof(MuscleGroup.Name))
             };
-            if (viewModel.Muscle == null)
-            {
-                return NotFound();
-            }
+            if (viewModel.Muscle == null) return NotFound();
             return View(viewModel);
         }
 
@@ -105,10 +92,7 @@ namespace WebApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, MuscleCreateEditViewModel viewModel)
         {
-            if (id != viewModel.Muscle.Id)
-            {
-                return NotFound();
-            }
+            if (id != viewModel.Muscle.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -121,29 +105,24 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.MuscleGroups.AllAsync(),
                 nameof(MuscleGroup.Id),
                 nameof(MuscleGroup.Name));
-            
+
             return View(viewModel);
         }
 
         // GET: Muscles/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var muscle = await _bll.Muscles.FindAsync((Guid) id);
-            if (muscle == null)
-            {
-                return NotFound();
-            }
+            if (muscle == null) return NotFound();
 
             return View(muscle);
         }
 
         // POST: Muscles/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {

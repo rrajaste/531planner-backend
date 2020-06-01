@@ -1,18 +1,20 @@
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
-using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App;
 
 namespace DAL.App.EF.Mappers
 {
-    public class BodyMeasurementMapper : EFBaseMapper, IDALMapper<Domain.App.BodyMeasurement, BodyMeasurement>
+    public class BodyMeasurementMapper : EFBaseMapper, IDALMapper<BodyMeasurement, DTO.BodyMeasurement>
     {
         public BodyMeasurementMapper(IAppDALMapperContext context) : base(context)
         {
         }
-        
-        public BodyMeasurement MapDomainToDAL(Domain.App.BodyMeasurement domainObject) => 
-            new BodyMeasurement(){
+
+        public DTO.BodyMeasurement MapDomainToDAL(BodyMeasurement domainObject)
+        {
+            return new DTO.BodyMeasurement
+            {
                 AppUserId = domainObject.AppUserId,
                 Arm = domainObject.Arm,
                 BodyFatPercentage = domainObject.BodyFatPercentage,
@@ -24,10 +26,11 @@ namespace DAL.App.EF.Mappers
                 LoggedAt = domainObject.LoggedAt,
                 Waist = domainObject.Waist
             };
+        }
 
-        public Domain.App.BodyMeasurement MapDALToDomain(BodyMeasurement dalObject)
+        public BodyMeasurement MapDALToDomain(DTO.BodyMeasurement dalObject)
         {
-            return new Domain.App.BodyMeasurement()
+            return new BodyMeasurement
             {
                 AppUserId = dalObject.AppUserId,
                 Arm = dalObject.Arm,
@@ -37,7 +40,7 @@ namespace DAL.App.EF.Mappers
                 Hip = dalObject.Hip,
                 Id = dalObject.Id,
                 Waist = dalObject.Waist,
-                Weight = dalObject.Weight,
+                Weight = dalObject.Weight
             };
         }
     }

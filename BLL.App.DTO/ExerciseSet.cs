@@ -5,13 +5,11 @@ namespace BLL.App.DTO
 {
     public class ExerciseSet : ExerciseSet<Guid>, IBLLBaseDTO
     {
-        
     }
 
-    public class ExerciseSet<TKey> : IBLLBaseDTO<TKey> 
+    public class ExerciseSet<TKey> : IBLLBaseDTO<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public int SetNumber { get; set; }
         public bool Completed { get; set; }
         public int? NrOfReps { get; set; }
@@ -25,5 +23,6 @@ namespace BLL.App.DTO
         public UnitType? UnitType { get; set; }
         public SetType? SetType { get; set; }
         public TKey SetTypeId { get; set; } = default!;
+        public TKey Id { get; set; } = default!;
     }
 }

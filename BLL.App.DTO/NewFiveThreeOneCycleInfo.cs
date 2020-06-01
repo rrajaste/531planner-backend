@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace BLL.App.DTO
 {
     public class NewFiveThreeOneCycleInfo

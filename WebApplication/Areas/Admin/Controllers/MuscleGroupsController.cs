@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Contracts.BLL.App;
 using BLL.App.DTO;
+using Contracts.BLL.App;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,16 +27,10 @@ namespace WebApplication.Areas.Admin.Controllers
         // GET: MuscleGroups/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var muscleGroup = await _bll.MuscleGroups.FindAsync((Guid) id);
-            if (muscleGroup == null)
-            {
-                return NotFound();
-            }
+            if (muscleGroup == null) return NotFound();
 
             return View(muscleGroup);
         }
@@ -46,12 +40,14 @@ namespace WebApplication.Areas.Admin.Controllers
         {
             return View();
         }
+
         // POST: MuscleGroups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] MuscleGroup muscleGroup)
+        public async Task<IActionResult> Create([Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")]
+            MuscleGroup muscleGroup)
         {
             if (ModelState.IsValid)
             {
@@ -59,22 +55,17 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(muscleGroup);
         }
 
         // GET: MuscleGroups/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var muscleGroup = await _bll.MuscleGroups.FindAsync((Guid) id);
-            if (muscleGroup == null)
-            {
-                return NotFound();
-            }
+            if (muscleGroup == null) return NotFound();
             return View(muscleGroup);
         }
 
@@ -83,12 +74,10 @@ namespace WebApplication.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")] MuscleGroup muscleGroup)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description,Id,CreatedAt,DeletedAt,Comment")]
+            MuscleGroup muscleGroup)
         {
-            if (id != muscleGroup.Id)
-            {
-                return NotFound();
-            }
+            if (id != muscleGroup.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -96,28 +85,24 @@ namespace WebApplication.Areas.Admin.Controllers
                 await _bll.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(muscleGroup);
         }
 
         // GET: MuscleGroups/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var muscleGroup = await _bll.MuscleGroups.FindAsync((Guid) id);
-            if (muscleGroup == null)
-            {
-                return NotFound();
-            }
+            if (muscleGroup == null) return NotFound();
 
             return View(muscleGroup);
         }
 
         // POST: MuscleGroups/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {

@@ -30,6 +30,7 @@ namespace WebApplication.Areas.Admin.Controllers
                 var viewModel = await GetIndexViewModelAsync(id);
                 return View(viewModel);
             }
+
             return NotFound();
         }
 
@@ -38,16 +39,17 @@ namespace WebApplication.Areas.Admin.Controllers
             if (await _bll.TrainingWeeks.IsPartOfBaseRoutineAsync(id))
             {
                 var parentRoutine = await _bll.WorkoutRoutines.FindWithWeekIdAsync(id);
-                var viewModel = new TrainingDayCreateEditViewModel()
+                var viewModel = new TrainingDayCreateEditViewModel
                 {
-                    TrainingDay = new BaseTrainingDay(){TrainingWeekId = id},
+                    TrainingDay = new BaseTrainingDay {TrainingWeekId = id},
                     WorkoutRoutineId = parentRoutine.Id
                 };
                 return View(await AddSelectListsToViewModelAsync(viewModel, id));
             }
+
             return NotFound();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TrainingDayCreateEditViewModel viewModel)
@@ -61,36 +63,36 @@ namespace WebApplication.Areas.Admin.Controllers
                     await _bll.SaveChangesAsync();
                     return RedirectToAction(nameof(Index), "TrainingWeeks", new {id = viewModel.WorkoutRoutineId});
                 }
+
                 return View(await AddSelectListsToViewModelAsync(viewModel, viewModel.TrainingDay.TrainingWeekId));
             }
+
             return BadRequest();
         }
-        
+
         public async Task<IActionResult> Edit(Guid id)
         {
             if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(id))
             {
                 var trainingDay = await _bll.TrainingDays.FindAsync(id);
                 var parentRoutine = await _bll.WorkoutRoutines.FindWithTrainingDayIdAsync(id);
-                var viewModel = new TrainingDayCreateEditViewModel()
+                var viewModel = new TrainingDayCreateEditViewModel
                 {
                     TrainingDay = trainingDay,
                     WorkoutRoutineId = parentRoutine.Id
                 };
                 return View(await AddSelectListsToViewModelAsync(viewModel, trainingDay.TrainingWeekId));
             }
+
             return NotFound();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, TrainingDayCreateEditViewModel viewModel)
         {
-            if (id != viewModel.TrainingDay.Id)
-            {
-                return NotFound();
-            }
-        
+            if (id != viewModel.TrainingDay.Id) return NotFound();
+
             if (await _bll.TrainingDays.IsPartOfBaseRoutineAsync(viewModel.TrainingDay.Id))
             {
                 if (ModelState.IsValid)
@@ -99,8 +101,10 @@ namespace WebApplication.Areas.Admin.Controllers
                     await _bll.SaveChangesAsync();
                     return RedirectToAction(nameof(Index), "TrainingWeeks", new {id = viewModel.WorkoutRoutineId});
                 }
-                return View(await AddSelectListsToViewModelAsync(viewModel, viewModel.TrainingDay.TrainingWeekId));   
+
+                return View(await AddSelectListsToViewModelAsync(viewModel, viewModel.TrainingDay.TrainingWeekId));
             }
+
             return BadRequest();
         }
 
@@ -116,13 +120,14 @@ namespace WebApplication.Areas.Admin.Controllers
                 var parentRoutine = await _bll.WorkoutRoutines.FindWithWeekIdAsync(viewModel.TrainingWeekId);
                 return RedirectToAction(nameof(Index), "TrainingWeeks", new {id = parentRoutine.Id});
             }
+
             return BadRequest();
         }
 
         private async Task<SelectList> GetDaysOfWeekSelectListAsync(Guid trainingWeekId)
         {
             var unusedDaysOfWeek = await _bll.TrainingDays.GetUnusedDaysInWeekWithIdAsync(trainingWeekId);
-            var selectListItems = unusedDaysOfWeek.Select(dayOfWeek => new SelectListItem()
+            var selectListItems = unusedDaysOfWeek.Select(dayOfWeek => new SelectListItem
             {
                 Value = ((int) dayOfWeek).ToString(),
                 Text = CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(dayOfWeek)
@@ -130,11 +135,12 @@ namespace WebApplication.Areas.Admin.Controllers
             var selectList = new SelectList(selectListItems, nameof(SelectListItem.Value), nameof(SelectListItem.Text));
             return selectList;
         }
-        
-        private async Task<TrainingDayCreateEditViewModel> AddSelectListsToViewModelAsync(TrainingDayCreateEditViewModel viewModel, Guid trainingWeekId)
+
+        private async Task<TrainingDayCreateEditViewModel> AddSelectListsToViewModelAsync(
+            TrainingDayCreateEditViewModel viewModel, Guid trainingWeekId)
         {
             var trainingDayTypes = await _bll.TrainingDayTypes.AllAsync();
-            var returnViewModel = new TrainingDayCreateEditViewModel()
+            var returnViewModel = new TrainingDayCreateEditViewModel
             {
                 TrainingDayTypes = new SelectList(
                     trainingDayTypes, nameof(TrainingDayType.Id), nameof(TrainingDayType.Name)),

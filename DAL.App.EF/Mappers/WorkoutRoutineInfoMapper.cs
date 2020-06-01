@@ -1,19 +1,19 @@
 using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
-using DAL.App.DTO;
 using DAL.Base.EF;
+using Domain.App;
 
 namespace DAL.App.EF.Mappers
 {
-    public class WorkoutRoutineInfoMapper : EFBaseMapper, IDALMapper<Domain.App.WorkoutRoutineInfo, WorkoutRoutineInfo>
+    public class WorkoutRoutineInfoMapper : EFBaseMapper, IDALMapper<WorkoutRoutineInfo, DTO.WorkoutRoutineInfo>
     {
         public WorkoutRoutineInfoMapper(IAppDALMapperContext context) : base(context)
         {
         }
 
-        public WorkoutRoutineInfo MapDomainToDAL(Domain.App.WorkoutRoutineInfo domainObject)
+        public DTO.WorkoutRoutineInfo MapDomainToDAL(WorkoutRoutineInfo domainObject)
         {
-            return new WorkoutRoutineInfo()
+            return new DTO.WorkoutRoutineInfo
             {
                 Description = domainObject.Description,
                 Id = domainObject.Id,
@@ -23,9 +23,9 @@ namespace DAL.App.EF.Mappers
             };
         }
 
-        public Domain.App.WorkoutRoutineInfo MapDALToDomain(WorkoutRoutineInfo dalObject)
+        public WorkoutRoutineInfo MapDALToDomain(DTO.WorkoutRoutineInfo dalObject)
         {
-            return new Domain.App.WorkoutRoutineInfo()
+            return new WorkoutRoutineInfo
             {
                 Id = dalObject.Id,
                 Name = dalObject.Name,
@@ -34,6 +34,5 @@ namespace DAL.App.EF.Mappers
                 CultureCode = dalObject.CultureCode
             };
         }
-        
     }
 }

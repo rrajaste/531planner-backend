@@ -5,6 +5,5 @@ namespace Contracts.BLL.App.Services
 {
     public interface IMuscleGroupService : IBaseEntityService<MuscleGroup>
     {
-        
     }
 }

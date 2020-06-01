@@ -6,7 +6,7 @@ namespace PublicApi.DTO.V1.Mappers
     {
         public static MuscleGroup MapBLLEntityToPublicDTO(BLL.App.DTO.MuscleGroup bllEntity)
         {
-            return new MuscleGroup()
+            return new MuscleGroup
             {
                 Id = bllEntity.Id.ToString(),
                 Name = bllEntity.Name,

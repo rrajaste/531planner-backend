@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
-using TrainingCycle = DAL.App.DTO.TrainingCycle;
+using DAL.App.DTO;
 
 namespace Contracts.DAL.App.Repositories
 {
-    public interface ITrainingCycleRepository : ITrainingCycleRepository<Guid, TrainingCycle>, IBaseRepository<TrainingCycle>
+    public interface ITrainingCycleRepository : ITrainingCycleRepository<Guid, TrainingCycle>,
+        IBaseRepository<TrainingCycle>
     {
     }
 
-    public interface ITrainingCycleRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity> 
-        where TEntity : class, IDALBaseDTO<TKey>, new() 
+    public interface ITrainingCycleRepository<in TKey, TEntity> : IBaseRepository<TKey, TEntity>
+        where TEntity : class, IDALBaseDTO<TKey>, new()
         where TKey : IEquatable<TKey>
     {
         Task<IEnumerable<TEntity>> AllWithRoutineIdForUserWithIdAsync(TKey id, Guid? userId);

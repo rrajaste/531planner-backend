@@ -11,23 +11,22 @@ using PublicApi.DTO.V1.Account;
 namespace WebApplication.ApiControllers.Identity
 {
     /// <summary>
-    /// Controller for managing user account related actions.
+    ///     Controller for managing user account related actions.
     /// </summary>
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
-
     public class AccountController : ControllerBase
     {
-
-        private readonly IConfiguration _configuration;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
-        private readonly ILogger<AccountController> _logger;
         private readonly IAppBLL _bll;
 
+        private readonly IConfiguration _configuration;
+        private readonly ILogger<AccountController> _logger;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+
         /// <summary>
-        /// Constructor for AccountController
+        ///     Constructor for AccountController
         /// </summary>
         /// <param name="configuration">WebApplication configuration.</param>
         /// <param name="userManager">WebApplication User Manager</param>
@@ -40,7 +39,7 @@ namespace WebApplication.ApiControllers.Identity
             SignInManager<AppUser> signInManager,
             IAppBLL bll,
             ILogger<AccountController> logger)
-        
+
         {
             _configuration = configuration;
             _userManager = userManager;
@@ -51,17 +50,17 @@ namespace WebApplication.ApiControllers.Identity
 
 
         /// <summary>
-        /// Authenticate user credentials and return JSON Web Token for user. 
+        ///     Authenticate user credentials and return JSON Web Token for user.
         /// </summary>
         /// <param name="dto">DTO containing login information.</param>
         /// <returns>
-        /// Response object containing JSON Web Token for authenticated User
+        ///     Response object containing JSON Web Token for authenticated User
         /// </returns>
         /// <response code="200">
-        /// User was successfully authenticated and appropriate login response containing JSON Web Token was returned.
+        ///     User was successfully authenticated and appropriate login response containing JSON Web Token was returned.
         /// </response>
         /// <response code="403">User authentication with provided credentials failed.</response>
-        [ProducesResponseType( typeof(LoginResponse), 200)]
+        [ProducesResponseType(typeof(LoginResponse), 200)]
         [ProducesResponseType(403)]
         [HttpPost]
         public async Task<ActionResult<string>> Login([FromBody] Login dto)
@@ -82,49 +81,45 @@ namespace WebApplication.ApiControllers.Identity
                     _configuration.GetSection("JWT").GetValue<string>("SigningKey"),
                     _configuration.GetSection("JWT").GetValue<string>("Issuer"),
                     _configuration.GetSection("JWT").GetValue<int>("ExpireInDays")
-                    );
+                );
                 _logger.LogInformation($@"Token generated for user {dto.UserName}");
-                return Ok(new LoginResponse()
+                return Ok(new LoginResponse
                 {
-                    Token = jwt, 
+                    Token = jwt,
                     Status = "Logged in",
                     HasActiveRoutine = await _bll.WorkoutRoutines.UserWithIdHasActiveRoutineAsync(appUser.Id)
                 });
-            } 
-            _logger.LogInformation($"Web-api login. Login attempt with incorrect password.");
+            }
+
+            _logger.LogInformation("Web-api login. Login attempt with incorrect password.");
             return StatusCode(403);
         }
 
-        
+
         /// <summary>
-        /// Register new user with provided credentials into system. 
+        ///     Register new user with provided credentials into system.
         /// </summary>
         /// <param name="dto">DTO containing registration information.</param>
         /// <returns>Response object containing created user's User Name and Email</returns>
         /// <response code="200">User was successfully registered into the system.</response>
         /// <response code="403">User registration failed, see response message for details.</response>
         [HttpPost]
-        [ProducesResponseType( typeof(RegisterResponse), 200)]
+        [ProducesResponseType(typeof(RegisterResponse), 200)]
         [ProducesResponseType(403)]
         public async Task<ActionResult<string>> Register([FromBody] Register dto)
         {
             if (await _userManager.FindByEmailAsync(dto.Email) != null)
-            {
                 return BadRequest(new {message = $"User with email {dto.Email} already exists"});
-            }
 
-            var newUser = new AppUser()
+            var newUser = new AppUser
             {
                 UserName = dto.UserName,
-                Email = dto.Email,
+                Email = dto.Email
             };
             var result = await _userManager.CreateAsync(newUser, dto.Password);
-            if (!result.Succeeded)
-            {
-                return BadRequest();
-            }
+            if (!result.Succeeded) return BadRequest();
             await _userManager.AddToRoleAsync(newUser, "user");
-            return Ok(new RegisterResponse(){Email = newUser.Email, UserName = newUser.UserName});
+            return Ok(new RegisterResponse {Email = newUser.Email, UserName = newUser.UserName});
         }
     }
 }

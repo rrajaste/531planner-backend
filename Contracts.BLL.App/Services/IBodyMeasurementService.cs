@@ -6,7 +6,7 @@ using Contracts.DAL.App.Repositories;
 
 namespace Contracts.BLL.App.Services
 {
-    public interface IBodyMeasurementService : IBaseEntityService<BodyMeasurement>, 
+    public interface IBodyMeasurementService : IBaseEntityService<BodyMeasurement>,
         IBodyMeasurementRepository<Guid, BodyMeasurement>
     {
         Task<BodyMeasurementStatistics> GetUserStatisticsAsync(Guid userId);

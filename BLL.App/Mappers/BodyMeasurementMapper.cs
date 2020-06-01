@@ -1,18 +1,19 @@
-using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
+using DAL.App.DTO;
 
 namespace BLL.Mappers
 {
-    public class BodyMeasurementMapper : BLLBaseMapper, IBLLMapper<DAL.App.DTO.BodyMeasurement, BodyMeasurement>
+    public class BodyMeasurementMapper : BLLBaseMapper, IBLLMapper<BodyMeasurement, App.DTO.BodyMeasurement>
     {
         public BodyMeasurementMapper(IAppBLLMapperContext context) : base(context)
         {
         }
 
-        public BodyMeasurement MapDALToBLL(DAL.App.DTO.BodyMeasurement dalObject) =>
-            new BodyMeasurement()
+        public App.DTO.BodyMeasurement MapDALToBLL(BodyMeasurement dalObject)
+        {
+            return new App.DTO.BodyMeasurement
             {
                 AppUserId = dalObject.AppUserId,
                 Arm = dalObject.Arm,
@@ -25,10 +26,11 @@ namespace BLL.Mappers
                 Weight = dalObject.Weight,
                 Waist = dalObject.Waist
             };
-        
-        public DAL.App.DTO.BodyMeasurement MapBLLToDAL(BodyMeasurement bllObject)
+        }
+
+        public BodyMeasurement MapBLLToDAL(App.DTO.BodyMeasurement bllObject)
         {
-            return new DAL.App.DTO.BodyMeasurement()
+            return new BodyMeasurement
             {
                 AppUserId = bllObject.AppUserId,
                 Weight = bllObject.Weight,

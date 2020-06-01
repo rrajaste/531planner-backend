@@ -1,18 +1,19 @@
+@using Resources.Views.Muscle
 @model BLL.App.DTO.Muscle
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>@Resources.Views.Muscle.Delete.Title</h1>
+<h1>@Delete.Title</h1>
 
-<h3>@Resources.Views.Muscle.Delete.ConfirmationText</h3>
+<h3>@Delete.ConfirmationText</h3>
 <div>
-    
+
     <partial name="_DetailsDeletePartial"/>
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">@Resources.Views.Muscle.Delete.BackToList</a>
+        <input type="hidden" asp-for="Id"/>
+        <input type="submit" value="Delete" class="btn btn-danger"/> |
+        <a asp-action="Index">@Delete.BackToList</a>
     </form>
 </div>

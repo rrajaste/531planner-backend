@@ -1,25 +1,26 @@
+@using Resources.Views.Accounts
 @model WebApplication.Areas.Admin.ViewModels.AppUserCreateManageViewModel
 
 <div class="jumbotron shadow rounded">
-    <h3 class="text-uppercase">@Resources.Views.Accounts.Create.Title</h3>
-    <hr />
+    <h3 class="text-uppercase">@Create.Title</h3>
+    <hr/>
     <div class="row justify-content-center">
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="All" class="text-danger"></div>
-               
+
                 <div class="form-group">
                     <label asp-for="UserName" class="control-label"></label>
-                    <input asp-for="UserName" class="form-control" />
+                    <input asp-for="UserName" class="form-control"/>
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
-                
+
                 <div class="form-group">
                     <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
+                    <input asp-for="Email" class="form-control"/>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                
+
                 <div class="form-group form-check">
                     <label class="form-check-label">
                         <input class="form-check-input" asp-for="IsEmailConfirmed"/>@Html.DisplayNameFor(model => model.IsEmailConfirmed)
@@ -27,20 +28,20 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
+                    <input asp-for="Password" class="form-control"/>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Roles" class="control-label"></label>
-                    <select asp-for="SelectedRoles" class ="form-control" asp-items="@Model.Roles"></select>
+                    <select asp-for="SelectedRoles" class="form-control" asp-items="@Model.Roles"></select>
                 </div>
-                
+
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-success" />
+                    <input type="submit" value="Create" class="btn btn-success"/>
                 </div>
                 <hr/>
                 <div>
-                    <a asp-action="Index">@Resources.Views.Accounts.Create.BackToList</a>
+                    <a asp-action="Index">@Create.BackToList</a>
                 </div>
             </form>
         </div>

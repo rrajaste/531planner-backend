@@ -1,3 +1,4 @@
+@using Resources.Views.ExerciseInTrainingDay
 @model WebApplication.Areas.Admin.ViewModels.ExerciseInTrainingDayCreateEditViewModel 
 
 @{
@@ -6,26 +7,27 @@
 
 <div class="jumbotron shadow rounded">
     <h3 class="text-uppercase">
-        @Resources.Views.ExerciseInTrainingDay.Edit.Title
+        @Edit.Title
     </h3>
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <partial name="_CreateEditPartial"/>
-            <input type="hidden" asp-for="@Model.ExerciseInTrainingDay.Id" />
-            <input type="hidden" asp-for="@Model.ExerciseInTrainingDay.TrainingDayId" />
-        </form>
+    <hr/>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <partial name="_CreateEditPartial"/>
+                <input type="hidden" asp-for="@Model.ExerciseInTrainingDay.Id"/>
+                <input type="hidden" asp-for="@Model.ExerciseInTrainingDay.TrainingDayId"/>
+            </form>
+        </div>
+    </div>
+    <hr/>
+    <div>
+        <a class="text-uppercase" asp-area="Admin" asp-controller="TrainingDays" asp-action="View"
+           asp-route-id="@Model.ExerciseInTrainingDay.TrainingDayId">
+            @Edit.BackToList
+        </a>
     </div>
 </div>
-<hr/>
-<div>
-    <a class="text-uppercase" asp-area="Admin" asp-controller="TrainingDays" asp-action="View"
-       asp-route-id="@Model.ExerciseInTrainingDay.TrainingDayId">
-        @Resources.Views.ExerciseInTrainingDay.Edit.BackToList
-    </a>
-</div>
-</div>
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

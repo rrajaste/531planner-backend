@@ -14,7 +14,7 @@ namespace PublicApi.DTO.V1
     {
         public IEnumerable<TrainingCycle> TrainingCycles { get; set; } = default!;
     }
-    
+
     public class BaseWorkoutRoutine : WorkoutRoutine
     {
     }

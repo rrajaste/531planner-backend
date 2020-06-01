@@ -1,23 +1,24 @@
+@using Resources.Views.Accounts
 @model WebApplication.Areas.Admin.ViewModels.AppUserSearchViewModel
 
 <form class="ml-3 pt-3 border-top border-bottom text-muted" asp-action="Search">
     <div class="form-group form-group-sm form-row">
         <label asp-for="search" class="col-form-label"></label>
         <div class="mx-2">
-            <input 
-                placeholder="@Resources.Views.Accounts._SearchBoxPartial.PlaceHolderText" class="form-control form-control-sm" asp-for="search">
+            <input
+                placeholder="@_SearchBoxPartial.PlaceHolderText" class="form-control form-control-sm" asp-for="search">
         </div>
         <label asp-for="includeDeactivated" class="col-form-label"></label>
         <div class="mx-2">
             <input class="form-control form-control-sm" type="checkbox" asp-for="@Model.includeDeactivated">
         </div>
         <div class="mx-2">
-            <input type="submit" value="@Resources.Views.Accounts._SearchBoxPartial.Search" class="btn btn-sm btn-info text-uppercase"/>
-        </div>    
+            <input type="submit" value="@_SearchBoxPartial.Search" class="btn btn-sm btn-info text-uppercase"/>
+        </div>
         <div class="mx-1">
             <a type="submit" asp-action="Index"
-               value="@Resources.Views.Accounts._SearchBoxPartial.Search" class="btn btn-sm btn-outline-secondary text-uppercase">
-                @Resources.Views.Accounts._SearchBoxPartial.Clear
+               value="@_SearchBoxPartial.Search" class="btn btn-sm btn-outline-secondary text-uppercase">
+                @_SearchBoxPartial.Clear
             </a>
         </div>
     </div >

@@ -5,13 +5,11 @@ namespace DAL.App.DTO
 {
     public class ExerciseSet : ExerciseSet<Guid>, IDALBaseDTO
     {
-        
     }
 
-    public class ExerciseSet<TKey> : IDALBaseDTO<TKey> 
+    public class ExerciseSet<TKey> : IDALBaseDTO<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public int SetNumber { get; set; }
         public bool Completed { get; set; }
         public int? NrOfReps { get; set; }
@@ -26,5 +24,6 @@ namespace DAL.App.DTO
         public TrainingDay? TrainingDay { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public UnitType? UnitType { get; set; }
+        public TKey Id { get; set; } = default!;
     }
 }

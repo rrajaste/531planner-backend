@@ -1,20 +1,21 @@
-﻿﻿﻿@{
+﻿@using Index = Resources.Views.Home.Index
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="jumbotron shadow rounded" xmlns="http://www.w3.org/1999/html">
-  <p class="display-4 text-uppercase">@Resources.Views.Home.Index.WelcomeTo</p>  
-  <h3>@Resources.Views.Home.Index.AreaGreeting</h3>
-  <hr/>
-  <h3>@Resources.Views.Home.Index.WhatIsThisHeading</h3>
-  <p>@Resources.Views.Home.Index.WhatIsThisBody</p>
-  <h3>@Resources.Views.Home.Index.WhatIs531Heading</h3>
-  <p>
-      @Resources.Views.Home.Index.WhatIs531Body
-  </p>
-  <h3>@Resources.Views.Home.Index.NeedHelpHeading</h3>
-  <p>
-      <a href="/swagger">@Resources.Views.Home.Index.ApiDocLinkText</a><br/>
-      <a href="#">@Resources.Views.Home.Index.GitLinkText</a>
-  </p>
+    <p class="display-4 text-uppercase">@Index.WelcomeTo</p>
+    <h3>@Index.AreaGreeting</h3>
+    <hr/>
+    <h3>@Index.WhatIsThisHeading</h3>
+    <p>@Index.WhatIsThisBody</p>
+    <h3>@Index.WhatIs531Heading</h3>
+    <p>
+        @Index.WhatIs531Body
+    </p>
+    <h3>@Index.NeedHelpHeading</h3>
+    <p>
+        <a href="/swagger">@Index.ApiDocLinkText</a><br/>
+        <a href="#">@Index.GitLinkText</a>
+    </p>
 </div>

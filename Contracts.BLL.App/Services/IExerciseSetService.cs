@@ -7,7 +7,7 @@ using Contracts.DAL.App.Repositories;
 
 namespace Contracts.BLL.App.Services
 {
-    public interface IExerciseSetService : IBaseEntityService<ExerciseSet>, 
+    public interface IExerciseSetService : IBaseEntityService<ExerciseSet>,
         IExerciseSetRepository<Guid, ExerciseSet>
     {
         Task<BaseLiftSet> AddBaseLiftSetAsync(BaseLiftSet baseSet);

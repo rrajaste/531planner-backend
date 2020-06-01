@@ -1,5 +1,5 @@
 ﻿using BLL.App.DTO;
-using SelectList = Microsoft.AspNetCore.Mvc.Rendering.SelectList;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApplication.Areas.Admin.ViewModels
 {

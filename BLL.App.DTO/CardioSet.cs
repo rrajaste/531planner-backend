@@ -5,13 +5,11 @@ namespace BLL.App.DTO
 {
     public class BaseCardioSet : BaseCardioSet<Guid>, IBLLBaseDTO
     {
-        
     }
 
-    public class BaseCardioSet<TKey> : IBLLBaseDTO<TKey> 
+    public class BaseCardioSet<TKey> : IBLLBaseDTO<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public int SetNumber { get; set; }
         public float? Duration { get; set; }
         public TKey TrainingDayId { get; set; } = default!;
@@ -22,5 +20,6 @@ namespace BLL.App.DTO
         public TrainingDay? TrainingDay { get; set; }
         public WorkoutRoutine? WorkoutRoutine { get; set; }
         public SetType? SetType { get; set; }
+        public TKey Id { get; set; } = default!;
     }
 }

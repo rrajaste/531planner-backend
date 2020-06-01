@@ -1,5 +1,5 @@
 using Contracts.BLL.App.Mappers;
-using bllDTO =  BLL.App.DTO;
+using bllDTO = BLL.App.DTO;
 using dalDTO = DAL.App.DTO;
 
 namespace Contracts.BLL.App

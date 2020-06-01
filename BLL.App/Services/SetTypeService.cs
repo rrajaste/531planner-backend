@@ -1,17 +1,16 @@
-using BLL.App.DTO;
-using BLL.Base.Mappers;
 using BLL.Base.Services;
 using Contracts.BLL.App.Mappers;
 using Contracts.BLL.App.Services;
 using Contracts.DAL.App;
 using Contracts.DAL.App.Repositories;
+using DAL.App.DTO;
 
 namespace BLL.Services
 {
     public class SetTypeService : BaseEntityService<ISetTypeRepository, IAppUnitOfWork,
-        DAL.App.DTO.SetType, BLL.App.DTO.SetType, IBLLMapper<DAL.App.DTO.SetType, BLL.App.DTO.SetType>>, ISetTypeService 
+        SetType, App.DTO.SetType, IBLLMapper<SetType, App.DTO.SetType>>, ISetTypeService
     {
-        public SetTypeService(IAppUnitOfWork unitOfWork, IBLLMapper<DAL.App.DTO.SetType, SetType> mapper) 
+        public SetTypeService(IAppUnitOfWork unitOfWork, IBLLMapper<SetType, App.DTO.SetType> mapper)
             : base(unitOfWork, mapper, unitOfWork.SetTypes)
         {
         }

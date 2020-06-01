@@ -6,11 +6,10 @@ namespace BLL.App.DTO
     public class BodyMeasurement : BodyMeasurement<Guid>, IBLLBaseDTO
     {
     }
-    
+
     public class BodyMeasurement<TKey> : IBLLBaseDTO<TKey>
         where TKey : IEquatable<TKey>
     {
-        public TKey Id { get; set; } = default!;
         public TKey AppUserId { get; set; } = default!;
         public float Weight { get; set; }
         public float Height { get; set; }
@@ -20,5 +19,6 @@ namespace BLL.App.DTO
         public float? Arm { get; set; }
         public float BodyFatPercentage { get; set; }
         public DateTime LoggedAt { get; set; }
+        public TKey Id { get; set; } = default!;
     }
 }

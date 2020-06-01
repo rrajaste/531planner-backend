@@ -1,68 +1,68 @@
 @using System.Globalization
 @using Extensions
+@using Resources.Views.TrainingWeeks
 @model BLL.App.DTO.UserTrainingDay
 
 <div class="m-1 p-0 training-day-table">
     <ul class="list-group p-1 border-thick">
         <li class="list-group-item">
-            <h5 class="text-uppercase">@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(@Model.Date.DayOfWeek)</h5>
+            <h5 class="text-uppercase">@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(Model.Date.DayOfWeek)</h5>
             <p class="m-0" title="@Model.TrainingDayType?.Description">@Model.TrainingDayType?.Name</p>
             <span class="view-edit-delete-small text-decoration-none">
-                <a title="@Resources.Views.TrainingWeeks._TrainingDayPartial.EditHoverText" asp-controller="TrainingDays" asp-action="Edit" asp-route-id="@Model.Id">
+                <a title="@_TrainingDayPartial.EditHoverText" asp-controller="TrainingDays" asp-action="Edit" asp-route-id="@Model.Id">
                     <i class="fa fa-pencil edit text-success ml-1" aria-hidden="true"></i>
                 </a>
                 <partial name="_DeleteDayPartial" model="Model"/>
             </span>
         </li>
-        @if (Model.MainLifts.IsEmptyOrNull() && Model.AccessoryLifts.IsEmptyOrNull() )
+        @if (Model.MainLifts.IsEmptyOrNull() && Model.AccessoryLifts.IsEmptyOrNull())
         {
             <li class="list-group-item">
-                <p class="text-secondary">@Resources.Views.TrainingWeeks._TrainingDayPartial.NoExercises</p>
+                <p class="text-secondary">@_TrainingDayPartial.NoExercises</p>
             </li>
         }
         else
         {
             <li class="list-group-item p-0">
                 <p class="text-uppercase m-1">
-                    <b>@Resources.Views.TrainingWeeks._TrainingDayPartial.MainLifts</b>
+                    <b>@_TrainingDayPartial.MainLifts</b>
                 </p>
             </li>
             if (Model.MainLifts.IsEmptyOrNull())
             {
                 <li class="text-secondary list-group-item">
-                    @Resources.Views.TrainingWeeks._TrainingDayPartial.NoMainLifts
+                    @_TrainingDayPartial.NoMainLifts
                 </li>
             }
             else
             {
                 <li class="list-group-item">
-                    @foreach (var exercise in @Model.MainLifts!)
-                        {
-                            <partial name="_ExercisePartial" model="exercise"/>
-                        } 
-                </li>  
+                    @foreach (var exercise in Model.MainLifts!)
+                    {
+                        <partial name="_ExercisePartial" model="exercise"/>
+                    }
+                </li>
             }
-            if (! Model.AccessoryLifts.IsEmptyOrNull())
+            if (!Model.AccessoryLifts.IsEmptyOrNull())
             {
                 <li class="list-group-item p-0">
                     <p class="text-uppercase m-1">
-                        <b>@Resources.Views.TrainingWeeks._TrainingDayPartial.Accessories</b>
+                        <b>@_TrainingDayPartial.Accessories</b>
                     </p>
                 </li>
                 <li class="list-group-item">
-                @foreach (var exercise in @Model.AccessoryLifts!)
-                {
-                    <partial name="_ExercisePartial" model="exercise"/>
-                }   
+                    @foreach (var exercise in Model.AccessoryLifts!)
+                    {
+                        <partial name="_ExercisePartial" model="exercise"/>
+                    }
                 </li>
             }
         }
         <li class="list-group-item">
-            <a class="btn btn-outline-info btn-sm text-uppercase stretched-link" 
+            <a class="btn btn-outline-info btn-sm text-uppercase stretched-link"
                asp-area="Admin" asp-controller="TrainingDays" asp-action="View" asp-route-id="@Model.Id">
-                @Resources.Views.TrainingWeeks._TrainingDayPartial.View
+                @_TrainingDayPartial.View
             </a>
         </li>
     </ul>
 </div>
-

@@ -1,16 +1,18 @@
-@using WebApplication.Areas.Admin.ViewModels
 @using Extensions
-@model AppUsersIndexViewModel
+@using Index = Resources.Views.Accounts.Index
+@model WebApplication.Areas.Admin.ViewModels.AppUsersIndexViewModel
 
 <div class="jumbotron shadow rounded">
     <div class="mb-3">
-        <h1 class="display-4 text-uppercase">@Resources.Views.Accounts.Index.Title</h1>
-        <h4 class="text-uppercase"><a asp-action="Create">@Resources.Views.Accounts.Index.Add</a></h4>
+        <h1 class="display-4 text-uppercase">@Index.Title</h1>
+        <h4 class="text-uppercase">
+            <a asp-action="Create">@Index.Add</a>
+        </h4>
     </div>
     <partial name="_SearchBoxPartial" model="@Model.SearchViewModel"/>
     <div class="text-left px-3 pt-3">
-        <h5>@Resources.Views.Accounts.Index.IncludedBelow</h5>
-        <p class="text-muted">@Resources.Views.Accounts.Index.IfNotListed</p>
+        <h5>@Index.IncludedBelow</h5>
+        <p class="text-muted">@Index.IfNotListed</p>
     </div>
     <table class="table table-responsive-sm table-hover">
         <thead>
@@ -28,7 +30,8 @@
         </tr>
         </thead>
         <tbody>
-        @foreach (var item in Model.AppUsers) {
+        @foreach (var item in Model.AppUsers)
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.UserName)
@@ -40,11 +43,11 @@
                     @Html.DisplayFor(modelItem => item.IsLocked)
                 </td>
                 <td>
-                    <a asp-action="ManageUser" title="@Resources.Views.Accounts.Index.Manage" asp-route-userName="@item.UserName">
+                    <a asp-action="ManageUser" title="@Index.Manage" asp-route-userName="@item.UserName">
                         <i class="fa fa-cog mx-1 text-secondary" aria-hidden="true"></i>
                     </a>
                     <a asp-action="Details" asp-route-userName="@item.UserName">
-                        <i class="fa fa-eye mx-1 text-primary" title="@Resources.Views.Accounts.Index.Details" aria-hidden="true"></i>
+                        <i class="fa fa-eye mx-1 text-primary" title="@Index.Details" aria-hidden="true"></i>
                     </a>
                     @if (item.IsLocked)
                     {
@@ -62,6 +65,6 @@
     <h1 class="text-muted">...</h1>
     @if (Model.AppUsers.IsEmptyOrNull())
     {
-        <h3 class="text-muted">@Resources.Views.Accounts.Index.No_results</h3>
+        <h3 class="text-muted">@Index.No_results</h3>
     }
 </div>

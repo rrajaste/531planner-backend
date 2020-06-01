@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.App.Identity;
@@ -15,8 +12,8 @@ namespace WebApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
 
         public ConfirmEmailChangeModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
@@ -24,21 +21,14 @@ namespace WebApp.Areas.Identity.Pages.Account
             _signInManager = signInManager;
         }
 
-        [TempData]
-        public string StatusMessage { get; set; } = default!;
+        [TempData] public string StatusMessage { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(string userId, string email, string code)
         {
-            if (userId == null || email == null || code == null)
-            {
-                return RedirectToPage("/Index");
-            }
+            if (userId == null || email == null || code == null) return RedirectToPage("/Index");
 
             var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{userId}'.");
-            }
+            if (user == null) return NotFound($"Unable to load user with ID '{userId}'.");
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ChangeEmailAsync(user, email, code);
