@@ -1,9 +1,8 @@
 using Contracts.DAL.App;
 using DAL.App.EF.Mappers;
-using DAL.Base;
 using Contracts.DAL.App.Mappers;
-using Domain;
 using Domain.App;
+using ee.itcollege.raraja.DAL;
 
 namespace DAL.App.EF
 {

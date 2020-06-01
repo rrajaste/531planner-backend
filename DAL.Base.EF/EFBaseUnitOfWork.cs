@@ -1,7 +1,5 @@
-using System;
 using System.Threading.Tasks;
-using Contracts.DAL.Base;
-using Contracts.DAL.Base.Repositories;
+using ee.itcollege.raraja.DAL;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Base.EF
