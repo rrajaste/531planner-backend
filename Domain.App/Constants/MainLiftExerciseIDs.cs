@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.App.Enums
+namespace Domain.App.Constants
 {
     public class MainLiftExerciseIDs
     {

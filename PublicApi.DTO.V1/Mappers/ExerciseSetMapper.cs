@@ -1,5 +1,4 @@
 using System;
-using Domain.App.Enums;
 
 namespace PublicApi.DTO.V1.Mappers
 {

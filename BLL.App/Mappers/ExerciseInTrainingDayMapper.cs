@@ -4,7 +4,7 @@ using BLL.App.DTO;
 using BLL.Base.Mappers;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;
-using Domain.App.Enums;
+using Domain.App.Constants;
 
 namespace BLL.Mappers
 {

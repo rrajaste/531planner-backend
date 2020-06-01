@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using ee.itcollege.raraja.Contracts.Domain;
 using Domain.App.Identity;
 using Domain.Base;
-using Domain.Identity;
 
 namespace Domain.App
 {

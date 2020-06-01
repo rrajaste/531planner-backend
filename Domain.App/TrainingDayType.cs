@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ee.itcollege.raraja.Contracts.Domain;
-using Domain.App.Enums;
 using Domain.Base;
 
 namespace Domain.App

@@ -4,7 +4,7 @@ using Contracts.DAL.App;
 using Contracts.DAL.App.Mappers;
 using DAL.App.DTO;
 using DAL.Base.EF;
-using Domain.App.Enums;
+using Domain.App.Constants;
 
 namespace DAL.App.EF.Mappers
 {

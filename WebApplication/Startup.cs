@@ -9,7 +9,6 @@ using Contracts.BLL.App;
 using Contracts.DAL.App;
 using DAL.App.EF;
 using Domain.App.Identity;
-using Domain.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;

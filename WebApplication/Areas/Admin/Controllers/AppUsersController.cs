@@ -1,11 +1,10 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.App.Enums;
+using Domain.App.Constants;
 using Domain.App.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Domain.Identity;
 using Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

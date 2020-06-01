@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using Domain.App.Enums;
+using Domain.App.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;

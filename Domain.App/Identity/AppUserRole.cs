@@ -1,9 +1,8 @@
 ﻿using System;
-using Contracts.DAL.Base;
 using ee.itcollege.raraja.Contracts.Domain;
 using Microsoft.AspNetCore.Identity;
 
-namespace Domain.Identity
+namespace Domain.App.Identity
 {
     public class AppUserRole : AppUserRole<Guid>
     {

@@ -1,4 +1,4 @@
-namespace Domain.App.Enums
+namespace Domain.App.Constants
 {
     public enum TargetMuscleGroupIntensity
     {

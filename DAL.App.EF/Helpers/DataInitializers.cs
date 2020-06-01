@@ -6,7 +6,6 @@ using ee.itcollege.raraja.Contracts.Domain;
 using DAL.Base;
 using Domain;
 using Domain.App.Identity;
-using Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

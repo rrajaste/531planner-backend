@@ -1,6 +1,6 @@
 using System;
 using Contracts.DAL.Base;
-using Domain.App.Enums;
+using Domain.App.Constants;
 
 namespace DAL.App.DTO
 {

@@ -1,5 +1,4 @@
 using BLL.Base.Mappers;
-using Contracts.DAL.App;
 using BLL.App.DTO;
 using Contracts.BLL.App;
 using Contracts.BLL.App.Mappers;

@@ -1,6 +1,6 @@
 using System;
 using Contracts.BLL.Base;
-using Domain.App.Enums;
+using Domain.App.Constants;
 
 namespace BLL.App.DTO
 {

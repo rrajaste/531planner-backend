@@ -1,7 +1,6 @@
 using BLL.Base;
 using BLL.Mappers;
 using Contracts.BLL.App.Mappers;
-using Contracts.DAL.App;
 using BLL.App.DTO;
 using Contracts.BLL.App;
 

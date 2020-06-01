@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.BLL.App;
 using DAL.App.DTO;
-using Domain.App.Enums;
+using Domain.App.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;

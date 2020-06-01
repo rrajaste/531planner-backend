@@ -5,7 +5,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Contracts.BLL.Base\Contracts.BLL.Base.csproj" />
       <ProjectReference Include="..\Domain.App\Domain.App.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="ee.itcollege.raraja.531planner.Contracts.BLL" Version="1.0.0" />
     </ItemGroup>
 </Project>

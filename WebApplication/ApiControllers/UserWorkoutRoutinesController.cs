@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using BLL.App.DTO;
 using Contracts.BLL.App;
 using DAL.App.DTO;
-using Domain.App.Enums;
+using Domain.App.Constants;
 using Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;

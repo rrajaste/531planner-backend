@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BLL.App.DTO;
 using Contracts.BLL.App.RoutineGenerators;
-using Domain.App.Enums;
+using Domain.App.Constants;
 
 namespace BLL.RoutineGenerators
 {

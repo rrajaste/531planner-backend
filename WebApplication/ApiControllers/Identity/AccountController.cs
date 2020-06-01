@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Contracts.BLL.App;
 using Domain.App.Identity;
-using Domain.Identity;
 using Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

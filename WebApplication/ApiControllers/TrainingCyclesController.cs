@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Contracts.BLL.App;
-using Domain.App.Enums;
+using Domain.App.Constants;
 using Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;

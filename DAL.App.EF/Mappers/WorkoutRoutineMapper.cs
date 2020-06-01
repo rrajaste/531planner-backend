@@ -8,7 +8,7 @@ using Contracts.DAL.App.Mappers;
 using DAL.Base.EF;
 using Domain.App;
 using PublicApi.DTO.V1;
-using Culture = Domain.App.Enums.Culture;
+using Culture = Domain.App.Constants.Culture;
 using WorkoutRoutine = DAL.App.DTO.WorkoutRoutine;
 
 namespace DAL.App.EF.Mappers

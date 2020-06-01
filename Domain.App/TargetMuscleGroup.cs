@@ -1,6 +1,6 @@
 ﻿using System;
+using Domain.App.Constants;
 using ee.itcollege.raraja.Contracts.Domain;
-using Domain.App.Enums;
 using Domain.Base;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 

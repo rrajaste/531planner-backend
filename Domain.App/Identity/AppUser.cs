@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ee.itcollege.raraja.Contracts.Domain;
-using Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.App.Identity
