@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Contracts.DAL.Base;
-using Contracts.Domain;
+using ee.itcollege.raraja.Contracts.Domain;
 
 namespace Domain.Base
 {

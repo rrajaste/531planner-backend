@@ -6,8 +6,8 @@ namespace WebApplication.Areas.Admin.ViewModels
 {
     public class TrainingDayCreateEditViewModel
     {
-        public BaseTrainingDay TrainingDay { get; set; }
-        public Guid WorkoutRoutineId { get; set; }
+        public BaseTrainingDay TrainingDay { get; set; } = default!;
+        public Guid WorkoutRoutineId { get; set; } = default!;
         public SelectList? TrainingDayTypes { get; set; }
         public SelectList? DaysOfWeek { get; set; }
     }

@@ -43,11 +43,11 @@ namespace WebApp.Areas.Identity.Pages.Account
         {
             [Required]
             [MaxLength(255)]
-            public string UserName { get; set; }
+            public string UserName { get; set; } = default!;
 
             [Required]
             [DataType(DataType.Password)]
-            public string Password { get; set; }
+            public string Password { get; set; } = default!;
 
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }

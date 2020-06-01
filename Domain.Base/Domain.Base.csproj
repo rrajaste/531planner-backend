@@ -8,4 +8,8 @@
       <ProjectReference Include="..\Contracts.Domain\Contracts.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="ee.itcollege.raraja.531planner.Contracts.Domain" Version="1.0.0" />
+    </ItemGroup>
+
 </Project>

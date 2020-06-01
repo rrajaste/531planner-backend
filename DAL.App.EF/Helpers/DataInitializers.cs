@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Contracts.DAL.Base;
-using Contracts.Domain;
+using ee.itcollege.raraja.Contracts.Domain;
 using DAL.Base;
 using Domain;
 using Domain.App.Identity;

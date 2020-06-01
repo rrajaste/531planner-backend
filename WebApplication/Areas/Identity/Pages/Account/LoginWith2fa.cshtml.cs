@@ -38,13 +38,13 @@ namespace WebApp.Areas.Identity.Pages.Account
             [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Text)]
             [Display(Name = "Authenticator code")]
-            public string TwoFactorCode { get; set; }
+            public string TwoFactorCode { get; set; } = default!;
 
             [Display(Name = "Remember this machine")]
             public bool RememberMachine { get; set; }
         }
 
-        public async Task<IActionResult> OnGetAsync(bool rememberMe, string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(bool rememberMe, string? returnUrl = null)
         {
             // Ensure the user has gone through the username & password screen first
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -54,13 +54,13 @@ namespace WebApp.Areas.Identity.Pages.Account
                 throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
-            ReturnUrl = returnUrl;
+            ReturnUrl = returnUrl ?? "";
             RememberMe = rememberMe;
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(bool rememberMe, string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(bool rememberMe, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
             {

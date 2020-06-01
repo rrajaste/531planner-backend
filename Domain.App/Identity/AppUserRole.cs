@@ -1,6 +1,6 @@
 ﻿using System;
 using Contracts.DAL.Base;
-using Contracts.Domain;
+using ee.itcollege.raraja.Contracts.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Identity

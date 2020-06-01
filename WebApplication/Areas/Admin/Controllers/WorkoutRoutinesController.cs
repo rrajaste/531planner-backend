@@ -168,7 +168,6 @@ namespace WebApplication.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return BadRequest();
-            return BadRequest();
         }
         
         private static WorkoutRoutineTranslation GetTranslation(IEnumerable<WorkoutRoutineTranslation> translations, string cultureCode)

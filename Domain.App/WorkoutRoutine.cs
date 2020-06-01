@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Contracts.Domain;
+using ee.itcollege.raraja.Contracts.Domain;
 using Domain.App.Identity;
 using Domain.Base;
 using Domain.Identity;
@@ -29,6 +29,6 @@ namespace Domain.App
         [Display(Name = nameof(TrainingCycles), ResourceType = typeof(Resources.Domain.WorkoutRoutine))]
         public ICollection<TrainingCycle>? TrainingCycles { get; set; }
         
-        public ICollection<WorkoutRoutineInfo> WorkoutRoutineInfos { get; set; }
+        public ICollection<WorkoutRoutineInfo>? WorkoutRoutineInfos { get; set; }
     }
 }

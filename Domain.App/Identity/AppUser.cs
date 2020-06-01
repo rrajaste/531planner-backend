@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Contracts.Domain;
+using ee.itcollege.raraja.Contracts.Domain;
 using Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 

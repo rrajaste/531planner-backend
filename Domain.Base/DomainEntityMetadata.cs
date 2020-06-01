@@ -1,5 +1,5 @@
 using System;
-using Contracts.DAL.Base;
+using ee.itcollege.raraja.Contracts.Domain;
 
 namespace Domain.Base
 {

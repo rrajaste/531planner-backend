@@ -6,9 +6,9 @@ namespace WebApplication.ViewModels
 {
     public class WorkoutRoutineCreateEditViewModel
     {
-        public WorkoutRoutine WorkoutRoutine { get; set; }
-        public WorkoutRoutineTranslation EstonianTranslation { get; set; }
-        public WorkoutRoutineTranslation EnglishTranslation { get; set; }
+        public WorkoutRoutine WorkoutRoutine { get; set; } = default!;
+        public WorkoutRoutineTranslation EstonianTranslation { get; set; } = default!;
+        public WorkoutRoutineTranslation EnglishTranslation { get; set; } = default!;
         public SelectList? RoutineTypeSelectList { get; set; }
     }
 }

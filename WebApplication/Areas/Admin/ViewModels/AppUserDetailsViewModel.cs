@@ -11,11 +11,11 @@ namespace WebApplication.Areas.Admin.ViewModels
         
         [Display(Name = nameof(Resources.ViewModels.AppUserDetailsViewModel.UserName), 
             ResourceType = typeof(Resources.ViewModels.AppUserDetailsViewModel))]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = default!;
         
         [Display(Name = nameof(Resources.ViewModels.AppUserDetailsViewModel.Email), 
             ResourceType = typeof(Resources.ViewModels.AppUserDetailsViewModel))]
-        public string Email { get; set; }
+        public string Email { get; set; } = default!;
         
         [Display(Name = nameof(Resources.ViewModels.AppUserDetailsViewModel.EmailConfirmed), 
             ResourceType = typeof(Resources.ViewModels.AppUserDetailsViewModel))]
@@ -23,7 +23,7 @@ namespace WebApplication.Areas.Admin.ViewModels
         
         [Display(Name = nameof(Resources.ViewModels.AppUserDetailsViewModel.PhoneNumber), 
             ResourceType = typeof(Resources.ViewModels.AppUserDetailsViewModel))]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = default!;
         
         [Display(Name = nameof(Resources.ViewModels.AppUserDetailsViewModel.PhoneNumberConfirmed), 
             ResourceType = typeof(Resources.ViewModels.AppUserDetailsViewModel))]

@@ -14,7 +14,7 @@ namespace DAL.App.DTO
         public string Name { get; set; } = default!;
         public string CultureCode { get; set; } = default!;
         public string Description { get; set; } = default!;
-        public WorkoutRoutine WorkoutRoutine { get; set; }
+        public WorkoutRoutine? WorkoutRoutine { get; set; }
         public TKey WorkoutRoutineId { get; set; }
     }
 }

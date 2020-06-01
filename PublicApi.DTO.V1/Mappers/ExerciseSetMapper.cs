@@ -22,7 +22,6 @@ namespace PublicApi.DTO.V1.Mappers
                 Id = bllEntity.Id,
                 NrOfReps = (int) bllEntity.NrOfReps,
                 Weight = bllEntity.Weight < 0.1 ? null : bllEntity.Weight,
-                UnitType = UnitTypes.Metric,
                 TypeName = bllEntity.SetType.Name,
                 TypeDescription = bllEntity.SetType.Description
             };

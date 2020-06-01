@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Contracts.DAL.App.Mappers;
 using Contracts.DAL.Base;
 using Contracts.DAL.Base.Repositories;
-using Contracts.Domain;
+using ee.itcollege.raraja.Contracts.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Base.EF.Repositories
