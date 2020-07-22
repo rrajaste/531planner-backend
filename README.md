@@ -2,8 +2,9 @@
 
 ### What's this?
 
-This is a server side backend for "531planner" providing RESTful API for client frontends as well as a ASP.NET server side generated user interface for application admin actions 
-
+This is a server side backend for "531planner" providing RESTful API for client frontends as well as a ASP.NET server side generated user interface for application admin actions.
+ 
+[Prototype frontend client](https://github.com/rrajaste/531planner-frontend)
 ### What is "531planner"?
  
 531planner is a workout routine generator and progress tracker for the famous powerlifting routine "531" developed by Jim Wendler. "531planner" aims to provide users with easy and flexible workout routine cycle generation as well as provide easy to understand nutrient and body composition tracking.
